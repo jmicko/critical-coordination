@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import '../AdminCompany/AdminCompany.css'
+import '../AdminLocation/AdminLocation.css'
 
-class AdminCompany extends Component {
+class AdminLocation extends Component {
   // this component doesn't do much to start, just renders some user info to the DOM
 
   async componentDidMount() {
@@ -40,4 +40,4 @@ class AdminCompany extends Component {
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStoreToProps)(AdminCompany);
+export default connect(mapStoreToProps)(AdminLocation);
