@@ -20,7 +20,7 @@ class Task extends Component {
     return (
       <div>
         <h2>Task Page</h2>
-        <button onClick={ () => this.navigate('/portfolio') } >Button to the task page</button>
+        <button onClick={ () => this.navigate('/portfolio') } >Button to the portfolio page</button>
       </div>
     );
   }
