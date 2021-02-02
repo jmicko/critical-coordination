@@ -1,4 +1,4 @@
-const portfolioReducer = (state = {}, action) => {
+ const portfolioReducer = (state = {}, action) => {
     switch (action.type) {
       case 'FETCH_PORTFOLIO': //think about this call name and work out a better one
         return action.payload;

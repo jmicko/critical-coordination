@@ -20,7 +20,9 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import ResetPage from '../ResetPage/ResetPage';
-import ResetLinkPage from '../resetLinkPage/ResetLinkPage'
+import ResetLinkPage from '../resetLinkPage/ResetLinkPage';
+import Portfolio from '../Portfolio/Portfolio';
+import Task from '../Task/Task'
 
 import './App.css';
 
@@ -89,6 +91,18 @@ class App extends Component {
               exact
               path="/resetpassword"
               component={ResetLinkPage}
+              authRedirect="/user"
+            />
+            <Route
+              exact
+              path="/portfolio"
+              component={Portfolio}
+              authRedirect="/user"
+            />
+            <Route
+              exact
+              path="/task"
+              component={Task}
               authRedirect="/user"
             />
             {/* If none of the other routes matched, we will show a 404. */}
