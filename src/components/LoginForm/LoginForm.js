@@ -46,7 +46,7 @@ class LoginForm extends Component {
               type="text"
               name="email"
               required
-              value={this.state.username}
+              value={this.state.email}
               onChange={this.handleInputChangeFor('email')}
             />
           </label>
