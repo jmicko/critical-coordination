@@ -7,14 +7,20 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 // the component name Task with the name for the new
 // component.
 class Task extends Component {
-  state = {
-    heading: 'Class Component',
-  };
+  
+
+    navigate = web_address => {
+        this.props.history.push(web_address);
+      }
+
+
+
 
   render() {
     return (
       <div>
         <h2>Task Page</h2>
+        <button onClick={ () => this.navigate('/portfolio') } >Button to the task page</button>
       </div>
     );
   }
