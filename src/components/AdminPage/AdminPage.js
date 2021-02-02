@@ -9,9 +9,8 @@ class AdminPage extends Component {
 
   async componentDidMount() {
     // Get's data to populate year pull-down
-    this.props.dispatch({type: 'USERS_XXXXXXXXX'});
-    this.props.dispatch({type: 'COMPANIES_XXXXXXXXX'});
-    this.props.dispatch({type: 'LOCATIONS_XXXXXXXXX'});
+    // this.props.dispatch({type: 'COMPANIES_XXXXXXXXX'});
+    // this.props.dispatch({type: 'LOCATIONS_XXXXXXXXX'});
 }
 
   state = {
