@@ -4,18 +4,18 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class LoginForm extends Component {
   state = {
-    username: '',
+    email: '',
     password: '',
   };
 
   login = (event) => {
     event.preventDefault();
 
-    if (this.state.username && this.state.password) {
+    if (this.state.email && this.state.password) {
       this.props.dispatch({
         type: 'LOGIN',
         payload: {
-          username: this.state.username,
+          username: this.state.email,
           password: this.state.password,
         },
       });
@@ -41,13 +41,13 @@ class LoginForm extends Component {
         )}
         <div>
           <label htmlFor="username">
-            Username:
+            Email:
             <input
               type="text"
-              name="username"
+              name="email"
               required
               value={this.state.username}
-              onChange={this.handleInputChangeFor('username')}
+              onChange={this.handleInputChangeFor('email')}
             />
           </label>
         </div>
