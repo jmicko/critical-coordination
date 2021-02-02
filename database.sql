@@ -1,29 +1,29 @@
-CREATE TABLE "User" (
+CREATE TABLE "user" (
 	"id" serial NOT NULL,
 	"email" varchar(255) NOT NULL,
-	"company" VARCHAR(255) NOT NULL,
-	"first_name" varchar(255) NOT NULL,
-	"last_name" varchar(255) NOT NULL,
+	"company" VARCHAR(255),
+	"first_name" varchar(255),
+	"last_name" varchar(255),
 	"password" varchar(255) NOT NULL,
-	"token" varchar(255) NOT NULL,
-	"company_fk" integer NOT NULL,
-	"admin" BOOLEAN NOT NULL,
-	CONSTRAINT "User_pk" PRIMARY KEY ("id")
+	"token" varchar(255),
+	"company_fk" integer,
+	"admin" BOOLEAN,
+	CONSTRAINT "user_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
-CREATE TABLE "Project" (
+CREATE TABLE "project" (
 	"id" integer NOT NULL,
 	"project_name" varchar(255) NOT NULL,
 	"PO_Number" varchar(255) NOT NULL,
 	"due_date" DATE NOT NULL DEFAULT 'today',
 	"company_fk" integer NOT NULL,
 	"location_fk" integer NOT NULL,
-	CONSTRAINT "Project_pk" PRIMARY KEY ("id")
+	CONSTRAINT "project_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
-CREATE TABLE "Task" (
+CREATE TABLE "task" (
 	"id" serial NOT NULL,
 	"poc_fk" integer NOT NULL,
 	"task_name" varchar(255) NOT NULL,
@@ -36,22 +36,22 @@ CREATE TABLE "Task" (
 	"updated_by" varchar(255),
 	"technician_info" varchar(255),
 	"project_fk" integer NOT NULL,
-	CONSTRAINT "Task_pk" PRIMARY KEY ("id")
+	CONSTRAINT "task_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
-CREATE TABLE "Task_name" (
+CREATE TABLE "task_name" (
 	"id" serial NOT NULL,
 	"task_name" varchar(255) NOT NULL,
 	"task_phase" varchar(255) NOT NULL,
-	CONSTRAINT "Task_name_pk" PRIMARY KEY ("id")
+	CONSTRAINT "task_name_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
-CREATE TABLE "Task_Status" (
+CREATE TABLE "task_status" (
 	"id" serial NOT NULL,
 	"status_type" varchar(255) NOT NULL,
-	CONSTRAINT "Task_Status_pk" PRIMARY KEY ("id")
+	CONSTRAINT "task_Status_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
@@ -71,11 +71,11 @@ CREATE TABLE "company_location" (
 ) WITH (
   OIDS=FALSE
 );
-ALTER TABLE "User" ADD CONSTRAINT "User_fk0" FOREIGN KEY ("company_fk") REFERENCES "company"("id");
-ALTER TABLE "Project" ADD CONSTRAINT "Project_fk0" FOREIGN KEY ("company_fk") REFERENCES "company"("id");
-ALTER TABLE "Project" ADD CONSTRAINT "Project_fk1" FOREIGN KEY ("location_fk") REFERENCES "company_location"("id");
-ALTER TABLE "Task" ADD CONSTRAINT "Task_fk0" FOREIGN KEY ("poc_fk") REFERENCES "User"("id");
-ALTER TABLE "Task" ADD CONSTRAINT "Task_fk1" FOREIGN KEY ("task_name_fk") REFERENCES "Task_name"("id");
-ALTER TABLE "Task" ADD CONSTRAINT "Task_fk2" FOREIGN KEY ("project_fk") REFERENCES "Project"("id");
-ALTER TABLE "Task" ADD CONSTRAINT "Task_fk3" FOREIGN KEY ("task_status_fk") REFERENCES "Task_Status"("id");
+ALTER TABLE "user" ADD CONSTRAINT "user_fk0" FOREIGN KEY ("company_fk") REFERENCES "company"("id");
+ALTER TABLE "project" ADD CONSTRAINT "project_fk0" FOREIGN KEY ("company_fk") REFERENCES "company"("id");
+ALTER TABLE "project" ADD CONSTRAINT "project_fk1" FOREIGN KEY ("location_fk") REFERENCES "company_location"("id");
+ALTER TABLE "task" ADD CONSTRAINT "task_fk0" FOREIGN KEY ("poc_fk") REFERENCES "user"("id");
+ALTER TABLE "task" ADD CONSTRAINT "task_fk1" FOREIGN KEY ("task_name_fk") REFERENCES "task_name"("id");
+ALTER TABLE "task" ADD CONSTRAINT "task_fk2" FOREIGN KEY ("project_fk") REFERENCES "project"("id");
+ALTER TABLE "task" ADD CONSTRAINT "task_fk3" FOREIGN KEY ("task_status_fk") REFERENCES "task_status"("id");
 ALTER TABLE "company_location" ADD CONSTRAINT "company_location_fk0" FOREIGN KEY ("company_fk") REFERENCES "company"("id");

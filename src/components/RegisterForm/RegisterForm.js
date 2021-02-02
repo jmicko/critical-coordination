@@ -14,7 +14,7 @@ class RegisterForm extends Component {
     this.props.dispatch({
       type: 'REGISTER',
       payload: {
-        username: this.state.email,
+        email: this.state.email,
         password: this.state.password,
       },
     });
@@ -36,7 +36,7 @@ class RegisterForm extends Component {
           </h3>
         )}
         <div>
-          <label htmlFor="username">
+          <label htmlFor="email">
             Email:
             <input
               type="text"
