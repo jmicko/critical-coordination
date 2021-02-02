@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux';
+
 
 const allCompanyReducer = (state = [], action) => {
   switch (action.type) {
@@ -17,9 +19,9 @@ const allLocationReducer = (state = [], action) => {
   }
 };
 
-const allCompanyReducer = (state = [], action) => {
+const statusCategoryReducer = (state = [], action) => {
   switch (action.type) {
-    case 'SET_ALLCOMPANY':
+    case 'SET_STATUSCATEGORY':
       return action.payload;
     default:
       return state;
@@ -28,4 +30,8 @@ const allCompanyReducer = (state = [], action) => {
 
 // user will be on the redux state at:
 // state.user
-export default userReducer;
+export default combineReducers({
+  allCompanyReducer,
+  allLocationReducer,
+  statusCategoryReducer,
+ });
