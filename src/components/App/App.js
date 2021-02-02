@@ -22,7 +22,9 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import ResetPage from '../ResetPage/ResetPage';
 import ResetLinkPage from '../resetLinkPage/ResetLinkPage';
 import Portfolio from '../Portfolio/Portfolio';
-import Task from '../Task/Task'
+import Project from '../Project/Project';
+import Task from '../Task/Task';
+
 
 import './App.css';
 
@@ -103,6 +105,12 @@ class App extends Component {
               exact
               path="/task"
               component={Task}
+              authRedirect="/user"
+            />
+            <Route
+              exact
+              path="/project"
+              component={Project}
               authRedirect="/user"
             />
             {/* If none of the other routes matched, we will show a 404. */}

@@ -32,9 +32,10 @@ navigate = web_address => {
     
     if( user == 1  ){
       return( <div>
-      <h1>hello this is the admin stuff</h1>
+        <h1> this is the portfolio page</h1>
+      <h1>hello this is the admin stuff </h1>
 
-      <button onClick={ () => this.navigate('/task') } >Button to the task page</button>
+      <button onClick={ () => this.navigate('/project') } >Button to the task page</button>
       
 
       </div>
