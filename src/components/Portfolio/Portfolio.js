@@ -22,7 +22,20 @@ handleChange = name => {
 
 
   render() {
-    let {user} = 1; // we will make this a call to the redux and the user.id store like this.props.store.user.id. will want to double check how this works
+    let user = 1; // we will make this a call to the redux and the user.id store like this.props.store.user.id. will want to double check how this works
+    
+    if( user == 1  ){
+      return(
+      <h1>hello this is the admin stuff</h1>
+      )
+    }
+
+    if( 1 === 2 ) {
+      return(
+      <h2>Go Away this is going to be the cleint stuff</h2>
+      )
+    }
+    
     return (
       <div>
         <h2>Portfolio Page</h2>
