@@ -20,6 +20,6 @@ export default function* rootSaga() {
     userSaga(),
     resetSaga(),
     setResetPasswordSaga(),
-    adminSaga(),
+    // adminSaga(),
   ]);
 }
