@@ -3,8 +3,8 @@ import axios from 'axios';
 
 
 function* adminSaga() {
-   yield takeLatest('ADMIN_FETCH_COMPANY', fetchCompanySaga)
-   yield takeLatest('ADMIN_FETCH_LOCATION', fetchLocationSaga)
+   yield takeLatest('FETCH_ALLCOMPANY', fetchCompanySaga)
+   yield takeLatest('FETCH_ALLLOCATION', fetchLocationSaga)
 }
 
 function* fetchCompanySaga() {
