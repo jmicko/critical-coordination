@@ -21,14 +21,9 @@ class AdminLocation extends Component {
   render() {
     return (
       <div>
-        <h1>Welcome to the admin location page, {this.props.store.user.username}!</h1>
+        <h1>Admin Location Page, {this.props.store.user.first_name}!</h1>
         
        
-
-
-        <h3>Company List</h3>
-     
-
         
       </div>
     );
