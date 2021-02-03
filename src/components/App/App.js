@@ -18,6 +18,11 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import AdminPage from '../AdminPage/AdminPage';
+import ResetPage from '../ResetPage/ResetPage';
+import ResetLinkPage from '../resetLinkPage/ResetLinkPage';
+import Portfolio from '../Portfolio/Portfolio';
+import Project from '../Project/Project';
+import Task from '../Task/Task';
 
 
 import './App.css';
@@ -83,7 +88,36 @@ class App extends Component {
               component={LandingPage}
               authRedirect="/user"
             />
-
+            <Route
+              exact
+              path="/forgotpassword"
+              component={ResetPage}
+              authRedirect="/user"
+            />
+            <Route
+              exact
+              path="/resetpassword"
+              component={ResetLinkPage}
+              authRedirect="/user"
+            />
+            <Route
+              exact
+              path="/portfolio"
+              component={Portfolio}
+              authRedirect="/user"
+            />
+            <Route
+              exact
+              path="/task"
+              component={Task}
+              authRedirect="/user"
+            />
+            <Route
+              exact
+              path="/project"
+              component={Project}
+              authRedirect="/user"
+            />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
