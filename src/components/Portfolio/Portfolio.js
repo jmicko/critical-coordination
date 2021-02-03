@@ -17,7 +17,6 @@ componentDidMount(){
   this.props.dispatch({ type: 'GET_PORTFOLIO', payload: this.props.store.user.id})
 }
 
-
 handleChange = name => {
   this.props.dispatch({ type: 'EDIT_PORTFOLIO', payload: name}); //this is not setup quite yet and is just a place holder for the moment
 }
@@ -30,15 +29,17 @@ navigate = web_address => {
 
 
   render() {
-    let user = 4; // we will make this a call to the redux and the user.id store like this.props.store.user.id. will want to double check how this works
-    
+    let user = 1; // we will make this a call to the redux and the user.id store like this.props.store.user.id. will want to double check how this works
+    // const admin = this.props.store.user.admin;
     
     // ADMIN VIEW ----
-    if( user == 1  ){
+    if ( true ){
+
       return( <div>
         <h1> this is the portfolio page</h1>
       <h1>hello this is the admin stuff </h1>
 
+      {JSON.stringify(this.props.store.user.admin)}
       <button onClick={ () => this.navigate('/project') } >Button to the task page</button>
 
       <table>
@@ -46,21 +47,23 @@ navigate = web_address => {
           return (
           
             <tr key={index} onClick={ () => this.navigate('/project')}>  */}
-            <tr>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th><button>filter</button></th>
-            </tr>
-            <tr>              
-              <td><input placeholder='name'/></td>
-              <td><input placeholder='location'/></td>
-              <td><input placeholder='PO number'/></td>
-              <td><input placeholder='NLT Date'/></td>
-              <td><input placeholder='Status'/></td>
-              <td><button>Edit</button></td>
-            </tr>
+            <tbody>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th><button>filter</button></th>
+              </tr>
+              <tr>              
+                <td><input placeholder='name'/></td>
+                <td><input placeholder='location'/></td>
+                <td><input placeholder='PO number'/></td>
+                <td><input placeholder='NLT Date'/></td>
+                <td><input placeholder='Status'/></td>
+                <td><button>Edit</button></td>
+              </tr>
+            </tbody>
           {/* )
         })} */}
 
@@ -91,20 +94,22 @@ navigate = web_address => {
               return (
               
                 <tr key={index} onClick={ () => this.navigate('/project')}>  */}
-            <tr>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th><button>filter</button></th>
-            </tr>
-            <tr>
-              <td><input value='name'/></td>
-              <td><input value='location'/></td>
-              <td><input value='PO number'/></td>
-              <td><input value='NLT Date'/></td>
-              <td><input value='Status'/></td>
-            </tr>
+            <tbody>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th><button>filter</button></th>
+              </tr>
+              <tr>
+                <td><input value='name'/></td>
+                <td><input value='location'/></td>
+                <td><input value='PO number'/></td>
+                <td><input value='NLT Date'/></td>
+                <td><input value='Status'/></td>
+              </tr>
+            </tbody>
 
               {/* )
             })} */}
@@ -129,21 +134,23 @@ navigate = web_address => {
               return (
               
                 <tr key={index} onClick={ () => this.navigate('/project')}>  */}
-            <tr>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th><button>filter drop down</button></th>
-            </tr>
-            <tr>
-              <td><input value='name'/></td>
-              <td><input value='location'/></td>
-              <td><input value='PO number'/></td>
-              <td><input value='NLT Date'/></td>
-              <td><input value='Status'/></td>
-              <td><button>Details</button></td>
-            </tr>
+            <tbody>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th><button>filter drop down</button></th>
+              </tr>
+              <tr>
+                <td><input value='name'/></td>
+                <td><input value='location'/></td>
+                <td><input value='PO number'/></td>
+                <td><input value='NLT Date'/></td>
+                <td><input value='Status'/></td>
+                <td><button>Details</button></td>
+              </tr>
+            </tbody>
             <button onClick={ () => this.navigate('/project') } >Button to the project page</button>
               {/* )
             })} */}
@@ -165,21 +172,23 @@ navigate = web_address => {
               return (
               
                 <tr key={index} onClick={ () => this.navigate('/project')}>  */}
-            <tr>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th><button>filter drop down</button></th>
-            </tr>
-            <tr>
-              <td><input placeholder='name'/></td>
-              <td><input placeholder='location'/></td>
-              <td><input placeholder='PO number'/></td>
-              <td><input placeholder='NLT Date'/></td>
-              <td><input placeholder='Status'/></td>
-              <td><button>Details</button></td>
-            </tr>
+            <tbody>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th><button>filter drop down</button></th>
+              </tr>
+              <tr>
+                <td><input placeholder='name'/></td>
+                <td><input placeholder='location'/></td>
+                <td><input placeholder='PO number'/></td>
+                <td><input placeholder='NLT Date'/></td>
+                <td><input placeholder='Status'/></td>
+                <td><button>Details</button></td>
+              </tr>
+            </tbody>
             <button onClick={ () => this.navigate('/project') } >Save</button>
               {/* )
             })} */}
