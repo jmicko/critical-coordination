@@ -37,3 +37,17 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
+
+
+const cron = require('node-cron');
+let count = 1;
+let hourCount = 1
+cron.schedule("0 */2 * * * *", function(){
+  console.log('running top of every other minute: ', count);
+  count++
+})
+
+cron.schedule("0 0 * * * *", function(){
+  console.log('running top of every hour: ', hourCount);
+  hourCount++;
+})
