@@ -21,10 +21,10 @@ const Nav = (props) => {
       <Link to="/home">
         <h2 className="nav-title">Prime Solo Project</h2>
       </Link>
+      <div className="nav-right">
       <Link className="nav-link" to="/adminpage">
               Admin
       </Link>
-      <div className="nav-right">
         <Link className="nav-link" to={loginLinkData.path}>
           {/* Show this link if they are logged in or not,
           but call this link 'Home' if they are logged in,
