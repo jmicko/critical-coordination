@@ -1,6 +1,10 @@
+-- Drop existing tables to start fresh
+DROP TABLE IF EXISTS "user", "project", "task", "task_name", "task_status", "company", "company_location" CASCADE;
+
+-- Table creation
 CREATE TABLE "user" (
 	"id" serial NOT NULL,
-	"email" varchar(255) NOT NULL,
+	"email" varchar(255) UNIQUE NOT NULL,
 	"company" VARCHAR(255),
 	"first_name" varchar(255),
 	"last_name" varchar(255),
@@ -79,3 +83,6 @@ ALTER TABLE "task" ADD CONSTRAINT "task_fk1" FOREIGN KEY ("task_name_fk") REFERE
 ALTER TABLE "task" ADD CONSTRAINT "task_fk2" FOREIGN KEY ("project_fk") REFERENCES "project"("id");
 ALTER TABLE "task" ADD CONSTRAINT "task_fk3" FOREIGN KEY ("task_status_fk") REFERENCES "task_status"("id");
 ALTER TABLE "company_location" ADD CONSTRAINT "company_location_fk0" FOREIGN KEY ("company_fk") REFERENCES "company"("id");
+
+--inserts of starter data
+INSERT INTO "public"."user"("email", "company", "first_name", "last_name", "password", "admin") VALUES('admin@admin.com', 'File Corp', 'Pail', 'Gwanlija', '$2a$10$T1FRsJQ4Y9yesCleyQX9o.ssMB3wBjLMx.o9iwGeXtcnyH9bMqEAu', TRUE)
