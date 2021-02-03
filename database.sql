@@ -10,7 +10,7 @@ CREATE TABLE "user" (
 	"password" varchar(255) NOT NULL,
 	"token" varchar(255),
 	"company_fk" integer,
-	"admin" BOOLEAN,
+	"user_type" varchar(255),
 	CONSTRAINT "user_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -84,7 +84,7 @@ ALTER TABLE "task" ADD CONSTRAINT "task_fk3" FOREIGN KEY ("task_status_fk") REFE
 ALTER TABLE "company_location" ADD CONSTRAINT "company_location_fk0" FOREIGN KEY ("company_fk") REFERENCES "company"("id");
 
 --inserts of starter data
-INSERT INTO "public"."user"("email", "first_name", "last_name", "password", "admin") VALUES('admin@admin.com', 'Pail', 'Gwanlija', '$2a$10$T1FRsJQ4Y9yesCleyQX9o.ssMB3wBjLMx.o9iwGeXtcnyH9bMqEAu', TRUE);
+INSERT INTO "public"."user"("email", "first_name", "last_name", "password", "user_type") VALUES('admin@admin.com', 'Pail', 'Gwanlija', '$2a$10$T1FRsJQ4Y9yesCleyQX9o.ssMB3wBjLMx.o9iwGeXtcnyH9bMqEAu', 'admin');
 insert into company ("company_name") VALUES ('Costco'); 
 insert into company_location ("address", "location_name", "company_fk") VALUES ('1431 Beam Avenue, Maplewood, MN 55115', 'Maplewood', 1);
 insert into company_location ("address", "location_name", "company_fk") VALUES ('11330 Fountains Dr, Maple Grove, MN 55369', 'Maple Grove', 1);
