@@ -32,7 +32,7 @@ class AdminPage extends Component {
         showLocation: false,
       showCategory: false,
   })
-  }
+  } 
 
   showCompany = () => {
     this.setState ({
