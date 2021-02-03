@@ -13,12 +13,11 @@ import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-
 import UserPage from '../UserPage/UserPage';
-
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import AdminPage from '../AdminPage/AdminPage';
 import ResetPage from '../ResetPage/ResetPage';
 import ResetLinkPage from '../resetLinkPage/ResetLinkPage';
 import Portfolio from '../Portfolio/Portfolio';
@@ -73,6 +72,12 @@ class App extends Component {
               path="/registration"
               component={RegisterPage}
               authRedirect="/user"
+            />
+            <ProtectedRoute
+              // logged in shows InfoPage else shows LoginPage
+              exact
+              path="/adminpage"
+              component={AdminPage}
             />
             <ProtectedRoute
               // with authRedirect:
