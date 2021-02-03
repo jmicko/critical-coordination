@@ -6,9 +6,15 @@ const router = express.Router();
  * GET route template
  */
 router.get('/', (req, res) => {
-   // GET route code here
+   const sqlText = `SELECT * FROM "project";`
+   pool.query(sqlText, [])
+      .then((result) => {
+         res.send(result.rows)
+      })
+      .catch((error) => {
+         console.log('error in TASK GET route, ', error);
+      })
 });
-
 /**
  * POST route template
  */

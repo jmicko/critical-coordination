@@ -5,7 +5,6 @@ DROP TABLE IF EXISTS "user", "project", "task", "task_name", "task_status", "com
 CREATE TABLE "user" (
 	"id" serial NOT NULL,
 	"email" varchar(255) UNIQUE NOT NULL,
-	"company" VARCHAR(255),
 	"first_name" varchar(255),
 	"last_name" varchar(255),
 	"password" varchar(255) NOT NULL,
