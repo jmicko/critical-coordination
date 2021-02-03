@@ -9,6 +9,8 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 class Portfolio extends Component {
   state = {
     heading: 'Class Component',
+   
+
   };
 
 componentDidMount(){
@@ -28,8 +30,10 @@ navigate = web_address => {
 
 
   render() {
-    let user = 1; // we will make this a call to the redux and the user.id store like this.props.store.user.id. will want to double check how this works
+    let user = 4; // we will make this a call to the redux and the user.id store like this.props.store.user.id. will want to double check how this works
     
+    
+    // ADMIN VIEW ----
     if( user == 1  ){
       return( <div>
         <h1> this is the portfolio page</h1>
@@ -38,14 +42,33 @@ navigate = web_address => {
       <button onClick={ () => this.navigate('/project') } >Button to the task page</button>
 
       <table>
-        {this.props.store.portfolio.portfolio.reducer.map((project, index) => {
-          return <tr key={index} onClick={ () => this.navigate('/project')}> </tr>//this is where I left off
-        })}
-      </table>
-      
+        {/* {this.props.store.portfolio.portfolio.reducer.map((project, index) => {
+          return (
+          
+            <tr key={index} onClick={ () => this.navigate('/project')}>  */}
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th><button>filter</button></th>
+            </tr>
+            <tr>              
+              <td><input placeholder='name'/></td>
+              <td><input placeholder='location'/></td>
+              <td><input placeholder='PO number'/></td>
+              <td><input placeholder='NLT Date'/></td>
+              <td><input placeholder='Status'/></td>
+              <td><button>Edit</button></td>
+            </tr>
+          {/* )
+        })} */}
 
+        {/* code for the css styling to make the input placeholder a solid text and not grey
+        input::placeholder {
+          color: red; */}
 
-
+      </table>   
       </div>
       )
     }
@@ -54,23 +77,126 @@ navigate = web_address => {
 
     {/* Conditioal rendering, if the user it Tom and has the user ID  admin we will get him the ability to edit and make changes to the files. */}
        
-    if( 1 === 2 ) {
+
+
+    // CLIENT VIEW ----
+    if( user === 2 ) {
       return(
-      <h2>Go Away this is going to be the cleint stuff</h2>
+        <div>
+          <h1>Portfolio Page</h1>
+          <h2>cleint stuff this is not editable</h2>
+
+          <table>
+            {/* {this.props.store.portfolio.portfolio.reducer.map((project, index) => {
+              return (
+              
+                <tr key={index} onClick={ () => this.navigate('/project')}>  */}
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th><button>filter</button></th>
+            </tr>
+            <tr>
+              <td><input value='name'/></td>
+              <td><input value='location'/></td>
+              <td><input value='PO number'/></td>
+              <td><input value='NLT Date'/></td>
+              <td><input value='Status'/></td>
+            </tr>
+
+              {/* )
+            })} */}
+
+          </table>
+          <button onClick={ () => this.navigate('/project') } >Button to the project page</button>
+
+        </div>
+
       )
     }
+
+
+    //VENDOR VIEW ----
+    if( user === 3){
+      return (
+        <>
+        <h1>Portfolio Page</h1>
+          <h1>Vendor view is not editable at this level</h1>
+          <table>
+            {/* {this.props.store.portfolio.portfolio.reducer.map((project, index) => {
+              return (
+              
+                <tr key={index} onClick={ () => this.navigate('/project')}>  */}
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th><button>filter drop down</button></th>
+            </tr>
+            <tr>
+              <td><input value='name'/></td>
+              <td><input value='location'/></td>
+              <td><input value='PO number'/></td>
+              <td><input value='NLT Date'/></td>
+              <td><input value='Status'/></td>
+              <td><button>Details</button></td>
+            </tr>
+            <button onClick={ () => this.navigate('/project') } >Button to the project page</button>
+              {/* )
+            })} */}
+     
+          </table>
+        </>
+      )
+    }
+
+
+    // EDIT VIEW 
+    if( user === 4){
+      return (
+        <>
+        <h1>Portfolio Page</h1>
+          <h1>Vendor view is not editable at this level</h1>
+          <table>
+            {/* {this.props.store.portfolio.portfolio.reducer.map((project, index) => {
+              return (
+              
+                <tr key={index} onClick={ () => this.navigate('/project')}>  */}
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th><button>filter drop down</button></th>
+            </tr>
+            <tr>
+              <td><input placeholder='name'/></td>
+              <td><input placeholder='location'/></td>
+              <td><input placeholder='PO number'/></td>
+              <td><input placeholder='NLT Date'/></td>
+              <td><input placeholder='Status'/></td>
+              <td><button>Details</button></td>
+            </tr>
+            <button onClick={ () => this.navigate('/project') } >Save</button>
+              {/* )
+            })} */}
+     
+          </table>
+        </>
+      )
+    }
+
+
+
+
+
+
+
+
     
-    return (
-      <div>
-        <h2>Portfolio Page</h2>
-
-
-
-
-
-
-      </div>
-    );
   }
 }
 
