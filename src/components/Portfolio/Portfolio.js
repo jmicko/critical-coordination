@@ -36,7 +36,15 @@ navigate = web_address => {
       <h1>hello this is the admin stuff </h1>
 
       <button onClick={ () => this.navigate('/project') } >Button to the task page</button>
+
+      <table>
+        {this.props.store.portfolio.portfolio.reducer.map((project, index) => {
+          return <tr key={index} onClick={ () => this.navigate('/project')}> </tr>//this is where I left off
+        })}
+      </table>
       
+
+
 
       </div>
       )
@@ -56,9 +64,6 @@ navigate = web_address => {
       <div>
         <h2>Portfolio Page</h2>
 
-
-        
-        
 
 
 
