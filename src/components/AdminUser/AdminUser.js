@@ -22,13 +22,8 @@ class AdminPage extends Component {
   render() {
     return (
       <div>
-        <h1>Welcome to the admin user page, {this.props.store.user.username}!</h1>
+        <h1>Admin User Page, {this.props.store.user.username}!</h1>
         
-       
-
-
-        <h3>Company List</h3>
-     
 
         
       </div>

@@ -21,14 +21,9 @@ class AdminCompany extends Component {
   render() {
     return (
       <div>
-        <h1>Welcome to the admin company page, {this.props.store.user.username}!</h1>
+        <h1>Admin Company Page, {this.props.store.user.username}!</h1>
         
        
-
-
-        <h3>Company List</h3>
-     
-
         
       </div>
     );
