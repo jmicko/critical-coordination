@@ -9,7 +9,7 @@ const allCompanyReducer = (state = [], action) => {
       return state;
   }
 };
-
+ 
 const allLocationReducer = (state = [], action) => {
   switch (action.type) {
     case 'SET_ALLLOCATION':
