@@ -66,10 +66,10 @@ class AdminPage extends Component {
       <div>
         <h1>Welcome to the admin page, {this.props.store.user.first_name}!</h1>
         
-        <button onClick={()=>this.showUser()}>Manage User</button>
-        <button onClick={()=>this.showCompany()}>Manage Company</button>
-        <button onClick={()=>this.showLocation()}>Manage Location</button>
-        <button onClick={()=>this.showCategory()}>Manage Category</button>
+        <button className="adminButtonClass" onClick={()=>this.showUser()}>Manage User</button>
+        <button className="adminButtonClass" onClick={()=>this.showCompany()}>Manage Company</button>
+        <button className="adminButtonClass" onClick={()=>this.showLocation()}>Manage Location</button>
+        <button className="adminButtonClass" onClick={()=>this.showCategory()}>Manage Category</button>
 
 
         {/* <h3>User List</h3> */}
