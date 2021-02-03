@@ -22,7 +22,16 @@ router.get('/user', (req, res) => {
 });
 
 router.get('/location', (req, res) => {
-   // GET route code here
+   const sqlText = `SELECT * FROM company
+                  JOIN company_location ON company_location.company_fk = company.id;`
+   pool.query(sqlText, [])
+      .then((result) => {
+         res.send(result.rows)
+      })
+      .catch((error) => {
+         console.log('error in COMPANY GET route, ', error);
+         res.sendStatus(500)
+      })
 });
 
 router.get('/project', (req, res) => {
