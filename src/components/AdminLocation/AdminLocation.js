@@ -21,7 +21,7 @@ class AdminLocation extends Component {
   render() {
     return (
       <div>
-        <h1>Admin Location Page, {this.props.store.user.username}!</h1>
+        <h1>Admin Location Page, {this.props.store.user.first_name}!</h1>
         
        
         

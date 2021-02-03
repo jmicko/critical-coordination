@@ -21,8 +21,9 @@ class AdminCompany extends Component {
   render() {
     return (
       <div>
-        <h1>Admin Company Page, {this.props.store.user.username}!</h1>
-        
+        <h1>Admin Company Page, {this.props.store.user.first_name}!</h1>
+
+          
        
         
       </div>
