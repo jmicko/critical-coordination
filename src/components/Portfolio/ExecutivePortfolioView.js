@@ -20,7 +20,7 @@ class ExecutivePortfolioView extends Component {
                         {this.props.store.portfolio.map((project, index) => {
                             return <tr key={index}>              
                                         <td><input value={project.project_name}/></td>
-                                        <td><input value='need get location data'/></td>
+                                        <td><input value={project.location_name}/></td>
                                         <td><input value={project.PO_Number}/></td>
                                         <td><input value={project.due_date}/></td>
                                         <td><input value='Logic needs to be done'/></td>

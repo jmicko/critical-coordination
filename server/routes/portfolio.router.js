@@ -7,10 +7,14 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  * GET route template
  */
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-    const queryText =`SELECT * FROM project WHERE company_fk = $1 ;`;
+    const queryText1 =` SELECT *
+                        FROM project
+                        INNER JOIN company_location 
+                        ON company_location.id = project.location_fk
+                        WHERE project.company_fk = $1`;
     console.log(req.params.id);
     
-    pool.query(queryText, [req.params.id])
+    pool.query(queryText1, [req.params.id])
         .then((result) => {
             res.send(result.rows);
         })
