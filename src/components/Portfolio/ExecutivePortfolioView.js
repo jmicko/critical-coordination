@@ -36,7 +36,7 @@ update = () => {
                 <table>
                     <tbody>
                         {this.props.store.portfolio.map((project) => {
-                            return <tr key={project.id} >
+                            return <tr key={project.id}>
                                         <td><input value={project.project_name}/></td>
                                         <td><input value={project.location_name}/></td>
                                         <td><input value={project.PO_Number}/></td>
@@ -54,7 +54,6 @@ update = () => {
                                             </Popup>
                                         </td> 
                                     </tr>
-                                    
                         })}                        
                     </tbody>
                 </table> 
