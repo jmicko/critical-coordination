@@ -7,9 +7,6 @@ import ExecutivePortfolioView from './ExecutivePortfolioView';
 import ClientVendorPortfolioView from './ClientVendorPortfolioView';
 
 class Portfolio extends Component {
-  state = {
-    heading: 'Class Component',
-  };
 
 componentDidMount(){ 
   this.props.dispatch({ type: 'GET_PORTFOLIO', payload: this.props.store.user?.company_fk })
