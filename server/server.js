@@ -14,6 +14,7 @@ const resetRouter = require('./routes/reset.router');
 const adminRouter = require('./routes/admin.router');
 const taskRouter = require('./routes/task.router');
 const projectRouter = require('./routes/project.router');
+const portfolioRouter = require('./routes/portfolio.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -32,6 +33,7 @@ app.use('/api/reset', resetRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/task', taskRouter);
 app.use('/api/project', projectRouter);
+app.use('/api/portfolio', portfolioRouter);
 
 // Serve static files
 app.use(express.static('build'));
