@@ -1,3 +1,6 @@
+/* import Open Sans font to match the font used at criticalcoordination.com */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 html,
 body,
 #react-root {
@@ -5,7 +8,7 @@ body,
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Open Sans', Arial, Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
 }
 
