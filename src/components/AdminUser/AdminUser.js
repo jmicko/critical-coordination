@@ -33,7 +33,7 @@ class AdminUser extends Component {
 
         {/* <h3>Category List</h3> */}
         {this.state.showAddUser ?
-          <> <AddUserForm /> <button onClick={this.addUser}>Cancel</button></>
+          <> <AddUserForm /> <button onClick={this.addUser}>Close</button></>
           : <button onClick={this.addUser}>Add User</button>}
               
 
