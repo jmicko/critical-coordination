@@ -9,8 +9,7 @@ class AdminCompany extends Component {
 
   async componentDidMount() {
     // Get's data to populate lists/tables
-    // this.props.dispatch({type: 'USERS_XXXXXXXXX'});
-   
+    this.props.dispatch({type: 'FETCH_ALLCOMPANY'});
 }
 
   state = {
@@ -21,11 +20,18 @@ class AdminCompany extends Component {
   render() {
     return (
       <div>
-        <h1>Admin Company Page, {this.props.store.user.first_name}!</h1>
+        <h3>Admin <span style={{textDecoration: "underline"}}>Company</span> Page, {this.props.store.user.first_name}!</h3>
 
-          
-       
-        
+              <button >Add Company</button>
+              <ul>
+                {this.props.store.admin.allCompanyReducer.map((lineItem, index) => {
+                    return (
+                        <div key={index}>
+                          <li>{lineItem.company_name} <button className="adminButtonClass">Modify</button><button className="adminButtonClass">Delete</button></li>
+                        </div>
+                    );
+                })} 
+              </ul>
       </div>
     );
   }

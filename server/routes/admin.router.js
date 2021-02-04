@@ -2,41 +2,33 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * GET route template
- */
+// GET company table
 router.get('/company', (req, res) => {
-   const sqlText = `SELECT * FROM "company"`
-   pool.query(sqlText, [])
-   .then( (result) => {
-      res.send(result.rows)
-   })
-   .catch( (error) => {
-      console.log('error in COMPANY GET route, ', error);
-      res.sendStatus(500)
-   })
-});
+   const queryText = 'SELECT * FROM company ORDER BY id ASC';
+   console.log ('in company get')
+   pool.query(queryText)
+     .then((result) => { res.send(result.rows); })
+     .catch((err) => {
+       console.log('Error completing company query', err);
+       res.sendStatus(500);
+     });
+ });
 
-router.get('/user', (req, res) => {
-   // GET route code here
-});
-
+// GET location table w/ company join
 router.get('/location', (req, res) => {
-   const sqlText = `SELECT * FROM company
-                  JOIN company_location ON company_location.company_fk = company.id;`
-   pool.query(sqlText, [])
-      .then((result) => {
-         res.send(result.rows)
-      })
-      .catch((error) => {
-         console.log('error in COMPANY GET route, ', error);
-         res.sendStatus(500)
-      })
-});
+   const queryText = `SELECT * FROM company_location 
+      JOIN company ON company.id = company_location.company_fk
+      ORDER BY company.id, company_location.id ASC;`
+   console.log ('in location get')
+   pool.query(queryText)
+     .then((result) => { res.send(result.rows); })
+     .catch((err) => {
+       console.log('Error location company query', err);
+       res.sendStatus(500);
+     });
+ });
 
-router.get('/project', (req, res) => {
-   // GET route code here
-});
+
 
 /**
  * POST route template

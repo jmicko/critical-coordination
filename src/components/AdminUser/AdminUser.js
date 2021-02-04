@@ -8,10 +8,9 @@ import '../AdminUser/AdminUser.css'
 class AdminPage extends Component {
   // this component doesn't do much to start, just renders some user info to the DOM
 
-  async componentDidMount() {
-    // Get's data to populate lists/tables
-    // this.props.dispatch({type: 'USERS_XXXXXXXXX'});
-   
+async componentDidMount() {
+  // Get's data to populate lists/tables
+  this.props.dispatch({type: 'FETCH_USER'});
 }
 
   state = {
@@ -22,10 +21,18 @@ class AdminPage extends Component {
   render() {
     return (
       <div>
-        <h1>Admin User Page, {this.props.store.user.first_name}!</h1>
-        
+        <h3>Admin <span style={{textDecoration: "underline"}}>User</span> Page, {this.props.store.user.first_name}!</h3>
 
-        
+              <button >Add User</button>
+              <ul>
+                {/* {this.props.store.user.map((lineItem, index) => {
+                    return (
+                        <div key={index}>
+                          <li>ID: {lineItem.id} {lineItem.email} - Name: {lineItem.first_name} {lineItem.last_name}, <button className="adminButtonClass">Modify</button><button className="adminButtonClass">Delete</button></li>
+                        </div>
+                    );
+                })}  */}
+              </ul>
       </div>
     );
   }
