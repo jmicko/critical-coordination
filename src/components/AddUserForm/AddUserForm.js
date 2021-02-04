@@ -39,12 +39,22 @@ class AddUserForm extends Component {
       } else {
          alert ('Please ensure all fields are filled before submitting')
       }
+      this.setState({
+         newUser: {
+            email: '',
+            company: '',
+            first_name: '',
+            last_name: '',
+            password: '',
+            user_type: '',
+         }
+      })
    }
 
    render() {
       return (
          <div>
-            <h2>Add New User</h2>
+            <h4>Add New User</h4>
             <form>
                <input required placeholder="email" onChange={(event) => this.handleChange(event, 'email')} value={this.state.newUser.email}></input>
                <select required onChange={(event) => this.handleChange(event, 'company')} value={this.state.newUser.company}>
