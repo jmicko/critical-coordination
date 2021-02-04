@@ -1,30 +1,60 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import Popup from 'reactjs-popup';
 
-// Basic class component structure for React with default state
-// value setup. When making a new component be sure to replace
-// the component name ExecutivePortfolioView with the name for the new
-// component.
+
 class ExecutivePortfolioView extends Component {
   state = {
-    heading: 'Class Component',
+    project_id: '',
+    location_id: '',
+    project_name: '',
+    location_name: '',
+    PO_Number: '',
+    due_date: '',
   };
 
+handleChange = name => event => {
+    this.setState({ [name]: event.target.value });    
+}
+
+updateId = (project) => {
+    this.setState({project_id: project.id})
+    this.setState({location_id: project.location_fk})
+}
+
+update = () => { 
+    this.props.dispatch({ type: 'UPDATE_PORTFOLIO', payload: this.state });  
+    this.props.dispatch({ type: 'GET_PORTFOLIO', payload: this.props.store.user?.company_fk })  
+}
+
     render() {
+        console.log(this.state);
         return (
             <>
                 <h1> Executive Portfolio Page </h1>
                 <table>
                     <tbody>
-                        <tr>              
-                            <td><input placeholder='name'/></td>
-                            <td><input placeholder='location'/></td>
-                            <td><input placeholder='PO number'/></td>
-                            <td><input placeholder='NLT Date'/></td>
-                            <td><input placeholder='Status'/></td>
-                            <td><button>Edit</button></td>
-                        </tr>
+                        {this.props.store.portfolio.map((project) => {
+                            return <tr key={project.id}>
+                                        <td><input value={project.project_name}/></td>
+                                        <td><input value={project.location_name}/></td>
+                                        <td><input value={project.PO_Number}/></td>
+                                        <td><input value={project.due_date}/></td>
+                                        <td><input value='Logic needs to be done'/></td>                                    
+                                        <td>
+                                            <Popup trigger={<button>Edit</button>} position="center" >
+                                                <div className="editPanel" onClick={ () => this.updateId(project) }>
+                                                    <input placeholder={project.project_name} onChange={this.handleChange('project_name')}/> 
+                                                    <input placeholder={project.location_name} onChange={this.handleChange('location_name')}/> 
+                                                    <input placeholder={project.PO_Number} onChange={this.handleChange('PO_Number')}/> 
+                                                    <input placeholder={project.due_date} onChange={this.handleChange('due_date')}/>    
+                                                    <button onClick={this.update}>Save</button> 
+                                                </div>
+                                            </Popup>
+                                        </td> 
+                                    </tr>
+                        })}                        
                     </tbody>
                 </table> 
             </>
