@@ -26,9 +26,7 @@ class ExecutivePortfolioView extends Component {
                                         <td><input value='Logic needs to be done'/></td>
                                         <td><button>Edit</button></td>
                                     </tr>
-                        })}
-
-                        
+                        })}                        
                     </tbody>
                 </table> 
             </>
