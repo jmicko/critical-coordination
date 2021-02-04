@@ -13,6 +13,16 @@ class Task extends Component {
         this.props.history.push(web_address);
       }
 
+      componentDidMount() {
+        console.log("task component did mount");
+        this.props.dispatch({
+          type: 'CLEAR_TASK'
+        });
+        this.props.dispatch({
+          type: 'FETCH_TASK',
+          payload: 2
+        });
+      }
 
 
 
@@ -20,6 +30,7 @@ class Task extends Component {
     return (
       <div>
         <h2>Task Page</h2>
+        {JSON.stringify(this.props.store.task)}
         <button onClick={ () => this.navigate('/portfolio') } >Button to the portfolio page</button>
       </div>
     );

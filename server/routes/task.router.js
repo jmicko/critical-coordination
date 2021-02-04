@@ -3,10 +3,12 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 //will need rejectunauthenticated text here 
-router.get('/', (req, res) => {
-  const sqlText = `SELECT * FROM "task";`
-  pool.query(sqlText, [])
+router.get('/:id', (req, res) => {
+  console.log(`SHOULD BE task id from task router line 7`, req.params);
+  const sqlText = `SELECT * FROM "task" WHERE "id"=$1`
+  pool.query(sqlText, [req.params.id])
   .then( (result) => {
+    console.log(`hey look at these RESULTS`, result.rows);
      res.send(result.rows)
   })
   .catch( (error) => {
