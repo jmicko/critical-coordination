@@ -9,13 +9,10 @@ import ClientVendorPortfolioView from './ClientVendorPortfolioView';
 class Portfolio extends Component {
   state = {
     heading: 'Class Component',
-   
-
   };
 
-componentDidMount(){
-  const company_fk = this.props.store.user.company_fk
-  this.props.dispatch({ type: 'GET_PORTFOLIO', payload: 1 })
+componentDidMount(){ 
+  this.props.dispatch({ type: 'GET_PORTFOLIO', payload: this.props.store.user?.company_fk })
 }
 
 handleChange = name => {
@@ -29,7 +26,6 @@ navigate = web_address => {
   render() {
     return (
       <>
-        {JSON.stringify(this.props.store.user.company_fk)}
         {this.props.store.user.admin ? <ExecutivePortfolioView/> : <ClientVendorPortfolioView/> }
       </>
     );

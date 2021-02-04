@@ -12,8 +12,6 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     
     pool.query(queryText, [req.params.id])
         .then((result) => {
-            console.log('here');
-            
             res.send(result.rows);
         })
         .catch((err) => {
