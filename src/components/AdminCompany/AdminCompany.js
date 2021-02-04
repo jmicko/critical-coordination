@@ -22,16 +22,23 @@ class AdminCompany extends Component {
       <div>
         <h3>Admin <span style={{textDecoration: "underline"}}>Company</span> Page, {this.props.store.user.first_name}!</h3>
 
-              <button >Add Company</button>
-              <ul>
-                {this.props.store.admin.allCompanyReducer.map((lineItem, index) => {
-                    return (
-                        <div key={index}>
-                          <li>{lineItem.company_name} <button className="adminButtonClass">Modify</button><button className="adminButtonClass">Delete</button></li>
-                        </div>
-                    );
-                })} 
-              </ul>
+              <button>Add Company</button>
+              <table className="tableClass">
+                <thead className="headerClass">
+                  <tr><th>Company Name</th><th>&nbsp;</th><th>&nbsp;</th></tr>
+                </thead>
+                <tbody className="bodyClass">
+                    {this.props.store.admin.allCompanyReducer.map((lineItem, index) => {
+                        return (
+                          <tr key={index}>
+                              <td>{lineItem.company_name}</td>
+                              <td><button className="adminButtonClass">Modify</button></td>
+                              <td><button className="adminButtonClass">Delete</button></td>
+                          </tr>
+                        );
+                    })} 
+                </tbody>
+              </table>
       </div>
     );
   }

@@ -19,9 +19,18 @@ const allLocationReducer = (state = [], action) => {
   }
 };
 
-const statusCategoryReducer = (state = [], action) => {
+const taskStatusReducer = (state = [], action) => {
   switch (action.type) {
-    case 'SET_STATUSCATEGORY':
+    case 'SET_TASKSTATUS':
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+const allUsersReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_ALLUSERS':
       return action.payload;
     default:
       return state;
@@ -33,5 +42,6 @@ const statusCategoryReducer = (state = [], action) => {
 export default combineReducers({
   allCompanyReducer,
   allLocationReducer,
-  statusCategoryReducer,
+  allUsersReducer,
+  taskStatusReducer,
  });

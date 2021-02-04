@@ -23,15 +23,24 @@ class AdminLocation extends Component {
         <h3>Admin <span style={{textDecoration: "underline"}}>Location</span> Page, {this.props.store.user.first_name}!</h3>
 
               <button >Add Location</button>
-              <ul>
-                {this.props.store.admin.allLocationReducer.map((lineItem, index) => {
-                    return (
-                        <div key={index}>
-                          <li>Company: {lineItem.company_name} - Name: {lineItem.location_name} - Address: {lineItem.address}, <button className="adminButtonClass">Modify</button><button className="adminButtonClass">Delete</button></li>
-                        </div>
-                    );
-                })} 
-              </ul>
+              <table className="tableClass">
+                <thead className="headerClass">
+                  <tr><th>Company</th><th>Name</th><th>Address</th><th>&nbsp;</th><th>&nbsp;</th></tr>
+                </thead>
+                <tbody className="bodyClass">
+                    {this.props.store.admin.allLocationReducer.map((lineItem, index) => {
+                        return (
+                          <tr key={index}>
+                              <td>{lineItem.company_name}</td>
+                              <td>{lineItem.location_name}</td>
+                              <td>{lineItem.address}</td>
+                              <td><button className="adminButtonClass">Modify</button></td>
+                              <td><button className="adminButtonClass">Delete</button></td>
+                          </tr>
+                        );
+                    })} 
+                </tbody>
+              </table>
       </div>
     );
   }

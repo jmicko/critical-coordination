@@ -1,0 +1,14 @@
+.tableClass {
+    margin: 20px;
+    border: 2px solid black;
+}
+
+.headerClass {
+    border: 2px solid white;
+    background-color: black;
+    color: white;
+}
+
+.bodyClass td {
+    border: 1px solid black;
+}
