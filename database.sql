@@ -16,7 +16,7 @@ CREATE TABLE "user" (
   OIDS=FALSE
 );
 CREATE TABLE "project" (
-	"id" integer NOT NULL,
+	"id" serial NOT NULL,
 	"project_name" varchar(255) NOT NULL,
 	"PO_Number" varchar(255) NOT NULL,
 	"due_date" DATE NOT NULL DEFAULT 'today',
@@ -29,11 +29,10 @@ CREATE TABLE "project" (
 CREATE TABLE "task" (
 	"id" serial NOT NULL,
 	"poc_fk" integer NOT NULL,
-	"task_name" varchar(255) NOT NULL,
 	"scheduled_date" DATE NOT NULL DEFAULT 'today',
 	"nlt_date" DATE NOT NULL DEFAULT 'today',
 	"task_name_fk" INTEGER NOT NULL,
-	"token" varchar(255) NOT NULL,
+	"token" varchar(255),
 	"task_status_fk" integer NOT NULL,
 	"tracking_id" integer,
 	"updated_by" varchar(255),
@@ -46,7 +45,6 @@ CREATE TABLE "task" (
 CREATE TABLE "task_name" (
 	"id" serial NOT NULL,
 	"task_name" varchar(255) NOT NULL,
-	"task_phase" varchar(255) NOT NULL,
 	CONSTRAINT "task_name_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -88,16 +86,22 @@ insert into company ("company_name") VALUES ('Critical Coordination');
 insert into company ("company_name") VALUES ('Costco'); 
 insert into company ("company_name") VALUES ('Walmart'); 
 insert into company ("company_name") VALUES ('The Electric Contracting Company'); 
+insert into company ("company_name") VALUES ('The Materials Supply Company'); 
 insert into company_location ("address", "location_name", "company_fk") VALUES ('Bayport, MN', 'Bayport', 1);
 insert into company_location ("address", "location_name", "company_fk") VALUES ('1431 Beam Avenue, Maplewood, MN 55115', 'Maplewood', 2);
 insert into company_location ("address", "location_name", "company_fk") VALUES ('11330 Fountains Dr, Maple Grove, MN 55369', 'Maple Grove', 2);
 insert into company_location ("address", "location_name", "company_fk") VALUES ('850 E Co Rd E East, Vadnais Heights, MN 55127', 'Vadnais Heights', 3);
 insert into company_location ("address", "location_name", "company_fk") VALUES ('10240 Hudson Rd, Woodbury, MN 55129', 'Woodbury', 3);
 insert into company_location ("address", "location_name", "company_fk") VALUES ('99 Electric Avenue, Shakopee, MN 55379', 'Shakopee', 4);
+insert into company_location ("address", "location_name", "company_fk") VALUES ('1000 Electric Supply Avenue, Shakopee, MN 55379', 'Shakopee', 5);
 INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") VALUES('admin@admin.com', 'Pail', 'Gwanlija', 1, '$2a$10$T1FRsJQ4Y9yesCleyQX9o.ssMB3wBjLMx.o9iwGeXtcnyH9bMqEAu', 'admin');
 INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") VALUES('costco@costco.com', 'Cost', 'Co', 2, '$2a$10$T1FRsJQ4Y9yesCleyQX9o.ssMB3wBjLMx.o9iwGeXtcnyH9bMqEAu', 'client');
 INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") VALUES('walmart@walmart.com', 'Wal', 'Mart', 3, '$2a$10$T1FRsJQ4Y9yesCleyQX9o.ssMB3wBjLMx.o9iwGeXtcnyH9bMqEAu', 'client');
-INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") VALUES('contractor@contractor.com', 'Dan', 'Electric', 4, '$2a$10$T1FRsJQ4Y9yesCleyQX9o.ssMB3wBjLMx.o9iwGeXtcnyH9bMqEAu', 'client');
-INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") VALUES('walmart@walmart.com', 'Wal', 'Mart', 2, '$2a$10$T1FRsJQ4Y9yesCleyQX9o.ssMB3wBjLMx.o9iwGeXtcnyH9bMqEAu', 'contractor');
-INSERT INTO task_status ("status_type") VALUES ('Started'), ('Receipt Acknowledged'), ('Shipped'), ('Scheduled'), ('Complete');
-
+INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") VALUES('contractor@contractor.com', 'Dan', 'Electric', 4, '$2a$10$T1FRsJQ4Y9yesCleyQX9o.ssMB3wBjLMx.o9iwGeXtcnyH9bMqEAu', 'contractor');
+INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") VALUES('supply@supply.com', 'Tim', 'Warehouse', 5, '$2a$10$T1FRsJQ4Y9yesCleyQX9o.ssMB3wBjLMx.o9iwGeXtcnyH9bMqEAu', 'contractor');
+INSERT INTO task_status ("status_type") VALUES ('Started'), ('Receipt Acknowledged'), ('Shipped'), ('Scheduled'), ('Complete'), ('Invoiced');
+INSERT INTO project ("project_name", "PO_Number", "due_date", "company_fk", "location_fk") VALUES('CostCo Bayport', '1000', '2021-03-01', 2, 2), ('CostCo MapleGrove', '1001', '2021-02-01', 2, 3),
+('Walmart Vadnais Heights', '1002', '2021-03-01', 3, 4), ('Walmart Woodbury', '1003', '2021-03-02', 3, 5);
+INSERT INTO task_name ("task_name") VALUES('Order Materials'), ('Schedule Installation'), ('Invoice');
+INSERT INTO task ("poc_fk", "scheduled_date", "nlt_date", "task_name_fk", "task_status_fk", "project_fk") 
+VALUES(5, '2021-02-08', '2021-02-09', 1, 1, 1);
