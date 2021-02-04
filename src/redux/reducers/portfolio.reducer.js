@@ -1,6 +1,6 @@
  const portfolioReducer = (state = {}, action) => {
     switch (action.type) {
-      case 'FETCH_PORTFOLIO': //think about this call name and work out a better one
+      case 'FETCH_PORTFOLIO': 
         return action.payload;
       case 'CLEAR_PORTFOLIO':
         return {};
