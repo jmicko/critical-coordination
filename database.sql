@@ -99,9 +99,16 @@ INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "p
 INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") VALUES('walmart@walmart.com', 'Wal', 'Mart', 3, '$2a$10$T1FRsJQ4Y9yesCleyQX9o.ssMB3wBjLMx.o9iwGeXtcnyH9bMqEAu', 'client');
 INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") VALUES('contractor@contractor.com', 'Dan', 'Electric', 4, '$2a$10$T1FRsJQ4Y9yesCleyQX9o.ssMB3wBjLMx.o9iwGeXtcnyH9bMqEAu', 'contractor');
 INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") VALUES('supply@supply.com', 'Tim', 'Warehouse', 5, '$2a$10$T1FRsJQ4Y9yesCleyQX9o.ssMB3wBjLMx.o9iwGeXtcnyH9bMqEAu', 'contractor');
+--data for projects and tasks FK tables
 INSERT INTO task_status ("status_type") VALUES ('Started'), ('Receipt Acknowledged'), ('Shipped'), ('Scheduled'), ('Complete'), ('Invoiced');
+INSERT INTO task_name ("task_name") VALUES('Order Materials'), ('Schedule Installation'), ('Invoice');
+--sample data for projects
 INSERT INTO project ("project_name", "PO_Number", "due_date", "company_fk", "location_fk") VALUES('CostCo Bayport', '1000', '2021-03-01', 2, 2), ('CostCo MapleGrove', '1001', '2021-02-01', 2, 3),
 ('Walmart Vadnais Heights', '1002', '2021-03-01', 3, 4), ('Walmart Woodbury', '1003', '2021-03-02', 3, 5);
-INSERT INTO task_name ("task_name") VALUES('Order Materials'), ('Schedule Installation'), ('Invoice');
+
+--sample data for tasks
 INSERT INTO task ("poc_fk", "scheduled_date", "nlt_date", "task_name_fk", "task_status_fk", "project_fk") 
-VALUES(5, '2021-02-08', '2021-02-09', 1, 1, 1);
+VALUES(5, '2021-02-08', '2021-02-09', 1, 1, 1), (4, '2021-02-10', '2021-02-11', 2, 1, 1), (5, '2021-02-10', '2021-02-11', 1, 1, 2), 
+(4, '2021-02-10', '2021-02-11', 2, 1, 2), (5, '2021-02-10', '2021-02-11', 1, 1, 3), (4, '2021-02-10', '2021-02-11', 2, 1, 3), 
+(5, '2021-02-10', '2021-02-11', 1, 1, 4), (4, '2021-02-10', '2021-02-11', 2, 1, 4);
+
