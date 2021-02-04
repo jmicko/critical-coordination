@@ -63,32 +63,24 @@ class AdminPage extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Welcome to the admin page, {this.props.store.user.first_name}!</h1>
-        
+      <center>
+        <h1>Admin Page</h1>  
         <button className="adminButtonClass" onClick={()=>this.showUser()}>Manage User</button>
         <button className="adminButtonClass" onClick={()=>this.showCompany()}>Manage Company</button>
-        <button className="adminButtonClass" onClick={()=>this.showLocation()}>Manage Location</button>
         <button className="adminButtonClass" onClick={()=>this.showTaskStatus()}>Manage Task Status</button>
-
-
         {/* <h3>User List</h3> */}
         {this.state.showUser ?
         <AdminUser />: <p></p>}
-        
         {/* <h3>Company List</h3> */}
         {this.state.showCompany ?
         <AdminCompany />: <p></p>}
-
         {/* <h3>Location List</h3> */}
-        {this.state.showLocation ?
+        {this.state.showCompany ?
         <AdminLocation />: <p></p>}
-
         {/* <h3>Category List</h3> */}
         {this.state.showTaskStatus ?
         <AdminTaskStatus />: <p></p>}
-        
-      </div>
+      </center>
     );
   }
 }

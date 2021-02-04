@@ -54,11 +54,23 @@ function* fetchTaskStatus() {
     }
 } 
 
+function* adminAddUser(action) {
+   console.log('in AdminAddUserSage');
+   try {
+      yield axios.post('/api/admin/adduser', action.payload)
+      yield put({ type: 'FETCH_ALLUSERS' })
+   }catch (error) {
+      console.log('error in Admin Add User Saga, ', error);
+      }
+   
+}
+
 function* adminSaga() {
     yield takeLatest('FETCH_ALLCOMPANY', fetchAllCompany);
     yield takeLatest('FETCH_ALLLOCATION', fetchAllLocation);
     yield takeLatest('FETCH_ALLUSERS', fetchAllUsers);
     yield takeLatest('FETCH_TASKSTATUS', fetchTaskStatus);
+    yield takeLatest('ADMIN_ADD_USER', adminAddUser)
 }
 
 

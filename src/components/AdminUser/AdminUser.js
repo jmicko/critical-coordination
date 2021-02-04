@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import AddUserForm from '../AddUserForm/AddUserForm'
 import '../AdminUser/AdminUser.css'
 
 
@@ -10,19 +11,31 @@ class AdminUser extends Component {
   async componentDidMount() {
     // Get's data to populate lists/tables
     this.props.dispatch({type: 'FETCH_ALLUSERS'});
+    this.props.dispatch({type: 'FETCH_ALLCOMPANY'});
   }
 
   state = {
     stateBuffer: 0,
+    showAddUser: false,
   }
 
+  addUser = () => {
+    this.setState({
+      showAddUser: !this.state.showAddUser
+    })
+    console.log('in add user');
+  }
 
   render() {
     return (
       <div>
-        <h3>Admin <span style={{textDecoration: "underline"}}>User</span> Page, {this.props.store.user.first_name}!</h3>
+        <h3>Admin User Page</h3>
 
-              <button >Add User</button>
+        {/* <h3>Category List</h3> */}
+        {this.state.showAddUser ?
+          <> <AddUserForm /> <button onClick={this.addUser}>Cancel</button></>
+          : <button onClick={this.addUser}>Add User</button>}
+              
 
               <table className="tableClass">
                 <thead className="headerClass">
@@ -38,7 +51,7 @@ class AdminUser extends Component {
                               <td>{lineItem.user_type}</td>
                               <td>{lineItem.company_name}</td>
                               <td><button className="adminButtonClass">Modify</button></td>
-                              <td><button className="adminButtonClass">Delete</button></td>
+                              <td><button className="adminButtonClass">Archive</button></td>
                           </tr>
                         );
                     })} 
