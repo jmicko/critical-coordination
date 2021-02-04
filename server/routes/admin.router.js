@@ -28,7 +28,32 @@ router.get('/location', (req, res) => {
      });
  });
 
+ // GET location table w/ company join
+router.get('/users', (req, res) => {
+   const queryText = `SELECT email, first_name, last_name, company_fk, user_type, company.company_name FROM "user" 
+         JOIN company ON company.id = "user".company_fk
+         ORDER BY company.id, "user".id  ASC;`
+   console.log ('in all users GET')
+   pool.query(queryText)
+     .then((result) => { res.send(result.rows); })
+     .catch((err) => {
+       console.log('Error GET all users query', err);
+       res.sendStatus(500);
+     });
+ });
 
+// GET location table w/ company join
+router.get('/taskstatus', (req, res) => {
+   const queryText = `SELECT * FROM task_status
+         ORDER BY id  ASC;`
+   console.log ('in task status GET')
+   pool.query(queryText)
+     .then((result) => { res.send(result.rows); })
+     .catch((err) => {
+       console.log('Error GET task status query', err);
+       res.sendStatus(500);
+     });
+ });
 
 /**
  * POST route template

@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import LogOutButton from '../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import '../AdminUser/AdminUser.css'
+import '../AdminTaskStatus/AdminTaskStatus.css'
 
-
-class AdminUser extends Component {
+class AdminTaskStatus extends Component {
   // this component doesn't do much to start, just renders some user info to the DOM
 
   async componentDidMount() {
     // Get's data to populate lists/tables
-    this.props.dispatch({type: 'FETCH_ALLUSERS'});
+    this.props.dispatch({type: 'FETCH_TASKSTATUS'});
   }
 
   state = {
@@ -22,13 +22,12 @@ class AdminUser extends Component {
       <div>
         <h3>Admin <span style={{textDecoration: "underline"}}>User</span> Page, {this.props.store.user.first_name}!</h3>
 
-              <button >Add Task Status</button>
+              <button >Add User</button>
               <ul>
-                {this.props.store.admin.allUsersReducer.map((lineItem, index) => {
+                {this.props.store.admin.taskStatusReducer.map((lineItem, index) => {
                     return (
                         <div key={index}>
-                          {/* {JSON.stringify(lineItem)} */}
-                          <li>ID: {lineItem.id} {lineItem.email} - Name: {lineItem.first_name} {lineItem.last_name}  - Company: {lineItem.company_name} <button className="adminButtonClass">Modify</button><button className="adminButtonClass">Delete</button></li>
+                          <li>ID: {lineItem.id} {lineItem.status_type} <button className="adminButtonClass">Modify</button><button className="adminButtonClass">Delete</button></li>
                         </div>
                     );
                 })} 
@@ -39,4 +38,4 @@ class AdminUser extends Component {
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStoreToProps)(AdminUser);
+export default connect(mapStoreToProps)(AdminTaskStatus);
