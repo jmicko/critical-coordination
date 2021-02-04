@@ -6,6 +6,8 @@ import Popup from 'reactjs-popup';
 
 class ExecutivePortfolioView extends Component {
   state = {
+    project_id: '',
+    location_id: '',
     project_name: '',
     location_name: '',
     PO_Number: '',
@@ -16,34 +18,43 @@ handleChange = name => event => {
     this.setState({ [name]: event.target.value });    
 }
 
-update = () => {
-    this.props.dispatch({ type: 'UPDATE_PORTFOLIO', payload: this.state });    
+updateId = (project) => {
+    this.setState({project_id: project.id})
+    this.setState({location_id: project.location_fk})
+}
+
+update = () => { 
+    this.props.dispatch({ type: 'UPDATE_PORTFOLIO', payload: this.state });  
+    this.props.dispatch({ type: 'GET_PORTFOLIO', payload: this.props.store.user?.company_fk })  
 }
 
     render() {
+        console.log(this.state);
         return (
             <>
                 <h1> Executive Portfolio Page </h1>
                 <table>
                     <tbody>
-                        {this.props.store.portfolio.map((project, index) => {
-                            return <tr key={index}>              
+                        {this.props.store.portfolio.map((project) => {
+                            return <tr key={project.id} >
                                         <td><input value={project.project_name}/></td>
                                         <td><input value={project.location_name}/></td>
                                         <td><input value={project.PO_Number}/></td>
                                         <td><input value={project.due_date}/></td>
-                                        <td><input value='Logic needs to be done'/></td>
-                                        <td><Popup trigger={<button>Edit</button>} closeOnButtonClick position="center" >
-                                                <div className="editPanel">
-                                                    <input placeholder={project.project_name} onChange={this.handleChange('project_name')}/>
+                                        <td><input value='Logic needs to be done'/></td>                                    
+                                        <td>
+                                            <Popup trigger={<button>Edit</button>} position="center" >
+                                                <div className="editPanel" onClick={ () => this.updateId(project) }>
+                                                    <input placeholder={project.project_name} onChange={this.handleChange('project_name')}/> 
                                                     <input placeholder={project.location_name} onChange={this.handleChange('location_name')}/> 
                                                     <input placeholder={project.PO_Number} onChange={this.handleChange('PO_Number')}/> 
                                                     <input placeholder={project.due_date} onChange={this.handleChange('due_date')}/>    
-                                                 <button onClick={this.update}>Save</button>
+                                                    <button onClick={this.update}>Save</button> 
                                                 </div>
                                             </Popup>
-                                        </td>
+                                        </td> 
                                     </tr>
+                                    
                         })}                        
                     </tbody>
                 </table> 
