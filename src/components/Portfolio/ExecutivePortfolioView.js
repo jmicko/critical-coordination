@@ -17,14 +17,18 @@ class ExecutivePortfolioView extends Component {
                 <h1> Executive Portfolio Page </h1>
                 <table>
                     <tbody>
-                        <tr>              
-                            <td><input placeholder='name'/></td>
-                            <td><input placeholder='location'/></td>
-                            <td><input placeholder='PO number'/></td>
-                            <td><input placeholder='NLT Date'/></td>
-                            <td><input placeholder='Status'/></td>
-                            <td><button>Edit</button></td>
-                        </tr>
+                        {this.props.store.portfolio.map((project, index) => {
+                            return <tr key={index}>              
+                                        <td><input value={project.project_name}/></td>
+                                        <td><input value='need get location data'/></td>
+                                        <td><input value={project.PO_Number}/></td>
+                                        <td><input value={project.due_date}/></td>
+                                        <td><input value='Logic needs to be done'/></td>
+                                        <td><button>Edit</button></td>
+                                    </tr>
+                        })}
+
+                        
                     </tbody>
                 </table> 
             </>
