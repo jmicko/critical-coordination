@@ -22,16 +22,24 @@ class AdminTaskStatus extends Component {
       <div>
         <h3>Admin <span style={{textDecoration: "underline"}}>User</span> Page, {this.props.store.user.first_name}!</h3>
 
-              <button >Add User</button>
-              <ul>
-                {this.props.store.admin.taskStatusReducer.map((lineItem, index) => {
-                    return (
-                        <div key={index}>
-                          <li>ID: {lineItem.id} {lineItem.status_type} <button className="adminButtonClass">Modify</button><button className="adminButtonClass">Delete</button></li>
-                        </div>
-                    );
-                })} 
-              </ul>
+              <button >Add Task Status</button>
+
+              <table className="tableClass">
+                <thead className="headerClass">
+                  <tr><th>Status</th><th>&nbsp;</th><th>&nbsp;</th></tr>
+                </thead>
+                <tbody className="bodyClass">
+                    {this.props.store.admin.taskStatusReducer.map((lineItem, index) => {
+                        return (
+                          <tr key={index}>
+                              <td>{lineItem.status_type}</td>
+                              <td><button className="adminButtonClass">Modify</button></td>
+                              <td><button className="adminButtonClass">Delete</button></td>
+                          </tr>
+                        );
+                    })} 
+                </tbody>
+              </table>
       </div>
     );
   }
