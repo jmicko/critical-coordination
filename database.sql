@@ -84,8 +84,20 @@ ALTER TABLE "task" ADD CONSTRAINT "task_fk3" FOREIGN KEY ("task_status_fk") REFE
 ALTER TABLE "company_location" ADD CONSTRAINT "company_location_fk0" FOREIGN KEY ("company_fk") REFERENCES "company"("id");
 
 --inserts of starter data
-INSERT INTO "public"."user"("email", "first_name", "last_name", "password", "user_type") VALUES('admin@admin.com', 'Pail', 'Gwanlija', '$2a$10$T1FRsJQ4Y9yesCleyQX9o.ssMB3wBjLMx.o9iwGeXtcnyH9bMqEAu', 'admin');
+insert into company ("company_name") VALUES ('Critical Coordination'); 
 insert into company ("company_name") VALUES ('Costco'); 
-insert into company_location ("address", "location_name", "company_fk") VALUES ('1431 Beam Avenue, Maplewood, MN 55115', 'Maplewood', 1);
-insert into company_location ("address", "location_name", "company_fk") VALUES ('11330 Fountains Dr, Maple Grove, MN 55369', 'Maple Grove', 1);
+insert into company ("company_name") VALUES ('Walmart'); 
+insert into company ("company_name") VALUES ('The Electric Contracting Company'); 
+insert into company_location ("address", "location_name", "company_fk") VALUES ('Bayport, MN', 'Bayport', 1);
+insert into company_location ("address", "location_name", "company_fk") VALUES ('1431 Beam Avenue, Maplewood, MN 55115', 'Maplewood', 2);
+insert into company_location ("address", "location_name", "company_fk") VALUES ('11330 Fountains Dr, Maple Grove, MN 55369', 'Maple Grove', 2);
+insert into company_location ("address", "location_name", "company_fk") VALUES ('850 E Co Rd E East, Vadnais Heights, MN 55127', 'Vadnais Heights', 3);
+insert into company_location ("address", "location_name", "company_fk") VALUES ('10240 Hudson Rd, Woodbury, MN 55129', 'Woodbury', 3);
+insert into company_location ("address", "location_name", "company_fk") VALUES ('99 Electric Avenue, Shakopee, MN 55379', 'Shakopee', 4);
+INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") VALUES('admin@admin.com', 'Pail', 'Gwanlija', 1, '$2a$10$T1FRsJQ4Y9yesCleyQX9o.ssMB3wBjLMx.o9iwGeXtcnyH9bMqEAu', 'admin');
+INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") VALUES('costco@costco.com', 'Cost', 'Co', 2, '$2a$10$T1FRsJQ4Y9yesCleyQX9o.ssMB3wBjLMx.o9iwGeXtcnyH9bMqEAu', 'client');
+INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") VALUES('walmart@walmart.com', 'Wal', 'Mart', 3, '$2a$10$T1FRsJQ4Y9yesCleyQX9o.ssMB3wBjLMx.o9iwGeXtcnyH9bMqEAu', 'client');
+INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") VALUES('contractor@contractor.com', 'Dan', 'Electric', 4, '$2a$10$T1FRsJQ4Y9yesCleyQX9o.ssMB3wBjLMx.o9iwGeXtcnyH9bMqEAu', 'client');
+INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") VALUES('walmart@walmart.com', 'Wal', 'Mart', 2, '$2a$10$T1FRsJQ4Y9yesCleyQX9o.ssMB3wBjLMx.o9iwGeXtcnyH9bMqEAu', 'contractor');
+INSERT INTO task_status ("status_type") VALUES ('Started'), ('Receipt Acknowledged'), ('Shipped'), ('Scheduled'), ('Complete');
 
