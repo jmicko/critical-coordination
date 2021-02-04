@@ -30,7 +30,15 @@ class AddUserForm extends Component {
 
    addUser = (event) => {
       event.preventDefault();
-      console.log('in addUser');
+      let user = this.state.newUser;
+      if(user.email !== '' && user.company !== '' 
+      && user.first_name !== '' && user.last_name !== '' 
+      && user.password !== '' && user.user_type !== '') {
+         console.log('in addUser');
+         this.props.dispatch( {type: 'ADMIN_ADD_USER', payload: user})
+      } else {
+         alert ('Please ensure all fields are filled before submitting')
+      }
    }
 
    render() {
