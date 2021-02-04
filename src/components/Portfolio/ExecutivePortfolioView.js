@@ -5,6 +5,11 @@ import Popup from 'reactjs-popup';
 
 
 class ExecutivePortfolioView extends Component {
+
+    componentDidMount(){ 
+        this.props.dispatch({ type: 'GET_PORTFOLIO', payload: this.props.store.user?.company_fk })
+    }
+
   state = {
     project_id: '',
     location_id: '',
