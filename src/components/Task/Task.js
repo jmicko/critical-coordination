@@ -10,7 +10,8 @@ class Task extends Component {
 
   state = {
     // toggle edit mode on and off to conditionally render input fields or static elements
-    edit: false
+    edit: false,
+    task: {}
   }
 
   // handle navigation from buttons on page
@@ -18,7 +19,7 @@ class Task extends Component {
     this.props.history.push(web_address);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.props.dispatch({
       type: 'CLEAR_TASK'
     });
@@ -30,12 +31,24 @@ class Task extends Component {
 
   handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
-      [propertyName]: event.target.value,
+      // change the task property for the input being changed
+      task:{...this.state.task,[propertyName]: event.target.value},
     });
   };
 
   handleEditButton = () => {
+    this.state.edit
+    // if coming out of edit mode, send changes to task store
+    ? this.updateTask()
+    // if going into edit mode, put the task store into local state
+    : this.setState({
+      task: this.props.store.task
+    })
     this.setState({ edit: !this.state.edit })
+  }
+
+  updateTask = () => {
+    console.log('task will be updated to', this.state.task);
   }
 
 
@@ -54,17 +67,19 @@ class Task extends Component {
           {this.state.edit
             ?
             <form>
-              <label htmlFor="task_id">
+              <label htmlFor="id">
                 Task ID:
               <input
                   type="text"
-                  name="task_id"
-                  value={this.props.store.task.id}
+                  name="id"
+                  value={this.state.task.id}
                   required
-                  onChange={this.handleInputChangeFor('task_id')}
+                  onChange={this.handleInputChangeFor('id')}
                 />
               </label>
-              <button onClick={() => this.handleEditButton()}>
+              <button
+                type="button"
+               onClick={() => this.handleEditButton()}>
                 {this.state.edit
                   ? "Save"
                   : "Edit"}
