@@ -54,8 +54,20 @@ function* fetchTaskStatus() {
     }
 } 
 
+function* updateTaskStatus() {
+    console.log('In fetchTaskStatus saga');
+    // Go to server, update redux store with data from server
+    try {
+        // get data from db
+        const response = yield axios.put('/api/admin/taskstatus');
+        // put data into store via Reducer
+        yield put({ type: 'SET_TASKSTATUS', payload: response.data });
+    } catch ( error ) {
+        console.log('error with fetchTaskStatus get request', error);
+    }
+} 
+
 function* adminAddUser(action) {
-   console.log('in AdminAddUserSage');
    try {
       yield axios.post('/api/admin/adduser', action.payload)
       yield put({ type: 'FETCH_ALLUSERS' })
@@ -64,13 +76,44 @@ function* adminAddUser(action) {
       }
    
 }
+function* adminAddCompany(action) {
+   try {
+      yield axios.post('/api/admin/addcompany', action.payload)
+      yield put({ type: 'FETCH_ALLCOMPANY' })
+   } catch (error) {
+      console.log('error in Admin Add Company Saga, ', error);
+   }
+}
+
+function* adminAddLocation(action) {
+   try {
+      yield axios.post('/api/admin/addlocation', action.payload)
+      yield put({ type: 'FETCH_ALLLOCATION' })
+   } catch (error) {
+      console.log('error in Admin Add Location Saga, ', error);
+   }
+}
+
+function* adminAddStatus(action) {
+   console.log('in AdminAddStatusSaga');
+   try {
+      yield axios.post('/api/admin/addstatus', action.payload)
+      yield put({ type: 'FETCH_TASKSTATUS' })
+   } catch (error) {
+      console.log('error in Admin Add Status Saga, ', error);
+   }
+}
 
 function* adminSaga() {
     yield takeLatest('FETCH_ALLCOMPANY', fetchAllCompany);
     yield takeLatest('FETCH_ALLLOCATION', fetchAllLocation);
     yield takeLatest('FETCH_ALLUSERS', fetchAllUsers);
     yield takeLatest('FETCH_TASKSTATUS', fetchTaskStatus);
+    yield takeLatest('UPDATE_TASKSTATUS', updateTaskStatus);
     yield takeLatest('ADMIN_ADD_USER', adminAddUser)
+    yield takeLatest('ADMIN_ADD_COMPANY', adminAddCompany);
+    yield takeLatest('ADMIN_ADD_LOCATION', adminAddLocation);
+    yield takeLatest('ADMIN_ADD_STATUS', adminAddStatus);
 }
 
 

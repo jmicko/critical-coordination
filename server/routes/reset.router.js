@@ -27,6 +27,7 @@ router.put('/forgot', (req, res) => {
    })
 })
 
+
 forgotPassword = (req, res) => {
    const email = req.body.email;
    console.log('in forgotPassword');
@@ -63,7 +64,6 @@ forgotPassword = (req, res) => {
 
 // handles password reset request
 router.put('/', forgotPassword)
-
 
 
 
