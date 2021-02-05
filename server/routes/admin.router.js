@@ -86,6 +86,7 @@ router.post('/addcompany', (req, res) => {
       })
 });
 
+//add new location route for admin page
 router.post('/addlocation', (req, res) => {
    const location = req.body.location;
    const address = req.body.address;
@@ -98,4 +99,6 @@ router.post('/addlocation', (req, res) => {
          console.log('Error with ADD LOCATION admin post', error);
       })
 });
+
+
 module.exports = router;
