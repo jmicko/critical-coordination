@@ -100,5 +100,16 @@ router.post('/addlocation', (req, res) => {
       })
 });
 
+router.post('/addstatus', (req, res) => {
+   const status = req.body.status_type
+   const sqlText = `INSERT INTO task_status ("status_type") VALUES($1);`;
+   pool.query(sqlText, [status])
+      .then(() => {
+         res.sendStatus(201)
+      }).catch((error) => {
+         console.log('Error with ADD LOCATION admin post', error);
+      })
+});
+
 
 module.exports = router;
