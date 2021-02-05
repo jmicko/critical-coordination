@@ -15,16 +15,26 @@ class AdminTaskStatus extends Component {
   state = {
     recordID: 0,
     editRecord:{
-      status_type: 0,
+      status_type: '',
     }
   }
 
-  updateId = (passedId) => {
-    this.setState({recordID: passedId})
+  updateState = (passedRecord) => {
+    console.log (`UpdateState: `, passedRecord);
+    this.setState({
+      recordID: passedRecord.id, 
+      editRecord: {
+        status_type: passedRecord.status_type
+      }
+    })
   }
 
   handleChange = name => event => {
-    this.setState({ [name]: event.target.value });    
+    this.setState({ 
+      editRecord: {
+        [name]: event.target.value 
+      }
+    });    
   }
 
   updateRecord = () => { 
@@ -51,8 +61,8 @@ class AdminTaskStatus extends Component {
                               <td>{lineItem.status_type}</td>
                               <td>
                                 <Popup trigger={<button>Edit</button>} position="center" >
-                                    <div className="editPanel" onClick={ () => this.updateId(lineItem.id) }>
-                                        <input placeholder={lineItem.status_type} onChange={this.handleChange('status_type')}/> 
+                                    <div className="editPanel" onClick={ () => this.updateState(lineItem) }>
+                                        <input placeholder={lineItem.status_type} value={this.state.editRecord.status_type} onChange={this.handleChange('status_type')}/> 
                                         <button onClick={this.updateRecord}>Save</button> 
                                     </div>
                                 </Popup>
