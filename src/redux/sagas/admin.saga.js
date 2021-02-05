@@ -54,6 +54,19 @@ function* fetchTaskStatus() {
     }
 } 
 
+function* updateTaskStatus() {
+    console.log('In fetchTaskStatus saga');
+    // Go to server, update redux store with data from server
+    try {
+        // get data from db
+        const response = yield axios.put('/api/admin/taskstatus');
+        // put data into store via Reducer
+        yield put({ type: 'SET_TASKSTATUS', payload: response.data });
+    } catch ( error ) {
+        console.log('error with fetchTaskStatus get request', error);
+    }
+} 
+
 function* adminAddUser(action) {
    try {
       yield axios.post('/api/admin/adduser', action.payload)
@@ -96,7 +109,8 @@ function* adminSaga() {
     yield takeLatest('FETCH_ALLLOCATION', fetchAllLocation);
     yield takeLatest('FETCH_ALLUSERS', fetchAllUsers);
     yield takeLatest('FETCH_TASKSTATUS', fetchTaskStatus);
-    yield takeLatest('ADMIN_ADD_USER', adminAddUser);
+    yield takeLatest('UPDATE_TASKSTATUS', updateTaskStatus);
+    yield takeLatest('ADMIN_ADD_USER', adminAddUser)
     yield takeLatest('ADMIN_ADD_COMPANY', adminAddCompany);
     yield takeLatest('ADMIN_ADD_LOCATION', adminAddLocation);
     yield takeLatest('ADMIN_ADD_STATUS', adminAddStatus);
