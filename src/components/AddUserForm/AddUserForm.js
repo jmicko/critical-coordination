@@ -66,6 +66,7 @@ class AddUserForm extends Component {
                <input required placeholder="Last Name" onChange={(event) => this.handleChange(event, 'last_name')} value={this.state.newUser.last_name}></input>
                <input required placeholder="password" onChange={(event) => this.handleChange(event, 'password')} value={this.state.newUser.password}></input>
                <select required placeholder="user type" onChange={(event) => this.handleChange(event, 'user_type')} value={this.state.newUser.user_type}>
+                  <option value="">User Type: </option>
                   <option value="client">User Type: Client</option>
                   <option value="contractor">User Type: Contractor</option>
                   <option value="admin">User Type: Admin</option>
