@@ -9,7 +9,7 @@ router.get('/:id', (req, res) => {
   pool.query(sqlText, [req.params.id])
   .then( (result) => {
     console.log(`hey look at these RESULTS`, result.rows);
-     res.send(result.rows)
+     res.send(...result.rows)
   })
   .catch( (error) => {
      console.log('error in TASK GET route, ', error);

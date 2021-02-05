@@ -7,31 +7,79 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 // the component name Task with the name for the new
 // component.
 class Task extends Component {
-  
 
-    navigate = web_address => {
-        this.props.history.push(web_address);
-      }
+  state = {
+    // toggle edit mode on and off to conditionally render input fields or static elements
+    edit: false
+  }
 
-      componentDidMount() {
-        console.log("task component did mount");
-        this.props.dispatch({
-          type: 'CLEAR_TASK'
-        });
-        this.props.dispatch({
-          type: 'FETCH_TASK',
-          payload: 2
-        });
-      }
+  // handle navigation from buttons on page
+  navigate = web_address => {
+    this.props.history.push(web_address);
+  }
 
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'CLEAR_TASK'
+    });
+    this.props.dispatch({
+      type: 'FETCH_TASK',
+      payload: 2
+    });
+  }
+
+  handleInputChangeFor = (propertyName) => (event) => {
+    this.setState({
+      [propertyName]: event.target.value,
+    });
+  };
+
+  handleEditButton = () => {
+    this.setState({ edit: !this.state.edit })
+  }
 
 
   render() {
     return (
-      <div>
+      <div className="container">
         <h2>Task Page</h2>
-        {JSON.stringify(this.props.store.task)}
-        <button onClick={ () => this.navigate('/portfolio') } >Button to the portfolio page</button>
+        <p>
+          Task store: {JSON.stringify(this.props.store.task)}
+        </p>
+        <p>
+          Local state: {JSON.stringify(this.state)}
+        </p>
+        <button onClick={() => this.navigate('/portfolio')} >Button to the portfolio page</button>
+        <div className="taskPanel">
+          {this.state.edit
+            ?
+            <form>
+              <label htmlFor="task_id">
+                Task ID:
+              <input
+                  type="text"
+                  name="task_id"
+                  value={this.props.store.task.id}
+                  required
+                  onChange={this.handleInputChangeFor('task_id')}
+                />
+              </label>
+              <button onClick={() => this.handleEditButton()}>
+                {this.state.edit
+                  ? "Save"
+                  : "Edit"}
+              </button>
+            </form>
+            : <div>
+              <p>Task ID: {this.props.store.task.id}</p>
+              <button onClick={() => this.handleEditButton()}>
+                {this.state.edit
+                  ? "Save"
+                  : "Edit"}
+              </button>
+            </div>
+          }
+        </div>
       </div>
     );
   }
