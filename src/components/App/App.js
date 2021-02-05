@@ -5,14 +5,10 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-
 import { connect } from 'react-redux';
-
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
 import UserPage from '../UserPage/UserPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
@@ -56,20 +52,16 @@ class App extends Component {
             be redirected to the path supplied when logged in, otherwise they will
             be taken to the component and path supplied. */}
             <ProtectedRoute
-              // with authRedirect:
-              // - if logged in, redirects to "/user"
-              // - else shows LoginPage at /login
-              exact
-              path="/login"
+              // with authRedirect: if logged in, redirects to "/user" else shows LoginPage at /login
+              exact path="/login"
               component={LoginPage}
-              authRedirect="/user"
+              authRedirect="/portfolio"
             />
             <ProtectedRoute
               // with authRedirect:
               // - if logged in, redirects to "/user"
               // - else shows RegisterPage at "/registration"
-              exact
-              path="/registration"
+              exact path="/registration"
               component={RegisterPage}
               authRedirect="/user"
             />
@@ -86,37 +78,30 @@ class App extends Component {
               exact
               path="/home"
               component={LandingPage}
-              authRedirect="/user"
             />
-            <Route
+            <ProtectedRoute
               exact
               path="/forgotpassword"
               component={ResetPage}
-              authRedirect="/user"
+              authRedirect="/portfolio"
             />
-            <Route
-              exact
-              path="/resetpassword"
+            <ProtectedRoute
+              exact path="/resetpassword"
               component={ResetLinkPage}
-              authRedirect="/user"
+              authRedirect="/portfolio"
             />
-            <Route
+            <ProtectedRoute
               exact
               path="/portfolio"
               component={Portfolio}
-              authRedirect="/user"
             />
-            <Route
-              exact
-              path="/task"
+            <ProtectedRoute
+              exact path="/task"
               component={Task}
-              authRedirect="/user"
             />
-            <Route
-              exact
-              path="/project"
+            <ProtectedRoute
+              exact path="/project"
               component={Project}
-              authRedirect="/user"
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

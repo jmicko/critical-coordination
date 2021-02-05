@@ -1,9 +1,12 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 //will need rejectunauthenticated text here 
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * FROM "task";`
   pool.query(sqlText, [])
   .then( (result) => {
