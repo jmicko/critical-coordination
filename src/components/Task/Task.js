@@ -67,33 +67,36 @@ class Task extends Component {
           {
             this.state.edit
               ?
+              // if in edit mode, render form items
               <div>
-                {/* if in edit mode, render form items */}
                 <form>
-                  {Object.keys(this.props.store.task).map((element, i) => {
-                    if (this.state.task[element]) {
-                      console.log('here is the element value', this.state.task[element]);
+                  {Object.keys(this.props.store.task).map((taskProperty, i) => {
+
+                      console.log('here is the taskProperty value', this.state.task[taskProperty]);
                       return (
-                        <label htmlFor={element}>
-                        Task {element}:
-                        <input
-                          type="text"
-                          name={element}
-                          value={this.state.task[element]}
-                          required
-                          onChange={this.handleInputChangeFor(element)}
+                        <label htmlFor={taskProperty}>
+                          Task {taskProperty}:
+                          <input
+                            type="text"
+                            name={taskProperty}
+                            value={this.state.task[taskProperty]
+                            ?this.state.task[taskProperty]
+                            :""}
+                            required
+                            onChange={this.handleInputChangeFor(taskProperty)}
                           />
-                      </label>
-                    )
-                  }
+                        </label>
+                      )
+
                   })}
                 </form>
               </div>
               :
-              Object.keys(this.props.store.task).map((element, i) => {
+              // if in
+              Object.keys(this.props.store.task).map((taskProperty, i) => {
                 return (
                   <div>
-                    <p>Task {element}: {this.props.store.task[element]}</p>
+                    <p>Task {taskProperty}: {this.props.store.task[taskProperty]}</p>
                   </div>
                 )
               })
