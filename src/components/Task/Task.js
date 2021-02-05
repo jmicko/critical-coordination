@@ -64,6 +64,13 @@ class Task extends Component {
         </p>
         <button onClick={() => this.navigate('/portfolio')} >Button to the portfolio page</button>
         <div className="taskPanel">
+          {
+            Object.keys(this.props.store.task).map((element, i) => {
+              return (
+              <p key={i}>key: {element} value: {this.props.store.task[element]}</p>
+              )
+            })
+          }
           {this.state.edit
             ?
             <form>
