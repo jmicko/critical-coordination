@@ -13,6 +13,7 @@ class AdminTaskStatus extends Component {
   }
 
   state = {
+    updatePopupFlag: false,
     recordID: 0,
     editRecord:{
       id: 0,
@@ -22,8 +23,9 @@ class AdminTaskStatus extends Component {
   }
 
   updateState = (passedRecord, archiveFlag=false) => {
-    console.log (`UpdateState: `, passedRecord);
+    //console.log (`UpdateState: `, passedRecord);
     this.setState({
+      updatePopupFlag: true,
       recordID: passedRecord.id, 
       editRecord: {
         id: passedRecord.id,
@@ -31,26 +33,22 @@ class AdminTaskStatus extends Component {
         archived: archiveFlag
       }
     })
-    
   }
 
   handleChange = name => event => {
     this.setState({ 
       editRecord: {
+        ...this.state.editRecord,
         [name]: event.target.value 
       }
     });    
   }
 
   updateRecord = () => { 
+    console.log (`updated record payload:`, this.state.editRecord);
     this.props.dispatch({ type: 'UPDATE_TASKSTATUS', payload: this.state.editRecord});  
-    this.props.dispatch({type: 'FETCH_TASKSTATUS'});  
-    // TODO -close popup?   how??
-  }
-
-  
-  cancelUpdate = () => { 
     this.setState({
+      updatePopupFlag: false,
       recordID: 0, 
       editRecord: {
         id: 0,
@@ -58,7 +56,25 @@ class AdminTaskStatus extends Component {
         archived: false
       }
     })
-    // TODO -close popup?   how??
+  }
+
+  OpenUpdatePopup = () => {
+    this.setState({
+      updatePopupFlag: true,
+    })
+  }
+  
+  cancelUpdate = () => { 
+    console.log (`cancel`);
+    this.setState({
+      updatePopupFlag: false,
+      recordID: 0, 
+      editRecord: {
+        id: 0,
+        status_type: '',
+        archived: false
+      }
+    })
   }
 
 
@@ -79,7 +95,8 @@ class AdminTaskStatus extends Component {
                           <tr key={index}>
                               <td>{lineItem.status_type}</td>
                               <td>
-                                <Popup trigger={<button>Edit</button>} position="center" >
+                                <button onClick={this.OpenUpdatePopup}>Edit</button>
+                                <Popup position="center" open={this.state.updatePopupFlag}>
                                     <div className="editPanel" onClick={ () => this.updateState(lineItem) }>
                                         <input placeholder={lineItem.status_type} value={this.state.editRecord.status_type} onChange={this.handleChange('status_type')}/> 
                                         <button onClick={this.updateRecord}>Save</button> 

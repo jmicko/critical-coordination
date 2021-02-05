@@ -45,7 +45,7 @@ router.get('/users', (req, res) => {
 
 // GET status table 
 router.get('/taskstatus', (req, res) => {
-   const queryText = `SELECT * FROM task_status
+   const queryText = `SELECT * FROM task_status WHERE archived = false
          ORDER BY id  ASC;`
    console.log ('in task status GET')
    pool.query(queryText)
@@ -56,11 +56,12 @@ router.get('/taskstatus', (req, res) => {
      });
  });
 
-//PUT status table
+//PUT (update) status table, to include delete (archive)
 router.put('/taskstatus', (req, res) => {
-   const id = req.body.editRecord.id;
-   const status = req.body.editRecord.status_type;
-   const archived = req.body.editRecord.archived;
+   console.log (`task put payload: `, req.body );
+   const id = req.body.id;
+   const status = req.body.status_type;
+   const archived = req.body.archived;
    const sqlText = `UPDATE task_status SET status_type = $2, archived = $3 WHERE id=$1;`;
    pool.query(sqlText, [id, status, archived])
    .then( () => {
@@ -69,7 +70,6 @@ router.put('/taskstatus', (req, res) => {
       console.log('Error with ADD USER admin post', error);
    })
 });
-
 
 
 //add new user route for admin page
