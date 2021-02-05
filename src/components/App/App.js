@@ -5,14 +5,10 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-
 import { connect } from 'react-redux';
-
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
 import UserPage from '../UserPage/UserPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
@@ -23,8 +19,6 @@ import ResetLinkPage from '../resetLinkPage/ResetLinkPage';
 import Portfolio from '../Portfolio/Portfolio';
 import Project from '../Project/Project';
 import Task from '../Task/Task';
-
-
 import './App.css';
 
 class App extends Component {
@@ -40,7 +34,6 @@ class App extends Component {
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
-
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
@@ -51,32 +44,25 @@ class App extends Component {
               path="/user"
               component={UserPage}
             />
-
             {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
             be taken to the component and path supplied. */}
             <ProtectedRoute
-              // with authRedirect:
-              // - if logged in, redirects to "/user"
-              // - else shows LoginPage at /login
-              exact
-              path="/login"
+              // with authRedirect: if logged in, redirects to "/user" else shows LoginPage at /login
+              exact path="/login"
               component={LoginPage}
-              authRedirect="/user"
+              authRedirect="/portfolio"
             />
             <ProtectedRoute
               // with authRedirect:
               // - if logged in, redirects to "/user"
               // - else shows RegisterPage at "/registration"
-              exact
-              path="/registration"
+              exact path="/registration"
               component={RegisterPage}
               authRedirect="/user"
             />
             <ProtectedRoute
-              // logged in shows InfoPage else shows LoginPage
-              exact
-              path="/adminpage"
+              exact path="/adminpage"
               component={AdminPage}
             />
             <ProtectedRoute
@@ -86,37 +72,30 @@ class App extends Component {
               exact
               path="/home"
               component={LandingPage}
-              authRedirect="/user"
             />
-            <Route
+            <ProtectedRoute
               exact
               path="/forgotpassword"
               component={ResetPage}
-              authRedirect="/user"
+              authRedirect="/portfolio"
             />
-            <Route
-              exact
-              path="/resetpassword"
+            <ProtectedRoute
+              exact path="/resetpassword"
               component={ResetLinkPage}
-              authRedirect="/user"
+              authRedirect="/portfolio"
             />
-            <Route
+            <ProtectedRoute
               exact
               path="/portfolio"
               component={Portfolio}
-              authRedirect="/user"
             />
-            <Route
-              exact
-              path="/task"
+            <ProtectedRoute
+              exact path="/task"
               component={Task}
-              authRedirect="/user"
             />
-            <Route
-              exact
-              path="/project"
+            <ProtectedRoute
+              exact path="/project"
               component={Project}
-              authRedirect="/user"
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
