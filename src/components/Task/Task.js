@@ -67,32 +67,38 @@ class Task extends Component {
           {
             this.state.edit
               ?
-              Object.keys(this.props.store.task).map((element, i) => {
-                return (
-                  <form>
-                    <label htmlFor={element}>
-                      Task {element}:
-                  <input
-                        type="text"
-                        name={element}
-                        value={this.state.task[element]}
-                        required
-                        onChange={this.handleInputChangeFor(element)}
-                      />
-                    </label>
-                  </form>
-                )
-              })
+              <div>
+                {/* if in edit mode, render form items */}
+                <form>
+                  {Object.keys(this.props.store.task).map((element, i) => {
+                    if (this.state.task[element]) {
+                      console.log('here is the element value', this.state.task[element]);
+                      return (
+                        <label htmlFor={element}>
+                        Task {element}:
+                        <input
+                          type="text"
+                          name={element}
+                          value={this.state.task[element]}
+                          required
+                          onChange={this.handleInputChangeFor(element)}
+                          />
+                      </label>
+                    )
+                  }
+                  })}
+                </form>
+              </div>
               :
               Object.keys(this.props.store.task).map((element, i) => {
                 return (
-                <div>
-                  <p>Task {element}: {this.props.store.task[element]}</p>
-                </div>
+                  <div>
+                    <p>Task {element}: {this.props.store.task[element]}</p>
+                  </div>
                 )
-          })
+              })
           }
-                <button onClick={() => this.handleEditButton()}>
+          <button onClick={() => this.handleEditButton()}>
             {this.state.edit
               ? "Save"
               : "Edit"}
