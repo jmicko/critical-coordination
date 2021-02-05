@@ -6,7 +6,7 @@ import '../AdminPage/AdminPage.css'
 import AdminUser from '../AdminUser/AdminUser'
 import AdminCompany from '../AdminCompany/AdminCompany'
 import AdminLocation from '../AdminLocation/AdminLocation'
-import AdminCategory from '../AdminCategory/AdminCategory'
+import AdminTaskStatus from '../AdminTaskStatus/AdminTaskStatus'
 
 class AdminPage extends Component {
   // this component doesn't do much to start, just renders some user info to the DOM
@@ -22,7 +22,7 @@ class AdminPage extends Component {
     showUser: false,
     showCompany: false, 
     showLocation: false,
-    showCategory: false,
+    showTaskStatus: false,
   }
 
   showUser = () => {
@@ -30,7 +30,7 @@ class AdminPage extends Component {
         showUser: !this.state.showUser,
         showCompany: false, 
         showLocation: false,
-      showCategory: false,
+        showTaskStatus: false,
   })
   } 
 
@@ -39,7 +39,7 @@ class AdminPage extends Component {
       showUser: false,
       showCompany: !this.state.showCompany, 
       showLocation: false,
-      showCategory: false,
+      showTaskStatus: false,
     })
   }
 
@@ -48,47 +48,39 @@ class AdminPage extends Component {
       showUser: false,
       showCompany: false, 
       showLocation: !this.state.showLocation,
-      showCategory: false,
+      showTaskStatus: false,
     })
   }
   
-  showCategory = () => {
+  showTaskStatus = () => {
     this.setState ({
       showUser: false,
       showCompany: false, 
       showLocation: false,
-      showCategory: !this.state.showCategory,
+      showTaskStatus: !this.state.showTaskStatus,
     })
   }
 
   render() {
     return (
-      <div>
-        <h1>Welcome to the admin page, {this.props.store.user.first_name}!</h1>
-        
+      <center>
+        <h1>Admin Page</h1>  
         <button className="adminButtonClass" onClick={()=>this.showUser()}>Manage User</button>
         <button className="adminButtonClass" onClick={()=>this.showCompany()}>Manage Company</button>
-        <button className="adminButtonClass" onClick={()=>this.showLocation()}>Manage Location</button>
-        <button className="adminButtonClass" onClick={()=>this.showCategory()}>Manage Category</button>
-
-
+        <button className="adminButtonClass" onClick={()=>this.showTaskStatus()}>Manage Task Status</button>
         {/* <h3>User List</h3> */}
         {this.state.showUser ?
         <AdminUser />: <p></p>}
-        
         {/* <h3>Company List</h3> */}
         {this.state.showCompany ?
         <AdminCompany />: <p></p>}
-
         {/* <h3>Location List</h3> */}
-        {this.state.showLocation ?
+        {this.state.showCompany ?
         <AdminLocation />: <p></p>}
-
         {/* <h3>Category List</h3> */}
-        {this.state.showCategory ?
-        <AdminCategory />: <p></p>}
-        
-      </div>
+        {this.state.showTaskStatus ?
+        <AdminTaskStatus />: <p></p>}
+      </center>
     );
   }
 }
