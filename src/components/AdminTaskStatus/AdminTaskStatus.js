@@ -40,6 +40,7 @@ class AdminTaskStatus extends Component {
   updateRecord = () => { 
     this.props.dispatch({ type: 'UPDATE_TASKSTATUS', payload: this.state.editRecord });  
     this.props.dispatch({type: 'FETCH_TASKSTATUS'});  
+    // TODO -close popup?   how??
   }
 
 
