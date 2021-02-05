@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Popup from 'reactjs-popup';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import '../AdminTaskStatus/AdminTaskStatus.css'
+import AddTastStatusForm from '../AddTaskStatusForm/AddTaskStatusForm';
 
 class AdminTaskStatus extends Component {
   // this component doesn't do much to start, just renders some user info to the DOM
@@ -13,6 +14,7 @@ class AdminTaskStatus extends Component {
   }
 
   state = {
+    showAddStatus: false,
     updatePopupFlag: false,
     recordID: 0,
     editRecord:{
@@ -77,13 +79,20 @@ class AdminTaskStatus extends Component {
     })
   }
 
+  toggleShow = () => {
+    this.setState({
+      showAddStatus: !this.state.showAddStatus,
+    })
+  }
 
   render() {
     return (
       <div>
-        <h3>Admin <span style={{textDecoration: "underline"}}>User</span> Page, {this.props.store.user.first_name}!</h3>
-
-              <button >Add Task Status</button>
+        <h3>Admin Task Status Page</h3>
+              {this.state.showAddStatus ? <> <AddTastStatusForm /> <button onClick={this.toggleShow}>Close</button> </>
+              : <button onClick={this.toggleShow}>Add Task Status</button>
+            }
+             
 
               <table className="tableClass">
                 <thead className="headerClass">
