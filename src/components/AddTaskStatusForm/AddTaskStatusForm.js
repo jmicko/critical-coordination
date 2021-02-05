@@ -42,7 +42,7 @@ class AddTaskStatusForm extends Component {
             <form>
                <label>New Status Type: </label>
                <input required onChange={(event) => this.handleChange(event, 'status_type')} value={this.state.newStatus.status_type}></input>  
-               <button className="button" type="submit" onClick={(event) => this.addStatus(event)}>Add User</button>
+               <button className="button" type="submit" onClick={(event) => this.addStatus(event)}>Add Status Type</button>
             </form>
          </div>
       );
