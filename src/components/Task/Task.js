@@ -32,18 +32,18 @@ class Task extends Component {
   handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
       // change the task property for the input being changed
-      task:{...this.state.task,[propertyName]: event.target.value},
+      task: { ...this.state.task, [propertyName]: event.target.value },
     });
   };
 
   handleEditButton = () => {
     this.state.edit
-    // if coming out of edit mode, send changes to task store
-    ? this.updateTask()
-    // if going into edit mode, put the task store into local state
-    : this.setState({
-      task: this.props.store.task
-    })
+      // if coming out of edit mode, send changes to task store
+      ? this.updateTask()
+      // if going into edit mode, put the task store into local state
+      : this.setState({
+        task: this.props.store.task
+      })
     this.setState({ edit: !this.state.edit })
   }
 
@@ -65,42 +65,38 @@ class Task extends Component {
         <button onClick={() => this.navigate('/portfolio')} >Button to the portfolio page</button>
         <div className="taskPanel">
           {
-            Object.keys(this.props.store.task).map((element, i) => {
-              return (
-              <p key={i}>key: {element} value: {this.props.store.task[element]}</p>
-              )
-            })
+            this.state.edit
+              ?
+              Object.keys(this.props.store.task).map((element, i) => {
+                return (
+                  <form>
+                    <label htmlFor="id">
+                      Task ID:
+                  <input
+                        type="text"
+                        name="id"
+                        value={this.state.task.id}
+                        required
+                        onChange={this.handleInputChangeFor('id')}
+                      />
+                    </label>
+                  </form>
+                )
+              })
+              :
+              Object.keys(this.props.store.task).map((element, i) => {
+                return (
+                <div>
+                  <p>Task ID: {this.props.store.task.id}</p>
+                </div>
+                )
+          })
           }
-          {this.state.edit
-            ?
-            <form>
-              <label htmlFor="id">
-                Task ID:
-              <input
-                  type="text"
-                  name="id"
-                  value={this.state.task.id}
-                  required
-                  onChange={this.handleInputChangeFor('id')}
-                />
-              </label>
-              <button
-                type="button"
-               onClick={() => this.handleEditButton()}>
-                {this.state.edit
-                  ? "Save"
-                  : "Edit"}
-              </button>
-            </form>
-            : <div>
-              <p>Task ID: {this.props.store.task.id}</p>
-              <button onClick={() => this.handleEditButton()}>
-                {this.state.edit
-                  ? "Save"
-                  : "Edit"}
-              </button>
-            </div>
-          }
+                <button onClick={() => this.handleEditButton()}>
+            {this.state.edit
+              ? "Save"
+              : "Edit"}
+          </button>
         </div>
       </div>
     );
