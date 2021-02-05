@@ -70,14 +70,14 @@ class Task extends Component {
               Object.keys(this.props.store.task).map((element, i) => {
                 return (
                   <form>
-                    <label htmlFor="id">
-                      Task ID:
+                    <label htmlFor={element}>
+                      Task {element}:
                   <input
                         type="text"
-                        name="id"
-                        value={this.state.task.id}
+                        name={element}
+                        value={this.state.task[element]}
                         required
-                        onChange={this.handleInputChangeFor('id')}
+                        onChange={this.handleInputChangeFor(element)}
                       />
                     </label>
                   </form>
@@ -87,7 +87,7 @@ class Task extends Component {
               Object.keys(this.props.store.task).map((element, i) => {
                 return (
                 <div>
-                  <p>Task ID: {this.props.store.task.id}</p>
+                  <p>Task {element}: {this.props.store.task[element]}</p>
                 </div>
                 )
           })
