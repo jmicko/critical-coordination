@@ -77,7 +77,9 @@ class Task extends Component {
                         <label htmlFor={taskProperty}>
                           Task {taskProperty}:
                           <input
-                            type="text"
+                            type={Number(this.state.task[taskProperty])
+                              ?"number"
+                              :"text"}
                             name={taskProperty}
                             value={this.state.task[taskProperty]
                             ?this.state.task[taskProperty]
@@ -92,7 +94,7 @@ class Task extends Component {
                 </form>
               </div>
               :
-              // if in
+              // if in view mode, render static html elements
               Object.keys(this.props.store.task).map((taskProperty, i) => {
                 return (
                   <div>
