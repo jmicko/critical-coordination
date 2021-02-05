@@ -15,18 +15,23 @@ class AdminTaskStatus extends Component {
   state = {
     recordID: 0,
     editRecord:{
+      id: 0,
       status_type: '',
+      archived: false,
     }
   }
 
-  updateState = (passedRecord) => {
+  updateState = (passedRecord, archiveFlag=false) => {
     console.log (`UpdateState: `, passedRecord);
     this.setState({
       recordID: passedRecord.id, 
       editRecord: {
-        status_type: passedRecord.status_type
+        id: passedRecord.id,
+        status_type: passedRecord.status_type,
+        archived: archiveFlag
       }
     })
+    
   }
 
   handleChange = name => event => {
@@ -38,8 +43,21 @@ class AdminTaskStatus extends Component {
   }
 
   updateRecord = () => { 
-    this.props.dispatch({ type: 'UPDATE_TASKSTATUS', payload: this.state.editRecord });  
+    this.props.dispatch({ type: 'UPDATE_TASKSTATUS', payload: this.state.editRecord});  
     this.props.dispatch({type: 'FETCH_TASKSTATUS'});  
+    // TODO -close popup?   how??
+  }
+
+  
+  cancelUpdate = () => { 
+    this.setState({
+      recordID: 0, 
+      editRecord: {
+        id: 0,
+        status_type: '',
+        archived: false
+      }
+    })
     // TODO -close popup?   how??
   }
 
@@ -65,10 +83,21 @@ class AdminTaskStatus extends Component {
                                     <div className="editPanel" onClick={ () => this.updateState(lineItem) }>
                                         <input placeholder={lineItem.status_type} value={this.state.editRecord.status_type} onChange={this.handleChange('status_type')}/> 
                                         <button onClick={this.updateRecord}>Save</button> 
+                                        <button onClick={this.cancelUpdate}>Cancel</button> 
                                     </div>
                                 </Popup>
                               </td>
-                              <td><button className="adminButtonClass">Delete</button></td>
+                              <td>
+                                <Popup trigger={<button>Delete</button>} position="center" >
+                                      <div className="editPanel" onClick={ () => this.updateState(lineItem, true) }>
+                                          <h3>Are you sure you would like to delete this record?</h3> 
+                                          <p>Deleted statuses will no longer be avialable to select for new records, </p> 
+                                          <p>but existing records with this status will maintain as is.</p> 
+                                          <button onClick={this.updateRecord}>Yes Delete</button> 
+                                          <button onClick={this.cancelUpdate}>Cancel</button> 
+                                      </div>
+                                 </Popup>
+                              </td>
                           </tr>
                         );
                     })} 

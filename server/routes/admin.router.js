@@ -43,7 +43,7 @@ router.get('/users', (req, res) => {
      });
  });
 
-// GET location table w/ company join
+// GET status table 
 router.get('/taskstatus', (req, res) => {
    const queryText = `SELECT * FROM task_status
          ORDER BY id  ASC;`
@@ -55,6 +55,22 @@ router.get('/taskstatus', (req, res) => {
        res.sendStatus(500);
      });
  });
+
+//PUT status table
+router.put('/taskstatus', (req, res) => {
+   const id = req.body.editRecord.id;
+   const status = req.body.editRecord.status_type;
+   const archived = req.body.editRecord.archived;
+   const sqlText = `UPDATE task_status SET status_type = $2, archived = $3 WHERE id=$1;`;
+   pool.query(sqlText, [id, status, archived])
+   .then( () => {
+      res.sendStatus(201)
+   }) .catch( (error) => {
+      console.log('Error with ADD USER admin post', error);
+   })
+});
+
+
 
 //add new user route for admin page
 router.post('/adduser', (req, res) => {
