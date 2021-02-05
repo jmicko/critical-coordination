@@ -88,7 +88,7 @@ router.post('/addcompany', (req, res) => {
 
 //add new location route for admin page
 router.post('/addlocation', (req, res) => {
-   const location = req.body.location;
+   const location = req.body.location_name;
    const address = req.body.address;
    const company = req.body.company;
    const sqlText = `INSERT INTO company_location ("address", "location_name", "company_fk") VALUES($1, $2, $3);`;
