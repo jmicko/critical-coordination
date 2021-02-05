@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import './Task.css'
 
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
@@ -54,13 +55,13 @@ class Task extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container paper">
         <h2>Task Page</h2>
         <p>
-          Task store: {JSON.stringify(this.props.store.task)}
+          {/* Task store: {JSON.stringify(this.props.store.task)} */}
         </p>
         <p>
-          Local state: {JSON.stringify(this.state)}
+          {/* Local state: {JSON.stringify(this.state)} */}
         </p>
         <button onClick={() => this.navigate('/portfolio')} >Button to the portfolio page</button>
         <div className="taskPanel">
