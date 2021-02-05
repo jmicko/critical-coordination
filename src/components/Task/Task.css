@@ -4,3 +4,15 @@
     background-color: rgb(245, 245, 244);
     width: max-content;
 }
+
+.taskPanel{
+    display: grid;
+    grid-template-columns: 25rem 25rem;
+    grid-auto-rows: 3.5rem;
+    margin-top: 1rem;
+}
+
+.top{
+    margin-top: 0;
+    height: 3rem;
+}

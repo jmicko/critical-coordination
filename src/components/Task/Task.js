@@ -64,45 +64,47 @@ class Task extends Component {
           {/* Local state: {JSON.stringify(this.state)} */}
         </p>
         <button onClick={() => this.navigate('/portfolio')} >Button to the portfolio page</button>
-        <div className="taskPanel">
+        <div>
           {
             this.state.edit
               ?
               // if in edit mode, render form items
               <div>
-                <form>
+                <form className="taskPanel">
                   {Object.keys(this.props.store.task).map((taskProperty, i) => {
 
-                      console.log('here is the taskProperty value', this.state.task[taskProperty]);
-                      return (
-                        <label htmlFor={taskProperty}>
-                          Task {taskProperty}:
-                          <input
-                            type={Number(this.state.task[taskProperty])
-                              ?"number"
-                              :"text"}
-                            name={taskProperty}
-                            value={this.state.task[taskProperty]
-                            ?this.state.task[taskProperty]
-                            :""}
-                            required
-                            onChange={this.handleInputChangeFor(taskProperty)}
-                          />
-                        </label>
-                      )
+                    console.log('here is the taskProperty value', this.state.task[taskProperty]);
+                    return (
+                      <label htmlFor={taskProperty}>
+                        Task {taskProperty}:
+                        <input
+                          type={Number(this.state.task[taskProperty])
+                            ? "number"
+                            : "text"}
+                          name={taskProperty}
+                          value={this.state.task[taskProperty]
+                            ? this.state.task[taskProperty]
+                            : ""}
+                          required
+                          onChange={this.handleInputChangeFor(taskProperty)}
+                        />
+                      </label>
+                    )
 
                   })}
                 </form>
               </div>
               :
               // if in view mode, render static html elements
-              Object.keys(this.props.store.task).map((taskProperty, i) => {
-                return (
-                  <div>
-                    <p>Task {taskProperty}: {this.props.store.task[taskProperty]}</p>
-                  </div>
-                )
-              })
+              <div className="taskPanel">
+                {Object.keys(this.props.store.task).map((taskProperty, i) => {
+                  return (
+                    <div className="top">
+                      <p className="top">Task {taskProperty}: {this.props.store.task[taskProperty]}</p>
+                    </div>
+                  )
+                })}
+              </div>
           }
           <button onClick={() => this.handleEditButton()}>
             {this.state.edit
