@@ -19,8 +19,6 @@ import ResetLinkPage from '../resetLinkPage/ResetLinkPage';
 import Portfolio from '../Portfolio/Portfolio';
 import Project from '../Project/Project';
 import Task from '../Task/Task';
-
-
 import './App.css';
 
 class App extends Component {
@@ -36,7 +34,6 @@ class App extends Component {
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
-
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
@@ -47,7 +44,6 @@ class App extends Component {
               path="/user"
               component={UserPage}
             />
-
             {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
             be taken to the component and path supplied. */}
@@ -66,9 +62,7 @@ class App extends Component {
               authRedirect="/user"
             />
             <ProtectedRoute
-              // logged in shows InfoPage else shows LoginPage
-              exact
-              path="/adminpage"
+              exact path="/adminpage"
               component={AdminPage}
             />
             <ProtectedRoute
