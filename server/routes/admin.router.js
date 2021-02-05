@@ -86,4 +86,16 @@ router.post('/addcompany', (req, res) => {
       })
 });
 
+router.post('/addlocation', (req, res) => {
+   const location = req.body.location;
+   const address = req.body.address;
+   const company = req.body.company;
+   const sqlText = `INSERT INTO company_location ("address", "location_name", "company_fk") VALUES($1, $2, $3);`;
+   pool.query(sqlText, [address, location, company])
+      .then(() => {
+         res.sendStatus(201)
+      }).catch((error) => {
+         console.log('Error with ADD LOCATION admin post', error);
+      })
+});
 module.exports = router;
