@@ -56,9 +56,7 @@ router.get('/taskstatus', (req, res) => {
      });
  });
 
-/**
- * POST route template
- */
+//add new user route for admin page
 router.post('/adduser', (req, res) => {
    const email = req.body.email;
    const first_name = req.body.first_name;
@@ -72,9 +70,46 @@ router.post('/adduser', (req, res) => {
    .then( () => {
       res.sendStatus(201)
    }) .catch( (error) => {
-      console.log('Error with ADD USER post', error);
+      console.log('Error with ADD USER admin post', error);
    })
-   // POST route code here
 });
+
+//add new company route for admin page
+router.post('/addcompany', (req, res) => {
+   const company = req.body.company;
+   const sqlText = `INSERT INTO company ("company_name") VALUES($1);`;
+   pool.query(sqlText, [company])
+      .then(() => {
+         res.sendStatus(201)
+      }).catch((error) => {
+         console.log('Error with ADD COMPANY admin post', error);
+      })
+});
+
+//add new location route for admin page
+router.post('/addlocation', (req, res) => {
+   const location = req.body.location_name;
+   const address = req.body.address;
+   const company = req.body.company;
+   const sqlText = `INSERT INTO company_location ("address", "location_name", "company_fk") VALUES($1, $2, $3);`;
+   pool.query(sqlText, [address, location, company])
+      .then(() => {
+         res.sendStatus(201)
+      }).catch((error) => {
+         console.log('Error with ADD LOCATION admin post', error);
+      })
+});
+
+router.post('/addstatus', (req, res) => {
+   const status = req.body.status_type
+   const sqlText = `INSERT INTO task_status ("status_type") VALUES($1);`;
+   pool.query(sqlText, [status])
+      .then(() => {
+         res.sendStatus(201)
+      }).catch((error) => {
+         console.log('Error with ADD LOCATION admin post', error);
+      })
+});
+
 
 module.exports = router;
