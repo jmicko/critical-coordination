@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 
-class AddTaskStatus extends Component {
+class AddTaskStatusForm extends Component {
    state = {
       newStatus: {
          status_type: '',
