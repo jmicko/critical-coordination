@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
+import Popup from 'reactjs-popup';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import '../AdminTaskStatus/AdminTaskStatus.css'
 
@@ -13,7 +13,23 @@ class AdminTaskStatus extends Component {
   }
 
   state = {
-    stateBuffer: 0,
+    recordID: 0,
+    editRecord:{
+      status_type: 0,
+    }
+  }
+
+  updateId = (passedId) => {
+    this.setState({recordID: passedId})
+  }
+
+  handleChange = name => event => {
+    this.setState({ [name]: event.target.value });    
+  }
+
+  updateRecord = () => { 
+    this.props.dispatch({ type: 'UPDATE_TASKSTATUS', payload: this.state.editRecord });  
+    this.props.dispatch({type: 'FETCH_TASKSTATUS'});  
   }
 
 
@@ -33,7 +49,14 @@ class AdminTaskStatus extends Component {
                         return (
                           <tr key={index}>
                               <td>{lineItem.status_type}</td>
-                              <td><button className="adminButtonClass">Modify</button></td>
+                              <td>
+                                <Popup trigger={<button>Edit</button>} position="center" >
+                                    <div className="editPanel" onClick={ () => this.updateId(lineItem.id) }>
+                                        <input placeholder={lineItem.status_type} onChange={this.handleChange('status_type')}/> 
+                                        <button onClick={this.updateRecord}>Save</button> 
+                                    </div>
+                                </Popup>
+                              </td>
                               <td><button className="adminButtonClass">Delete</button></td>
                           </tr>
                         );
