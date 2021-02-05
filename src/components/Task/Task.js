@@ -26,6 +26,7 @@ class Task extends Component {
     });
     this.props.dispatch({
       type: 'FETCH_TASK',
+      // the payload works for testing purposes, but should become a prop so it can change based on parent
       payload: 2
     });
   }
@@ -45,6 +46,7 @@ class Task extends Component {
       : this.setState({
         task: this.props.store.task
       })
+      // toggle edit mode
     this.setState({ edit: !this.state.edit })
   }
 
@@ -71,17 +73,19 @@ class Task extends Component {
               // if in edit mode, render form items
               <div>
                 <form className="taskPanel">
+                  {/* map through the task object based on the array of object keys */}
                   {Object.keys(this.props.store.task).map((taskProperty, i) => {
-
-                    console.log('here is the taskProperty value', this.state.task[taskProperty]);
                     return (
                       <label htmlFor={taskProperty}>
                         Task {taskProperty}:
                         <input
+                        // check if the property value is a number, and change the field type if true
                           type={Number(this.state.task[taskProperty])
                             ? "number"
                             : "text"}
-                          name={taskProperty}
+                            name={taskProperty}
+                            // the object key can determine values of the task object
+                            // if there is a value, fill the input. If not, use empty string
                           value={this.state.task[taskProperty]
                             ? this.state.task[taskProperty]
                             : ""}
@@ -106,6 +110,7 @@ class Task extends Component {
                 })}
               </div>
           }
+          {/* render a button with text based on current mode */}
           <button onClick={() => this.handleEditButton()}>
             {this.state.edit
               ? "Save"
