@@ -3,8 +3,11 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class ClientVendorPortfolioView extends Component {
-  state = {
-    heading: 'Class Component',
+ 
+  navigate = web_address => {
+    console.log(this.props.history);
+    
+    // this.props.history.push(web_address);
   };
 
   render() {
@@ -14,7 +17,7 @@ class ClientVendorPortfolioView extends Component {
         <table>
           <tbody>
             {this.props.store.portfolio.map((project, index) => {
-              return <tr key={index}>              
+              return <tr key={index} onClick={ () => this.navigate("/project")}>              
                         <td><input value={project.project_name}/></td>
                         <td><input value={project.location_name}/></td>
                         <td><input value={project.PO_Number}/></td>
