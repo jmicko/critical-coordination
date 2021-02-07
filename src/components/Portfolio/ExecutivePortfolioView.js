@@ -39,7 +39,12 @@ update = () => {
             <>
                 <h1> Executive Portfolio Page </h1>
                 <table>
-                    <tbody>
+                    <tbody className="table td">
+                    <th><td>Project:</td></th>
+                    <th><td>Location:</td></th>
+                    <th><td>PO#:</td></th>
+                    <th><td>Due Date:</td></th>
+                    <th><td>Status:</td></th>
                         {this.props.store.portfolio.map((project) => {
                             return <tr key={project.id}>
                                         <td><input value={project.project_name}/></td>
@@ -53,7 +58,7 @@ update = () => {
                                                     <input placeholder={project.project_name} onChange={this.handleChange('project_name')}/> 
                                                     <input placeholder={project.location_name} onChange={this.handleChange('location_name')}/> 
                                                     <input placeholder={project.PO_Number} onChange={this.handleChange('PO_Number')}/> 
-                                                    <input placeholder={project.due_date} onChange={this.handleChange('due_date')}/>    
+                                                    {/* <input placeholder={format(project.due_date, "m/dd/yy")} onChange={this.handleChange('due_date')}/>     */}
                                                     <button onClick={this.update}>Save</button> 
                                                 </div>
                                             </Popup>

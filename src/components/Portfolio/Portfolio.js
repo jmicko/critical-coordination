@@ -8,10 +8,6 @@ import ClientVendorPortfolioView from './ClientVendorPortfolioView';
 
 class Portfolio extends Component {
 
-componentDidMount(){ 
-  this.props.dispatch({ type: 'GET_PORTFOLIO', payload: this.props.store.user?.company_fk })
-}
-
   render() {
     return (
       <>      

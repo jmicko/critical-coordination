@@ -3,23 +3,40 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-/**
- * GET route template
- */
+// ---- GET route ----
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-    const queryText1 =` SELECT *
-                        FROM project
-                        INNER JOIN company_location 
-                        ON company_location.id = project.location_fk
-                        WHERE project.company_fk = $1`;    
-    pool.query(queryText1, [req.params.id])
-        .then((result) => {
-            res.send(result.rows);
-        })
-        .catch((error) => {
-            console.log('Error completing the GET route for PORTFOLIO', error);
-            res.sendStatus(500);
-        });
+    
+    console.log(req.params.id)
+    //This will grab everything for anyone working at critical coordination
+    // and the else is for any other company other than critical coordination
+    if( req.params.id === '2' ) {
+        const queryTextAdmin = `SELECT * 
+                                FROM project
+                                INNER JOIN company_location
+                                ON company_location.id = project.location_fk;`;
+        pool.query(queryTextAdmin)
+            .then((result) => {
+                res.send(result.rows);
+            })
+            .catch((error) => {
+                console.log('Error completeing the GET route for PORTFOLIO ADMIN', error);
+                res.sendStatus(500);
+            });
+    } else {
+        const queryText1 =` SELECT *
+                            FROM project
+                            INNER JOIN company_location 
+                            ON company_location.id = project.location_fk
+                            WHERE project.company_fk = $1`;    
+        pool.query(queryText1, [req.params.id])
+            .then((result) => {
+                res.send(result.rows);
+            })
+            .catch((error) => {
+                console.log('Error completing the GET route for PORTFOLIO', error);
+                res.sendStatus(500);
+            });
+    }
 });
 
 
