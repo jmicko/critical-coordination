@@ -39,8 +39,6 @@ class ExecutivePortfolioView extends Component {
     navigate = (web_address, project) => {     
         // console.log(project.id); //this is logging the project whic has the ID to make the redux call with for the project view.
         this.props.history.push(web_address);
-        
-        // this.props.history.push(web_address);
     };
 
   // returns the date in the day/month/year format
@@ -79,12 +77,15 @@ class ExecutivePortfolioView extends Component {
                                             <Popup trigger={<button>Edit</button>} position="center" >
                                                 <div className="editPanel" onClick={ () => this.updateId(project) }>
                                                     <h3>Edit Window:</h3>
-                                                    <label>Project:</label>
+                                                    <label>Project:
                                                     <input placeholder={project.project_name} onChange={this.handleChange('project_name')}/> 
-                                                    <label>Location:</label>
+                                                    </label>
+                                                    <label>Location:
                                                     <input placeholder={project.location_name} onChange={this.handleChange('location_name')}/> 
-                                                    <label>PO#:</label>
+                                                    </label>
+                                                    <label>PO#:
                                                     <input placeholder={project.PO_Number} onChange={this.handleChange('PO_Number')}/> 
+                                                    </label>
 
                                                     {/* Edit the date/calendar to show the date which is coming from the DB and not todays date */}
                                                     <label>Due Date:</label>

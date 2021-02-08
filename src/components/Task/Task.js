@@ -20,7 +20,7 @@ class Task extends Component {
     this.props.history.push(web_address);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.props.dispatch({
       type: 'CLEAR_TASK'
     });
