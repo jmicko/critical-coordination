@@ -54,20 +54,33 @@ router.get('/users', rejectUnauthenticated, (req, res) => {
    });
 
 
-// GET location table w/ company join
+// GET status table 
 router.get('/taskstatus', rejectUnauthenticated, (req, res) => {
-   if (req.user.user_type === 'admin'){
-      const queryText = `SELECT * FROM task_status
-            ORDER BY id  ASC;`
-      console.log ('in task status GET')
-      pool.query(queryText)
-        .then((result) => { res.send(result.rows); })
-        .catch((err) => {
-          console.log('Error GET task status query', err);
-          res.sendStatus(500);
-        });
-      }
-    });
+   const queryText = `SELECT * FROM task_status WHERE archived = false
+         ORDER BY id  ASC;`
+   console.log ('in task status GET')
+   pool.query(queryText)
+     .then((result) => { res.send(result.rows); })
+     .catch((err) => {
+       console.log('Error GET task status query', err);
+       res.sendStatus(500);
+     });
+ });
+
+//PUT (update) status table, to include delete (archive)
+router.put('/taskstatus', rejectUnauthenticated, (req, res) => {
+   console.log (`task put payload: `, req.body );
+   const id = req.body.id;
+   const status = req.body.status_type;
+   const archived = req.body.archived;
+   const sqlText = `UPDATE task_status SET status_type = $2, archived = $3 WHERE id=$1;`;
+   pool.query(sqlText, [id, status, archived])
+   .then( () => {
+      res.sendStatus(201)
+   }) .catch( (error) => {
+      console.log('Error with ADD USER admin post', error);
+   })
+});
 
 
 //add new user route for admin page
