@@ -4,12 +4,12 @@ const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 // ---- GET route ----
-router.get('/:id', rejectUnauthenticated, (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     
-    console.log(req.params.id)
-    //This will grab everything for anyone working at critical coordination
+    console.log('user type: ', req.user.user_type, 'user id: ', req.user.id)
+    //This will grab everything for anyone checking as an administrator
     // and the else is for any other company other than critical coordination
-    if( req.params.id === '2' ) {
+    if( req.user.user_type === 'admin' ) {
         const queryTextAdmin = `SELECT * 
                                 FROM project
                                 INNER JOIN company_location
@@ -28,7 +28,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
                             INNER JOIN company_location 
                             ON company_location.id = project.location_fk
                             WHERE project.company_fk = $1`;    
-        pool.query(queryText1, [req.params.id])
+        pool.query(queryText1, [req.user.company_fk])
             .then((result) => {
                 res.send(result.rows);
             })

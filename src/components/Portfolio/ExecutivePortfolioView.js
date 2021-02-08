@@ -33,7 +33,7 @@ class ExecutivePortfolioView extends Component {
     // update the database and then get the info from the update DB
     update = () => { 
         this.props.dispatch({ type: 'UPDATE_PORTFOLIO', payload: this.state });  
-        this.props.dispatch({ type: 'GET_PORTFOLIO', payload: this.props.store.user?.company_fk })  
+        this.props.dispatch({ type: 'GET_PORTFOLIO' })  
     }
   // this function will route us to the task page
     navigate = (web_address, project) => {     
