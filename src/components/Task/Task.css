@@ -1,0 +1,18 @@
+.paper{
+    box-shadow: 1px 2px 6px 0px rgba(163, 163, 163, 0.83);
+    padding: 1rem;
+    background-color: rgb(245, 245, 244);
+    width: max-content;
+}
+
+.taskPanel{
+    display: grid;
+    grid-template-columns: 25rem 25rem;
+    grid-auto-rows: 3.5rem;
+    margin-top: 1rem;
+}
+
+.top{
+    margin-top: 0;
+    height: 3rem;
+}

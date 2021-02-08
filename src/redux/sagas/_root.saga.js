@@ -6,6 +6,7 @@ import resetSaga from './resetPassword.saga';
 import setResetPasswordSaga from './setResetPassword.saga';
 import adminSaga from './admin.saga';
 import portfolioSaga from './portfolio.saga';
+import taskSaga from './task.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -23,5 +24,6 @@ export default function* rootSaga() {
     setResetPasswordSaga(),
     adminSaga(),
     portfolioSaga(),
+    taskSaga(),
   ]);
 }
