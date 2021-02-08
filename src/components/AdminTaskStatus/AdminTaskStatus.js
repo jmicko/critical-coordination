@@ -52,10 +52,11 @@ class AdminTaskStatus extends Component {
   openUpdatePopup = (passedRecord, archiveFlag) => {
     this.setState({
       updatePopupFlag: false,
+      updateDeleteFlag: false,
     })
     console.log (`payload on openUpdatePopup`, passedRecord);
     this.setState({
-      updatePopupFlag: true,
+      updatePopupFlag: !this.state.updatePopupFlag,
       editRecord: {
         id: passedRecord.id,
         status_type: passedRecord.status_type,
@@ -67,10 +68,11 @@ class AdminTaskStatus extends Component {
   openDeletePopup = (passedRecord, archiveFlag) => {
     this.setState({
       updatePopupFlag: false,
+      updateDeleteFlag: false,
     })
     console.log (`payload on openDeletePopup`, passedRecord);
     this.setState({
-      deletePopupFlag: true,
+      deletePopupFlag: !this.state.deletePopupFlag,
       editRecord: {
         id: passedRecord.id,
         status_type: passedRecord.status_type,
@@ -102,7 +104,7 @@ class AdminTaskStatus extends Component {
     return (
       <div>
         <h3>Admin Task Status Page</h3>
-              {JSON.stringify(this.state)}
+              {/* {JSON.stringify(this.state)} */}
               {this.state.showAddStatus ? <> <AddTastStatusForm /> <button onClick={this.toggleShow}>Close</button> </>
               : <button onClick={this.toggleShow}>Add Task Status</button>
               }
