@@ -47,7 +47,6 @@ class ExecutivePortfolioView extends Component {
 
   // returns the date in the day/month/year format
     dateConversion = date => {
-        // console.log(...date);
         let year = date[0]+date[1]+date[2]+date[3];
         let month = date[5]+date[6];
         let day = date[8]+date[9];
@@ -63,6 +62,7 @@ class ExecutivePortfolioView extends Component {
                     <thead>
                         <tr position='align-left'>
                             <th>Project:</th>
+                            <th>ID:</th>
                             <th>Location:</th>
                             <th>PO#:</th>
                             <th>Due Date:</th>
@@ -72,7 +72,8 @@ class ExecutivePortfolioView extends Component {
                     <tbody>
                         {this.props.store.portfolio.map((project) => {
                             return <tr key={project.id} onClick={ () => this.navigate(`/project`, project)}>
-                                        <td><label>{project.project_name}</label> </td>          
+                                        <td><label>{project.project_name}</label> </td> 
+                                        <td>{project.id}</td>         
                                         <td><label>{project.location_name}</label></td>
                                         <td><label>{project.PO_Number}</label></td>
                                         <td>{this.dateConversion(project.due_date)}</td> 
