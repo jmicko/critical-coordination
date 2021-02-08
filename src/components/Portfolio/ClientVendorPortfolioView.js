@@ -8,10 +8,8 @@ class ClientVendorPortfolioView extends Component {
     this.props.dispatch({ type: 'GET_PORTFOLIO', payload: this.props.store.user?.company_fk })
   }
   // this function will route us to the task page
-  navigate = web_address => {
-    console.log(this.props.history);
-    
-    // this.props.history.push(web_address);
+  navigate = web_address => {        
+    this.props.history.push(web_address);
   };
 
   // returns the date in the day/month/year format
