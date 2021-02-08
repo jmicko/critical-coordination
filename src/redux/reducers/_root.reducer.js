@@ -4,7 +4,7 @@ import user from './user.reducer';
 import portfolio from './portfolio.reducer'
 import admin from './admin.reducer'
 import task from './task.reducer'
-
+import projectReducer from './project.reducer'
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -16,7 +16,8 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   portfolio,
   admin,
-  task, // contains a task
+  task,
+  projectReducer, // contains a task
 });
 
 export default rootReducer;

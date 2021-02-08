@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import '../AdminPage/AdminPage.css'
 import AdminUser from '../AdminUser/AdminUser'
 import AdminCompany from '../AdminCompany/AdminCompany'
 import AdminLocation from '../AdminLocation/AdminLocation'
 import AdminTaskStatus from '../AdminTaskStatus/AdminTaskStatus'
+import AddNewProject from '../AddNewProject/AddNewProject'
 
 class AdminPage extends Component {
-  // this component doesn't do much to start, just renders some user info to the DOM
 
  componentDidMount() {
 }
@@ -19,6 +18,7 @@ class AdminPage extends Component {
     showCompany: false, 
     showLocation: false,
     showTaskStatus: false,
+    showNewProject: false,
   }
 
   showUser = () => {
@@ -27,6 +27,7 @@ class AdminPage extends Component {
         showCompany: false, 
         showLocation: false,
         showTaskStatus: false,
+        showNewProject: false,
   })
   } 
 
@@ -36,6 +37,7 @@ class AdminPage extends Component {
       showCompany: !this.state.showCompany, 
       showLocation: false,
       showTaskStatus: false,
+      showNewProject: false,
     })
   }
 
@@ -45,6 +47,7 @@ class AdminPage extends Component {
       showCompany: false, 
       showLocation: !this.state.showLocation,
       showTaskStatus: false,
+      showNewProject: false,
     })
   }
   
@@ -54,6 +57,17 @@ class AdminPage extends Component {
       showCompany: false, 
       showLocation: false,
       showTaskStatus: !this.state.showTaskStatus,
+      showNewProject: false,
+    })
+  }
+
+  showNewProject = () => {
+    this.setState ({
+      showUser: false,
+      showCompany: false,
+      showLocation: false,
+      showTaskStatus: false,
+      showNewProject: !this.state.showNewProject,
     })
   }
 
@@ -66,6 +80,9 @@ class AdminPage extends Component {
           <button className="adminButtonClass" onClick={()=>this.showUser()}>Manage User</button>
           <button className="adminButtonClass" onClick={()=>this.showCompany()}>Manage Company</button>
           <button className="adminButtonClass" onClick={()=>this.showTaskStatus()}>Manage Task Status</button>
+          <br/><br/>
+          {this.state.showNewProject ?
+          <AddNewProject /> : <p></p>}
           {/* <h3>User List</h3> */}
           {this.state.showUser ?
           <AdminUser />: <p></p>}
