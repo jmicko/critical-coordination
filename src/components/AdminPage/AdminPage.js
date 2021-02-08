@@ -75,8 +75,8 @@ class AdminPage extends Component {
     if(this.props.store.user.user_type === 'admin'){
       return (
         <center>
-          <h1>Admin Page</h1> 
-          <button className="adminButtonClass" onClick={()=>this.showNewProject()}>New Project</button>
+          <h1>Admin Page</h1>  
+          {/* {JSON.stringify(this.props)} */}
           <button className="adminButtonClass" onClick={()=>this.showUser()}>Manage User</button>
           <button className="adminButtonClass" onClick={()=>this.showCompany()}>Manage Company</button>
           <button className="adminButtonClass" onClick={()=>this.showTaskStatus()}>Manage Task Status</button>
