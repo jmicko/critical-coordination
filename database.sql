@@ -11,6 +11,7 @@ CREATE TABLE "user" (
 	"token" varchar(255),
 	"company_fk" integer DEFAULT 1,
 	"user_type" varchar(255),
+	"archived" BOOLEAN DEFAULT false,
 	CONSTRAINT "user_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -22,6 +23,7 @@ CREATE TABLE "project" (
 	"due_date" DATE NOT NULL DEFAULT 'today',
 	"company_fk" integer NOT NULL,
 	"location_fk" integer NOT NULL,
+	"archived" BOOLEAN DEFAULT false,
 	CONSTRAINT "project_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -38,6 +40,7 @@ CREATE TABLE "task" (
 	"updated_by" varchar(255),
 	"technician_info" varchar(255),
 	"project_fk" integer NOT NULL,
+	"archived" BOOLEAN DEFAULT false,
 	CONSTRAINT "task_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -45,6 +48,7 @@ CREATE TABLE "task" (
 CREATE TABLE "task_name" (
 	"id" serial NOT NULL,
 	"task_name" varchar(255) NOT NULL,
+	"archived" BOOLEAN DEFAULT false,
 	CONSTRAINT "task_name_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -52,6 +56,7 @@ CREATE TABLE "task_name" (
 CREATE TABLE "task_status" (
 	"id" serial NOT NULL,
 	"status_type" varchar(255) NOT NULL,
+	"archived" BOOLEAN DEFAULT false,
 	CONSTRAINT "task_Status_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -59,6 +64,7 @@ CREATE TABLE "task_status" (
 CREATE TABLE "company" (
 	"id" serial NOT NULL,
 	"company_name" varchar(255) NOT NULL,
+	"archived" BOOLEAN DEFAULT false,
 	CONSTRAINT "company_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -68,6 +74,7 @@ CREATE TABLE "company_location" (
 	"address" varchar(255) NOT NULL,
 	"location_name" varchar(255) NOT NULL,
 	"company_fk" integer NOT NULL,
+	"archived" BOOLEAN DEFAULT false,
 	CONSTRAINT "company_location_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
