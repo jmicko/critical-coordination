@@ -54,16 +54,14 @@ function* fetchTaskStatus() {
     }
 } 
 
-function* updateTaskStatus() {
-    console.log('In fetchTaskStatus saga');
+function* updateTaskStatus(action) {
+    console.log('In updateTaskStatus saga', action.payload);
     // Go to server, update redux store with data from server
     try {
         // get data from db
-        const response = yield axios.put('/api/admin/taskstatus');
-        // put data into store via Reducer
-        yield put({ type: 'SET_TASKSTATUS', payload: response.data });
+        const response = yield axios.put('/api/admin/taskstatus', action.payload);
     } catch ( error ) {
-        console.log('error with fetchTaskStatus get request', error);
+        console.log('error with updateTaskStatus get request', error);
     }
 } 
 

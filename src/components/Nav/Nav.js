@@ -20,7 +20,7 @@ const Nav = (props) => {
   return (
     <div className="nav">
       <Link className="logo" to="/home">
-        <img src={logo}></img>
+        <img src={logo} alt="Critical Coordination Logo"></img>
       </Link>
       <div className="nav-right">
         <Link className="nav-link" to={loginLinkData.path}>
