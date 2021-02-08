@@ -7,7 +7,7 @@ import Popup from 'reactjs-popup';
 class ExecutivePortfolioView extends Component {
 
     componentDidMount(){ 
-        this.props.dispatch({ type: 'GET_PORTFOLIO', payload: this.props.store.user?.company_fk })
+        this.props.dispatch({ type: 'GET_PORTFOLIO'})
     }
 
     state = {
@@ -56,13 +56,12 @@ class ExecutivePortfolioView extends Component {
     render() {
         // console.log(this.state);
         return (
-            <>
+            <center className="container paper">
                 <h1> Executive Portfolio Page </h1>
                 <table className="table td">
                     <thead>
                         <tr position='align-left'>
                             <th>Project:</th>
-                            <th>ID:</th>
                             <th>Location:</th>
                             <th>PO#:</th>
                             <th>Due Date:</th>
@@ -72,8 +71,7 @@ class ExecutivePortfolioView extends Component {
                     <tbody>
                         {this.props.store.portfolio.map((project) => {
                             return <tr key={project.id} onClick={ () => this.navigate(`/project`, project)}>
-                                        <td><label>{project.project_name}</label> </td> 
-                                        <td>{project.id}</td>         
+                                        <td><label>{project.project_name}</label> </td>       
                                         <td><label>{project.location_name}</label></td>
                                         <td><label>{project.PO_Number}</label></td>
                                         <td>{this.dateConversion(project.due_date)}</td> 
@@ -101,7 +99,7 @@ class ExecutivePortfolioView extends Component {
                         })}                        
                     </tbody>
                 </table> 
-            </>
+            </center>
         );
     }
 };

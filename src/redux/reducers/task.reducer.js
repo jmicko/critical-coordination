@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux'; 
+ 
  const taskReducer = (state = {}, action) => {
     switch (action.type) {
       case 'SET_TASK': 
@@ -9,7 +11,19 @@
     }
   };
   
+  const projectTasksReducer = (state = {}, action) => {
+    switch (action.type) {
+      case 'SET_PROJECT_TASKS':
+        return action.payload;
+    default:
+      return state;
+    }
+  };
+
   // user will be on the redux state at:
   // state.user
-  export default taskReducer;
+export default combineReducers({
+  taskReducer,
+  projectTasksReducer
+});
   

@@ -32,20 +32,11 @@ componentDidMount(){
       })
    }
 
-   saveProject = () => {
+   saveProject = async() => {
       if (this.state.newProject.company !== '' && this.state.newProject.location !== '' 
          && this.state.newProject.PO !== '' && this.state.newProject.due_date !== '' && this.state.newProject.project_name !== ''){
-         this.props.dispatch( {type: 'ADMIN_ADD_PROJECT', payload: this.state.newProject})
-         this.setState({
-            newProject: {
-               project_name: '',
-               company: '',
-               location: '',
-               PO: '',
-               due_date: '',
-            }
-         })
-         this.props.history.push('/portfolio')
+         await this.props.dispatch( {type: 'ADMIN_ADD_PROJECT', payload: this.state.newProject});
+         await this.props.history.push('/portfolio');
       } else {
          alert('Please fill out all fields before Saving a New Project')
       }
