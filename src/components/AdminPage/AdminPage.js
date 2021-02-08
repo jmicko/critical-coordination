@@ -62,7 +62,7 @@ class AdminPage extends Component {
       return (
         <center>
           <h1>Admin Page</h1>  
-          {JSON.stringify(this.props)}
+          {/* {JSON.stringify(this.props)} */}
           <button className="adminButtonClass" onClick={()=>this.showUser()}>Manage User</button>
           <button className="adminButtonClass" onClick={()=>this.showCompany()}>Manage Company</button>
           <button className="adminButtonClass" onClick={()=>this.showTaskStatus()}>Manage Task Status</button>
