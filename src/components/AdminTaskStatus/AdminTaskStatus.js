@@ -16,7 +16,7 @@ class AdminTaskStatus extends Component {
   state = {
     showAddStatus: false,
     updatePopupFlag: false,
-    recordID: 0,
+    deletePopupFlag: false,
     editRecord:{
       id: 0,
       status_type: '',
@@ -24,19 +24,7 @@ class AdminTaskStatus extends Component {
     }
   }
 
-  updateState = (passedRecord, archiveFlag=false) => {
-    //console.log (`UpdateState: `, passedRecord);
-    this.setState({
-      updatePopupFlag: true,
-      recordID: passedRecord.id, 
-      editRecord: {
-        id: passedRecord.id,
-        status_type: passedRecord.status_type,
-        archived: archiveFlag
-      }
-    })
-  }
-
+ 
   handleChange = name => event => {
     this.setState({ 
       editRecord: {
@@ -51,26 +39,53 @@ class AdminTaskStatus extends Component {
     this.props.dispatch({ type: 'UPDATE_TASKSTATUS', payload: this.state.editRecord});  
     this.setState({
       updatePopupFlag: false,
-      recordID: 0, 
+      deletePopupFlag: false,
       editRecord: {
         id: 0,
         status_type: '',
         archived: false
       }
     })
+    this.props.dispatch({type: 'FETCH_TASKSTATUS'})
   }
 
-  OpenUpdatePopup = () => {
+  openUpdatePopup = (passedRecord, archiveFlag) => {
     this.setState({
-      updatePopupFlag: true,
+      updatePopupFlag: false,
+      updateDeleteFlag: false,
+    })
+    console.log (`payload on openUpdatePopup`, passedRecord);
+    this.setState({
+      updatePopupFlag: !this.state.updatePopupFlag,
+      editRecord: {
+        id: passedRecord.id,
+        status_type: passedRecord.status_type,
+        archived: false
+      }
+    })
+  }
+  
+  openDeletePopup = (passedRecord, archiveFlag) => {
+    this.setState({
+      updatePopupFlag: false,
+      updateDeleteFlag: false,
+    })
+    console.log (`payload on openDeletePopup`, passedRecord);
+    this.setState({
+      deletePopupFlag: !this.state.deletePopupFlag,
+      editRecord: {
+        id: passedRecord.id,
+        status_type: passedRecord.status_type,
+        archived: true
+      }
     })
   }
   
   cancelUpdate = () => { 
-    console.log (`cancel`);
+    console.log (`cancel and close`);
     this.setState({
       updatePopupFlag: false,
-      recordID: 0, 
+      deletePopupFlag: false,
       editRecord: {
         id: 0,
         status_type: '',
@@ -89,9 +104,10 @@ class AdminTaskStatus extends Component {
     return (
       <div>
         <h3>Admin Task Status Page</h3>
+              {/* {JSON.stringify(this.state)} */}
               {this.state.showAddStatus ? <> <AddTastStatusForm /> <button onClick={this.toggleShow}>Close</button> </>
               : <button onClick={this.toggleShow}>Add Task Status</button>
-            }
+              }
              
 
               <table className="tableClass">
@@ -101,12 +117,12 @@ class AdminTaskStatus extends Component {
                 <tbody className="bodyClass">
                     {this.props.store.admin.taskStatusReducer.map((lineItem, index) => {
                         return (
-                          <tr key={index}>
+                          <tr key={index} data={lineItem.id}>
                               <td>{lineItem.status_type}</td>
                               <td>
-                                <button onClick={this.OpenUpdatePopup}>Edit</button>
-                                <Popup position="center" open={this.state.updatePopupFlag}>
-                                    <div className="editPanel" onClick={ () => this.updateState(lineItem) }>
+                                <button onClick={()=>this.openUpdatePopup(lineItem)}>Edit</button>
+                                <Popup position="center" open={this.state.updatePopupFlag} closeOnDocumentClick>
+                                    <div className="editPanel" >
                                         <input placeholder={lineItem.status_type} value={this.state.editRecord.status_type} onChange={this.handleChange('status_type')}/> 
                                         <button onClick={this.updateRecord}>Save</button> 
                                         <button onClick={this.cancelUpdate}>Cancel</button> 
@@ -114,8 +130,9 @@ class AdminTaskStatus extends Component {
                                 </Popup>
                               </td>
                               <td>
-                                <Popup trigger={<button>Delete</button>} position="center" >
-                                      <div className="editPanel" onClick={ () => this.updateState(lineItem, true) }>
+                                <button onClick={()=>this.openDeletePopup(lineItem)}>Delete</button>
+                                <Popup position="center" open={this.state.deletePopupFlag}>
+                                      <div className="editPanel" >
                                           <h3>Are you sure you would like to delete this record?</h3> 
                                           <p>Deleted statuses will no longer be avialable to select for new records, </p> 
                                           <p>but existing records with this status will maintain as is.</p> 
