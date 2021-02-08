@@ -7,9 +7,13 @@ const {
 
 
 //will need rejectunauthenticated text here 
-router.get('/', rejectUnauthenticated, (req, res) => {
-   const sqlText = `SELECT * FROM "project";`
-   pool.query(sqlText, [])
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+   const sqlText = `SELECT * 
+                     FROM "project
+                     WHERE project.id = $1";`
+
+
+   pool.query(sqlText, [req.params.id])
       .then((result) => {
          res.send(result.rows)
       })
