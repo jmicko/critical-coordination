@@ -104,6 +104,15 @@ function* adminAddStatus(action) {
    }
 }
 
+function* adminAddProject(action) {
+    console.log('in AdminAddProjectSaga');
+    try {
+        yield axios.post('/api/admin/addproject', action.payload)
+    } catch (error) {
+        console.log('error in Admin Add Project Saga, ', error);
+    }
+}
+
 function* adminSaga() {
     yield takeLatest('FETCH_ALLCOMPANY', fetchAllCompany);
     yield takeLatest('FETCH_ALLLOCATION', fetchAllLocation);
@@ -114,6 +123,7 @@ function* adminSaga() {
     yield takeLatest('ADMIN_ADD_COMPANY', adminAddCompany);
     yield takeLatest('ADMIN_ADD_LOCATION', adminAddLocation);
     yield takeLatest('ADMIN_ADD_STATUS', adminAddStatus);
+    yield takeLatest('ADMIN_ADD_PROJECT', adminAddProject);
 }
 
 
