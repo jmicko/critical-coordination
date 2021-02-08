@@ -80,6 +80,7 @@ class AdminPage extends Component {
           <button className="adminButtonClass" onClick={()=>this.showUser()}>Manage User</button>
           <button className="adminButtonClass" onClick={()=>this.showCompany()}>Manage Company</button>
           <button className="adminButtonClass" onClick={()=>this.showTaskStatus()}>Manage Task Status</button>
+          <br/><br/>
           {this.state.showNewProject ?
           <AddNewProject /> : <p></p>}
           {/* <h3>User List</h3> */}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import { withRouter } from 'react-router';
 
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
@@ -44,6 +45,7 @@ componentDidMount(){
                due_date: '',
             }
          })
+         this.props.history.push('/portfolio')
       } else {
          alert('Please fill out all fields before Saving a New Project')
       }
@@ -88,4 +90,4 @@ componentDidMount(){
    }
 }
 
-export default connect(mapStoreToProps)(AddNewProject);
+export default connect(mapStoreToProps)(withRouter(AddNewProject));

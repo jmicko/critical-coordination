@@ -62,22 +62,6 @@ router.get('/users', rejectUnauthenticated, (req, res) => {
 
 // GET status table 
 router.get('/taskstatus', rejectUnauthenticated, (req, res) => {
-<<<<<<< HEAD
-   if (req.user.user_type === 'admin'){
-      const queryText = `SELECT * FROM task_status
-            ORDER BY id  ASC;`
-      console.log ('in task status GET')
-      pool.query(queryText)
-        .then((result) => { res.send(result.rows); })
-        .catch((err) => {
-          console.log('Error GET task status query', err);
-          res.sendStatus(500);
-        });
-   } else {
-      res.sendStatus(403)
-   }
-    });
-=======
    const queryText = `SELECT * FROM task_status WHERE archived = false
          ORDER BY id  ASC;`
    console.log ('in task status GET')
@@ -103,7 +87,6 @@ router.put('/taskstatus', rejectUnauthenticated, (req, res) => {
       console.log('Error with ADD USER admin post', error);
    })
 });
->>>>>>> 622ffb3b961e2ed3bb11f322cd89d3aec9ba8783
 
 
 //add new user route for admin page

@@ -5,7 +5,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 class ClientVendorPortfolioView extends Component {
  
   componentDidMount(){ 
-    this.props.dispatch({ type: 'GET_PORTFOLIO', payload: this.props.store.user?.company_fk })
+    this.props.dispatch({ type: 'GET_PORTFOLIO' })
   }
   // this function will route us to the task page
   navigate = web_address => {        
