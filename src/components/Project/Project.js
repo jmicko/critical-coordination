@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import AddNewTask from '../AddNewTask/AddNewTask'
 const getCookie = (cookieName) => {
   // Get name followed by anything except a semicolon
   const cookieString = RegExp('' + cookieName + '[^;]+').exec(document.cookie);
@@ -36,6 +37,8 @@ class Project extends Component {
           <p>Scheduled Completion: {this.props.store.projectReducer[0]?.due_date}</p>
           <p>Address: {this.props.store.projectReducer[0]?.address}</p>
         </div>
+        {this.props.store.user.user_type === 'admin' &&
+        <AddNewTask/>}
         <div className="container paper">
           <h3 > Tasks </h3>
         </div>
