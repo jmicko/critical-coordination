@@ -18,6 +18,8 @@ router.get('/company', rejectUnauthenticated, (req, res) => {
           console.log('Error completing company query', err);
           res.sendStatus(500);
         });
+   } else {
+      res.sendStatus(403)
    }
  });
 
@@ -34,7 +36,9 @@ router.get('/location', rejectUnauthenticated, (req, res) => {
           console.log('Error location company query', err);
           res.sendStatus(500);
         });
-      }
+   } else {
+      res.sendStatus(403)
+   }
     });
 
  // GET location table w/ company join
@@ -50,12 +54,30 @@ router.get('/users', rejectUnauthenticated, (req, res) => {
           console.log('Error GET all users query', err);
           res.sendStatus(500);
         });
-      }
+   } else {
+      res.sendStatus(403)
+   }
    });
 
 
 // GET status table 
 router.get('/taskstatus', rejectUnauthenticated, (req, res) => {
+<<<<<<< HEAD
+   if (req.user.user_type === 'admin'){
+      const queryText = `SELECT * FROM task_status
+            ORDER BY id  ASC;`
+      console.log ('in task status GET')
+      pool.query(queryText)
+        .then((result) => { res.send(result.rows); })
+        .catch((err) => {
+          console.log('Error GET task status query', err);
+          res.sendStatus(500);
+        });
+   } else {
+      res.sendStatus(403)
+   }
+    });
+=======
    const queryText = `SELECT * FROM task_status WHERE archived = false
          ORDER BY id  ASC;`
    console.log ('in task status GET')
@@ -81,6 +103,7 @@ router.put('/taskstatus', rejectUnauthenticated, (req, res) => {
       console.log('Error with ADD USER admin post', error);
    })
 });
+>>>>>>> 622ffb3b961e2ed3bb11f322cd89d3aec9ba8783
 
 
 //add new user route for admin page
@@ -100,6 +123,8 @@ router.post('/adduser', rejectUnauthenticated, (req, res) => {
       }) .catch( (error) => {
          console.log('Error with ADD USER admin post', error);
       })
+   } else {
+      res.sendStatus(403)
    }
 });
 
@@ -114,6 +139,8 @@ router.post('/addcompany', rejectUnauthenticated, (req, res) => {
          }).catch((error) => {
             console.log('Error with ADD COMPANY admin post', error);
          })
+   } else {
+      res.sendStatus(403)
    }
 });
 
@@ -130,6 +157,8 @@ router.post('/addlocation', rejectUnauthenticated, (req, res) => {
          }).catch((error) => {
             console.log('Error with ADD LOCATION admin post', error);
          })
+   } else {
+      res.sendStatus(403)
    }
 });
 
@@ -143,6 +172,27 @@ router.post('/addstatus', rejectUnauthenticated, (req, res) => {
          }).catch((error) => {
             console.log('Error with ADD LOCATION admin post', error);
          })
+   } else {
+      res.sendStatus(403)
+   }
+});
+
+router.post('/addproject', rejectUnauthenticated, (req, res) => {
+   if (req.user.user_type === 'admin') {
+      const project_name = req.body.project_name;
+      const company = req.body.company;
+      const location = req.body.location;
+      const PO = req.body.PO;
+      const due_date = req.body.due_date;
+      const sqlText = `INSERT INTO project ("project_name", "PO_Number", "due_date", "company_fk", "location_fk") VALUES($1, $2, $3, $4, $5);`;
+      pool.query(sqlText, [project_name, PO, due_date, company, location])
+         .then(() => {
+            res.sendStatus(201)
+         }).catch((error) => {
+            console.log('Error with ADD PROJECT admin post', error);
+         })
+   } else {
+      res.sendStatus(403)
    }
 });
 

@@ -57,10 +57,6 @@ router.put('/update', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500);
         })
 
-
-
-
-
   // POST route code here
 });
 
