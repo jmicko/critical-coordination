@@ -10,50 +10,86 @@ class ExecutivePortfolioView extends Component {
         this.props.dispatch({ type: 'GET_PORTFOLIO', payload: this.props.store.user?.company_fk })
     }
 
-  state = {
-    project_id: '',
-    location_id: '',
-    project_name: '',
-    location_name: '',
-    PO_Number: '',
-    due_date: '',
-  };
+    state = {
+        project_id: '',
+        location_id: '',
+        project_name: '',
+        location_name: '',
+        PO_Number: '',
+        due_date: '',
+    };
 
-handleChange = name => event => {
-    this.setState({ [name]: event.target.value });    
-}
+    handleChange = name => event => {
+        this.setState({ [name]: event.target.value });    
+    }
 
-updateId = (project) => {
-    this.setState({project_id: project.id})
-    this.setState({location_id: project.location_fk})
-}
+    // Each time a person clicks on a different project this changes 
+    // the ID so that you update the right one
+    updateId = (project) => {
+        this.setState({project_id: project.id})
+        this.setState({location_id: project.location_fk})
+    }
 
-update = () => { 
-    this.props.dispatch({ type: 'UPDATE_PORTFOLIO', payload: this.state });  
-    this.props.dispatch({ type: 'GET_PORTFOLIO', payload: this.props.store.user?.company_fk })  
-}
+    // update the database and then get the info from the update DB
+    update = () => { 
+        this.props.dispatch({ type: 'UPDATE_PORTFOLIO', payload: this.state });  
+        this.props.dispatch({ type: 'GET_PORTFOLIO', payload: this.props.store.user?.company_fk })  
+    }
+  // this function will route us to the task page
+    navigate = (web_address, project) => {     
+        // console.log(project.id); //this is logging the project whic has the ID to make the redux call with for the project view.
+        this.props.history.push(web_address);
+        
+        // this.props.history.push(web_address);
+    };
+
+  // returns the date in the day/month/year format
+    dateConversion = date => {
+        // console.log(...date);
+        let year = date[0]+date[1]+date[2]+date[3];
+        let month = date[5]+date[6];
+        let day = date[8]+date[9];
+        return( day + "/" + month + "/" + year);
+    }
 
     render() {
-        console.log(this.state);
+        // console.log(this.state);
         return (
             <>
                 <h1> Executive Portfolio Page </h1>
-                <table>
+                <table className="table td">
+                    <thead>
+                        <tr position='align-left'>
+                            <th>Project:</th>
+                            <th>Location:</th>
+                            <th>PO#:</th>
+                            <th>Due Date:</th>
+                            <th>Status:</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         {this.props.store.portfolio.map((project) => {
-                            return <tr key={project.id}>
-                                        <td><input value={project.project_name}/></td>
-                                        <td><input value={project.location_name}/></td>
-                                        <td><input value={project.PO_Number}/></td>
-                                        <td><input value={project.due_date}/></td>
-                                        <td><input value='Logic needs to be done'/></td>                                    
+                            return <tr key={project.id} onClick={ () => this.navigate("/project", project)}>
+                                        <td><label>{project.project_name}</label> </td>          
+                                        <td><label>{project.location_name}</label></td>
+                                        <td><label>{project.PO_Number}</label></td>
+                                        <td>{this.dateConversion(project.due_date)}</td> 
+                                        <td><input placeholder='Logic needs to be done'/></td>                                  
                                         <td>
                                             <Popup trigger={<button>Edit</button>} position="center" >
                                                 <div className="editPanel" onClick={ () => this.updateId(project) }>
+                                                    <h3>Edit Window:</h3>
+                                                    <label>Project:</label>
                                                     <input placeholder={project.project_name} onChange={this.handleChange('project_name')}/> 
+                                                    <label>Location:</label>
                                                     <input placeholder={project.location_name} onChange={this.handleChange('location_name')}/> 
+                                                    <label>PO#:</label>
                                                     <input placeholder={project.PO_Number} onChange={this.handleChange('PO_Number')}/> 
-                                                    <input placeholder={project.due_date} onChange={this.handleChange('due_date')}/>    
+
+                                                    {/* Edit the date/calendar to show the date which is coming from the DB and not todays date */}
+                                                    <label>Due Date:</label>
+                                                    <input  type="date" onChange={this.handleChange('due_date')} placeholder={project.due_date}/>    
+
                                                     <button onClick={this.update}>Save</button> 
                                                 </div>
                                             </Popup>
@@ -69,3 +105,5 @@ update = () => {
 
 
 export default connect(mapStoreToProps)(ExecutivePortfolioView);
+
+ 
