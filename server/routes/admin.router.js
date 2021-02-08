@@ -167,11 +167,15 @@ router.post('/addproject', rejectUnauthenticated, (req, res) => {
       const location = req.body.location;
       const PO = req.body.PO;
       const due_date = req.body.due_date;
-      const sqlText = `INSERT INTO project ("project_name", "PO_Number", "due_date", "company_fk", "location_fk") VALUES($1, $2, $3, $4, $5);`;
+      const sqlText = `INSERT INTO project ("project_name", "PO_Number", "due_date", "company_fk", "location_fk") 
+                        VALUES($1, $2, $3, $4, $5)
+                        RETURNING "id";`;
       pool.query(sqlText, [project_name, PO, due_date, company, location])
-         .then(() => {
-            res.sendStatus(201)
-         }).catch((error) => {
+      .then((result) => {
+         const projectId = {id: result.rows[0].id}
+         console.log(projectId);
+         res.send(projectId)
+      }).catch((error) => {
             console.log('Error with ADD PROJECT admin post', error);
          })
    } else {

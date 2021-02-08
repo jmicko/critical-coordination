@@ -105,7 +105,8 @@ function* adminAddStatus(action) {
 function* adminAddProject(action) {
     console.log('in AdminAddProjectSaga');
     try {
-        yield axios.post('/api/admin/addproject', action.payload)
+        const response = yield axios.post('/api/admin/addproject', action.payload)
+        document.cookie = `project=${response.data.id}`;
         yield put ({ type: 'FETCH_PORTFOLIO' })
     } catch (error) {
         console.log('error in Admin Add Project Saga, ', error);

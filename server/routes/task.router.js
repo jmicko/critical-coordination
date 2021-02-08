@@ -19,6 +19,21 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
   })
 });
 
+router.get('/project/:id', rejectUnauthenticated, (req, res) => {
+  const task = req.params.id;
+  const sqlText = `SELECT * FROM task 
+                  JOIN task_name ON task_name.id = task.task_name_fk
+                  JOIN task_status ON task_status.id = task.task_status_fk
+                  where project_fk = $1;`;
+  pool.query(sqlText, [task])
+  .then( (result) => {
+    res.send(result.rows)
+  })
+  .catch ( (error) => {
+    console.log('error in getting tasks for Project', error);
+  })
+})
+
 /**
  * POST route template
  */
