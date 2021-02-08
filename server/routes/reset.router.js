@@ -62,8 +62,7 @@ forgotPassword = (req, res) => {
       })
 }
 
-// handles password reset request
-router.put('/', forgotPassword)
+
 
 
 

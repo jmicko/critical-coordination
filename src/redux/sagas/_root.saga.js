@@ -8,6 +8,7 @@ import adminSaga from './admin.saga';
 import portfolioSaga from './portfolio.saga';
 import projectSaga from './project.saga'
 import taskSaga from './task.saga';
+import projectSaga from './project.saga'
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -27,5 +28,6 @@ export default function* rootSaga() {
     portfolioSaga(),
     projectSaga(),
     taskSaga(),
+    projectSaga(),
   ]);
 }

@@ -4,31 +4,28 @@ const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 // ---- GET route ----
-router.get('/:id', rejectUnauthenticated, (req, res) => {
-    
-    console.log(req.params.id)
-    //This will grab everything for anyone working at critical coordination
+router.get('/', rejectUnauthenticated, (req, res) => {  
+    console.log('user type: ', req.user.user_type, 'user id: ', req.user.id)
+    //This will grab everything for anyone checking as an administrator
     // and the else is for any other company other than critical coordination
-    if( req.params.id === '2' ) {
-        const queryTextAdmin = `SELECT * 
-                                FROM project
-                                INNER JOIN company_location
-                                ON company_location.id = project.location_fk;`;
+    if( req.user.user_type === 'admin' ) {
+        const queryTextAdmin = `SELECT project_name, project.id, due_date, "PO_Number", address, location_name  FROM project
+                                JOIN company_location ON company_location.id = project.location_fk
+                                JOIN company ON company.id = project.company_fk;`
         pool.query(queryTextAdmin)
             .then((result) => {
                 res.send(result.rows);
             })
             .catch((error) => {
-                console.log('Error completeing the GET route for PORTFOLIO ADMIN', error);
+                console.log('Error completing the GET route for PORTFOLIO ADMIN', error);
                 res.sendStatus(500);
             });
     } else {
-        const queryText1 =` SELECT *
-                            FROM project
-                            INNER JOIN company_location 
-                            ON company_location.id = project.location_fk
+        const queryText1 =` SELECT project_name, project.id, due_date, "PO_Number", address, location_name  FROM project
+                            JOIN company_location ON company_location.id = project.location_fk
+                            JOIN company ON company.id = project.company_fk
                             WHERE project.company_fk = $1`;    
-        pool.query(queryText1, [req.params.id])
+        pool.query(queryText1, [req.user.company_fk])
             .then((result) => {
                 res.send(result.rows);
             })
@@ -56,10 +53,6 @@ router.put('/update', rejectUnauthenticated, (req, res) => {
             console.log('Error completing the PUT route for PORTFOLIO', error);
             res.sendStatus(500);
         })
-
-
-
-
 
   // POST route code here
 });

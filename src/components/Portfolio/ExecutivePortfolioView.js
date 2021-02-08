@@ -33,17 +33,18 @@ class ExecutivePortfolioView extends Component {
     // update the database and then get the info from the update DB
     update = () => { 
         this.props.dispatch({ type: 'UPDATE_PORTFOLIO', payload: this.state });  
-        this.props.dispatch({ type: 'GET_PORTFOLIO', payload: this.props.store.user?.company_fk })  
+        this.props.dispatch({ type: 'GET_PORTFOLIO' })  
     }
   // this function will route us to the task page
-    navigate = (web_address, project) => {     
+    navigate = (web_address, project) => {  
+        document.cookie = `project=${project.id}`;
+        this.props.dispatch({type: 'FETCH_PROJECT', payload: project.id})  
         // console.log(project.id); //this is logging the project whic has the ID to make the redux call with for the project view.
         this.props.history.push(web_address);
     };
 
   // returns the date in the day/month/year format
     dateConversion = date => {
-        // console.log(...date);
         let year = date[0]+date[1]+date[2]+date[3];
         let month = date[5]+date[6];
         let day = date[8]+date[9];
@@ -59,6 +60,7 @@ class ExecutivePortfolioView extends Component {
                     <thead>
                         <tr position='align-left'>
                             <th>Project:</th>
+                            <th>ID:</th>
                             <th>Location:</th>
                             <th>PO#:</th>
                             <th>Due Date:</th>
@@ -67,8 +69,9 @@ class ExecutivePortfolioView extends Component {
                     </thead>
                     <tbody>
                         {this.props.store.portfolio.map((project) => {
-                            return <tr key={project.id} onClick={ () => this.navigate("/project", project)}>
-                                        <td><label>{project.project_name}</label> </td>          
+                            return <tr key={project.id} onClick={ () => this.navigate(`/project`, project)}>
+                                        <td><label>{project.project_name}</label> </td> 
+                                        <td>{project.id}</td>         
                                         <td><label>{project.location_name}</label></td>
                                         <td><label>{project.PO_Number}</label></td>
                                         <td>{this.dateConversion(project.due_date)}</td> 
