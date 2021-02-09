@@ -75,7 +75,7 @@ router.get('/taskstatus', rejectUnauthenticated, (req, res) => {
 
 //PUT (update) status table, to include delete (archive)
 router.put('/taskstatus', rejectUnauthenticated, (req, res) => {
-   console.log (`task put payload: `, req.body );
+   console.log (`taskstatus put payload: `, req.body );
    const id = req.body.id;
    const status = req.body.status_type;
    const archived = req.body.archived;
@@ -84,7 +84,34 @@ router.put('/taskstatus', rejectUnauthenticated, (req, res) => {
    .then( () => {
       res.sendStatus(201)
    }) .catch( (error) => {
-      console.log('Error with ADD USER admin post', error);
+      console.log('Error with taskstatus admin post', error);
+   })
+});
+
+
+//PUT (update) USER table, to include delete of user (archive)
+router.put('/usermodify', rejectUnauthenticated, (req, res) => {
+   console.log (`usermodify put payload: `, req.body );
+   const id = req.body.id;
+   const email = req.body.email;
+   const first_name = req.body.first_name;
+   const last_name = req.body.last_name;
+   const company_fk = req.body.company_fk;
+   const user_type = req.body.user_type;
+   const archived = req.body.archived;
+   const sqlText = `UPDATE user SET 
+                     email = $2, 
+                     first_name = $3
+                     last_name = $4
+                     company_fk= $5
+                     user_type = $6
+                     archived = $7
+                    WHERE id=$1;`;
+   pool.query(sqlText, [id, email, first_name, last_name, company_fk, user_type, archived])
+   .then( () => {
+      res.sendStatus(201)
+   }) .catch( (error) => {
+      console.log('Error with usermodify admin post', error);
    })
 });
 
