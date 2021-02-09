@@ -4,6 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import Popup from 'reactjs-popup';
 
 
+
 class ExecutivePortfolioView extends Component {
 
     componentDidMount(){ 
@@ -13,12 +14,11 @@ class ExecutivePortfolioView extends Component {
 
     state = {
         project_id: '',
-        location_id: '',
         project_name: '',
         location_name: '',
         PO_Number: '',
         due_date: '',
-        // company_fk: this.props.store.admin.company_fk,
+        location_fk: '',
     };
 
     handleChange = name => event => {
@@ -31,7 +31,7 @@ class ExecutivePortfolioView extends Component {
     // the ID so that you update the right one
     updateId = (project) => {
         this.setState({project_id: project.id})
-        this.setState({location_id: project.location_fk})
+        this.setState({location_fk: project.location_fk})
     }
 
     // update the database and then get the info from the update DB
@@ -58,9 +58,7 @@ class ExecutivePortfolioView extends Component {
     }
 
     render() {
-        console.log(this.state);
-        console.log(this.props.store.admin.allLocationReducer);
-        
+        console.log(this.state);        
         return (
             <center className="container paper">
                 <h1> Executive Portfolio Page </h1>
