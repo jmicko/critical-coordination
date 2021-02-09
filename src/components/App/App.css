@@ -146,6 +146,7 @@ table td:last-child {
   border-right: none;
 }
 
+/* this orange color matches the orange on criticalcoordination.com */
 .orange{
   background-color: #f56f34;
   color: white;
@@ -153,6 +154,7 @@ table td:last-child {
 
 }
 
+/* this gray color matches the gray on criticalcoordination.com */
 .slate{
   background-color: #425564;
   color: white;
@@ -167,13 +169,18 @@ table td:last-child {
 }
 
 .notched{
-  /* css for notched corners taken from  */
+  /* css for notched corners taken from https://css-tricks.com/notched-boxes/ */
+  /* this variable is the size of the notch */
   --notchSize: 1rem;
-  
+  /* clip-path shows whatever is inside the specified region. Everything else is hidden */
   clip-path: 
+  /* the region is a polygon. 8 points are defined, one for each corner */
     polygon(
       0% var(--notchSize), 
       var(--notchSize) 0%, 
+      /* to keep corner sizes the same, the position is calculated as the 
+      difference between the notch size (1rem), and the total length of the 
+      side our point is on */
       calc(100% - var(--notchSize)) 0%, 
       100% var(--notchSize), 
       100% calc(100% - var(--notchSize)), 
@@ -181,5 +188,6 @@ table td:last-child {
       var(--notchSize) 100%, 
       0% calc(100% - var(--notchSize))
     );
-
+  /* 1rem of padding to more than account for the size of the notch */
+    padding: 1rem;
 }
