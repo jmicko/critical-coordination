@@ -149,6 +149,12 @@ class AdminUser extends Component {
                                         <input placeholder={lineItem.email} value={this.state.editRecord.email} onChange={this.handleChange('email')}/> 
                                         <input placeholder={lineItem.first_name} value={this.state.editRecord.first_name} onChange={this.handleChange('first_name')}/> 
                                         <input placeholder={lineItem.last_name} value={this.state.editRecord.last_name} onChange={this.handleChange('last_name')}/> 
+                                        <select placeholder={lineItem.user_type} value={this.state.editRecord.user_type} onChange={this.handleChange('user_type')}>
+                                            <option value="admin">admin</option>
+                                            <option value="client">client</option>
+                                            <option value="contractor">contractor</option>
+                                        </select>
+                                        <input placeholder={lineItem.user_type} value={this.state.editRecord.user_type} onChange={this.handleChange('user_type')}/> 
                                         <button onClick={this.updateRecord}>Save</button> 
                                         <button onClick={this.cancelUpdate}>Cancel</button> 
                                     </div>
