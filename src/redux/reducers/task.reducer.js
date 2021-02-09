@@ -11,7 +11,7 @@ import { combineReducers } from 'redux';
     }
   };
   
-  const projectTasksReducer = (state = {}, action) => {
+  const projectTasksReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_PROJECT_TASKS':
         return action.payload;
