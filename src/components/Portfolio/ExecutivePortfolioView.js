@@ -22,8 +22,6 @@ class ExecutivePortfolioView extends Component {
     };
 
     handleChange = name => event => {
-        console.log(name);
-        
         this.setState({ [name]: event.target.value });    
     }
 
@@ -81,14 +79,14 @@ class ExecutivePortfolioView extends Component {
                                         <td>{this.dateConversion(project.due_date)}</td> 
                                         <td><input placeholder='Logic needs to be done'/></td>                                  
                                         <td>
-                                            <Popup trigger={<button>Edit</button>} position="left" >
+                                            <Popup trigger={ open => (<button>Edit </button>)} position="left" >
                                                 <div className="editPanel" onClick={ () => this.updateId(project) }>
                                                     <h3>Edit Window:</h3>
                                                     <label>Project:</label>
                                                     <input placeholder={project.project_name} onChange={this.handleChange('project_name')}/> 
                                                     <label>Location:</label>
                                                     <select onChange={this.handleChange('location_name')}>
-                                                        {this.props.store.admin.allLocationReducer.map((location) => <option key={location.id} value={location.location_name}>{location.location_name}</option>)}
+                                                        {this.props.store.admin.allLocationReducer.map((location) => <option key={location.address} value={location.location_name}>{location.location_name}</option>)}
                                                     </select>                                                    
                                                     <label>PO#:</label>
                                                     <input placeholder={project.PO_Number} onChange={this.handleChange('PO_Number')}/> 
@@ -96,6 +94,9 @@ class ExecutivePortfolioView extends Component {
                                                     {/* Edit the date/calendar to show the date which is coming from the DB and not todays date */}
                                                     <label>Due Date:</label>
                                                     <input  type="date" onChange={this.handleChange('due_date')} placeholder={project.due_date}/>    
+
+                                                   
+                                                    
 
                                                     <button onClick={this.update}>Save</button> 
                                                 </div>
