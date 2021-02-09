@@ -5,20 +5,22 @@ import Popup from 'reactjs-popup';
 import AddNewProject from '../AddNewProject/AddNewProject';
 
 
+
 class ExecutivePortfolioView extends Component {
 
-    componentDidMount() {
-        this.props.dispatch({ type: 'GET_PORTFOLIO' })
+    componentDidMount(){ 
+        this.props.dispatch({ type: 'GET_PORTFOLIO'})
+        this.props.dispatch({type: 'FETCH_ALLLOCATION'});
     }
 
     state = {
         project_id: '',
-        location_id: '',
         project_name: '',
         location_name: '',
         PO_Number: '',
         due_date: '',
         showAddNewProject: false,
+        location_fk: '',
     };
 
     handleChange = name => event => {
@@ -28,8 +30,8 @@ class ExecutivePortfolioView extends Component {
     // Each time a person clicks on a different project this changes 
     // the ID so that you update the right one
     updateId = (project) => {
-        this.setState({ project_id: project.id })
-        this.setState({ location_id: project.location_fk })
+        this.setState({project_id: project.id})
+        this.setState({location_fk: project.location_fk})
     }
 
     // update the database and then get the info from the update DB
@@ -62,7 +64,7 @@ class ExecutivePortfolioView extends Component {
     }
 
     render() {
-        // console.log(this.state);
+        console.log(this.state);        
         return (
             <center className="container paper">
                 <h1> Executive Portfolio Page </h1>
@@ -82,33 +84,38 @@ class ExecutivePortfolioView extends Component {
                     </thead>
                     <tbody>
                         {this.props.store.portfolio.map((project) => {
-                            return <tr key={project.id} onClick={() => this.navigate(`/project`, project)}>
-                                <td><label>{project.project_name}</label> </td>
-                                <td><label>{project.location_name}</label></td>
-                                <td><label>{project.PO_Number}</label></td>
-                                <td>{this.dateConversion(project.due_date)}</td>
-                                <td><input placeholder='Logic needs to be done' /></td>
-                                <td>
-                                    <Popup trigger={<button>Edit</button>} position="center" >
-                                        <div className="editPanel" onClick={() => this.updateId(project)}>
-                                            <h3>Edit Window:</h3>
-                                            <label>Project:</label>
-                                            <input placeholder={project.project_name} onChange={this.handleChange('project_name')} />
-                                            <label>Location:</label>
-                                            <input placeholder={project.location_name} onChange={this.handleChange('location_name')} />
-                                            <label>PO#:</label>
-                                            <input placeholder={project.PO_Number} onChange={this.handleChange('PO_Number')} />
+                            return <tr key={project.id} onClick={ () => this.navigate(`/project`, project)}>
+                                        <td><label>{project.project_name}</label> </td>       
+                                        <td><label>{project.location_name}</label></td>
+                                        <td><label>{project.PO_Number}</label></td>
+                                        <td>{this.dateConversion(project.due_date)}</td> 
+                                        <td><input placeholder='Logic needs to be done'/></td>                                  
+                                        <td>
+                                            <Popup trigger={ open => (<button>Edit </button>)} position="left" >
+                                                <div className="editPanel" onClick={ () => this.updateId(project) }>
+                                                    <h3>Edit Window:</h3>
+                                                    <label>Project:</label>
+                                                    <input placeholder={project.project_name} onChange={this.handleChange('project_name')}/> 
+                                                    <label>Location:</label>
+                                                    <select onChange={this.handleChange('location_name')}>
+                                                        {this.props.store.admin.allLocationReducer.map((location) => <option key={location.address} value={location.location_name}>{location.location_name}</option>)}
+                                                    </select>                                                    
+                                                    <label>PO#:</label>
+                                                    <input placeholder={project.PO_Number} onChange={this.handleChange('PO_Number')}/> 
 
-                                            {/* Edit the date/calendar to show the date which is coming from the DB and not todays date */}
-                                            <label>Due Date:</label>
-                                            <input type="date" onChange={this.handleChange('due_date')} placeholder={project.due_date} />
+                                                    {/* Edit the date/calendar to show the date which is coming from the DB and not todays date */}
+                                                    <label>Due Date:</label>
+                                                    <input  type="date" onChange={this.handleChange('due_date')} placeholder={project.due_date}/>    
 
-                                            <button onClick={this.update}>Save</button>
-                                        </div>
-                                    </Popup>
-                                </td>
-                            </tr>
-                        })}
+                                                   
+                                                    
+
+                                                    <button onClick={this.update}>Save</button> 
+                                                </div>
+                                            </Popup>
+                                        </td> 
+                                    </tr>
+                        })}                        
                     </tbody>
                 </table>
             </center>

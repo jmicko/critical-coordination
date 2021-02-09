@@ -9,8 +9,7 @@ import ClientVendorPortfolioView from './ClientVendorPortfolioView';
 class Portfolio extends Component {
 
   render() {
-    console.log(this.props);
-    
+    // console.log(this.props);
     return (
       <>      
         { (this.props.store.user.user_type === "admin") ? <ExecutivePortfolioView history={this.props.history}/> : <ClientVendorPortfolioView history={this.props.history}/> }

@@ -15,7 +15,7 @@ function* getPortfolio (action) {
 function* updatePortfoio (action) {
     if( action.type === 'UPDATE_PORTFOLIO' ) {
         try{
-            const response = yield axios.put(`/api/portfolio/update`, action.payload)
+             yield axios.put(`/api/portfolio/update`, action.payload)
         } catch( error ) {
             console.log('error with the PORTFOLIO UPDATE');
         }
