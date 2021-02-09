@@ -41,7 +41,7 @@ class AdminUser extends Component {
 
   updateRecord = () => { 
     console.log (`updated record payload:`, this.state.editRecord);
-    this.props.dispatch({ type: 'UPDATE_USER', payload: this.state.editRecord});  
+    this.props.dispatch({ type: 'UPDATE_USER_VIAADMIN', payload: this.state.editRecord});  
     this.setState({
       updatePopupFlag: false,
       deletePopupFlag: false,
@@ -55,7 +55,8 @@ class AdminUser extends Component {
         archived: false,
       }
     })
-    this.props.dispatch({type: 'FETCH_USER'})
+    this.props.dispatch({type: 'FETCH_ALLUSERS'});
+    this.props.dispatch({type: 'FETCH_ALLCOMPANY'});
   }
 
   openUpdatePopup = (passedRecord) => {
@@ -67,7 +68,7 @@ class AdminUser extends Component {
     this.setState({
       updatePopupFlag: !this.state.updatePopupFlag,
       editRecord: {
-        id: 0,
+        id: passedRecord.id,
         email: passedRecord.email,
         first_name: passedRecord.first_name,
         last_name: passedRecord.last_name,
@@ -87,12 +88,12 @@ class AdminUser extends Component {
     this.setState({
       deletePopupFlag: !this.state.deletePopupFlag,
       editRecord: {
-        id: 0,
-        email: '',
-        first_name: '',
-        last_name: '',
-        company_fk: 0,
-        user_type: '',
+        id: passedRecord.id,
+        email: passedRecord.email,
+        first_name: passedRecord.first_name,
+        last_name: passedRecord.last_name,
+        company_fk: passedRecord.company_fk,
+        user_type: passedRecord.user_type,
         archived: true,
       }
     })
@@ -146,17 +147,52 @@ class AdminUser extends Component {
                               <button onClick={()=>this.openUpdatePopup(lineItem)}>Edit</button>
                                 <Popup position="center" open={this.state.updatePopupFlag} closeOnDocumentClick>
                                     <div className="editPanel" >
-                                        <input placeholder={lineItem.email} value={this.state.editRecord.email} onChange={this.handleChange('email')}/> 
-                                        <input placeholder={lineItem.first_name} value={this.state.editRecord.first_name} onChange={this.handleChange('first_name')}/> 
-                                        <input placeholder={lineItem.last_name} value={this.state.editRecord.last_name} onChange={this.handleChange('last_name')}/> 
-                                        <select placeholder={lineItem.user_type} value={this.state.editRecord.user_type} onChange={this.handleChange('user_type')}>
-                                            <option value="admin">admin</option>
-                                            <option value="client">client</option>
-                                            <option value="contractor">contractor</option>
-                                        </select>
-                                        <input placeholder={lineItem.user_type} value={this.state.editRecord.user_type} onChange={this.handleChange('user_type')}/> 
-                                        <button onClick={this.updateRecord}>Save</button> 
-                                        <button onClick={this.cancelUpdate}>Cancel</button> 
+                                      <table>
+                                        <thead>
+                                          <tr>
+                                            <th>email</th>
+                                            <th>First</th>
+                                            <th>Last</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <td><input placeholder={lineItem.email} value={this.state.editRecord.email} onChange={this.handleChange('email')}/> </td>
+                                            <td><input placeholder={lineItem.first_name} value={this.state.editRecord.first_name} onChange={this.handleChange('first_name')}/> </td>
+                                            <td><input placeholder={lineItem.last_name} value={this.state.editRecord.last_name} onChange={this.handleChange('last_name')}/> </td>
+                                          </tr>
+                                        </tbody>
+                                        <thead>
+                                          <tr>
+                                            <th>User Type</th>
+                                            <th>Company</th>
+                                            <th>Buttons</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <td>
+                                              <select placeholder={lineItem.user_type} value={this.state.editRecord.user_type} onChange={this.handleChange('user_type')}>
+                                                <option value="admin">admin</option>
+                                                <option value="client">client</option>
+                                                <option value="contractor">contractor</option>
+                                              </select>
+                                            </td>
+                                            <td>
+                                              <select placeholder={lineItem.company_name} value={this.state.editRecord.company_name} onChange={this.handleChange('company_name')}>
+                                              {this.props.store.admin.allCompanyReducer.map( (company) => {
+                                                return (
+                                                    <option key={company.id} value={company.id}>{company.company_name}</option>)})}
+                                              </select>
+                                            </td>
+                                            <td>
+                                                <button onClick={this.updateRecord}>Save</button> 
+                                                <button onClick={this.cancelUpdate}>Cancel</button> 
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                      
                                     </div>
                                 </Popup>
                               </td>

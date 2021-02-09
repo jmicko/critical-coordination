@@ -44,8 +44,9 @@ router.get('/location', rejectUnauthenticated, (req, res) => {
  // GET location table w/ company join
 router.get('/users', rejectUnauthenticated, (req, res) => {
    if (req.user.user_type === 'admin'){
-      const queryText = `SELECT email, first_name, last_name, company_fk, user_type, company.company_name FROM "user" 
+      const queryText = `SELECT "user".id, email, first_name, last_name, company_fk, user_type, company.company_name FROM "user" 
             JOIN company ON company.id = "user".company_fk
+            WHERE "user".archived = false
             ORDER BY company.id, "user".id  ASC;`
       console.log ('in all users GET')
       pool.query(queryText)
@@ -62,8 +63,9 @@ router.get('/users', rejectUnauthenticated, (req, res) => {
 
 // GET status table 
 router.get('/taskstatus', rejectUnauthenticated, (req, res) => {
-   const queryText = `SELECT * FROM task_status WHERE archived = false
-         ORDER BY id  ASC;`
+   const queryText = `SELECT * FROM task_status 
+         WHERE archived = false
+         ORDER BY status_type  ASC;`
    console.log ('in task status GET')
    pool.query(queryText)
      .then((result) => { res.send(result.rows); })
@@ -99,12 +101,12 @@ router.put('/usermodify', rejectUnauthenticated, (req, res) => {
    const company_fk = req.body.company_fk;
    const user_type = req.body.user_type;
    const archived = req.body.archived;
-   const sqlText = `UPDATE user SET 
+   const sqlText = `UPDATE "user" SET 
                      email = $2, 
-                     first_name = $3
-                     last_name = $4
-                     company_fk= $5
-                     user_type = $6
+                     first_name = $3,
+                     last_name = $4,
+                     company_fk= $5,
+                     user_type = $6,
                      archived = $7
                     WHERE id=$1;`;
    pool.query(sqlText, [id, email, first_name, last_name, company_fk, user_type, archived])
