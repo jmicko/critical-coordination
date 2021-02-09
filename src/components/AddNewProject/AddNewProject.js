@@ -32,11 +32,11 @@ componentDidMount(){
       })
    }
 
-   saveProject = async() => {
+   saveProject = () => {
       if (this.state.newProject.company !== '' && this.state.newProject.location !== '' 
          && this.state.newProject.PO !== '' && this.state.newProject.due_date !== '' && this.state.newProject.project_name !== ''){
-         await this.props.dispatch( {type: 'ADMIN_ADD_PROJECT', payload: this.state.newProject});
-         await this.props.history.push('/portfolio');
+         this.props.dispatch( {type: 'ADMIN_ADD_PROJECT', payload: this.state.newProject});
+
       } else {
          alert('Please fill out all fields before Saving a New Project')
       }
@@ -44,7 +44,8 @@ componentDidMount(){
 
    render() {
       return (
-         <div className="orange notched">
+         <div className="slate notched">
+            {JSON.stringify(this.props.store.projectReducer)}
             <h4>Add New Project</h4>
             <label> New Project Company:
                <select required onChange={(event) => this.handleChange(event, 'company')} value={this.state.newProject.company}>
