@@ -146,8 +146,16 @@ table td:last-child {
   border-right: none;
 }
 
+.orange{
+  background-color: #f56f34;
+  color: white;
+  padding: 1rem;
+
+}
+
 .slate{
   background-color: #425564;
+  color: white;
   padding: 1rem;
 }
 
@@ -158,3 +166,20 @@ table td:last-child {
   width: max-content;
 }
 
+.notched{
+  /* css for notched corners taken from  */
+  --notchSize: 1rem;
+  
+  clip-path: 
+    polygon(
+      0% var(--notchSize), 
+      var(--notchSize) 0%, 
+      calc(100% - var(--notchSize)) 0%, 
+      100% var(--notchSize), 
+      100% calc(100% - var(--notchSize)), 
+      calc(100% - var(--notchSize)) 100%, 
+      var(--notchSize) 100%, 
+      0% calc(100% - var(--notchSize))
+    );
+
+}

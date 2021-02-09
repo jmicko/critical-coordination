@@ -44,7 +44,7 @@ componentDidMount(){
 
    render() {
       return (
-         <div className="paper">
+         <div className="orange notched">
             <h4>Add New Project</h4>
             <label> New Project Company:
                <select required onChange={(event) => this.handleChange(event, 'company')} value={this.state.newProject.company}>
