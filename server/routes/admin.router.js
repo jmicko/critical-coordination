@@ -201,11 +201,33 @@ router.post('/addproject', rejectUnauthenticated, (req, res) => {
                         RETURNING "id";`;
       pool.query(sqlText, [project_name, PO, due_date, company, location])
       .then((result) => {
-         const projectId = {id: result.rows[0].id}
+         const projectId = result.rows
          console.log(projectId);
          res.send(projectId)
       }).catch((error) => {
             console.log('Error with ADD PROJECT admin post', error);
+         })
+   } else {
+      res.sendStatus(403)
+   }
+});
+
+router.post('/addtask', rejectUnauthenticated, (req, res) => {
+   if (req.user.user_type === 'admin') {
+      console.log(req.body);
+      const task_name = req.body.type;
+      const nlt_date = req.body.due_date;
+      const task_status = req.body.status;
+      const updated_by = req.body.updated_by;
+      const project = req.body.project;
+      const notes = req.body.notes;
+      const sqlText = `INSERT INTO task ("task_name_fk", "nlt_date", "task_status_fk", "updated_by", "project_fk", "notes")
+      VALUES($1, $2, $3, $4, $5, $6)`;
+      pool.query(sqlText, [task_name, nlt_date, task_status, updated_by, project, notes])
+         .then( () => {
+            res.sendStatus(201)
+         }).catch((error) => {
+            console.log('Error with ADD Task admin post', error);
          })
    } else {
       res.sendStatus(403)

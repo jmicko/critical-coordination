@@ -105,7 +105,6 @@ function* adminAddLocation(action) {
 }
 
 function* adminAddStatus(action) {
-   console.log('in AdminAddStatusSaga');
    try {
       yield axios.post('/api/admin/addstatus', action.payload)
       yield put({ type: 'FETCH_TASKSTATUS' })
@@ -115,11 +114,20 @@ function* adminAddStatus(action) {
 }
 
 function* adminAddProject(action) {
-    console.log('in AdminAddProjectSaga');
     try {
         const response = yield axios.post('/api/admin/addproject', action.payload)
         document.cookie = `project=${response.data.id}`;
         yield put ({ type: 'FETCH_PORTFOLIO' })
+    } catch (error) {
+        console.log('error in Admin Add Project Saga, ', error);
+    }
+}
+
+function* adminAddTask(action) {
+    console.log('in AdminAddTaskSaga');
+    try {
+        yield axios.post('/api/admin/addtask', action.payload)
+        yield put({ type: 'FETCH_PROJECT_TASKS', payload: action.payload.project })
     } catch (error) {
         console.log('error in Admin Add Project Saga, ', error);
     }
@@ -137,6 +145,7 @@ function* adminSaga() {
     yield takeLatest('ADMIN_ADD_STATUS', adminAddStatus);
     yield takeLatest('ADMIN_ADD_PROJECT', adminAddProject);
     yield takeLatest('UPDATE_USER_VIAADMIN', updateUserViaAdmin);
+    yield takeLatest('ADMIN_ADD_TASK', adminAddTask)
 }
 
 export default adminSaga;
