@@ -14,7 +14,6 @@ class ProjectTitle extends Component {
     this.props.dispatch({ type: 'FETCH_PROJECT', payload: getCookie('project') })
   }
     
-
   render() {
     return (
     
