@@ -30,16 +30,17 @@ CREATE TABLE "project" (
 );
 CREATE TABLE "task" (
 	"id" serial NOT NULL,
-	"poc_fk" integer NOT NULL,
-	"scheduled_date" DATE NOT NULL DEFAULT 'today',
+	"poc_fk" integer,
+	"scheduled_date" DATE,
 	"nlt_date" DATE NOT NULL DEFAULT 'today',
 	"task_name_fk" INTEGER NOT NULL,
 	"token" varchar(255),
 	"task_status_fk" integer NOT NULL,
-	"tracking_id" integer,
+	"tracking_id" varchar(25),
 	"updated_by" varchar(255),
 	"technician_info" varchar(255),
 	"project_fk" integer NOT NULL,
+	"notes" varchar(9999),
 	"archived" BOOLEAN DEFAULT false,
 	CONSTRAINT "task_pk" PRIMARY KEY ("id")
 ) WITH (
@@ -110,10 +111,10 @@ INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "p
 INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") VALUES('supply@supply.com', 'Tim', 'Warehouse', 6, '$2a$10$T1FRsJQ4Y9yesCleyQX9o.ssMB3wBjLMx.o9iwGeXtcnyH9bMqEAu', 'contractor');
 --data for projects and tasks FK tables
 INSERT INTO task_status ("status_type") VALUES ('Started'), ('Receipt Acknowledged'), ('Shipped'), ('Scheduled'), ('Complete'), ('Invoiced');
-INSERT INTO task_name ("task_name") VALUES('Order Materials'), ('Schedule Installation'), ('Invoice');
+INSERT INTO task_name ("task_name") VALUES('Order Materials'), ('Schedule Installation'), ('Invoice'), ('Custom');
 --sample data for projects
-INSERT INTO project ("project_name", "PO_Number", "due_date", "company_fk", "location_fk") VALUES('CostCo Bayport', '1000', '2021-03-01', 2, 2), ('CostCo MapleGrove', '1001', '2021-02-01', 2, 3),
-('Walmart Vadnais Heights', '1002', '2021-03-01', 3, 4), ('Walmart Woodbury', '1003', '2021-03-02', 3, 5);
+INSERT INTO project ("project_name", "PO_Number", "due_date", "company_fk", "location_fk") VALUES('CostCo Bayport', '1000', '2021-03-01', 3, 2), ('CostCo MapleGrove', '1001', '2021-02-01', 3, 3),
+('Walmart Vadnais Heights', '1002', '2021-03-01', 4, 4), ('Walmart Woodbury', '1003', '2021-03-02', 4, 5);
 
 --sample data for tasks
 INSERT INTO task ("poc_fk", "scheduled_date", "nlt_date", "task_name_fk", "task_status_fk", "project_fk") 
