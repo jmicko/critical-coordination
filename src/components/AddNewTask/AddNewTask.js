@@ -23,6 +23,11 @@ class AddNewTask extends Component {
             type: '',
             company: '',
             updated_by: `${this.props.store.user.first_name} ${this.props.store.user.last_name}`,
+            notes: '',
+            project: getCookie('project'),
+            due_date: '',
+            status: '',
+            tracking_number: '',
         }
     };
 
@@ -35,12 +40,27 @@ class AddNewTask extends Component {
         });
     }
 
-    // returns the date in the day/month/year format
-    dateConversion = date => {
-        let year = date[0] + date[1] + date[2] + date[3];
-        let month = date[5] + date[6];
-        let day = date[8] + date[9];
-        return (day + "/" + month + "/" + year);
+    addTask = () => {
+        if(this.state.newTask.type !== '' && 
+            this.state.newTask.company !== '' && 
+            this.state.newTask.due_date !== '' &&
+            this.state.newTask.status !== ''){
+            this.props.dispatch( {type: 'ADMIN_ADD_TASK', payload: this.state.newTask})
+            this.setState({
+                newTask: {
+                    type: '',
+                    company: '',
+                    updated_by: `${this.props.store.user.first_name} ${this.props.store.user.last_name}`,
+                    notes: '',
+                    project: getCookie('project'),
+                    due_date: '',
+                    status: '',
+                    tracking_number: '',
+                }
+            })
+        } else {
+            alert('please fill out all fields before saving a new task')
+        }
     }
 
     render() {
@@ -50,7 +70,7 @@ class AddNewTask extends Component {
                 <h1> Add New Task </h1>
                 <form>
                     <label>Task Type: &nbsp;
-                        <select onChange={(event) => this.handleChange(event, 'type')}>
+                        <select value={this.state.newTask.type} onChange={(event) => this.handleChange(event, 'type')}>
                             <option value=''></option>
                             <option value="1">Materials</option>
                             <option value="2">Install</option>
@@ -59,18 +79,19 @@ class AddNewTask extends Component {
                         </select>
                     </label>
                     <label>Company Assigned: &nbsp;
-                        <select onChange={(event) => this.handleChange(event, 'company')}>
+                        <select value={this.state.newTask.company} onChange={(event) => this.handleChange(event, 'company')}>
                             {this.props.store.admin.allCompanyReducer.map((company) => {
                                 return <option key={company.id} value={company.id}>{company.company_name}</option>
                             })}
                         </select>
                     </label>
                     <label> Due Date: &nbsp;
-                        <input onChange={(event) => this.handleChange(event, 'due_date')} type="date"></input>
+                        <input value={this.state.newTask.due_date} onChange={(event) => this.handleChange(event, 'due_date')} type="date"></input>
                     </label>
                     <br />
                     <label> Task Status: &nbsp;
-                        <select onChange={(event) => this.handleChange(event, 'status')}>
+                        <select value={this.state.newTask.status} onChange={(event) => this.handleChange(event, 'status')}>
+                            <option value=''></option>
                             {this.props.store.admin.taskStatusReducer.map((status) => {
                                 return <option key={status.id} value={status.id}>{status.status_type}</option>
                             })}
@@ -78,13 +99,18 @@ class AddNewTask extends Component {
                     </label>
                     {this.state.newTask.type === '1' &&
                     <label> Tracking Number: &nbsp;
-                        <input placeholder="UPS or FEDEX"></input>
+                        <input value={this.state.newTask.tracking_number} onChange={(event) => this.handleChange(event, 'tracking_number')} placeholder="UPS or FEDEX"></input>
                     </label>}
                     <br/>
                     <br/>
                     <label> Notes: &nbsp;
-                            <input className="notes" type="text" size="100"></input>
+                            <textarea placeholder="...any specific details about the task go here" 
+                            className="notes" type="text" cols="100" rows="5"
+                            value={this.state.newTask.notes}
+                            onChange={(event) => this.handleChange(event, 'notes')}/>
                     </label>
+                    <br/>
+                    <button onClick={ (event) => this.addTask(event)} type="submit">Add Task</button>
                 </form>
             </center>
         );
