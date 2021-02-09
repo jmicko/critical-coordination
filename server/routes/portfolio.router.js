@@ -38,9 +38,15 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 
 router.put('/update', rejectUnauthenticated, (req, res) => {
+    console.log(req.user);
     console.log(req.body);
     const queryText1 =  `UPDATE project SET project_name=$1, "PO_Number"=$2, due_date=$3 WHERE id = $4;`;
-    const queryText2 = `UPDATE company_location SET location_name=$1 WHERE id=$2`
+    const queryText2 = `UPDATE company_location 
+                        SET company_location.id=$1
+                        FROM company_location
+                        INNER JOIN project
+                        ON company_location.id = project.location_fk
+                        WHERE project.id = $2;`;
 
     pool.query(queryText1, [req.body.project_name, req.body.PO_Number, req.body.due_date, req.body.project_id])
         .then(() => {

@@ -8,6 +8,7 @@ class ExecutivePortfolioView extends Component {
 
     componentDidMount(){ 
         this.props.dispatch({ type: 'GET_PORTFOLIO'})
+        this.props.dispatch({type: 'FETCH_ALLLOCATION'});
     }
 
     state = {
@@ -17,9 +18,12 @@ class ExecutivePortfolioView extends Component {
         location_name: '',
         PO_Number: '',
         due_date: '',
+        // company_fk: this.props.store.admin.company_fk,
     };
 
     handleChange = name => event => {
+        console.log(name);
+        
         this.setState({ [name]: event.target.value });    
     }
 
@@ -54,7 +58,9 @@ class ExecutivePortfolioView extends Component {
     }
 
     render() {
-        // console.log(this.state);
+        console.log(this.state);
+        console.log(this.props.store.admin.allLocationReducer);
+        
         return (
             <center className="container paper">
                 <h1> Executive Portfolio Page </h1>
@@ -77,13 +83,15 @@ class ExecutivePortfolioView extends Component {
                                         <td>{this.dateConversion(project.due_date)}</td> 
                                         <td><input placeholder='Logic needs to be done'/></td>                                  
                                         <td>
-                                            <Popup trigger={<button>Edit</button>} position="center" >
+                                            <Popup trigger={<button>Edit</button>} position="left" >
                                                 <div className="editPanel" onClick={ () => this.updateId(project) }>
                                                     <h3>Edit Window:</h3>
                                                     <label>Project:</label>
                                                     <input placeholder={project.project_name} onChange={this.handleChange('project_name')}/> 
                                                     <label>Location:</label>
-                                                    <input placeholder={project.location_name} onChange={this.handleChange('location_name')}/> 
+                                                    <select onChange={this.handleChange('location_name')}>
+                                                        {this.props.store.admin.allLocationReducer.map((location) => <option key={location.id} value={location.location_name}>{location.location_name}</option>)}
+                                                    </select>                                                    
                                                     <label>PO#:</label>
                                                     <input placeholder={project.PO_Number} onChange={this.handleChange('PO_Number')}/> 
 
