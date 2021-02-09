@@ -18,6 +18,7 @@ class ExecutivePortfolioView extends Component {
         location_name: '',
         PO_Number: '',
         due_date: '',
+        showAddNewProject: false,
     };
 
     handleChange = name => event => {
@@ -54,15 +55,21 @@ class ExecutivePortfolioView extends Component {
         return (day + "/" + month + "/" + year);
     }
 
+    showAdd = () => {
+        this.setState({
+            showAddNewProject: !this.state.showAddNewProject,
+        })
+    }
+
     render() {
         // console.log(this.state);
         return (
             <center className="container paper">
                 <h1> Executive Portfolio Page </h1>
-                <button>
+                <button onClick={this.showAdd}>
                     Add New Project
                 </button>
-                <AddNewProject />
+                {this.state.showAddNewProject && <AddNewProject />}
                 <table className="table td">
                     <thead>
                         <tr position='align-left'>
