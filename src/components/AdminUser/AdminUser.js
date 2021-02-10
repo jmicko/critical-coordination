@@ -200,7 +200,7 @@ class AdminUser extends Component {
                                 <Popup position="center" open={this.state.deletePopupFlag}>
                                       <div className="editPanel" >
                                           <h3>Are you sure you would like to delete this record?</h3> 
-                                          <p>Deleted statuses will no longer be avialable to select for new records, </p> 
+                                          <p>Deleted users will no longer be avialable to select for new records, </p> 
                                           <p>but existing records with this status will maintain as is.</p> 
                                           <button onClick={this.updateRecord}>Yes Delete</button> 
                                           <button onClick={this.cancelUpdate}>Cancel</button> 

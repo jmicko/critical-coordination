@@ -10,7 +10,9 @@ const {
 router.get('/company', rejectUnauthenticated, (req, res) => {
    if(req.user.user_type === 'admin'){
       console.log('user type is: ', req.user.user_type);
-      const queryText = 'SELECT * FROM company ORDER BY id ASC';
+      const queryText = `SELECT * FROM company 
+                  WHERE archived = false
+                  ORDER BY company_name ASC;`;
       console.log ('in company get')
       pool.query(queryText)
         .then((result) => { res.send(result.rows); })
@@ -116,6 +118,25 @@ router.put('/usermodify', rejectUnauthenticated, (req, res) => {
       console.log('Error with usermodify admin post', error);
    })
 });
+
+//PUT (update) company table, to include delete of user (archive)
+router.put('/companymodify', rejectUnauthenticated, (req, res) => {
+   console.log (`companymodify put payload: `, req.body );
+   const id = req.body.id;
+   const company_name = req.body.company_name;
+   const archived = req.body.archived;
+   const sqlText = `UPDATE company SET 
+                     company_name = $2, 
+                     archived = $3
+                    WHERE id=$1;`;
+   pool.query(sqlText, [id, company_name, archived])
+   .then( () => {
+      res.sendStatus(201)
+   }) .catch( (error) => {
+      console.log('Error with companymodify admin post', error);
+   })
+});
+
 
 
 //add new user route for admin page
