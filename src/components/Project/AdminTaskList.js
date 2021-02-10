@@ -45,7 +45,7 @@ class AdminTaskList extends Component {
                                       return <option key={status.id} value={status.id}>{status.status_type}</option>
                                     })}
                                   </select></label> :  
-                                  <p> NLT Date: {this.props.task.nlt_date}  </p>}
+                                  <p>Status: {this.props.task.status_type}  </p>}
        
         <center>
                 
