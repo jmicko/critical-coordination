@@ -43,7 +43,7 @@ class ExecutivePortfolioView extends Component {
     navigate = (web_address, project) => {
         document.cookie = `project=${project.id}`;
         this.props.dispatch({ type: 'FETCH_PROJECT', payload: project.id })
-        // console.log(project.id); //this is logging the project whic has the ID to make the redux call with for the project view.
+        // console.log(project.id); //this is logging the project which has the ID to make the redux call with for the project view.
         this.props.history.push(web_address);
 
         // this.props.history.push(web_address);
