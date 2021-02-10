@@ -5,6 +5,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import TaskList from './TaskList';
 import ProjectTitle from './ProjectTitle';
 import AddNewTask from '../AddNewTask/AddNewTask';
+import TrackingApi from '../TrackingApi/TrackingApi'
 
 
 class Project extends Component {
@@ -18,6 +19,7 @@ class Project extends Component {
         <AddNewTask/>}
         <br></br>
         <TaskList/>  
+        <TrackingApi/>
       </div>
     );
   }
