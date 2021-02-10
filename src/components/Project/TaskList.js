@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import EditButtonAdmin from './AdminTaskList' //this is the TaskListPopUp
 import AddNewTask from '../AddNewTask/AddNewTask';
-import EditButtonContractor from './ContractorTaskList'
+import AdminTaskList from './AdminTaskList' 
+import ContractorTaskList from './ContractorTaskList'
+import ClientTaskList from './ClientTaskList'
 
 const getCookie = (cookieName) => {
     // Get name followed by anything except a semicolon
@@ -47,9 +48,9 @@ class TaskList extends Component {
             <h3>Task List</h3>       
             {this.props.store.projectReducer.projectTaskReducer.map((task, index) => {
                 return <div key={index}>
-                            {this.props.store.user.user_type === 'admin' && <EditButtonAdmin task={task} />}
-                            {this.props.store.user.user_type === 'contractor' && <EditButtonContractor task={task} />}
-
+                            {this.props.store.user.user_type === 'admin' && <AdminTaskList task={task} />}
+                            {this.props.store.user.user_type === 'contractor' && <ContractorTaskList task={task} />}
+                            {this.props.store.user.user_type === 'client' && <ClientTaskList task={task} />}
                         </div>               
                       
             })}                           

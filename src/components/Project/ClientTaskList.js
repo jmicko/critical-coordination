@@ -9,7 +9,6 @@ class ClientTaskList extends Component {
   render() {      
     return (
       <div>
-        {JSON.stringify(this.props.task)}
         <p>Task: {this.props.task.task_name} </p>
         <p>Date Scheduled: {this.props.task.scheduled_date} </p>
         <p>NLT Date: {this.props.task.nlt_date} </p>    

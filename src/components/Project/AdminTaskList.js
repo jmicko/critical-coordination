@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import Popup from 'reactjs-popup';
+
 
 
 class AdminTaskList extends Component {
@@ -17,22 +17,22 @@ class AdminTaskList extends Component {
             [name]: event.target.value
         }
     });
-}
+  }
 
-showEditTask = () => {
-  this.setState({
-    showEditTask: !this.state.showEditTask
-  })
-}
+  showEditTask = () => {
+    this.setState({
+      showEditTask: !this.state.showEditTask
+    })
+  }
 
-save = () => {
-  this.showEditTask()
-  
-}
+  save = () => {
+    this.showEditTask()
+    
+  }
 
   render() {
     return (
-      <div>
+      <div >
           {/* {JSON.stringify(this.props.task)} */}
        
        
