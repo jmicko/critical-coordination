@@ -87,7 +87,7 @@ class AdminUser extends Component {
     this.setState({
       deletePopupFlag: !this.state.deletePopupFlag,
       editRecord: {
-        id: passedRecord.id,
+        id: passedRecord.location_id,
         email: passedRecord.email,
         first_name: passedRecord.first_name,
         last_name: passedRecord.last_name,
@@ -165,7 +165,7 @@ class AdminUser extends Component {
                                           <tr>
                                             <th>User Type</th>
                                             <th>Company</th>
-                                            <th>Buttons</th>
+                                            <th>&nbsp;</th>
                                           </tr>
                                         </thead>
                                         <tbody>
@@ -206,7 +206,7 @@ class AdminUser extends Component {
                                           <button onClick={this.cancelUpdate}>Cancel</button> 
                                       </div>
                                  </Popup>
-                                 </td>
+                              </td>
                           </tr>
                         );
                     })} 
@@ -216,6 +216,6 @@ class AdminUser extends Component {
     );
   }
 }
-
+ 
 // this allows us to use <App /> in index.js
 export default connect(mapStoreToProps)(AdminUser);
