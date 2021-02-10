@@ -49,7 +49,7 @@ class AdminTaskStatus extends Component {
     this.props.dispatch({type: 'FETCH_TASKSTATUS'})
   }
 
-  openUpdatePopup = (passedRecord, archiveFlag) => {
+  openUpdatePopup = (passedRecord) => {
     this.setState({
       updatePopupFlag: false,
       updateDeleteFlag: false,
@@ -65,7 +65,7 @@ class AdminTaskStatus extends Component {
     })
   }
   
-  openDeletePopup = (passedRecord, archiveFlag) => {
+  openDeletePopup = (passedRecord) => {
     this.setState({
       updatePopupFlag: false,
       updateDeleteFlag: false,
