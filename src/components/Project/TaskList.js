@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-
-import EditButton from './TaskListPopUp'
+import AddNewTask from '../AddNewTask/AddNewTask';
+import AdminTaskList from './AdminTaskList' 
+import ContractorTaskList from './ContractorTaskList'
+import ClientTaskList from './ClientTaskList'
 
 const getCookie = (cookieName) => {
     // Get name followed by anything except a semicolon
@@ -12,33 +14,46 @@ const getCookie = (cookieName) => {
   }
 
 class TaskList extends Component {
+    state = {
+        showAddTask: false,
+      };
+
     componentDidMount(){
         this.props.dispatch({ type: 'FETCH_PROJECT_TASKS', payload: getCookie('project') })
+        this.props.dispatch({ type: 'FETCH_TASKSTATUS' });
     }
 
-    edit = user_type => {
-        if (user_type !== "client") {
-            return <EditButton/>
-        }
-    }
+
+    showAddTask = () => {
+        this.setState({
+          showAddTask: !this.state.showAddTask
+        })
+      }
+
 
   render() {
+      console.log(this.state);
+      
     return (      
         <div className="container paper">
-            <h3>Task List</h3>
-            {this.props.store.projectReducer.projectTaskReducer.map((task) => {
-                return <div key={task.id} onClick={ () => this.navigate}>
-                        <p>Task: {task.task_name} </p>
-                        <p>Date Scheduled: {task.scheduled_date} </p>
-                        <p>NLT Date: {task.nlt_date} </p>                     
-
-                        {this.edit(this.props.store.user.user_type)}
-                        
-                        </div>
-                    
-            })}
-
-                                        
+            <center>
+                {this.props.store.user.user_type === 'admin' && <>
+                    {this.state.showAddTask ? 
+                        <> <AddNewTask/> <button onClick={this.showAddTask}>Close Add New Task</button> </> : 
+                        <button onClick={this.showAddTask}>Create A New Task</button>
+                    }
+                </>
+            }
+            </center>
+            <h3>Task List</h3>       
+            {this.props.store.projectReducer.projectTaskReducer.map((task, index) => {
+                return <div key={index}>
+                            {this.props.store.user.user_type === 'admin' && <AdminTaskList task={task} />}
+                            {this.props.store.user.user_type === 'contractor' && <ContractorTaskList task={task} />}
+                            {this.props.store.user.user_type === 'client' && <ClientTaskList task={task} />}
+                        </div>               
+                      
+            })}                           
         </div>
 
       
