@@ -28,9 +28,11 @@ router.get('/company', rejectUnauthenticated, (req, res) => {
 // GET location table w/ company join
 router.get('/location', rejectUnauthenticated, (req, res) => {
    if (req.user.user_type === 'admin'){
-      const queryText = `SELECT * FROM company_location 
-         JOIN company ON company.id = company_location.company_fk
-         ORDER BY company.id, company_location.id ASC;`
+      const queryText = `SELECT company_location.id AS location_id, address, location_name, company_name, company_fk  
+      FROM company_location
+      JOIN company ON company.id = company_location.company_fk
+      WHERE company_location.archived = false
+      ORDER BY company_location.id ASC;`
       console.log ('in location get')
       pool.query(queryText)
         .then((result) => { res.send(result.rows); })
@@ -137,6 +139,27 @@ router.put('/companymodify', rejectUnauthenticated, (req, res) => {
    })
 });
 
+//PUT (update) company_location table, to include delete of user (archive)
+router.put('/locationmodify', rejectUnauthenticated, (req, res) => {
+   console.log (`locationmodify put payload: `, req.body );
+   const id = req.body.id;
+   const address = req.body.address;
+   const location_name = req.body.location_name;
+   const company_fk = req.body.company_fk;
+   const archived = req.body.archived;
+   const sqlText = `UPDATE company_location SET 
+                     address = $2, 
+                     location_name = $3,
+                     company_fk = $4,
+                     archived = $5
+                    WHERE id=$1;`;
+   pool.query(sqlText, [id, address, location_name, company_fk, archived])
+   .then( () => {
+      res.sendStatus(201)
+   }) .catch( (error) => {
+      console.log('Error with locationmodify admin post', error);
+   })
+});
 
 
 //add new user route for admin page
