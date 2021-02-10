@@ -71,8 +71,22 @@ function* updateUserViaAdmin(action) {
     try {
         // get data from db
         const response = yield axios.put('/api/admin/usermodify', action.payload);
+        yield put({ type: 'FETCH_ALLUSERS' });
+        yield put({ type: 'FETCH_ALLCOMPANY' });
     } catch ( error ) {
         console.log('error with updateUserViaAdmin get request', error);
+    }
+} 
+
+function* updateCompanyViaAdmin(action) {
+    console.log('In updateCompanyViaAdmin saga', action.payload);
+    // Go to server, update redux store with data from server
+    try {
+        // get data from db
+        const response = yield axios.put('/api/admin/companymodify', action.payload);
+        yield put({ type: 'FETCH_ALLCOMPANY' });
+    } catch ( error ) {
+        console.log('error with updateCompanyViaAdmin get request', error);
     }
 } 
 
@@ -146,6 +160,8 @@ function* adminSaga() {
     yield takeLatest('ADMIN_ADD_PROJECT', adminAddProject);
     yield takeLatest('UPDATE_USER_VIAADMIN', updateUserViaAdmin);
     yield takeLatest('ADMIN_ADD_TASK', adminAddTask)
+    yield takeLatest('UPDATE_COMPANY_VIAADMIN', updateCompanyViaAdmin);
+    
 }
 
 export default adminSaga;
