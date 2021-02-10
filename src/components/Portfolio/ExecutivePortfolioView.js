@@ -68,6 +68,7 @@ class ExecutivePortfolioView extends Component {
                             <th>PO#:</th>
                             <th>Due Date:</th>
                             <th>Status:</th>
+                            <th>Expedited?</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,7 +78,8 @@ class ExecutivePortfolioView extends Component {
                                         <td><label>{project.location_name}</label></td>
                                         <td><label>{project.PO_Number}</label></td>
                                         <td>{this.dateConversion(project.due_date)}</td> 
-                                        <td><input placeholder='Logic needs to be done'/></td>                                  
+                                        <td><input placeholder='Logic needs to be done'/></td>  
+                                        <td></td>                                
                                         <td>
                                             <Popup trigger={ open => (<button>Edit </button>)} position="left" >
                                                 <div className="editPanel" onClick={ () => this.updateId(project) }>
@@ -102,6 +104,7 @@ class ExecutivePortfolioView extends Component {
                                                 </div>
                                             </Popup>
                                         </td> 
+                                        
                                     </tr>
                         })}                        
                     </tbody>
