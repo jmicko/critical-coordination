@@ -55,8 +55,7 @@ class AdminUser extends Component {
         archived: false,
       }
     })
-    this.props.dispatch({type: 'FETCH_ALLUSERS'});
-    this.props.dispatch({type: 'FETCH_ALLCOMPANY'});
+    
   }
 
   openUpdatePopup = (passedRecord) => {
@@ -179,7 +178,7 @@ class AdminUser extends Component {
                                               </select>
                                             </td>
                                             <td>
-                                              <select placeholder={lineItem.company_name} value={this.state.editRecord.company_name} onChange={this.handleChange('company_name')}>
+                                              <select placeholder={lineItem.company_name} value={this.state.editRecord.company_fk} onChange={this.handleChange('company_fk')}>
                                               {this.props.store.admin.allCompanyReducer.map( (company) => {
                                                 return (
                                                     <option key={company.id} value={company.id}>{company.company_name}</option>)})}
