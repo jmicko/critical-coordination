@@ -12,7 +12,7 @@ function* getPortfolio (action) {
     }
 }
 
-function* updatePortfoio (action) {
+function* updatePortfolio (action) {
     if( action.type === 'UPDATE_PORTFOLIO' ) {
         try{
              yield axios.put(`/api/portfolio/update`, action.payload)
@@ -24,7 +24,7 @@ function* updatePortfoio (action) {
 
 function* portfolioSaga() {
   yield takeLatest('GET_PORTFOLIO', getPortfolio);
-  yield takeLatest('UPDATE_PORTFOLIO', updatePortfoio);
+  yield takeLatest('UPDATE_PORTFOLIO', updatePortfolio);
 }
 
 export default portfolioSaga;
