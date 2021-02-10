@@ -65,6 +65,18 @@ function* updateTaskStatus(action) {
     }
 } 
 
+function* updateUserViaAdmin(action) {
+    console.log('In updateUserViaAdmin saga', action.payload);
+    // Go to server, update redux store with data from server
+    try {
+        // get data from db
+        const response = yield axios.put('/api/admin/usermodify', action.payload);
+    } catch ( error ) {
+        console.log('error with updateUserViaAdmin get request', error);
+    }
+} 
+
+
 function* adminAddUser(action) {
    try {
       yield axios.post('/api/admin/adduser', action.payload)
@@ -132,8 +144,8 @@ function* adminSaga() {
     yield takeLatest('ADMIN_ADD_LOCATION', adminAddLocation);
     yield takeLatest('ADMIN_ADD_STATUS', adminAddStatus);
     yield takeLatest('ADMIN_ADD_PROJECT', adminAddProject);
+    yield takeLatest('UPDATE_USER_VIAADMIN', updateUserViaAdmin);
     yield takeLatest('ADMIN_ADD_TASK', adminAddTask)
 }
-
 
 export default adminSaga;
