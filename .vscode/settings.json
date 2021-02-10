@@ -3,15 +3,18 @@
         "ALLCOMPANY",
         "ALLLOCATION",
         "ALLUSERS",
+        "VIAADMIN",
         "addcompany",
         "addlocation",
         "addproject",
         "addstatus",
+        "addtask",
         "adduser",
         "adminpage",
         "criticalcoordination",
         "forgotpassword",
         "resetpassword",
-        "taskstatus"
+        "taskstatus",
+        "usermodify"
     ]
 }

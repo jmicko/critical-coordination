@@ -22,6 +22,10 @@ componentDidMount(){
          due_date: '',
       }
    };
+   
+   componentDidUpdate(prevProps){
+      
+   }
 
    handleChange = (event, type) => {
       this.setState({
@@ -36,7 +40,7 @@ componentDidMount(){
       if (this.state.newProject.company !== '' && this.state.newProject.location !== '' 
          && this.state.newProject.PO !== '' && this.state.newProject.due_date !== '' && this.state.newProject.project_name !== ''){
          this.props.dispatch( {type: 'ADMIN_ADD_PROJECT', payload: this.state.newProject});
-
+            // 
       } else {
          alert('Please fill out all fields before Saving a New Project')
       }
