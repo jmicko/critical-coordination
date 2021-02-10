@@ -71,6 +71,8 @@ function* updateUserViaAdmin(action) {
     try {
         // get data from db
         const response = yield axios.put('/api/admin/usermodify', action.payload);
+        yield put({ type: 'FETCH_ALLUSERS' });
+        yield put({ type: 'FETCH_ALLCOMPANY' });
     } catch ( error ) {
         console.log('error with updateUserViaAdmin get request', error);
     }
