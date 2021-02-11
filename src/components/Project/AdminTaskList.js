@@ -42,24 +42,15 @@ class AdminTaskList extends Component {
     
     return (
       <div >
-          {/* {JSON.stringify(this.props.task)} */}
-       
-       
-       {this.state.showEditTask ? <p><label>Task Type: &nbsp;
-                                        <select value={this.state.type} onChange={(event) => this.handleChange(event, 'type')}>
-                                            <option value=''></option>
-                                            <option value="1">Materials</option>
-                                            <option value="2">Install</option>
-                                            <option value="3">Invoice</option>
-                                            <option value="4">Custom</option>
-                                        </select>
-                                      </label></p> :  <p> Task: {this.props.task.task_name}  </p>} 
-       
-       
-       
-                                      
-       
-       
+       {this.state.showEditTask ? <label>Task Type: &nbsp;
+                                    <select value={this.state.type} onChange={(event) => this.handleChange(event, 'type')}>
+                                      <option value=''></option>
+                                      <option value="1">Materials</option>
+                                      <option value="2">Install</option>
+                                      <option value="3">Invoice</option>
+                                      <option value="4">Custom</option>
+                                    </select>
+                                  </label> :  <p> Task: {this.props.task.task_name}  </p>} 
        {this.state.showEditTask ? <p><label>DateScheduled:<input type='date' placeholder={this.props.task.scheduled_date}></input></label></p> :  <p> Date Scheduled: {this.dateConversion(this.props.task.scheduled_date)} </p>} 
        {this.state.showEditTask ? <p><label>NLT Date:<input type='date' placeholder={this.props.task.nlt_date}></input></label></p> :  <p> NLT Date: {this.dateConversion(this.props.task.nlt_date)} </p>}
        {this.state.showEditTask ? <label>Status:<select onChange={(event) => this.handleChange(event, 'status')}>
@@ -69,14 +60,11 @@ class AdminTaskList extends Component {
                                     })}
                                   </select></label> :  
                                   <p>Status: {this.props.task.status_type}  </p>}
-       
         <center>
-                
                     {this.state.showEditTask ? 
                         <>  <button onClick={this.save}>Save</button> </> : 
                         <button onClick={ this.showEditTask}>Edit</button>
                     }
-               
         </center>                
       </div>
     );

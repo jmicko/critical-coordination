@@ -31,15 +31,21 @@ class ContractorTaskList extends Component {
     
   }
 
+  // returns the date in the day/month/year format
+  dateConversion = date => {
+    // console.log(...date);
+    let year = date[0]+date[1]+date[2]+date[3];
+    let month = date[5]+date[6];
+    let day = date[8]+date[9];
+    return( day + "/" + month + "/" + year);
+  }
+
   render() {
     return (
       <div >
-          {/* {JSON.stringify(this.props.task)} */}
-       
-       
       <p>Task: {this.props.task.task_name}  </p> 
-      {this.state.showEditTask ? <p><label>DateScheduled:<input type='date' placeholder={this.props.task.scheduled_date}></input></label></p> :  <p> Date Scheduled: {this.props.task.scheduled_date}  </p>} 
-      <p> NLT Date: {this.props.task.nlt_date}</p>
+      {this.state.showEditTask ? <p><label>DateScheduled:<input type='date' placeholder={this.props.task.scheduled_date}></input></label></p> :  <p> Date Scheduled: {this.dateConversion(this.props.task.scheduled_date)} </p>} 
+      <p> NLT Date: {this.dateConversion(this.props.task.nlt_date)} </p>
       {this.state.showEditTask ? <label>Status:<select onChange={(event) => this.handleChange(event, 'status')}>
                                     <option value=''></option>
                                     {this.props.store.admin.taskStatusReducer.map((status) => {
@@ -47,14 +53,11 @@ class ContractorTaskList extends Component {
                                     })}
                                   </select></label> :  
                                   <p> NLT Date: {this.props.task.nlt_date}  </p>}
-       
-        <center>
-                
+        <center>               
                     {this.state.showEditTask ? 
                         <>  <button onClick={this.save}>Save</button> </> : 
                         <button onClick={ this.showEditTask}>Update</button>
                     }
-               
         </center>                
       </div>
     );
