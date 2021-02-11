@@ -60,7 +60,7 @@ class AdminTaskList extends Component {
                                   </select></label> :  
                                   <p>Status: {this.props.task.status_type}  </p>}
                                   {this.props.task.task_name === 'Order Materials' &&
-                                  <TrackingApi tracking_number={this.props.task.tracking_number}/>}
+                                  <TrackingApi tracking_number={this.props.task.tracking_id}/>}
        
         <center>
                     {this.state.showEditTask ? 

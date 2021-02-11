@@ -20,7 +20,7 @@ class TrackingApi extends Component {
          } else {
             const tracking_data = {
                carrier: 'fedex',
-               tracking_number: '783275757626' //this.props.tracking_number
+               tracking_number: this.props.tracking_number
             }
             this.props.dispatch( {type: 'GET_TRACKING_DATA', payload: tracking_data})
          }
@@ -33,6 +33,7 @@ class TrackingApi extends Component {
             <h4>Tracking Status</h4>
             {this.props.tracking_number ? 
             <>
+            <p>Tracking Number: {this.props.tracking_number}</p>
             <p>ETA: {this.props.store.trackingReducer.eta}</p>
             <p>Status Details: {this.props.store.trackingReducer?.tracking_status?.status_details}</p>
             <p>Status Date: {this.props.store.trackingReducer?.tracking_status?.status_date}</p>
