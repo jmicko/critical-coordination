@@ -38,8 +38,6 @@ class AdminTaskList extends Component {
   }
 
   render() {
-    console.log(this.state);
-    
     return (
       <div >
        {this.state.showEditTask ? <label>Task Type: &nbsp;
