@@ -27,7 +27,7 @@ class AddNewProject extends Component {
       // look for project id prop to change which happens after adding new project
       if (this.props.store.projectReducer.projectReducer !== prevProps.store.projectReducer.projectReducer) {
          console.log('the props have changed!', this.props.store.projectReducer.projectReducer.id);
-         // this.props.history.push(web_address);
+         this.props.history.push(`/project/${this.props.store.projectReducer.projectReducer.id}`);
       }
    }
 
