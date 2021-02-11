@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import TrackingApi from '../TrackingApi/TrackingApi'
 
 
 class ClientTaskList extends Component {
@@ -21,6 +22,8 @@ class ClientTaskList extends Component {
         <p>Date Scheduled: {this.dateConversion(this.props.task.scheduled_date)} </p>
         <p>NLT Date: {this.dateConversion(this.props.task.nlt_date)} </p>    
         <p>Status: {this.props.task.status_type}</p> 
+        {this.props.task.task_name === 'Order Materials' &&
+          <TrackingApi />}
       </div>
     );
   }

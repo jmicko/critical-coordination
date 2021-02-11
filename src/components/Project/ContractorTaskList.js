@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Popup from 'reactjs-popup';
+import TrackingApi from '../TrackingApi/TrackingApi'
 
 
 class ContractorTaskList extends Component {
@@ -54,10 +55,9 @@ class ContractorTaskList extends Component {
                                   </select></label> :  
                                   <p> NLT Date: {this.props.task.nlt_date}  </p>}
         <center>               
-                    {this.state.showEditTask ? 
-                        <>  <button onClick={this.save}>Save</button> </> : 
-                        <button onClick={ this.showEditTask}>Update</button>
-                    }
+          {this.props.task.task_name === 'Order Materials' && <TrackingApi />}
+
+          {this.state.showEditTask ? <>  <button onClick={this.save}>Save</button> </> : <button onClick={ this.showEditTask}>Update</button>}
         </center>                
       </div>
     );

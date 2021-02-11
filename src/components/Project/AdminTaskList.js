@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import TrackingApi from '../TrackingApi/TrackingApi'
 
 
 
@@ -60,6 +61,9 @@ class AdminTaskList extends Component {
                                     })}
                                   </select></label> :  
                                   <p>Status: {this.props.task.status_type}  </p>}
+                                  {this.props.task.task_name === 'Order Materials' &&
+                                  <TrackingApi tracking_number={this.props.task.tracking_number}/>}
+       
         <center>
                     {this.state.showEditTask ? 
                         <>  <button onClick={this.save}>Save</button> </> : 
