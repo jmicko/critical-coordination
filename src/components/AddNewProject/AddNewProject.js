@@ -9,10 +9,10 @@ import { withRouter } from 'react-router';
 // component.
 class AddNewProject extends Component {
 
-componentDidMount(){
-   this.props.dispatch({type: 'FETCH_ALLCOMPANY'});
-   this.props.dispatch({type: 'FETCH_ALLLOCATION'});
-}
+   componentDidMount() {
+      this.props.dispatch({ type: 'FETCH_ALLCOMPANY' });
+      this.props.dispatch({ type: 'FETCH_ALLLOCATION' });
+   }
    state = {
       newProject: {
          project_name: '',
@@ -34,10 +34,10 @@ componentDidMount(){
       })
    }
 
-   saveProject = async() => {
-      if (this.state.newProject.company !== '' && this.state.newProject.location !== '' 
-         && this.state.newProject.PO !== '' && this.state.newProject.due_date !== '' && this.state.newProject.project_name !== ''){
-         await this.props.dispatch( {type: 'ADMIN_ADD_PROJECT', payload: this.state.newProject});
+   saveProject = async () => {
+      if (this.state.newProject.company !== '' && this.state.newProject.location !== ''
+         && this.state.newProject.PO !== '' && this.state.newProject.due_date !== '' && this.state.newProject.project_name !== '') {
+         await this.props.dispatch({ type: 'ADMIN_ADD_PROJECT', payload: this.state.newProject });
          await this.props.history.push('/portfolio');
       } else {
          alert('Please fill out all fields before Saving a New Project')
@@ -48,7 +48,7 @@ componentDidMount(){
       return (
          <div className="paper">
             <h4>Add New Project</h4>
-            <br/>
+            <br />
             <label> Project Name:
                <input type="text" onChange={(event) => this.handleChange(event, 'project_name')} value={this.state.newProject.project_name}></input>
             </label>
@@ -66,25 +66,28 @@ componentDidMount(){
             <label> New Project Location:
                <select required onChange={(event) => this.handleChange(event, 'location')} value={this.state.newProject.location}>
                   <option value=''></option>
-                  {this.props.store.admin.allLocationReducer.map( (location) => {
+                  {this.props.store.admin.allLocationReducer.map((location) => {
                      return (
                         this.state.newProject.company == location.company_fk &&
-                           <option key={location.id} value={location.id}>{location.location_name} : {location.address}</option>
+                        <option key={location.id} value={location.id}>{location.location_name} : {location.address}</option>
                      )
                   })}
-               </select><br/>
+               </select><br />
             </label>
             <label> Ordered By:
-               <input type="text" onChange={(event) => this.handleChange(event, 'ordered_by')} value={this.state.newProject.ordered_by}/>
+               <input type="text" onChange={(event) => this.handleChange(event, 'ordered_by')} value={this.state.newProject.ordered_by} />
             </label>
-            <br/>
+            <br />
             <label> Project Due Date:
                <input type="Date" onChange={(event) => this.handleChange(event, 'due_date')} value={this.state.newProject.due_date}></input>
             </label>
             <label> Expedited?
-            <input type="checkbox" onChange={(event) => this.handleChange(event, 'expedited')} value={this.state.newProject.expedited}/>
+               <select onChange={(event) => this.handleChange(event, 'expedited')} value={this.state.newProject.expedited}>
+                  <option value="false">No</option>
+                  <option value="true">Yes</option>
+               </select>
             </label>
-            <br/>
+            <br />
             <button onClick={this.saveProject}>Save Project</button>
          </div>
       );
