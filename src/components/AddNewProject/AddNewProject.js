@@ -9,10 +9,10 @@ import { withRouter } from 'react-router';
 // component.
 class AddNewProject extends Component {
 
-componentDidMount(){
-   this.props.dispatch({type: 'FETCH_ALLCOMPANY'});
-   this.props.dispatch({type: 'FETCH_ALLLOCATION'});
-}
+   componentDidMount() {
+      this.props.dispatch({ type: 'FETCH_ALLCOMPANY' });
+      this.props.dispatch({ type: 'FETCH_ALLLOCATION' });
+   }
    state = {
       newProject: {
          project_name: '',
@@ -22,9 +22,12 @@ componentDidMount(){
          due_date: '',
       }
    };
-   
-   componentDidUpdate(prevProps){
-      
+
+   componentDidUpdate(prevProps) {
+      // look for project id prop to change which happens after adding new project
+      if (this.props.store.projectReducer.projectReducer !== prevProps.store.projectReducer.projectReducer) {
+         console.log('the props have changed!', this.props.store.projectReducer.projectReducer);
+      }
    }
 
    handleChange = (event, type) => {
@@ -37,10 +40,10 @@ componentDidMount(){
    }
 
    saveProject = () => {
-      if (this.state.newProject.company !== '' && this.state.newProject.location !== '' 
-         && this.state.newProject.PO !== '' && this.state.newProject.due_date !== '' && this.state.newProject.project_name !== ''){
-         this.props.dispatch( {type: 'ADMIN_ADD_PROJECT', payload: this.state.newProject});
-            // 
+      if (this.state.newProject.company !== '' && this.state.newProject.location !== ''
+         && this.state.newProject.PO !== '' && this.state.newProject.due_date !== '' && this.state.newProject.project_name !== '') {
+         this.props.dispatch({ type: 'ADMIN_ADD_PROJECT', payload: this.state.newProject });
+         this.props.dispatch({ type: 'FETCH_PORTFOLIO' })
       } else {
          alert('Please fill out all fields before Saving a New Project')
       }
@@ -49,7 +52,8 @@ componentDidMount(){
    render() {
       return (
          <div className="slate notched">
-            {JSON.stringify(this.props.store.projectReducer)}
+            {/* this should be showing the id number of the newly added project */}
+            {JSON.stringify(this.props.store.projectReducer.projectReducer)}
             <h4>Add New Project</h4>
             <label> New Project Company:
                <select required onChange={(event) => this.handleChange(event, 'company')} value={this.state.newProject.company}>
@@ -62,13 +66,13 @@ componentDidMount(){
             <label> New Project Location:
                <select required onChange={(event) => this.handleChange(event, 'location')} value={this.state.newProject.location}>
                   <option></option>
-                  {this.props.store.admin.allLocationReducer.map( (location) => {
+                  {this.props.store.admin.allLocationReducer.map((location) => {
                      return (
                         this.state.newProject.company == location.company_fk &&
-                           <option key={location.id} value={location.id}>{location.location_name} : {location.address}</option>
+                        <option key={location.id} value={location.id}>{location.location_name} : {location.address}</option>
                      )
                   })}
-               </select><br/>
+               </select><br />
             </label>
             <label> Project Name:
                <input type="text" onChange={(event) => this.handleChange(event, 'project_name')} value={this.state.newProject.project_name}></input>
@@ -79,7 +83,7 @@ componentDidMount(){
             <label> Project Due Date:
                <input type="Date" onChange={(event) => this.handleChange(event, 'due_date')} value={this.state.newProject.due_date}></input>
             </label>
-            <br/>
+            <br />
             <button onClick={this.saveProject}>Save Project</button>
          </div>
       );
