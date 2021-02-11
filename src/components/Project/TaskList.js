@@ -39,7 +39,7 @@ class TaskList extends Component {
             <center>
                 {this.props.store.user.user_type === 'admin' && <>
                     {this.state.showAddTask ? 
-                        <> <AddNewTask/> <button onClick={this.showAddTask}>Close Add New Task</button> </> : 
+                        <> <button onClick={this.showAddTask}>Close Add New Task</button> <AddNewTask/>  </> : 
                         <button onClick={this.showAddTask}>Create A New Task</button>
                     }
                 </>

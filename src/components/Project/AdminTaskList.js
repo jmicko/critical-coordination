@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import TrackingApi from '../TrackingApi/TrackingApi'
 
 
 
@@ -36,7 +37,7 @@ class AdminTaskList extends Component {
           {/* {JSON.stringify(this.props.task)} */}
        
        
-       {this.state.showEditTask ? <p><label>Task Name:<input placeholder={this.props.task.task_name}></input></label></p> :  <p> Task: {this.props.task.task_name}  </p>} 
+        {this.state.showEditTask ? <p><label>Task Name:<input placeholder={this.props.task.task_name}></input></label></p> :<p> Task: {this.props.task.task_name}  </p>} 
        {this.state.showEditTask ? <p><label>DateScheduled:<input type='date' placeholder={this.props.task.scheduled_date}></input></label></p> :  <p> Date Scheduled: {this.props.task.scheduled_date}  </p>} 
        {this.state.showEditTask ? <p><label>NLT Date:<input type='date' placeholder={this.props.task.nlt_date}></input></label></p> :  <p> NLT Date: {this.props.task.nlt_date}  </p>}
        {this.state.showEditTask ? <label>Status:<select onChange={(event) => this.handleChange(event, 'status')}>
@@ -46,6 +47,8 @@ class AdminTaskList extends Component {
                                     })}
                                   </select></label> :  
                                   <p>Status: {this.props.task.status_type}  </p>}
+                                  {this.props.task.task_name === 'Order Materials' &&
+                                  <TrackingApi tracking_number={this.props.task.tracking_number}/>}
        
         <center>
                 

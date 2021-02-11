@@ -66,8 +66,8 @@ class AddNewTask extends Component {
     render() {
         // console.log(this.state);
         return (
-            <center className="container paper">
-                <h1> Add New Task </h1>
+            <div className="container paper">
+                <h3> Add New Task </h3>
                 <form>
                     <label>Task Type: &nbsp;
                         <select value={this.state.newTask.type} onChange={(event) => this.handleChange(event, 'type')}>
@@ -78,6 +78,7 @@ class AddNewTask extends Component {
                             <option value="4">Custom</option>
                         </select>
                     </label>
+                    <br/>
                     <label>Company Assigned: &nbsp;
                         <select value={this.state.newTask.company} onChange={(event) => this.handleChange(event, 'company')}>
                             {this.props.store.admin.allCompanyReducer.map((company) => {
@@ -85,6 +86,7 @@ class AddNewTask extends Component {
                             })}
                         </select>
                     </label>
+                    <br/>
                     <label> Due Date: &nbsp;
                         <input value={this.state.newTask.due_date} onChange={(event) => this.handleChange(event, 'due_date')} type="date"></input>
                     </label>
@@ -112,7 +114,7 @@ class AddNewTask extends Component {
                     <br/>
                     <button onClick={ (event) => this.addTask(event)} type="submit">Add Task</button>
                 </form>
-            </center>
+            </div>
         );
     }
 };
