@@ -7,7 +7,7 @@ function* getPortfolio (action) {
             const response = yield axios.get(`/api/portfolio`)
             yield put({ type: 'SET_PORTFOLIO', payload: response.data})
         } catch( error ) {
-            console.log('error with the GET request for the PORTFOLIO', error);
+            console.log('error with the GET request for the FETCH_PORTFOLIO in portfolio.saga', error);
         }
     }
 }
@@ -17,7 +17,7 @@ function* updatePortfolio (action) {
         try{
              yield axios.put(`/api/portfolio/update`, action.payload)
         } catch( error ) {
-            console.log('error with the PORTFOLIO UPDATE');
+            console.log('error with the PORTFOLIO_UPDATE in portfolio.saga', error);
         }
     }
 }

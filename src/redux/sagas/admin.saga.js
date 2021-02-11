@@ -42,7 +42,7 @@ function* fetchAllUsers() {
 } 
 
 function* fetchTaskStatus() {
-    console.log('In fetchTaskStatus saga');
+    // console.log('In fetchTaskStatus saga');
     // Go to server, update redux store with data from server
     try {
         // get data from db
