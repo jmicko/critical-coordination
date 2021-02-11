@@ -6,7 +6,7 @@ function* getTrackingData(action) {
       const carrier = action.payload.carrier;
       const tracking_number = action.payload.tracking_number;
       const response = yield axios.get(`/api/tracking/${carrier}/${tracking_number}`)
-      console.log(response);
+      yield put ({ type: 'SET_TRACKING_DATA', payload: response.data})
    } catch (error) {
       console.log('error with the get request from shippo', error);
    }

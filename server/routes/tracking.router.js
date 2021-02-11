@@ -8,11 +8,11 @@ const axios = require('axios')
  * GET route template
  */
 router.get('/:carrier/:tracking_number', (req, res) => {
+   const token = process.env.SHIPPO_API_KEY;
    const carrier = req.params.carrier;
    const tracking_number = req.params.tracking_number;
-   axios.get(`https://api.goshippo.com/tracks/fedex/783275757626`, { 'headers': { 'Authorization': 'ShippoToken shippo_live_fdafef3163b3e143001cbaf1ffe000b8d7b82c1e'}})
+   axios.get(`https://api.goshippo.com/tracks/${carrier}/${tracking_number}`, { 'headers': { 'Authorization': `ShippoToken ${token}`}})
    .then((response) => {
-      console.log(response.data);
       res.send(response.data)
    }) .catch( (error) => {
       console.log('problem in get request to Shippo:', error);
