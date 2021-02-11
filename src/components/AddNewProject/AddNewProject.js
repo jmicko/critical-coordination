@@ -22,6 +22,7 @@ class AddNewProject extends Component {
          due_date: '',
          expedited: false,
          ordered_by: '',
+         notes: '',
       }
    };
 
@@ -44,11 +45,14 @@ class AddNewProject extends Component {
    }
 
    saveProject = () => {
-      if (this.state.newProject.company !== '' && this.state.newProject.location !== ''
-         && this.state.newProject.PO !== '' && this.state.newProject.due_date !== '' && this.state.newProject.project_name !== '') {
+      if (this.state.newProject.company !== '' && 
+         this.state.newProject.location !== '' && 
+         this.state.newProject.PO !== '' && 
+         this.state.newProject.due_date !== '' && 
+         this.state.newProject.project_name !== '' &&
+         this.state.newProject.ordered_by !== '') {
          // send new project info to db
          this.props.dispatch({ type: 'ADMIN_ADD_PROJECT', payload: this.state.newProject });
-         // grab the new info --maybe we can delete this since it redirects anyway?
          this.props.dispatch({ type: 'FETCH_PORTFOLIO' })
       } else {
          alert('Please fill out all fields before Saving a New Project')
@@ -78,7 +82,7 @@ class AddNewProject extends Component {
                   })}
                </select>
             </label>
-
+            <br/>
             {/* Project Location dropdown */}
             <label> New Project Location:
                <select required onChange={(event) => this.handleChange(event, 'location')} value={this.state.newProject.location}>
@@ -103,6 +107,12 @@ class AddNewProject extends Component {
                   <option value="false">No</option>
                   <option value="true">Yes</option>
                </select>
+            </label><br/>
+            <label> Notes: &nbsp;
+                            <textarea placeholder="...any specific details about the project..."
+                  className="notes" type="text" cols="100" rows="5"
+                  value={this.state.newProject.notes}
+                  onChange={(event) => this.handleChange(event, 'notes')} />
             </label>
             <br />
             <button onClick={this.saveProject}>Save Project</button>
