@@ -20,9 +20,13 @@ CREATE TABLE "project" (
 	"id" serial NOT NULL,
 	"project_name" varchar(255) NOT NULL,
 	"PO_Number" varchar(255) NOT NULL,
+	"ordered_by" varchar(255),
+	"started_date" DATE NOT NULL DEFAULT 'today',
 	"due_date" DATE NOT NULL DEFAULT 'today',
+	"notes" varchar(5000) DEFAULT 'none',
 	"company_fk" integer NOT NULL,
 	"location_fk" integer NOT NULL,
+	"expedited" BOOLEAN DEFAULT false,
 	"archived" BOOLEAN DEFAULT false,
 	CONSTRAINT "project_pk" PRIMARY KEY ("id")
 ) WITH (
@@ -121,4 +125,3 @@ INSERT INTO task ("poc_fk", "scheduled_date", "nlt_date", "task_name_fk", "task_
 VALUES(5, '2021-02-08', '2021-02-09', 1, 1, 1), (4, '2021-02-10', '2021-02-11', 2, 1, 1), (5, '2021-02-10', '2021-02-11', 1, 1, 2), 
 (4, '2021-02-10', '2021-02-11', 2, 1, 2), (5, '2021-02-10', '2021-02-11', 1, 1, 3), (4, '2021-02-10', '2021-02-11', 2, 1, 3), 
 (5, '2021-02-10', '2021-02-11', 1, 1, 4), (4, '2021-02-10', '2021-02-11', 2, 1, 4);
-
