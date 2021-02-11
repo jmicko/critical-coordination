@@ -20,9 +20,12 @@ CREATE TABLE "project" (
 	"id" serial NOT NULL,
 	"project_name" varchar(255) NOT NULL,
 	"PO_Number" varchar(255) NOT NULL,
+	"ordered_by" varchar(255),
+	"started_date" DATE NOT NULL DEFAULT 'today',
 	"due_date" DATE NOT NULL DEFAULT 'today',
 	"company_fk" integer NOT NULL,
 	"location_fk" integer NOT NULL,
+	"expedited" BOOLEAN DEFAULT false,
 	"archived" BOOLEAN DEFAULT false,
 	CONSTRAINT "project_pk" PRIMARY KEY ("id")
 ) WITH (
