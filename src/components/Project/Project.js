@@ -4,8 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 //imported Components
 import TaskList from './TaskList';
 import ProjectTitle from './ProjectTitle';
-import AddNewTask from '../AddNewTask/AddNewTask';
-import TrackingApi from '../TrackingApi/TrackingApi'
+
 
 
 class Project extends Component {
