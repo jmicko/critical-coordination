@@ -56,12 +56,8 @@ class AddNewProject extends Component {
    render() {
       return (
          <div className="slate notched">
-            {/* this should be showing the id number of the newly added project */}
-            {JSON.stringify(this.props.store.projectReducer.projectReducer)}
-            {/* Show local state */}
-            {JSON.stringify(this.state)}
+
             <h4>Add New Project</h4>
-            <p>{JSON.stringify(this.props.store.admin.allLocationReducer)} </p>
 
             {/* Project Company dropdown */}
             <label> New Project Company:
