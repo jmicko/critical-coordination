@@ -60,6 +60,7 @@ function* updateTaskStatus(action) {
     try {
         // get data from db
         const response = yield axios.put('/api/admin/taskstatus', action.payload);
+        yield put({ type: 'FETCH_TASKSTATUS' });
     } catch ( error ) {
         console.log('error with updateTaskStatus get request', error);
     }
