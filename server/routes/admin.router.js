@@ -242,10 +242,11 @@ router.post('/addproject', rejectUnauthenticated, (req, res) => {
       const due_date = req.body.due_date;
       const expedited = req.body.expedited;
       const ordered_by = req.body.ordered_by;
-      const sqlText = `INSERT INTO project ("project_name", "PO_Number", "due_date", "company_fk", "location_fk", "expedited", "ordered_by") 
-                        VALUES($1, $2, $3, $4, $5, $6, $7)
+      const notes = req.body.notes;
+      const sqlText = `INSERT INTO project ("project_name", "PO_Number", "due_date", "company_fk", "location_fk", "expedited", "ordered_by", "notes") 
+                        VALUES($1, $2, $3, $4, $5, $6, $7, $8)
                         RETURNING "id";`;
-      pool.query(sqlText, [project_name, PO, due_date, company, location, expedited, ordered_by])
+      pool.query(sqlText, [project_name, PO, due_date, company, location, expedited, ordered_by, notes])
       .then((result) => {
          const [projectId] = result.rows
          console.log(projectId);
