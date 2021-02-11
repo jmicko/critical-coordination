@@ -60,6 +60,7 @@ function* updateTaskStatus(action) {
     try {
         // get data from db
         const response = yield axios.put('/api/admin/taskstatus', action.payload);
+        yield put({ type: 'FETCH_TASKSTATUS' });
     } catch ( error ) {
         console.log('error with updateTaskStatus get request', error);
     }
@@ -144,8 +145,9 @@ function* adminAddStatus(action) {
 function* adminAddProject(action) {
     try {
         const response = yield axios.post('/api/admin/addproject', action.payload)
-        document.cookie = `project=${response.data.id}`;
-        yield put ({ type: 'FETCH_PORTFOLIO' })
+        // document.cookie = `project=${response.data.id}`;
+        yield put ({ type: 'FETCH_PORTFOLIO' }) // THIS IS THROWING AN ERROR AND NOT UPDATING
+        yield put ({ type: 'SET_PROJECT', payload: {id: response.data.id} });
     } catch (error) {
         console.log('error in Admin Add Project Saga, ', error);
     }

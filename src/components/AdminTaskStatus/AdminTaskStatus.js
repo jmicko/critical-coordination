@@ -46,7 +46,6 @@ class AdminTaskStatus extends Component {
         archived: false
       }
     })
-    this.props.dispatch({type: 'FETCH_TASKSTATUS'})
   }
 
   openUpdatePopup = (passedRecord) => {

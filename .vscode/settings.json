@@ -1,7 +1,20 @@
 {
     "cSpell.words": [
+        "ALLCOMPANY",
+        "ALLLOCATION",
+        "ALLUSERS",
+        "VIAADMIN",
+        "addcompany",
+        "addlocation",
+        "addproject",
+        "addstatus",
+        "addtask",
+        "adduser",
         "adminpage",
+        "criticalcoordination",
         "forgotpassword",
-        "resetpassword"
+        "resetpassword",
+        "taskstatus",
+        "usermodify"
     ]
 }
