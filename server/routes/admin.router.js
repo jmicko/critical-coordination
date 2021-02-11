@@ -245,7 +245,7 @@ router.post('/addproject', rejectUnauthenticated, (req, res) => {
                         RETURNING "id";`;
       pool.query(sqlText, [project_name, PO, due_date, company, location])
       .then((result) => {
-         const projectId = result.rows
+         const [projectId] = result.rows
          console.log(projectId);
          res.send(projectId)
       }).catch((error) => {
