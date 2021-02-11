@@ -20,6 +20,8 @@ componentDidMount(){
          location: '',
          PO: '',
          due_date: '',
+         expedited: false,
+         ordered_by: '',
       }
    };
 
@@ -46,6 +48,13 @@ componentDidMount(){
       return (
          <div className="paper">
             <h4>Add New Project</h4>
+            <br/>
+            <label> Project Name:
+               <input type="text" onChange={(event) => this.handleChange(event, 'project_name')} value={this.state.newProject.project_name}></input>
+            </label>
+            <label> PO Number:
+               <input type="text" onChange={(event) => this.handleChange(event, 'PO')} value={this.state.newProject.PO}></input>
+            </label><br />
             <label> New Project Company:
                <select required onChange={(event) => this.handleChange(event, 'company')} value={this.state.newProject.company}>
                   {this.props.store.admin.allCompanyReducer.map((company) => {
@@ -56,7 +65,7 @@ componentDidMount(){
             </label>
             <label> New Project Location:
                <select required onChange={(event) => this.handleChange(event, 'location')} value={this.state.newProject.location}>
-                  <option></option>
+                  <option value=''></option>
                   {this.props.store.admin.allLocationReducer.map( (location) => {
                      return (
                         this.state.newProject.company == location.company_fk &&
@@ -65,14 +74,15 @@ componentDidMount(){
                   })}
                </select><br/>
             </label>
-            <label> Project Name:
-               <input type="text" onChange={(event) => this.handleChange(event, 'project_name')} value={this.state.newProject.project_name}></input>
+            <label> Ordered By:
+               <input type="text" onChange={(event) => this.handleChange(event, 'ordered_by')} value={this.state.newProject.ordered_by}/>
             </label>
-            <label> PO Number:
-               <input type="text" onChange={(event) => this.handleChange(event, 'PO')} value={this.state.newProject.PO}></input>
-            </label>
+            <br/>
             <label> Project Due Date:
                <input type="Date" onChange={(event) => this.handleChange(event, 'due_date')} value={this.state.newProject.due_date}></input>
+            </label>
+            <label> Expedited?
+            <input type="checkbox" onChange={(event) => this.handleChange(event, 'expedited')} value={this.state.newProject.expedited}/>
             </label>
             <br/>
             <button onClick={this.saveProject}>Save Project</button>
