@@ -34,10 +34,10 @@ Button
 .btn {
   display: inline-block;
   padding: 10px 20px;
-  border-color: #014041;
+  border-color: #7a371a;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #00acb0;
+  background-color: #f56f34;
   color: #f8f8f8;
   font-size: 1.1rem;
   outline: 0;
@@ -60,25 +60,29 @@ Button
 }
 
 .btn:hover {
-  background-color: #008183;
+  background-color: #df4c0d;
   text-decoration: none;
+}
+
+.btn:active{
+  border-width: 3px 1px 1px;
 }
 
 /* This line makes the "Register" and "Login" buttons look like links */
 .btn_asLink {
   padding: 0;
   border-width: 0;
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid #f56f34;
   border-radius: 0;
   background: none;
   font: inherit;
-  color: #444;
+  color: #f56f34;
 }
 
 .btn_asLink:hover {
   background-color: transparent;
-  border-color: #008183;
-  color: #008183;
+  border-color: #df4c0d;
+  color: #df4c0d;
 }
 
 /* --------------------------------------------------------------------------------
@@ -145,6 +149,12 @@ table td:first-child {
 table td:last-child {
   border-right: none;
 }
+
+
+/* --------------------------------------------------------------------------------
+General Theme
+-------------------------------------------------------------------------------- */
+
 
 /* this orange color matches the orange on criticalcoordination.com */
 .orange{
