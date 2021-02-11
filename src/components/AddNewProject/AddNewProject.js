@@ -27,6 +27,7 @@ class AddNewProject extends Component {
       // look for project id prop to change which happens after adding new project
       if (this.props.store.projectReducer.projectReducer !== prevProps.store.projectReducer.projectReducer) {
          console.log('the props have changed!', this.props.store.projectReducer.projectReducer.id);
+         // redirect to the new project's page
          this.props.history.push(`/project/${this.props.store.projectReducer.projectReducer.id}`);
       }
    }
@@ -43,7 +44,9 @@ class AddNewProject extends Component {
    saveProject = () => {
       if (this.state.newProject.company !== '' && this.state.newProject.location !== ''
          && this.state.newProject.PO !== '' && this.state.newProject.due_date !== '' && this.state.newProject.project_name !== '') {
+         // send new project info to db
          this.props.dispatch({ type: 'ADMIN_ADD_PROJECT', payload: this.state.newProject });
+         // grab the new info --maybe we can delete this since it redirects anyway?
          this.props.dispatch({ type: 'FETCH_PORTFOLIO' })
       } else {
          alert('Please fill out all fields before Saving a New Project')
