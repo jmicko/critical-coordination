@@ -25,6 +25,15 @@ class AddNewProject extends Component {
       }
    };
 
+   componentDidUpdate(prevProps) {
+      // look for project id prop to change which happens after adding new project
+      if (this.props.store.projectReducer.projectReducer !== prevProps.store.projectReducer.projectReducer) {
+         console.log('the props have changed!', this.props.store.projectReducer.projectReducer.id);
+         // redirect to the new project's page
+         this.props.history.push(`/project/${this.props.store.projectReducer.projectReducer.id}`);
+      }
+   }
+
    handleChange = (event, type) => {
       this.setState({
          newProject: {
@@ -34,11 +43,13 @@ class AddNewProject extends Component {
       })
    }
 
-   saveProject = async () => {
+   saveProject = () => {
       if (this.state.newProject.company !== '' && this.state.newProject.location !== ''
          && this.state.newProject.PO !== '' && this.state.newProject.due_date !== '' && this.state.newProject.project_name !== '') {
-         await this.props.dispatch({ type: 'ADMIN_ADD_PROJECT', payload: this.state.newProject });
-         await this.props.history.push('/portfolio');
+         // send new project info to db
+         this.props.dispatch({ type: 'ADMIN_ADD_PROJECT', payload: this.state.newProject });
+         // grab the new info --maybe we can delete this since it redirects anyway?
+         this.props.dispatch({ type: 'FETCH_PORTFOLIO' })
       } else {
          alert('Please fill out all fields before Saving a New Project')
       }
@@ -46,7 +57,8 @@ class AddNewProject extends Component {
 
    render() {
       return (
-         <div className="paper">
+         <div className="slate notched">
+
             <h4>Add New Project</h4>
             <br />
             <label> Project Name:
@@ -56,20 +68,25 @@ class AddNewProject extends Component {
                <input type="text" onChange={(event) => this.handleChange(event, 'PO')} value={this.state.newProject.PO}></input>
             </label><br />
             <label> New Project Company:
-               <select required onChange={(event) => this.handleChange(event, 'company')} value={this.state.newProject.company}>
+               <select
+                  required
+                  onChange={(event) => this.handleChange(event, 'company')}
+                  value={this.state.newProject.company}>
                   {this.props.store.admin.allCompanyReducer.map((company) => {
                      return (
-                        <option key={company.id} value={company.id}>{company.company_name}</option>)
+                        <option key={company.id} value={company.id}> {company.company_name}</option>)
                   })}
                </select>
             </label>
+
+            {/* Project Location dropdown */}
             <label> New Project Location:
                <select required onChange={(event) => this.handleChange(event, 'location')} value={this.state.newProject.location}>
                   <option value=''></option>
                   {this.props.store.admin.allLocationReducer.map((location) => {
                      return (
                         this.state.newProject.company == location.company_fk &&
-                        <option key={location.id} value={location.id}>{location.location_name} : {location.address}</option>
+                        <option key={location.location_id} value={location.location_id}>{location.location_name} : {location.address}</option>
                      )
                   })}
                </select><br />

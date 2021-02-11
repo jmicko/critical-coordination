@@ -15,6 +15,8 @@
   position: -webkit-sticky;
   position: sticky;
   top: 0;
+  /* keep nav on top of newly loaded components */
+  z-index: 9999;
 }
 
 .nav-link {
