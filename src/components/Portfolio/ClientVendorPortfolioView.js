@@ -5,7 +5,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 class ClientVendorPortfolioView extends Component {
  
   componentDidMount(){ 
-    this.props.dispatch({ type: 'GET_PORTFOLIO' })
+    this.props.dispatch({ type: 'FETCH_PORTFOLIO' })
   }
   // this function will route us to the task page
   navigate = web_address => {        
@@ -23,27 +23,29 @@ class ClientVendorPortfolioView extends Component {
 
   render() {
     return (
-      <div>
-        <h1> Client/Vendor Portfolio Page</h1>
-        <table>
-          <tbody>
-            <th><td>Project:</td></th>
-            <th><td>Location:</td></th>
-            <th><td>PO#:</td></th>
-            <th><td>Due Date:</td></th>
-            <th><td>Status:</td></th>
-            {this.props.store.portfolio.map((project, index) => {
-              return <tr key={index} onClick={ () => this.navigate("/project")}>    
-                        <td><label>{project.project_name}</label> </td>          
-                        <td><label>{project.location_name}</label></td>
-                        <td><label>{project.PO_Number}</label></td>
-                        <td>{this.dateConversion(project.due_date)}</td> 
-                        <td><input value='Logic needs to be done'/></td>
-                      </tr>
-            })}
-          </tbody>
-        </table>
-      </div>
+      <center>
+        <div>
+           { (this.props.store.user.user_type === "client") ? <h1>Client</h1> : <h1>Contractor</h1> }
+          <table>
+            <tbody>
+              <th><td>Project:</td></th>
+              <th><td>Location:</td></th>
+              <th><td>PO#:</td></th>
+              <th><td>Due Date:</td></th>
+              <th><td>Status:</td></th>
+              {this.props.store.portfolio.map((project, index) => {
+                return <tr key={index} onClick={ () => this.navigate("/project")}>    
+                          <td><label>{project.project_name}</label> </td>          
+                          <td><label>{project.location_name}</label></td>
+                          <td><label>{project.PO_Number}</label></td>
+                          <td>{this.dateConversion(project.due_date)}</td> 
+                          <td><input value='Logic needs to be done'/></td>
+                        </tr>
+              })}
+            </tbody>
+          </table>
+        </div>
+      </center>
     );
   }
 }

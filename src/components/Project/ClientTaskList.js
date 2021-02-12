@@ -7,10 +7,12 @@ import TrackingApi from '../TrackingApi/TrackingApi'
 class ClientTaskList extends Component {
 
   dateConversion = fieldValue => {
+    if( fieldValue != null ) { 
     let year = fieldValue.slice(0, 4);
     let month = fieldValue.slice(5, 7);
     let day = fieldValue.slice(8, 10);
     return `${month}/${day}/${year}`
+    }
   }
 
   render() {      

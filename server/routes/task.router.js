@@ -48,4 +48,21 @@ router.put('/update', rejectUnauthenticated, (req, res) => {
   });
 });
 
+router.put('/contractor', rejectUnauthenticated, (req, res) => {
+  const queryText1 = `UPDATE task SET task_status_fk=$1, scheduled_date=$2 WHERE id=$3;`;
+  pool.query(queryText1, [req.body.status, req.body.date_scheduled, req.body.task_id])
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((error) => {
+    console.log('Error completeing the CONTRACTOR TASK UPDATE in task.router.js', error);
+    res.sendStatus(500);  
+  });
+
+  
+
+
+
+});
+
 module.exports = router;

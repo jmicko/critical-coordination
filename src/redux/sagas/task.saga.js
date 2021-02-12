@@ -24,8 +24,6 @@ function* fetchProjectTasks (action) {
 }
 
 function* updateTask (action) {  
-    console.log(action.payload);
-      
     try {
         yield axios.put(`/api/task/update`, action.payload.updateRecord)
         yield put({ type: 'FETCH_PROJECT_TASKS', payload: action.payload.project_id })
@@ -34,12 +32,24 @@ function* updateTask (action) {
     }
 }
 
+function* contractorUpdateTask (action) {
+    try {
+        yield axios.put(`/api/task/contractor`, action.payload.updateRecord)
+        yield put({ type: 'FETCH_PROJECT_TASKS', payload: action.payload.project_id })
+    } catch( error ) {
+        console.log('error with the UPDATE_TASK request in the task.saga file', error);
+    }
+
+}
+
+
 
 
 function* taskSaga() {
   yield takeLatest('FETCH_TASK', getTask);
   yield takeLatest('FETCH_PROJECT_TASKS', fetchProjectTasks)
   yield takeLatest('UPDATE_TASK', updateTask)
+  yield takeLatest('CONTRACTOR_UPDATE_TASK', contractorUpdateTask)
 }
 
 export default taskSaga;
