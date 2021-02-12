@@ -19,8 +19,6 @@ class TaskList extends Component {
       };
 
     componentDidMount(){
-      // console.log(getCookie('project'));
-      
         this.props.dispatch({ type: 'FETCH_PROJECT_TASKS', payload: getCookie('project') })
         this.props.dispatch({ type: 'FETCH_TASKSTATUS' });
     }

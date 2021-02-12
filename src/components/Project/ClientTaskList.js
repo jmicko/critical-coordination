@@ -6,13 +6,11 @@ import TrackingApi from '../TrackingApi/TrackingApi'
 
 class ClientTaskList extends Component {
 
-  // returns the date in the day/month/year format
-  dateConversion = date => {
-    // console.log(...date);
-    let year = date[0]+date[1]+date[2]+date[3];
-    let month = date[5]+date[6];
-    let day = date[8]+date[9];
-    return( day + "/" + month + "/" + year);
+  dateConversion = fieldValue => {
+    let year = fieldValue.slice(0, 4);
+    let month = fieldValue.slice(5, 7);
+    let day = fieldValue.slice(8, 10);
+    return `${month}/${day}/${year}`
   }
 
   render() {      
