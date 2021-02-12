@@ -14,6 +14,13 @@ class ProjectTitle extends Component {
     this.props.dispatch({ type: 'FETCH_PROJECT', payload: getCookie('project') })
   }
     
+   // returns the date in the day/month/year format
+   dateConversion = date => {
+    let year = date[0] + date[1] + date[2] + date[3];
+    let month = date[5] + date[6];
+    let day = date[8] + date[9];
+    return (day + "/" + month + "/" + year);
+}
   render() {
     return (
     
@@ -26,7 +33,7 @@ class ProjectTitle extends Component {
           <p>Address: {this.props.store.projectReducer.projectReducer[0]?.address}</p>
           <p>Notes: {this.props.store.projectReducer.projectReducer[0]?.notes}</p>
         </div>
-    
+          
     );
   }
 }
