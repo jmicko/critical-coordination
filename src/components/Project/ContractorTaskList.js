@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import Popup from 'reactjs-popup';
 import TrackingApi from '../TrackingApi/TrackingApi'
 
 

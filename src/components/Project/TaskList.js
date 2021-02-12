@@ -19,10 +19,11 @@ class TaskList extends Component {
       };
 
     componentDidMount(){
+      // console.log(getCookie('project'));
+      
         this.props.dispatch({ type: 'FETCH_PROJECT_TASKS', payload: getCookie('project') })
         this.props.dispatch({ type: 'FETCH_TASKSTATUS' });
     }
-
 
     showAddTask = () => {
         this.setState({
@@ -30,10 +31,7 @@ class TaskList extends Component {
         })
       }
 
-
   render() {
-      console.log(this.state);
-      
     return (      
         <div className="container paper">
             <center>
@@ -46,7 +44,7 @@ class TaskList extends Component {
             }
             </center>
             <h3>Task List</h3>       
-            {this.props.store.projectReducer.projectTaskReducer.map((task, index) => {
+            {this.props.store.task.projectTaskReducer.map((task, index) => {
                 return <div key={index}>
                             {this.props.store.user.user_type === 'admin' && <AdminTaskList task={task} />}
                             {this.props.store.user.user_type === 'contractor' && <ContractorTaskList task={task} />}

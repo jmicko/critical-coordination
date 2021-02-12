@@ -51,8 +51,6 @@ router.put('/update', rejectUnauthenticated, (req, res) => {
             console.log('Error completing the PUT route for PORTFOLIO', error);
             res.sendStatus(500);
         })
-
-  // POST route code here
 });
 
 module.exports = router;
