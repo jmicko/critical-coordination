@@ -68,8 +68,7 @@ router.get('/users', rejectUnauthenticated, (req, res) => {
 // GET status table 
 router.get('/taskstatus', rejectUnauthenticated, (req, res) => {
    const queryText = `SELECT * FROM task_status 
-         WHERE archived = false
-         ORDER BY status_type  ASC;`
+         WHERE archived = false;`
    console.log ('in task status GET')
    pool.query(queryText)
      .then((result) => { res.send(result.rows); })

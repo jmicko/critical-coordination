@@ -31,7 +31,7 @@ class AddNewProject extends Component {
       if (this.props.store.projectReducer.projectReducer !== prevProps.store.projectReducer.projectReducer) {
          console.log('the props have changed!', this.props.store.projectReducer.projectReducer.id);
          // redirect to the new project's page
-         this.props.history.push(`/project/${this.props.store.projectReducer.projectReducer.id}`);
+         //this.props.history.push(`/project/${this.props.store.projectReducer.projectReducer.id}`);
       }
    }
 
@@ -76,6 +76,7 @@ class AddNewProject extends Component {
                   required
                   onChange={(event) => this.handleChange(event, 'company')}
                   value={this.state.newProject.company}>
+                     <option value=''></option>
                   {this.props.store.admin.allCompanyReducer.map((company) => {
                      return (
                         <option key={company.id} value={company.id}> {company.company_name}</option>)

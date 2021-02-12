@@ -82,12 +82,14 @@ class AdminTaskList extends Component {
                                   <p>Status: {this.props.task.status_type}  </p>}
                                   {this.props.task.task_name === 'Order Materials' &&
                                   <TrackingApi tracking_number={this.props.task.tracking_id}/>}
+                                  <p>Notes: {this.props.task.notes}</p>
        
         <center>
                     {this.state.showEditTask ? 
-                        <>  <button onClick={this.save}>Save</button> <button onClick={this.showEditTask}>Cancle</button><button onClick={this.delete}>Delete</button> </> : 
+                        <>  <button onClick={this.save}>Save</button> <button onClick={this.showEditTask}>Cancel</button><button onClick={this.delete}>Delete</button> </> : 
                         <button onClick={this.showEditTask}>Edit</button>
                     }
+                    <p>------------------------------------------------</p>
         </center>                
       </div>
     );

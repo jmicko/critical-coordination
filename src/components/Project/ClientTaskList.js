@@ -24,6 +24,8 @@ class ClientTaskList extends Component {
         <p>Status: {this.props.task.status_type}</p> 
         {this.props.task.task_name === 'Order Materials' &&
           <TrackingApi />}
+        <p>Notes: {this.props.task.notes}</p>
+        <p>------------------------------------------------</p>
       </div>
     );
   }
