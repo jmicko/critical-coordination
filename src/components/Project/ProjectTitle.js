@@ -24,6 +24,7 @@ class ProjectTitle extends Component {
           <p>PO Number: {this.props.store.projectReducer.projectReducer[0]?.PO_Number}</p>
           <p>Scheduled Completion: {this.props.store.projectReducer.projectReducer[0]?.due_date}</p>
           <p>Address: {this.props.store.projectReducer.projectReducer[0]?.address}</p>
+          <p>Notes: {this.props.store.projectReducer.projectReducer[0]?.notes}</p>
         </div>
     
     );

@@ -68,8 +68,7 @@ router.get('/users', rejectUnauthenticated, (req, res) => {
 // GET status table 
 router.get('/taskstatus', rejectUnauthenticated, (req, res) => {
    const queryText = `SELECT * FROM task_status 
-         WHERE archived = false
-         ORDER BY status_type  ASC;`
+         WHERE archived = false;`
    console.log ('in task status GET')
    pool.query(queryText)
      .then((result) => { res.send(result.rows); })
@@ -262,15 +261,16 @@ router.post('/addproject', rejectUnauthenticated, (req, res) => {
 router.post('/addtask', rejectUnauthenticated, (req, res) => {
    if (req.user.user_type === 'admin') {
       console.log(req.body);
+      const company = req.body.company;
       const task_name = req.body.type;
       const nlt_date = req.body.due_date;
       const task_status = req.body.status;
       const updated_by = req.body.updated_by;
       const project = req.body.project;
       const notes = req.body.notes;
-      const sqlText = `INSERT INTO task ("task_name_fk", "nlt_date", "task_status_fk", "updated_by", "project_fk", "notes")
-      VALUES($1, $2, $3, $4, $5, $6)`;
-      pool.query(sqlText, [task_name, nlt_date, task_status, updated_by, project, notes])
+      const sqlText = `INSERT INTO task ("task_name_fk", "nlt_date", "task_status_fk", "updated_by", "project_fk", "notes", "company_fk")
+      VALUES($1, $2, $3, $4, $5, $6, $7)`;
+      pool.query(sqlText, [task_name, nlt_date, task_status, updated_by, project, notes, company])
          .then( () => {
             res.sendStatus(201)
          }).catch((error) => {

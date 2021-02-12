@@ -5,7 +5,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 // ---- GET route ----
 router.get('/', rejectUnauthenticated, (req, res) => {  
-    console.log('user type: ', req.user.user_type, 'user id: ', req.user.id)
+
     //This will grab everything for anyone checking as an administrator
     // and the else is for any other company other than critical coordination
     if( req.user.user_type === 'admin' ) {
@@ -20,11 +20,24 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                 console.log('Error completing the GET route for PORTFOLIO ADMIN', error);
                 res.sendStatus(500);
             });
-    } else {
+    } else if (req.user.user_type === 'client') {
         const queryText1 =` SELECT project_name, project.id, due_date, "PO_Number", address, location_name, location_fk  FROM project
                             JOIN company_location ON company_location.id = project.location_fk
                             JOIN company ON company.id = project.company_fk
                             WHERE project.company_fk = $1`;    
+        pool.query(queryText1, [req.user.company_fk])
+            .then((result) => {
+                res.send(result.rows);
+            })
+            .catch((error) => {
+                console.log('Error completing the GET route for PORTFOLIO', error);
+                res.sendStatus(500);
+            });
+    } else if (req.user.user_type === 'contractor') {
+        const queryText1 = `SELECT * FROM task
+                            JOIN company on company.id = task.company_fk
+                            JOIN project on project.id = task.project_fk
+                            WHERE task.company_fk = $1;`
         pool.query(queryText1, [req.user.company_fk])
             .then((result) => {
                 res.send(result.rows);

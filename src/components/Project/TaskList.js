@@ -41,7 +41,7 @@ class TaskList extends Component {
                 </>
             }
             </center>
-            <h3>Task List</h3>       
+            <h3>Task List</h3>      
             {this.props.store.task.projectTaskReducer.map((task, index) => {
                 return <div key={index}>
                             {this.props.store.user.user_type === 'admin' && <AdminTaskList task={task} />}
