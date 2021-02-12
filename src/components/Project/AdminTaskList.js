@@ -59,6 +59,19 @@ class AdminTaskList extends Component {
     }
   }
 
+  fieldValidation = () => {
+    if( this.state.updateRecord.task_id  && 
+        this.state.updateRecord.task_status  &&
+        this.state.updateRecord.task_type  &&
+        this.state.updateRecord.nlt_date  &&
+        this.state.updateRecord.date_scheduled  
+        ){
+          {this.save()}
+        }else{
+          alert('Please fill out all the fields')
+        }
+  }
+
   render() {
     return (
       <div >
@@ -85,7 +98,7 @@ class AdminTaskList extends Component {
        
         <center>
                     {this.state.showEditTask ? 
-                        <>  <button onClick={this.save}>Save</button> <button onClick={this.showEditTask}>Cancle</button><button onClick={this.delete}>Delete</button> </> : 
+                        <>  <button onClick={this.fieldValidation}>Save</button> <button onClick={this.showEditTask}>Cancel</button><button onClick={this.delete}>Delete</button> </> : 
                         <button onClick={this.showEditTask}>Edit</button>
                     }
         </center>                
