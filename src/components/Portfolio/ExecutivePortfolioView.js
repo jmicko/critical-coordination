@@ -3,10 +3,6 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Popup from 'reactjs-popup';
 import AddNewProject from '../AddNewProject/AddNewProject';
-// class ExecutivePortfolioView extends Component {
-//     componentDidMount() {
-//         this.props.dispatch({ type: 'GET_PORTFOLIO' })
-
 
 
 class ExecutivePortfolioView extends Component {
@@ -129,8 +125,6 @@ class ExecutivePortfolioView extends Component {
         );
     }
 };
-// export default connect(mapStoreToProps)(ExecutivePortfolioView);
-
 
 export default connect(mapStoreToProps)(ExecutivePortfolioView);
 
