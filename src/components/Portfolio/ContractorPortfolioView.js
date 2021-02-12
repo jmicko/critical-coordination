@@ -8,7 +8,9 @@ class ClientVendorPortfolioView extends Component {
     this.props.dispatch({ type: 'FETCH_PORTFOLIO' })
   }
   // this function will route us to the task page
-  navigate = web_address => {        
+  navigate = (web_address, project) => {   
+    document.cookie = `project=${project.id}`;
+    this.props.dispatch({ type: 'FETCH_PROJECT', payload: project.id })     
     this.props.history.push(web_address);
   };
 
@@ -34,7 +36,7 @@ class ClientVendorPortfolioView extends Component {
               <th><td>Due Date:</td></th>
               <th><td>Status:</td></th>
               {this.props.store.portfolio.map((project, index) => {
-                return <tr key={index} onClick={ () => this.navigate("/project")}>    
+                return <tr key={index} onClick={ () => this.navigate("/project", project)}>    
                           <td><label>{project.project_name}</label> </td>          
                           <td><label>{project.location_name}</label></td>
                           <td><label>{project.PO_Number}</label></td>
