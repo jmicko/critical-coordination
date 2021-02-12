@@ -87,7 +87,7 @@ class AdminUser extends Component {
     this.setState({
       deletePopupFlag: !this.state.deletePopupFlag,
       editRecord: {
-        id: passedRecord.location_id,
+        id: passedRecord.id,
         email: passedRecord.email,
         first_name: passedRecord.first_name,
         last_name: passedRecord.last_name,
