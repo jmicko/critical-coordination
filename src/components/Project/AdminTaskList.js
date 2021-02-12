@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import TrackingApi from '../TrackingApi/TrackingApi'
+import Popup from 'reactjs-popup';
 
 const getCookie = (cookieName) => {
   // Get name followed by anything except a semicolon
@@ -26,7 +27,6 @@ class AdminTaskList extends Component {
 
   handleChange = (event, name) => {
     this.setState({ 
-      
       updateRecord: {
         ...this.state.updateRecord,
         [name]: event.target.value 
@@ -35,32 +35,28 @@ class AdminTaskList extends Component {
   }
 
   showEditTask = () => {
-    console.log(this.props.task.id);
-    
     this.setState({
       showEditTask: !this.state.showEditTask,
       updateRecord: {task_id: this.props.task.id}
     })
   }
 
-  save = () => {   
-    console.log('SAVE STATE', this.state);
-     
-    this.props.dispatch({ type: 'UPDATE_TASK', payload: this.state }) 
-
-   
-    console.log(this.props);
-    
-    this.showEditTask() //closes the edit view
+  save = () => {
+    this.props.dispatch({ type: 'UPDATE_TASK', payload: this.state });     
+    this.showEditTask(); //closes the edit view
   }
 
-    // returns the date in the day/month/year format
-  dateConversion = date => {
-     // console.log(...date);
-    //let year = date[0]+date[1]+date[2]+date[3];
-    //let month = date[5]+date[6];
-    //let day = date[8]+date[9];
-    //return( day + "/" + month + "/" + year);
+  delete = () => {
+    this.props.dispatch({ type: 'DELETE_TASK', payload: this.state})
+  }
+
+  dateConversion = fieldValue => {
+    if( fieldValue != null ) { 
+    let year = fieldValue.slice(0, 4);
+    let month = fieldValue.slice(5, 7);
+    let day = fieldValue.slice(8, 10);
+    return `${month}/${day}/${year}`
+    }
   }
 
   render() {
@@ -89,7 +85,7 @@ class AdminTaskList extends Component {
        
         <center>
                     {this.state.showEditTask ? 
-                        <>  <button onClick={this.save}>Save</button> </> : 
+                        <>  <button onClick={this.save}>Save</button> <button onClick={this.showEditTask}>Cancle</button><button onClick={this.delete}>Delete</button> </> : 
                         <button onClick={this.showEditTask}>Edit</button>
                     }
         </center>                
