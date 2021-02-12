@@ -58,11 +58,18 @@ router.put('/contractor', rejectUnauthenticated, (req, res) => {
     console.log('Error completeing the CONTRACTOR TASK UPDATE in task.router.js', error);
     res.sendStatus(500);  
   });
+});
 
-  
-
-
-
+router.put('/delete', rejectUnauthenticated, (req, res) => {
+  const queryText1 = `DELETE FROM task WHERE id=$1`
+  pool.query(queryText1, [req.body.task_id])
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((error) => {
+    console.log('Error completeing the DELETE in task.router.js', error);
+    res.sendStatus(500);  
+  });
 });
 
 module.exports = router;

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import TrackingApi from '../TrackingApi/TrackingApi'
+import Popup from 'reactjs-popup';
 
 const getCookie = (cookieName) => {
   // Get name followed by anything except a semicolon
@@ -45,6 +46,10 @@ class AdminTaskList extends Component {
     this.showEditTask(); //closes the edit view
   }
 
+  delete = () => {
+    this.props.dispatch({ type: 'DELETE_TASK', payload: this.state})
+  }
+
   dateConversion = fieldValue => {
     if( fieldValue != null ) { 
     let year = fieldValue.slice(0, 4);
@@ -80,7 +85,7 @@ class AdminTaskList extends Component {
        
         <center>
                     {this.state.showEditTask ? 
-                        <>  <button onClick={this.save}>Save</button> </> : 
+                        <>  <button onClick={this.save}>Save</button> <button onClick={this.showEditTask}>Cancle</button><button onClick={this.delete}>Delete</button> </> : 
                         <button onClick={this.showEditTask}>Edit</button>
                     }
         </center>                
