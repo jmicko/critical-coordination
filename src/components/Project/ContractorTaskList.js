@@ -67,7 +67,7 @@ class ContractorTaskList extends Component {
                                   <p> Status: {this.props.task.status_type}  </p>}
         <center>               
           {this.props.task.task_name === 'Order Materials' && <TrackingApi />}
-          {this.state.showEditTask ? <>  <button onClick={this.save}>Save</button> </> : <button onClick={ this.showEditTask}>Update</button>}
+          {this.state.showEditTask ? <>  <button onClick={this.save}>Save</button> <button onClick={this.showEditTask}>Cancle</button> </> : <button onClick={ this.showEditTask}>Update</button>}
         </center>                
       </div>
     );
