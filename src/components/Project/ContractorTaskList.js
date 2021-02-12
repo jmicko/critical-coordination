@@ -55,6 +55,7 @@ class ContractorTaskList extends Component {
   render() {
     return (
       <div >
+      <p>Assigned to: {this.props.task.company_name} </p>
       <p>Task: {this.props.task.task_name}  </p> 
       {this.state.showEditTask ? <p><label>DateScheduled:<input type='date' onChange={ (event => this.handleChange(event, 'date_scheduled'))} placeholder={this.props.task.scheduled_date}></input></label></p> :  <p> Date Scheduled: {this.dateConversion(this.props.task.scheduled_date)} </p>} 
       <p> NLT Date: {this.dateConversion(this.props.task.nlt_date)} </p>

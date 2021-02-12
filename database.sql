@@ -35,6 +35,7 @@ CREATE TABLE "project" (
 CREATE TABLE "task" (
 	"id" serial NOT NULL,
 	"poc_fk" integer,
+	"company_fk" integer,
 	"scheduled_date" DATE,
 	"nlt_date" DATE NOT NULL DEFAULT 'today',
 	"task_name_fk" INTEGER NOT NULL,
@@ -121,7 +122,7 @@ INSERT INTO project ("project_name", "PO_Number", "due_date", "company_fk", "loc
 ('Walmart Vadnais Heights', '1002', '2021-03-01', 4, 4), ('Walmart Woodbury', '1003', '2021-03-02', 4, 5);
 
 --sample data for tasks
-INSERT INTO task ("poc_fk", "scheduled_date", "nlt_date", "task_name_fk", "task_status_fk", "project_fk") 
-VALUES(5, '2021-02-08', '2021-02-09', 1, 1, 1), (4, '2021-02-10', '2021-02-11', 2, 1, 1), (5, '2021-02-10', '2021-02-11', 1, 1, 2), 
-(4, '2021-02-10', '2021-02-11', 2, 1, 2), (5, '2021-02-10', '2021-02-11', 1, 1, 3), (4, '2021-02-10', '2021-02-11', 2, 1, 3), 
-(5, '2021-02-10', '2021-02-11', 1, 1, 4), (4, '2021-02-10', '2021-02-11', 2, 1, 4);
+INSERT INTO task ("poc_fk", "company_fk", "scheduled_date", "nlt_date", "task_name_fk", "task_status_fk", "project_fk") 
+VALUES(5, 6, '2021-02-08', '2021-02-09', 1, 1, 1), (4, 5, '2021-02-10', '2021-02-11', 2, 1, 1), (5, 6, '2021-02-10', '2021-02-11', 1, 1, 2), 
+(4, 5, '2021-02-10', '2021-02-11', 2, 1, 2), (5, 6, '2021-02-10', '2021-02-11', 1, 1, 3), (4, 5, '2021-02-10', '2021-02-11', 2, 1, 3), 
+(5, 6, '2021-02-10', '2021-02-11', 1, 1, 4), (4, 5, '2021-02-10', '2021-02-11', 2, 1, 4);
