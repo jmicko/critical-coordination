@@ -8,9 +8,9 @@ class ClientVendorPortfolioView extends Component {
     this.props.dispatch({ type: 'FETCH_PORTFOLIO' })
   }
   // this function will route us to the task page
-  navigate = (web_address, project) => {    
+  navigate = (web_address, project) => {   
     document.cookie = `project=${project.id}`;
-    this.props.dispatch({ type: 'FETCH_PROJECT', payload: project.id })    
+    this.props.dispatch({ type: 'FETCH_PROJECT', payload: project.id })     
     this.props.history.push(web_address);
   };
 
@@ -27,7 +27,7 @@ class ClientVendorPortfolioView extends Component {
     return (
       <center>
         <div>
-           { (this.props.store.user.user_type === "client") ? <h1>Client</h1> : <h1>Contractor</h1> }
+          <h1>Contractor View</h1>
           <table>
             <tbody>
               <th><td>Project:</td></th>

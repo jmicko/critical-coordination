@@ -81,6 +81,7 @@ class AddNewTask extends Component {
                     <br/>
                     <label>Company Assigned: &nbsp;
                         <select value={this.state.newTask.company} onChange={(event) => this.handleChange(event, 'company')}>
+                            <option value=''></option>
                             {this.props.store.admin.allCompanyReducer.map((company) => {
                                 return <option key={company.id} value={company.id}>{company.company_name}</option>
                             })}
