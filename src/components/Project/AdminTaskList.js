@@ -86,7 +86,7 @@ class AdminTaskList extends Component {
         <center>
                     {this.state.showEditTask ? 
                         <>  <button onClick={this.save}>Save</button> <button onClick={this.showEditTask}>Cancle</button><button onClick={this.delete}>Delete</button> </> : 
-                        <button onClick={this.showEditTask}>Edit</button>
+                       <p> <button onClick={this.showEditTask}>Edit</button> <button>Email</button> </p>
                     }
         </center>                
       </div>
