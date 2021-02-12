@@ -38,7 +38,7 @@ class AdminTaskList extends Component {
     this.setState({
       showEditTask: !this.state.showEditTask,
       updateRecord: {task_id: this.props.task.id}
-    })
+    });
   }
 
   save = () => {
@@ -47,7 +47,7 @@ class AdminTaskList extends Component {
   }
 
   delete = () => {
-    this.props.dispatch({ type: 'DELETE_TASK', payload: this.state})
+    this.props.dispatch({ type: 'DELETE_TASK', payload: this.state});
   }
 
   dateConversion = fieldValue => {
@@ -68,7 +68,7 @@ class AdminTaskList extends Component {
         ){
           {this.save()}
         }else{
-          alert('Please fill out all the fields')
+          alert('Please fill out all the fields');
         }
   }
 
