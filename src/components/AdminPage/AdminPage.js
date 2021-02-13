@@ -23,9 +23,11 @@ class AdminPage extends Component {
         <center>
           <h1>Admin Page</h1>
           {/* {JSON.stringify(this.props)} */}
-          <button className="btn" onClick={() => this.setState({ active: "user" })}>Manage User</button>
-          <button className="btn" onClick={() => this.setState({ active: "company" })}>Manage Company</button>
-          <button className="btn" onClick={() => this.setState({ active: "task" })}>Manage Task Status</button>
+          <div className="menu-horizontal">
+            <button className="btn-menu-horizontal" onClick={() => this.setState({ active: "user" })}>Manage User</button>
+            <button className="btn-menu-horizontal" onClick={() => this.setState({ active: "company" })}>Manage Company</button>
+            <button className="btn-menu-horizontal" onClick={() => this.setState({ active: "task" })}>Manage Task Status</button>
+          </div>
           <br /><br />
           {this.state.active === "user" &&
             <AdminUser />}

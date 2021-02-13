@@ -1,4 +1,7 @@
-/* .adminButtonClass {
-    margin-left: 5px;
-} */
+.btn-menu-horizontal{
+    height: 100%;
+}
 
+.menu-horizontal{
+    height: 2rem;
+}
