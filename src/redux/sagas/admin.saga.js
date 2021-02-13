@@ -163,6 +163,17 @@ function* adminAddTask(action) {
     }
 }
 
+function* emailTask(action) {
+    try {
+        yield axios.post('/api/admin/emailtask', action.payload)
+        yield put({ type: 'FETCH_PROJECT_TASKS', payload: action.payload.project })
+        yield put({ type: 'FETCH_TASKSTATUS' });
+    } catch (error) {
+        console.log('error in sending task email to contractor', error);
+    }
+}
+
+
 function* adminSaga() {
     yield takeLatest('FETCH_ALLCOMPANY', fetchAllCompany);
     yield takeLatest('FETCH_ALLLOCATION', fetchAllLocation);
@@ -178,7 +189,7 @@ function* adminSaga() {
     yield takeLatest('ADMIN_ADD_TASK', adminAddTask)
     yield takeLatest('UPDATE_COMPANY_VIAADMIN', updateCompanyViaAdmin);
     yield takeLatest('UPDATE_LOCATION_VIAADMIN', updateLocationViaAdmin);
-    
+    yield takeLatest('EMAIL_TASK', emailTask)
 }
 
 export default adminSaga;

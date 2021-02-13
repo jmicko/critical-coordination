@@ -2,9 +2,19 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const encryptLib = require('../modules/encryption');
-const {
-   rejectUnauthenticated,
-} = require('../modules/authentication-middleware');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const nodemailer = require('nodemailer');
+const jwt = require('jsonwebtoken');
+const key = process.env.RESET_PASSWORD_KEY;
+const mailAcct = process.env.REACT_APP_EMAIL_USER;
+const mailPw = process.env.REACT_APP_EMAIL_PASSWORD
+const transporter = nodemailer.createTransport({
+   service: 'gmail',
+   auth: {
+      user: mailAcct, //value from .env file
+      pass: mailPw // value from .env file
+   }
+});
 
 // GET company table
 router.get('/company', rejectUnauthenticated, (req, res) => {
@@ -146,12 +156,9 @@ router.put('/locationmodify', rejectUnauthenticated, (req, res) => {
    const location_name = req.body.location_name;
    const company_fk = req.body.company_fk;
    const archived = req.body.archived;
-   const sqlText = `UPDATE company_location SET 
-                     address = $2, 
-                     location_name = $3,
-                     company_fk = $4,
-                     archived = $5
-                    WHERE id=$1;`;
+   const sqlText = `UPDATE company_location 
+      SET address = $2, location_name = $3, company_fk = $4, archived = $5
+      WHERE id=$1;`;
    pool.query(sqlText, [id, address, location_name, company_fk, archived])
    .then( () => {
       res.sendStatus(201)
@@ -280,6 +287,66 @@ router.post('/addtask', rejectUnauthenticated, (req, res) => {
       res.sendStatus(403)
    }
 });
+
+router.post('/emailtask', rejectUnauthenticated, (req, res) => {
+   if (req.user.user_type === 'admin') {
+      const id = req.body.id;
+      const sqlText = `SELECT * FROM task
+         JOIN company on company.id = task.company_fk
+         JOIN "user" on "user".company_fk = company.id
+         JOIN project on project.id = task.project_fk
+         JOIN company_location on company_location.id = project.location_fk
+         WHERE task.id=$1;`
+      pool.query(sqlText, [id])
+      .then ( (result) => {
+         console.log(result.rows[0]);
+         const id = result.rows[0].id;
+         const date = (new Date()).toLocaleString("en-US");
+         const queryText = `UPDATE task 
+            SET notified_date = $1 
+            WHERE id=$2;`;
+         pool.query(queryText, [date, id]);
+         for(let i=0; i<result.rows.length; i++){
+            const task = result.rows[i];
+            const email = task.email;
+            const link = `${process.env.CLIENT_URL}`
+            const mailOptions = {
+               from: '',
+               to: email,
+               subject: 'Critical Coordination - Task Notification',
+               text: `<p>${task.first_name}, Critical Coordination has issued a job request related to ${task.project_name}.</p>
+                     <p>PO Number: ${task.PO_Number}</p>
+                     <p>Location: ${task.location_name}</p>
+                     <p>Address: ${task.address}</p>
+                     <p>Notes: ${task.notes}</p>
+                     <p>Please log in to the <a href="${link}">Critical Coordination Dashboard</a> to accept this job and change job status to "Receipt Acknowledged".<br/><br/>
+                     For Shipping tasks please update with the tracking number and set status to "Shipped" when they are sent - for Install jobs please select an installation
+                     date upon accepting the job </p>`,
+               html: `<p>${task.first_name}, Critical Coordindation has issued a job request related to ${task.project_name}.</p>
+                     <p>PO Number: ${task.PO_Number}</p>
+                     <p>Location: ${task.location_name}</p>
+                     <p>Address: ${task.address}</p>
+                     <p>Notes: ${task.notes}</p>
+                     <p>Please log in to the <a href="${link}">Critical Coordination Dashboard</a> to accept this job and change job status to "Receipt Acknowledged".<br/><br/>
+                     For Shipping tasks please update with the tracking number and set status to "Shipped" when they are sent - for Install jobs please select an installation
+                     date upon accepting the job </p>`};
+            transporter.sendMail(mailOptions, function (error, info) {
+               if (error) {
+                  console.log(error);
+                  res.sendStatus(500)
+               } else {
+                  console.log('Email sent: ' + info.response);
+                  return res.json({ message: 'Email has been sent, please reset your account' })
+               }
+            });
+         }
+         res.sendStatus(200)
+      }) .catch ( (error) => {
+         console.log('error in sending task email, ', error);
+         res.sendStatus(500)
+      })
+   }
+})
 
 
 module.exports = router;
