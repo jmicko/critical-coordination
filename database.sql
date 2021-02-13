@@ -37,6 +37,8 @@ CREATE TABLE "task" (
 	"poc_fk" integer,
 	"company_fk" integer,
 	"scheduled_date" DATE,
+	"notified" BOOLEAN DEFAULT false,
+	"notified_date" DATE,
 	"nlt_date" DATE NOT NULL DEFAULT 'today',
 	"task_name_fk" INTEGER NOT NULL,
 	"token" varchar(255),
