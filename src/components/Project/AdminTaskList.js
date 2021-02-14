@@ -38,7 +38,7 @@ class AdminTaskList extends Component {
     this.setState({
       showEditTask: !this.state.showEditTask,
       updateRecord: {task_id: this.props.task.id}
-    })
+    });
   }
 
   save = () => {
@@ -47,7 +47,7 @@ class AdminTaskList extends Component {
   }
 
   delete = () => {
-    this.props.dispatch({ type: 'DELETE_TASK', payload: this.state})
+    this.props.dispatch({ type: 'DELETE_TASK', payload: this.state});
   }
 
   dateConversion = fieldValue => {
@@ -59,9 +59,30 @@ class AdminTaskList extends Component {
     }
   }
 
+  fieldValidation = () => {
+    if( this.state.updateRecord.task_id  && 
+        this.state.updateRecord.task_status  &&
+        this.state.updateRecord.task_type  &&
+        this.state.updateRecord.nlt_date  &&
+        this.state.updateRecord.date_scheduled  
+        ){
+          {this.save()}
+        }else{
+          alert('Please fill out all the fields');
+        }
+  }
+
+  confirmSend = (id) => {
+    console.log('sending email for task', id);
+    this.props.dispatch({ type: 'EMAIL_TASK', payload: { id: id, project: getCookie('project')}})
+    const date = (new Date()).toLocaleString("en-US")
+    console.log(date);
+  }
+
   render() {
     return (
       <div >
+        <p> Assigned to: {this.props.task.company_name} </p>
        {this.state.showEditTask ? <label>Task Type: &nbsp;
                                     <select value={this.state.type} onChange={(event) => this.handleChange(event, 'task_type')}>
                                       <option value=''></option>
@@ -86,9 +107,12 @@ class AdminTaskList extends Component {
        
         <center>
                     {this.state.showEditTask ? 
-                        <>  <button onClick={this.save}>Save</button> <button onClick={this.showEditTask}>Cancel</button><button onClick={this.delete}>Delete</button> </> : 
-                        <button onClick={this.showEditTask}>Edit</button>
+                        <>  <button onClick={this.fieldValidation}>Save</button> <button onClick={this.showEditTask}>Cancel</button><button onClick={this.delete}>Delete</button> </> : 
+                       <p> <button onClick={this.showEditTask}>Edit</button>  </p>
                     }
+                    <p><button onClick={(event) => this.confirmSend(this.props.task.id)}>Notify Contractor via Email</button></p>
+                    {this.props.task.notified_date &&
+                    <p>Last Notified Date: {this.props.task?.notified_date}</p>}
                     <p>------------------------------------------------</p>
         </center>                
       </div>

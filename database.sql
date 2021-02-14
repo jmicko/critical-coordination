@@ -37,6 +37,8 @@ CREATE TABLE "task" (
 	"poc_fk" integer,
 	"company_fk" integer,
 	"scheduled_date" DATE,
+	"notified" BOOLEAN DEFAULT false,
+	"notified_date" DATE,
 	"nlt_date" DATE NOT NULL DEFAULT 'today',
 	"task_name_fk" INTEGER NOT NULL,
 	"token" varchar(255),
@@ -112,9 +114,8 @@ INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "p
 INSERT INTO task_status ("status_type") VALUES ('Started'), ('Receipt Acknowledged'), ('Shipped'), ('Scheduled'), ('Complete'), ('Invoiced');
 INSERT INTO task_name ("task_name") VALUES('Order Materials'), ('Schedule Installation'), ('Invoice'), ('Custom');
 --sample data for projects
-INSERT INTO project ("project_name", "PO_Number", "due_date", "company_fk", "location_fk") VALUES('CostCo Bayport', '1000', '2021-03-01', 3, 2), ('CostCo MapleGrove', '1001', '2021-02-01', 3, 3),
-('Walmart Vadnais Heights', '1002', '2021-03-01', 4, 4), ('Walmart Woodbury', '1003', '2021-03-02', 4, 5);
-
+INSERT INTO project ("project_name", "PO_Number", "due_date", "company_fk", "location_fk", "notes") VALUES('AT&T Install', '1000', '2021-03-01', 3, 2, 'Cable Install to be completed no later than 3-1-21'), ('AT&T Maplewood', '1001', '2021-02-28', 3, 3, 'Cable Install to be completed by 2-28-21'),
+('Datalink Maple Grove', '1002', '2021-03-01', 4, 4, 'new project due 3-1-21'), ('Datalink Woodbury', '1003', '2021-03-02', 4, 5, 'new project/install due 3-2-21');
 --sample data for tasks
 INSERT INTO task ("poc_fk", "company_fk", "scheduled_date", "nlt_date", "task_name_fk", "task_status_fk", "project_fk") 
 VALUES(5, 6, '2021-02-08', '2021-02-09', 1, 1, 1), (4, 5, '2021-02-10', '2021-02-11', 2, 1, 1), (5, 6, '2021-02-10', '2021-02-11', 1, 1, 2), 

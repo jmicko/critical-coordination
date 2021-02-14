@@ -28,23 +28,24 @@ router.put('/forgot', (req, res) => {
 })
 
 
-forgotPassword = (req, res) => {
+router.put('/', (req, res) => {
    const email = req.body.email;
-   console.log('in forgotPassword');
    let sqlText = 'SELECT * FROM "user" WHERE email=$1;'
    pool.query(sqlText, [email])
       .then( (result) => {
-         console.log(result.rows[0].email);
          if (result.rows[0].email) {
+            console.log('test');
             const token = jwt.sign({email: email}, key, {expiresIn: '20m'})
-            sqlText = 'UPDATE "user" SET token=$1 WHERE email=$2;'
-            pool.query(sqlText, [token, email])
+            sqlText = 'UPDATE "user" SET token=$1 WHERE email=$2;';
+            pool.query(sqlText, [token, email]);
+            const link = `${process.env.CLIENT_URL}/#/resetpassword?token=${token}`
             const mailOptions = {
-               from: 'noreply@auth-shelf.com',
+               from: '',
                to: email,
                subject: 'password reset',
-               text: `Please click on the link to reset your password ${process.env.CLIENT_URL}/#/resetpassword?token=${token}`
-            };
+               text: `Please click on the link to reset your password ${process.env.CLIENT_URL}/#/resetpassword?token=${token}`,
+               html: `<p>Critical Coordination has received a request to reset your password. If this was you that requested this reset, please click the link below and enter a new password.</p>
+                     <br/><p>Reset Link: <a href="${link}">Click Here</a></p>`};
             transporter.sendMail(mailOptions, function (error, info) {
                if (error) {
                   console.log(error);
@@ -55,12 +56,13 @@ forgotPassword = (req, res) => {
                }
             });
          }
+         res.sendStatus(200);
       })
       .catch((error)=> {
          console.log('problem with GET to match lost password with registered user', error);
          res.sendStatus(500)
       })
-}
+})
 
 
 

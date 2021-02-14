@@ -52,6 +52,17 @@ class ContractorTaskList extends Component {
     }
   }
 
+  fieldValidation = () => {
+    if( this.state.updateRecord.task_id  && 
+        this.state.updateRecord.task_status  &&
+        this.state.updateRecord.date_scheduled  
+        ){
+          {this.save()}
+        }else{
+          alert('Please fill out all the fields')
+        }
+  }
+
   render() {
     return (
       <div >
@@ -69,7 +80,7 @@ class ContractorTaskList extends Component {
         <center>               
           {this.props.task.task_name === 'Order Materials' && <TrackingApi />}
           <p>Notes: {this.props.task.notes}</p>
-          {this.state.showEditTask ? <>  <button onClick={this.save}>Save</button> <button onClick={this.showEditTask}>Cancle</button> </> : <button onClick={ this.showEditTask}>Update</button>}
+          {this.state.showEditTask ? <>  <button onClick={this.fieldValidation}>Save</button> <button onClick={this.showEditTask}>Cancle</button> </> : <button onClick={ this.showEditTask}>Update</button>}
           <p>------------------------------------------------</p>
         </center>                
       </div>
