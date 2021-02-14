@@ -80,7 +80,7 @@ class AdminTaskList extends Component {
   render() {
     return (
       // one task is held entirely within this div
-      <div className="container-task" >
+      <div className="container-task metal rounded" >
         {/* show who the task is assigned to */}
         <p> Assigned to: {this.props.task.company_name} </p>
         <p> Task: {this.props.task.task_name}  </p>
@@ -137,6 +137,7 @@ class AdminTaskList extends Component {
           </div>
 
           // If not editing
+<<<<<<< HEAD
           : <div>
             
             {/* if a materials task, show delivery date */}
@@ -147,6 +148,11 @@ class AdminTaskList extends Component {
             <p> Scheduled Install Date: {this.dateConversion(this.props.task.scheduled_date)} <br/>
             Technician Info: {this.props.task.technician_info}</p>
             }
+=======
+          : <div className="">
+            <p> Task: {this.props.task.task_name}  </p>
+            <p> Date Scheduled: {this.dateConversion(this.props.task.scheduled_date)} </p>
+>>>>>>> master
             <p> Final Due Date: {this.dateConversion(this.props.task.nlt_date)} </p>
             <p>Status: {this.props.task.status_type}  </p>
             {/* show shipping information if there is any */}

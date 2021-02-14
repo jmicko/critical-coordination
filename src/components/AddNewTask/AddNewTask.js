@@ -66,7 +66,7 @@ class AddNewTask extends Component {
     render() {
         // console.log(this.state);
         return (
-            <div className="container paper">
+            <div className="container metal rounded">
                 <h3> Add New Task </h3>
                 <form>
                     {/* TASK TYPE */}
