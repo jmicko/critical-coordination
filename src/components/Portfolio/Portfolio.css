@@ -20,21 +20,21 @@
     border: #40e22b solid .375rem;
 }
 
-.on-time .status-bar{
+.on-time .status-bar .active{
     height: 2rem;
     width: auto;
     background-color: #2b89e2;
     margin: 0;
 }
 
-.late .status-bar{
+.late .status-bar .active{
     height: 2rem;
     width: auto;
     background-color: #ad1717;
     margin: 0;
 }
 
-.complete .status-bar{
+.complete .status-bar .active{
     height: 2rem;
     /* width: 33%; */
     background-color: #40e22b;
@@ -44,4 +44,21 @@
 .status-bar{
     display: grid;
     grid-template-columns:repeat(3, 1fr);
+}
+
+.status-bar button{
+    background-color: #5a544d;
+    color: #efefef;
+    border: inherit;
+    font-size: 1.125rem;
+}
+
+/* .status-bar button:active, */
+.status-bar button:hover,
+.status-bar button:focus{
+    /* background-color: #5a544d; */
+    color: #efefef;
+    border: none;
+    outline: inherit;
+    background-color: #3a2815a8;
 }

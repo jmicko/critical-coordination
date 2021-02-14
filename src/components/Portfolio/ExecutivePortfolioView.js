@@ -80,36 +80,21 @@ class ExecutivePortfolioView extends Component {
             <div className="container paper">
                 {/* THIS WILL RENDER IF ADMIN */}
                 {this.props.store.user.user_type === "admin"
-                ?
+                    ?
                     <div>
                         <h1> Executive Portfolio Page </h1>
                         <button onClick={this.showAdd}>
                             Add New Project
                         </button>
-                        {/* TODO - NEED TO REMOVE THESE BUTTON AFTER LOGIC */}
-                        <button
-                            onClick={() => this.setState({ status: 'onTime' })}
-                        >
-                            onTime status [TESTING ONLY]
-                        </button>
-                        <button
-                            onClick={() => this.setState({ status: 'late' })}
-                        >
-                            late status [TESTING ONLY]
-                        </button>
-                        <button
-                            onClick={() => this.setState({ status: 'complete' })}
-                        >
-                            complete status [TESTING ONLY]
-                        </button>
+
                         {this.state.showAddNewProject && <AddNewProject />}
                     </div>
                     // END ADMIN
                     // RENDER CLIENT PAGE IF CLIENT
                     : this.props.store.user.user_type === "client"
-                    ? <h1> Client Portfolio Page </h1>
-                    // RENDER CONTRACTOR IF CONTRACTOR
-                    : <h1> Contractor Portfolio Page </h1>
+                        ? <h1> Client Portfolio Page </h1>
+                        // RENDER CONTRACTOR IF CONTRACTOR
+                        : <h1> Contractor Portfolio Page </h1>
                 }
 
                 {this.props.store.portfolio.map((project) => {
@@ -128,20 +113,40 @@ class ExecutivePortfolioView extends Component {
                         `}
                         >
                             <div className="status-bar">
-                                <div>
+                                <button
+                                    onClick={() => this.setState({ status: 'onTime' })}
+                                    className={`
+                                    ${this.state.status === "onTime" &&
+                                        "active"}
+                                    `}
+                                >
                                     <center>On Time</center>
-                                </div>
-                                <div>
+                                </button>
+                                <button
+                                    onClick={() => this.setState({ status: 'late' })}
+                                    className={`
+                                    ${this.state.status === "late" &&
+                                        "active"}
+                                    `}
+                                >
                                     <center>Late</center>
-                                </div>
-                                <div>
+                                </button>
+                                <button
+                                    onClick={() => this.setState({ status: 'complete' })}
+                                    className={`
+                                    ${this.state.status === "complete" &&
+                                        "active"}
+                                    `}
+                                >
                                     <center>Complete</center>
-                                </div>
+                                </button>
                             </div>
                             <div className="project-details"
                                 onClick={() => this.navigate(`/project`, project)}
                             >
-                                <label><h2>Project: {project.project_name}</h2></label>
+                                <div className="project-name">
+                                    <h2>{project.project_name}</h2>
+                                </div>
 
                                 <label>Location: {project.location_name}</label>
 
@@ -149,25 +154,25 @@ class ExecutivePortfolioView extends Component {
 
                                 <label>Due Date: {this.dateConversion(project.due_date)}</label>
 
-                                <label>Status: <input placeholder='Logic needs to be done' /></label>
+                                {/* <label>Status: <input placeholder='Logic needs to be done' /></label> */}
 
                                 {this.props.store.user.user_type === "admin" &&
-                                <Popup trigger={open => (<button>Edit </button>)} position="left" >
-                                    <div className="editPanel" onClick={() => this.updateId(project)}>
-                                        <h3>Edit Window:</h3>
-                                        <label>Project:</label>
-                                        <input placeholder={project.project_name} onChange={this.handleChange('project_name')} />
-                                        <label>Location:</label>
-                                        <select onChange={this.handleChange('location_name')}>
-                                            {this.props.store.admin.allLocationReducer.map((location) => <option key={location.address} value={location.location_name}>{location.location_name}</option>)}
-                                        </select>
-                                        <label>PO#:</label>
-                                        <input placeholder={project.PO_Number} onChange={this.handleChange('PO_Number')} />
-                                        <label>Due Date:</label>
-                                        <input type="date" onChange={this.handleChange('due_date')} placeholder={project.due_date} />
-                                        <button onClick={this.fieldValidation}>Save</button>
-                                    </div>
-                                </Popup>
+                                    <Popup trigger={open => (<button>Edit </button>)} position="left" >
+                                        <div className="editPanel" onClick={() => this.updateId(project)}>
+                                            <h3>Edit Window:</h3>
+                                            <label>Project:</label>
+                                            <input placeholder={project.project_name} onChange={this.handleChange('project_name')} />
+                                            <label>Location:</label>
+                                            <select onChange={this.handleChange('location_name')}>
+                                                {this.props.store.admin.allLocationReducer.map((location) => <option key={location.address} value={location.location_name}>{location.location_name}</option>)}
+                                            </select>
+                                            <label>PO#:</label>
+                                            <input placeholder={project.PO_Number} onChange={this.handleChange('PO_Number')} />
+                                            <label>Due Date:</label>
+                                            <input type="date" onChange={this.handleChange('due_date')} placeholder={project.due_date} />
+                                            <button onClick={this.fieldValidation}>Save</button>
+                                        </div>
+                                    </Popup>
                                 }
                             </div>
                         </div>
