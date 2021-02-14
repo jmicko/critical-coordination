@@ -36,10 +36,11 @@ Button
 .btn {
   display: inline-block;
   padding: 10px 20px;
-  border-color: #7a371a;
+  border-color: #6b6b6b;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #f56f34;
+  color: #f8f8f8;
+  background-color: #000000;
   font-size: 1.1rem;
   outline: 0;
   cursor: pointer;
@@ -61,7 +62,7 @@ Button
 }
 
 .btn:hover {
-  background-color: #df4c0d;
+  background-color: #242424;
   text-decoration: none;
 }
 
@@ -83,7 +84,7 @@ Button
 .btn_asLink:hover {
   background-color: transparent;
   border-color: #df4c0d;
-  color: #df4c0d;
+  color: #242424;
 }
 
 /* --------------------------------------------------------------------------------
@@ -189,7 +190,7 @@ General Theme
   box-shadow: 1px 2px 6px 0px rgba(163, 163, 163, 0.83);
   padding: 1rem;
   color: #efefef;
-  background-color: rgb(59, 59, 59);
+  background-color: #3b3b3b;
   width: max-content;
 }
 

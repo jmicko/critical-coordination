@@ -9,41 +9,52 @@
 }
 
 .on-time{
-    border: #2b89e2 solid .375rem;
+    border: #00cdf1 solid .375rem;
+}
+
+.attention{
+    border: #9c7319 solid .375rem;
 }
 
 .late{
-    border: #ad1717 solid .375rem;
+    border: #b80b0b solid .375rem;
 }
 
 .complete{
-    border: #40e22b solid .375rem;
+    border: #279219 solid .375rem;
 }
 
 .on-time .status-bar .active{
     height: 2rem;
     width: auto;
-    background-color: #2b89e2;
+    background-color: #00cdf1;
+    margin: 0;
+}
+
+.attention .status-bar .active{
+    height: 2rem;
+    width: auto;
+    background-color: #9c7319;
     margin: 0;
 }
 
 .late .status-bar .active{
     height: 2rem;
     width: auto;
-    background-color: #ad1717;
+    background-color: #b80b0b;
     margin: 0;
 }
 
 .complete .status-bar .active{
     height: 2rem;
     /* width: 33%; */
-    background-color: #40e22b;
+    background-color: #279219;
     margin: 0;
 }
 
 .status-bar{
     display: grid;
-    grid-template-columns:repeat(3, 1fr);
+    grid-template-columns:repeat(4, 1fr);
 }
 
 .status-bar button{
@@ -61,4 +72,18 @@
     border: none;
     outline: inherit;
     background-color: #3a2815a8;
+}
+
+.project-name{
+    /* width: max-content; */
+    /* background-color: #b3481d; */
+    background: linear-gradient(90deg, #813f23 0%, #813f23 75%, #3b3b3b00 100%);
+    border-bottom-left-radius: .4rem;
+    border-top-left-radius: .4rem;
+}
+
+.project-name h2{
+    margin-left: .75rem;
+    margin-right: 33%;
+    width: max-content;
 }

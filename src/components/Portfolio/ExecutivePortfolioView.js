@@ -83,7 +83,9 @@ class ExecutivePortfolioView extends Component {
                     ?
                     <div>
                         <h1> Executive Portfolio Page </h1>
-                        <button onClick={this.showAdd}>
+                        <button
+                        className="btn"
+                        onClick={this.showAdd}>
                             Add New Project
                         </button>
 
@@ -106,12 +108,16 @@ class ExecutivePortfolioView extends Component {
                                 project-item 
                             ${this.state.status === "onTime" &&
                                 "on-time"}
+                            ${this.state.status === "attention" &&
+                                "attention"}
                             ${this.state.status === "late" &&
                                 "late"}
                             ${this.state.status === "complete" &&
                                 "complete"}
                         `}
                         >
+                            {/* div to hold status bar. clicking a button will 
+                            change the status and color will update */}
                             <div className="status-bar">
                                 <button
                                     onClick={() => this.setState({ status: 'onTime' })}
@@ -121,6 +127,15 @@ class ExecutivePortfolioView extends Component {
                                     `}
                                 >
                                     <center>On Time</center>
+                                </button>
+                                <button
+                                    onClick={() => this.setState({ status: 'attention' })}
+                                    className={`
+                                    ${this.state.status === "attention" &&
+                                        "active"}
+                                    `}
+                                >
+                                    <center>Needs Attention</center>
                                 </button>
                                 <button
                                     onClick={() => this.setState({ status: 'late' })}
@@ -148,16 +163,16 @@ class ExecutivePortfolioView extends Component {
                                     <h2>{project.project_name}</h2>
                                 </div>
 
-                                <label>Location: {project.location_name}</label>
+                                <p>Location: {project.location_name}</p>
 
-                                <label>PO#: {project.PO_Number}</label>
+                                <p>PO#: {project.PO_Number}</p>
 
-                                <label>Due Date: {this.dateConversion(project.due_date)}</label>
+                                <p>Due Date: {this.dateConversion(project.due_date)}</p>
 
                                 {/* <label>Status: <input placeholder='Logic needs to be done' /></label> */}
 
                                 {this.props.store.user.user_type === "admin" &&
-                                    <Popup trigger={open => (<button>Edit </button>)} position="left" >
+                                    <Popup trigger={open => (<button className="btn">Edit </button>)} position="left" >
                                         <div className="editPanel" onClick={() => this.updateId(project)}>
                                             <h3>Edit Window:</h3>
                                             <label>Project:</label>
