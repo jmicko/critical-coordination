@@ -1,16 +1,47 @@
 .project-item{
     margin: 1rem auto;
-    padding: 1rem;
+    border-radius: .5rem;
+    background-color: rgb(75, 76, 80);
 }
 
-.onTime{
-    border: rgb(43, 137, 226) solid 2px;
+.project-details{
+    margin: 1rem;
+}
+
+.on-time{
+    border: #2b89e2 solid .375rem;
 }
 
 .late{
-    border: rgb(173, 23, 23) solid 2px;
+    border: #ad1717 solid .375rem;
 }
 
 .complete{
-    border: rgb(64, 226, 43) solid 2px;
+    border: #40e22b solid .375rem;
+}
+
+.on-time .status-bar{
+    height: 2rem;
+    width: auto;
+    background-color: #2b89e2;
+    margin: 0;
+}
+
+.late .status-bar{
+    height: 2rem;
+    width: auto;
+    background-color: #ad1717;
+    margin: 0;
+}
+
+.complete .status-bar{
+    height: 2rem;
+    /* width: 33%; */
+    background-color: #40e22b;
+    margin: 0;
+}
+
+.status-bar{
+    display: grid;
+    grid-template-columns:repeat(3, 1fr);
 }
