@@ -19,9 +19,7 @@ const Nav = (props) => {
 
   return (
     <div className="nav">
-      <Link className="logo" to="/home">
-        <img src={logo} alt="Critical Coordination Logo"></img>
-      </Link>
+        <img src={logo} className="logo" alt="Critical Coordination Logo"></img>
       <div className="nav-right">
         <Link className="nav-link" to={loginLinkData.path}>
           {/* Show this link if they are logged in or not,
@@ -32,9 +30,11 @@ const Nav = (props) => {
         {/* Show the link to the info page and the logout button if the user is logged in */}
         {props.store.user.id && (
           <>
+            {props.store.user.user_type === 'admin' ? 
             <Link className="nav-link" to="/adminpage">
               Admin
             </Link>
+            : <></>}
             <Link className="nav-link" to="/portfolio">
               Portfolio
             </Link>
