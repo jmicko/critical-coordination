@@ -10,6 +10,8 @@ body,
 body {
   font-family: 'Open Sans', Arial, Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
+  color: #f8f8f8;
+  background-color: rgb(19, 19, 19);
 }
 
 img {
@@ -38,7 +40,6 @@ Button
   border-width: 1px 1px 3px;
   border-radius: 4px;
   background-color: #f56f34;
-  color: #f8f8f8;
   font-size: 1.1rem;
   outline: 0;
   cursor: pointer;
@@ -187,7 +188,8 @@ General Theme
 .paper{
   box-shadow: 1px 2px 6px 0px rgba(163, 163, 163, 0.83);
   padding: 1rem;
-  background-color: rgb(245, 245, 244);
+  color: #efefef;
+  background-color: rgb(59, 59, 59);
   width: max-content;
 }
 
