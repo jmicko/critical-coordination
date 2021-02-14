@@ -41,11 +41,11 @@ class AddNewTask extends Component {
     }
 
     addTask = () => {
-        if(this.state.newTask.type !== '' && 
-            this.state.newTask.company !== '' && 
+        if (this.state.newTask.type !== '' &&
+            this.state.newTask.company !== '' &&
             this.state.newTask.due_date !== '' &&
-            this.state.newTask.status !== ''){
-            this.props.dispatch( {type: 'ADMIN_ADD_TASK', payload: this.state.newTask})
+            this.state.newTask.status !== '') {
+            this.props.dispatch({ type: 'ADMIN_ADD_TASK', payload: this.state.newTask })
             this.setState({
                 newTask: {
                     type: '',
@@ -78,7 +78,7 @@ class AddNewTask extends Component {
                             <option value="4">Custom</option>
                         </select>
                     </label>
-                    <br/>
+                    <br />
                     <label>Company Assigned: &nbsp;
                         <select value={this.state.newTask.company} onChange={(event) => this.handleChange(event, 'company')}>
                             <option value=''></option>
@@ -87,7 +87,7 @@ class AddNewTask extends Component {
                             })}
                         </select>
                     </label>
-                    <br/>
+                    <br />
                     <label> Due Date: &nbsp;
                         <input value={this.state.newTask.due_date} onChange={(event) => this.handleChange(event, 'due_date')} type="date"></input>
                     </label>
@@ -101,19 +101,22 @@ class AddNewTask extends Component {
                         </select>
                     </label>
                     {this.state.newTask.type === '1' &&
-                    <label> Tracking Number: &nbsp;
+                        <label> Tracking Number: &nbsp;
                         <input value={this.state.newTask.tracking_number} onChange={(event) => this.handleChange(event, 'tracking_number')} placeholder="UPS or FEDEX"></input>
-                    </label>}
-                    <br/>
-                    <br/>
+                        </label>}
+                    <br />
+                    <br />
                     <label> Notes: &nbsp;
-                            <textarea placeholder="...any specific details about the task go here" 
+                            <textarea placeholder="...any specific details about the task go here"
                             className="notes" type="text" cols="100" rows="5"
                             value={this.state.newTask.notes}
-                            onChange={(event) => this.handleChange(event, 'notes')}/>
+                            onChange={(event) => this.handleChange(event, 'notes')} />
                     </label>
-                    <br/>
-                    <button onClick={ (event) => this.addTask(event)} type="submit">Add Task</button>
+                    <br />
+                    <button className="btn" onClick={(event) => this.addTask(event)} type="submit">Add Task</button>
+                    <button className="btn" onClick={this.props.showAddTask}>
+                        Cancel
+            </button>
                 </form>
             </div>
         );
