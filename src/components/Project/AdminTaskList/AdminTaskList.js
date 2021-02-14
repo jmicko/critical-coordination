@@ -93,7 +93,7 @@ class AdminTaskList extends Component {
             <div> 
               <p>
                 Scheduled Install Date: {this.dateConversion(this.props.task.scheduled_date)} 
-              </p>
+              </p><br/><br/>
               <p>
               <label> Technician Info: <br/>
                 <textarea 
