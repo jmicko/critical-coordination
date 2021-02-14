@@ -37,9 +37,21 @@ router.get('/project/:id', rejectUnauthenticated, (req, res) => {
   })
 })
 
+dateConversion = fieldValue => {
+  if (fieldValue != null) {
+    let year = fieldValue.slice(0, 4);
+    let month = fieldValue.slice(5, 7);
+    let day = fieldValue.slice(8, 10);
+    return `${year}-${month}-${day}`
+  }
+}
+
 router.put('/update', rejectUnauthenticated, (req, res) => {
-  const queryText1 = `UPDATE task SET task_status_fk=$1, task_name_fk=$2, nlt_date=$3, scheduled_date=$4 WHERE id=$5;`;
-  pool.query(queryText1, [req.body.task_status, req.body.task_type, req.body.nlt_date, req.body.date_scheduled, req.body.task_id])
+  const updatedBy = `${req.user.first_name} ${req.user.last_name}`
+  const due_date = dateConversion(req.body.nlt_date);
+  const scheduled_date = dateConversion(req.body.scheduled_date);
+  const queryText1 = `UPDATE task SET task_status_fk=$1, task_name_fk=$2, nlt_date=$3, scheduled_date=$4, updated_by=$5, tracking_id=$6, notes=$7, technician_info=$8 WHERE id=$9;`;
+  pool.query(queryText1, [req.body.task_status_fk, req.body.task_name_fk, due_date, scheduled_date, updatedBy, req.body.tracking_id, req.body.notes, req.body.technician_info, req.body.id])
     .then(() => {
       res.sendStatus(201);
     })
