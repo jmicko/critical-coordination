@@ -92,8 +92,10 @@ class AdminTaskList extends Component {
             {this.props.task.task_name === 'Schedule Installation' &&
             <div> 
               <p>
-                Scheduled Install Date: {this.dateConversion(this.props.task.scheduled_date)} 
-              </p><br/><br/>
+                <label>Scheduled Install Date: {this.dateConversion(this.props.task.scheduled_date)}
+                  <input type='date' onChange={(event => this.handleChange(event, 'scheduled_date'))} value={update.date_scheduled} placeholder={this.props.task.scheduled_date} />
+                </label>
+              </p>
               <p>
               <label> Technician Info: <br/>
                 <textarea 
@@ -137,7 +139,6 @@ class AdminTaskList extends Component {
           </div>
 
           // If not editing
-<<<<<<< HEAD
           : <div>
             
             {/* if a materials task, show delivery date */}
@@ -148,11 +149,6 @@ class AdminTaskList extends Component {
             <p> Scheduled Install Date: {this.dateConversion(this.props.task.scheduled_date)} <br/>
             Technician Info: {this.props.task.technician_info}</p>
             }
-=======
-          : <div className="">
-            <p> Task: {this.props.task.task_name}  </p>
-            <p> Date Scheduled: {this.dateConversion(this.props.task.scheduled_date)} </p>
->>>>>>> master
             <p> Final Due Date: {this.dateConversion(this.props.task.nlt_date)} </p>
             <p>Status: {this.props.task.status_type}  </p>
             {/* show shipping information if there is any */}
