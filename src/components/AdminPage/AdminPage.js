@@ -6,7 +6,6 @@ import AdminUser from '../AdminUser/AdminUser'
 import AdminCompany from '../AdminCompany/AdminCompany'
 import AdminLocation from '../AdminLocation/AdminLocation'
 import AdminTaskStatus from '../AdminTaskStatus/AdminTaskStatus'
-import AddNewProject from '../AddNewProject/AddNewProject'
 
 class AdminPage extends Component {
 
