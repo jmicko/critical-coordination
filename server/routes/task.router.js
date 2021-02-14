@@ -75,7 +75,7 @@ router.put('/contractor', rejectUnauthenticated, (req, res) => {
 
 router.put('/delete', rejectUnauthenticated, (req, res) => {
   const queryText1 = `DELETE FROM task WHERE id=$1`
-  pool.query(queryText1, [req.body.task_id])
+  pool.query(queryText1, [req.body.id])
     .then(() => {
       res.sendStatus(201);
     })
