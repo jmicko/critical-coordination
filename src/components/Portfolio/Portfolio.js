@@ -105,15 +105,11 @@ class Portfolio extends Component {
               key={project.id}
               // class names will render based on task status
               className={`
-                            project-item 
-                        ${this.state.status === "onTime" &&
-                "on-time"}
-                        ${this.state.status === "attention" &&
-                "attention"}
-                        ${this.state.status === "late" &&
-                "late"}
-                        ${this.state.status === "complete" &&
-                "complete"}
+                        project-item 
+                        ${this.state.status === "onTime" && "on-time"}
+                        ${this.state.status === "attention" && "attention"}
+                        ${this.state.status === "late" && "late"}
+                        ${this.state.status === "complete" && "complete"}
                     `}
             >
               {/* div to hold status bar. clicking a button will 
@@ -122,40 +118,35 @@ class Portfolio extends Component {
                 <button
                   onClick={() => this.setState({ status: 'onTime' })}
                   className={`
-                                btn-status
-                                ${this.state.status === "onTime" &&
-                                "active"}
-                                `}
-                                >
-                  <center>On Time</center>
+                    btn-status
+                    ${this.state.status === "onTime" && "active"}
+                  `}
+                >
+                  On Time
                 </button>
                 <button
                   onClick={() => this.setState({ status: 'attention' })}
-                  className={`
-                  ${this.state.status === "attention" &&
-                  "active"}
-                  `}
-                  >
-                  <center>Needs Attention</center>
+                  className={`${this.state.status === "attention" && "active"}`}
+                >
+                  Needs Attention
                 </button>
                 <button
                   onClick={() => this.setState({ status: 'late' })}
                   className={`
                   ${this.state.status === "late" &&
-                  "active"}
+                    "active"}
                   `}
-                  >
-                  <center>Late</center>
+                >
+                  Late
                 </button>
                 <button
                   onClick={() => this.setState({ status: 'complete' })}
                   className={`
-                  btn-status
-                                ${this.state.status === "complete" &&
-                    "active"}
-                                `}
+                    btn-status
+                    ${this.state.status === "complete" && "active"}
+                  `}
                 >
-                  <center>Complete</center>
+                  Complete
                 </button>
               </div>
               <div className="project-details"
