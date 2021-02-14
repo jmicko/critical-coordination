@@ -14,6 +14,7 @@ class Portfolio extends Component {
   }
 
   state = {
+    edit: '',
     project_id: '',
     project_name: '',
     location_name: '',
@@ -149,9 +150,9 @@ class Portfolio extends Component {
                   Complete
                 </button>
               </div>
-              <div className="project-details"
-                onClick={() => this.navigate(`/project`, project)}
-              >
+              
+
+              <div className="project-details">
                 <div className="project-name">
                   <h2>{project.project_name}</h2>
                 </div>
@@ -182,6 +183,8 @@ class Portfolio extends Component {
                     </div>
                   </Popup>
                 }
+                <button className="btn" onClick={() => this.navigate(`/project`, project)}>Details</button>
+                <button className="btn">Close Project</button>
               </div>
             </div>
           )

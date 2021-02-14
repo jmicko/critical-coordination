@@ -171,7 +171,6 @@ class AdminTaskList extends Component {
             {/* cancel button to toggle edit mode */}
             <button className="btn" onClick={this.showEditTask}>Cancel</button>
             {/* delete button */}
-            <button className="btn" onClick={this.delete}>Delete</button>
           </div>
           :
           // buttons to show when not in edit mode
@@ -188,6 +187,7 @@ class AdminTaskList extends Component {
               onClick={(event) => this.confirmSend(this.props.task.id)}>
               Notify Contractor via Email
             </button>
+            <button className="btn" onClick={this.delete}>Delete Task</button>
           </div>
         }
          {/* show the last time a reminder was sent, if any */}
