@@ -301,11 +301,6 @@ router.post('/emailtask', rejectUnauthenticated, (req, res) => {
       .then ( (result) => {
          console.log(result.rows[0]);
          const id = result.rows[0].id;
-         const date = (new Date()).toLocaleString("en-US");
-         const queryText = `UPDATE task 
-            SET notified_date = $1 
-            WHERE id=$2;`;
-         pool.query(queryText, [date, id]);
          for(let i=0; i<result.rows.length; i++){
             const task = result.rows[i];
             const email = task.email;
@@ -336,7 +331,7 @@ router.post('/emailtask', rejectUnauthenticated, (req, res) => {
                   res.sendStatus(500)
                } else {
                   console.log('Email sent: ' + info.response);
-                  return res.json({ message: 'Email has been sent, please reset your account' })
+                  return res.json({ message: 'Email has been sent' })
                }
             });
          }
@@ -344,6 +339,15 @@ router.post('/emailtask', rejectUnauthenticated, (req, res) => {
       }) .catch ( (error) => {
          console.log('error in sending task email, ', error);
          res.sendStatus(500)
+      })
+      const date = (new Date()).toLocaleString("en-US");
+      const queryText = `UPDATE task 
+            SET notified_date = $1 
+            WHERE id=$2;`;
+      pool.query(queryText, [date, id])
+         .then(() => {
+         }).catch((error) => {
+            console.log('something broke in updating notified date', error);
       })
    }
 })
