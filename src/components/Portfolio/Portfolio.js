@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import './Portfolio.css'
 
 // Components
 import ExecutivePortfolioView from './ExecutivePortfolioView';
@@ -13,13 +14,14 @@ class Portfolio extends Component {
     // console.log(this.props);
     return (
       <>      
-        {this.props.store.user.user_type === "admin" && 
-         <ExecutivePortfolioView history={this.props.history}/> }
-        {this.props.store.user.user_type === "client" &&
-        <ClientVendorPortfolioView history={this.props.history}/> }
+        {/* {this.props.store.user.user_type === "admin" &&  */}
+         <ExecutivePortfolioView history={this.props.history}/> 
+         {/* } */}
+        {/* {this.props.store.user.user_type === "client" && */}
+        {/* <ClientVendorPortfolioView history={this.props.history}/> } */}
         {/* need to create a contractor portal view to let them see their jobs and tasks and replace the below component with that*/}
-        {this.props.store.user.user_type === "contractor"  &&
-        <ContractorPortfolioView history={this.props.history}/>}
+        {/* {this.props.store.user.user_type === "contractor"  && */}
+        {/* <ContractorPortfolioView history={this.props.history}/>} */}
       </>
     );
   }

@@ -26,7 +26,6 @@ class ProjectTitle extends Component {
 }
   render() {
     return (
-    
        <div className="container paper">
           <h3>{this.props.store.projectReducer.projectReducer[0]?.project_name}</h3>
           <p>Customer: {this.props.store.projectReducer.projectReducer[0]?.company_name}</p>
@@ -36,9 +35,7 @@ class ProjectTitle extends Component {
           <p>Address: {this.props.store.projectReducer.projectReducer[0]?.address}</p>
           <p>Notes: {this.props.store.projectReducer.projectReducer[0]?.notes}</p>
         <TaskList/>  
-
         </div>
-          
     );
   }
 }

@@ -1,0 +1,16 @@
+.project-item{
+    margin: 1rem auto;
+    padding: 1rem;
+}
+
+.onTime{
+    border: rgb(43, 137, 226) solid 2px;
+}
+
+.late{
+    border: rgb(173, 23, 23) solid 2px;
+}
+
+.complete{
+    border: rgb(64, 226, 43) solid 2px;
+}
