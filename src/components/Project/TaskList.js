@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import AddNewTask from '../AddNewTask/AddNewTask';
-import AdminTaskList from './AdminTaskList' 
+import AdminTaskList from './AdminTaskList/AdminTaskList' 
 import ContractorTaskList from './ContractorTaskList'
 import ClientTaskList from './ClientTaskList'
 
@@ -34,9 +34,9 @@ class TaskList extends Component {
         <div className="container paper">
             <center>
                 {this.props.store.user.user_type === 'admin' && <>
-                    {this.state.showAddTask ? 
-                        <> <button onClick={this.showAddTask}>Close Add New Task</button> <AddNewTask/>  </> : 
-                        <button onClick={this.showAddTask}>Create A New Task</button>
+                    {this.state.showAddTask 
+                        ? <> <button className="btn" onClick={this.showAddTask}>Close Add New Task</button> <AddNewTask/>  </> 
+                        : <button className="btn" onClick={this.showAddTask}>Create A New Task</button>
                     }
                 </>
             }
