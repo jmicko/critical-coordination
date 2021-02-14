@@ -10,6 +10,8 @@ body,
 body {
   font-family: 'Open Sans', Arial, Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
+  color: #f8f8f8;
+  background-color: rgb(19, 19, 19);
 }
 
 img {
@@ -34,11 +36,11 @@ Button
 .btn {
   display: inline-block;
   padding: 10px 20px;
-  border-color: #7a371a;
+  border-color: #6b6b6b;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #f56f34;
   color: #f8f8f8;
+  background-color: #000000;
   font-size: 1.1rem;
   outline: 0;
   cursor: pointer;
@@ -60,7 +62,7 @@ Button
 }
 
 .btn:hover {
-  background-color: #df4c0d;
+  background-color: #242424;
   text-decoration: none;
 }
 
@@ -82,7 +84,7 @@ Button
 .btn_asLink:hover {
   background-color: transparent;
   border-color: #df4c0d;
-  color: #df4c0d;
+  color: #242424;
 }
 
 /* --------------------------------------------------------------------------------
@@ -110,7 +112,7 @@ Form Treatment
   max-width: 100%;
   padding: 25px;
   margin: 0 auto 20px;
-  background-color: #efefef;
+  background-color: #525252;
   border-radius: 3px;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
 }
@@ -121,7 +123,7 @@ Form Treatment
   max-width: 100%;
   padding: 25px;
   margin: 0 auto 20px;
-  background-color: #efefef;
+  background-color: #525252;
   border-radius: 3px;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
 }
@@ -152,6 +154,19 @@ table td:last-child {
 
 
 /* --------------------------------------------------------------------------------
+Menus
+-------------------------------------------------------------------------------- */
+
+.menu-hz-btn{
+  height: 100%;
+}
+
+.menu-hz{
+  height: 2rem;
+}
+
+
+/* --------------------------------------------------------------------------------
 General Theme
 -------------------------------------------------------------------------------- */
 
@@ -174,7 +189,8 @@ General Theme
 .paper{
   box-shadow: 1px 2px 6px 0px rgba(163, 163, 163, 0.83);
   padding: 1rem;
-  background-color: rgb(245, 245, 244);
+  color: #efefef;
+  background-color: #3b3b3b;
   width: max-content;
 }
 

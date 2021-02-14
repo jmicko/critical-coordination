@@ -21,11 +21,13 @@ class AdminPage extends Component {
     if (this.props.store.user.user_type === 'admin') {
       return (
         <center>
-          <h1>Admin Page</h1>
+          <h1 className="menu-hz-header">Admin</h1>
           {/* {JSON.stringify(this.props)} */}
-          <button className="btn" onClick={() => this.setState({ active: "user" })}>Manage User</button>
-          <button className="btn" onClick={() => this.setState({ active: "company" })}>Manage Company</button>
-          <button className="btn" onClick={() => this.setState({ active: "task" })}>Manage Task Status</button>
+          <div className="menu-hz">
+            <button className="menu-hz-btn" onClick={() => this.setState({ active: "user" })}>Manage User</button>
+            <button className="menu-hz-btn" onClick={() => this.setState({ active: "company" })}>Manage Company</button>
+            <button className="menu-hz-btn" onClick={() => this.setState({ active: "task" })}>Manage Task Status</button>
+          </div>
           <br /><br />
           {this.state.active === "user" &&
             <AdminUser />}

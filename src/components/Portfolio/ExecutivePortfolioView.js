@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Popup from 'reactjs-popup';
 import AddNewProject from '../AddNewProject/AddNewProject';
+import './Portfolio.css'
 
 
 class ExecutivePortfolioView extends Component {
@@ -20,18 +21,19 @@ class ExecutivePortfolioView extends Component {
         due_date: '',
         showAddNewProject: false,
         location_fk: '',
+        status: 'complete'
     };
 
     fieldValidation = () => {
-        if( this.state.project_id  && 
-            this.state.project_name  &&
-            this.state.location_name  &&
-            this.state.PO_Number  &&
+        if (this.state.project_id &&
+            this.state.project_name &&
+            this.state.location_name &&
+            this.state.PO_Number &&
             this.state.due_date &&
-            this.state.location_fk  
-        ){
-            {this.update()};
-        }else{
+            this.state.location_fk
+        ) {
+            { this.update() };
+        } else {
             alert('Please fill out all the fields');
         }
     }
@@ -71,36 +73,106 @@ class ExecutivePortfolioView extends Component {
             showAddNewProject: !this.state.showAddNewProject,
         })
     }
-    
+
     render() {
-        console.log(this.state);
+        // console.log(this.state);
         return (
-            <center className="container paper">
-                <h1> Executive Portfolio Page </h1>
-                <button onClick={this.showAdd}>
-                    Add New Project
-                </button>
-                {this.state.showAddNewProject && <AddNewProject />}
-                <table className="table td">
-                    <thead>
-                        <tr position='align-left'>
-                            <th>Project:</th>
-                            <th>Location:</th>
-                            <th>PO#:</th>
-                            <th>Due Date:</th>
-                            <th>Status:</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.props.store.portfolio.map((project) => {
-                            return <tr key={project.id} onClick={() => this.navigate(`/project`, project)}>
-                                <td><label>{project.project_name}</label> </td>
-                                <td><label>{project.location_name}</label></td>
-                                <td><label>{project.PO_Number}</label></td>
-                                <td>{this.dateConversion(project.due_date)}</td>
-                                <td><input placeholder='Logic needs to be done' /></td>
-                                <td>
-                                    <Popup trigger={open => (<button>Edit </button>)} position="left" >
+            <div className="container paper">
+                {/* THIS WILL RENDER IF ADMIN */}
+                {this.props.store.user.user_type === "admin"
+                    ?
+                    <div>
+                        <h1> Executive Portfolio Page </h1>
+                        <button
+                        className="btn"
+                        onClick={this.showAdd}>
+                            Add New Project
+                        </button>
+
+                        {this.state.showAddNewProject && <AddNewProject />}
+                    </div>
+                    // END ADMIN
+                    // RENDER CLIENT PAGE IF CLIENT
+                    : this.props.store.user.user_type === "client"
+                        ? <h1> Client Portfolio Page </h1>
+                        // RENDER CONTRACTOR IF CONTRACTOR
+                        : <h1> Contractor Portfolio Page </h1>
+                }
+
+                {this.props.store.portfolio.map((project) => {
+                    return (
+                        <div
+                            key={project.id}
+                            // class names will render based on task status
+                            className={`
+                                project-item 
+                            ${this.state.status === "onTime" &&
+                                "on-time"}
+                            ${this.state.status === "attention" &&
+                                "attention"}
+                            ${this.state.status === "late" &&
+                                "late"}
+                            ${this.state.status === "complete" &&
+                                "complete"}
+                        `}
+                        >
+                            {/* div to hold status bar. clicking a button will 
+                            change the status and color will update */}
+                            <div className="status-bar">
+                                <button
+                                    onClick={() => this.setState({ status: 'onTime' })}
+                                    className={`
+                                    ${this.state.status === "onTime" &&
+                                        "active"}
+                                    `}
+                                >
+                                    <center>On Time</center>
+                                </button>
+                                <button
+                                    onClick={() => this.setState({ status: 'attention' })}
+                                    className={`
+                                    ${this.state.status === "attention" &&
+                                        "active"}
+                                    `}
+                                >
+                                    <center>Needs Attention</center>
+                                </button>
+                                <button
+                                    onClick={() => this.setState({ status: 'late' })}
+                                    className={`
+                                    ${this.state.status === "late" &&
+                                        "active"}
+                                    `}
+                                >
+                                    <center>Late</center>
+                                </button>
+                                <button
+                                    onClick={() => this.setState({ status: 'complete' })}
+                                    className={`
+                                    ${this.state.status === "complete" &&
+                                        "active"}
+                                    `}
+                                >
+                                    <center>Complete</center>
+                                </button>
+                            </div>
+                            <div className="project-details"
+                                onClick={() => this.navigate(`/project`, project)}
+                            >
+                                <div className="project-name">
+                                    <h2>{project.project_name}</h2>
+                                </div>
+
+                                <p>Location: {project.location_name}</p>
+
+                                <p>PO#: {project.PO_Number}</p>
+
+                                <p>Due Date: {this.dateConversion(project.due_date)}</p>
+
+                                {/* <label>Status: <input placeholder='Logic needs to be done' /></label> */}
+
+                                {this.props.store.user.user_type === "admin" &&
+                                    <Popup trigger={open => (<button className="btn">Edit </button>)} position="left" >
                                         <div className="editPanel" onClick={() => this.updateId(project)}>
                                             <h3>Edit Window:</h3>
                                             <label>Project:</label>
@@ -116,12 +188,12 @@ class ExecutivePortfolioView extends Component {
                                             <button onClick={this.fieldValidation}>Save</button>
                                         </div>
                                     </Popup>
-                                </td>
-                            </tr>
-                        })}
-                    </tbody>
-                </table>
-            </center>
+                                }
+                            </div>
+                        </div>
+                    )
+                })}
+            </div >
         );
     }
 };
