@@ -41,11 +41,11 @@ class AddNewTask extends Component {
     }
 
     addTask = () => {
-        if(this.state.newTask.type !== '' && 
-            this.state.newTask.company !== '' && 
+        if (this.state.newTask.type !== '' &&
+            this.state.newTask.company !== '' &&
             this.state.newTask.due_date !== '' &&
-            this.state.newTask.status !== ''){
-            this.props.dispatch( {type: 'ADMIN_ADD_TASK', payload: this.state.newTask})
+            this.state.newTask.status !== '') {
+            this.props.dispatch({ type: 'ADMIN_ADD_TASK', payload: this.state.newTask })
             this.setState({
                 newTask: {
                     type: '',
@@ -69,7 +69,8 @@ class AddNewTask extends Component {
             <div className="container paper">
                 <h3> Add New Task </h3>
                 <form>
-                    <label>Task Type: &nbsp;
+                    {/* TASK TYPE */}
+                    <label>Task Type:
                         <select value={this.state.newTask.type} onChange={(event) => this.handleChange(event, 'type')}>
                             <option value=''></option>
                             <option value="1">Materials</option>
@@ -78,8 +79,9 @@ class AddNewTask extends Component {
                             <option value="4">Custom</option>
                         </select>
                     </label>
-                    <br/>
-                    <label>Company Assigned: &nbsp;
+
+                    {/* ASSIGNED TO */}
+                    <label>Company Assigned:
                         <select value={this.state.newTask.company} onChange={(event) => this.handleChange(event, 'company')}>
                             <option value=''></option>
                             {this.props.store.admin.allCompanyReducer.map((company) => {
@@ -87,12 +89,14 @@ class AddNewTask extends Component {
                             })}
                         </select>
                     </label>
-                    <br/>
-                    <label> Due Date: &nbsp;
+
+                    {/* DUE DATE */}
+                    <label> Due Date:
                         <input value={this.state.newTask.due_date} onChange={(event) => this.handleChange(event, 'due_date')} type="date"></input>
                     </label>
-                    <br />
-                    <label> Task Status: &nbsp;
+
+                    {/* STATUS */}
+                    <label> Status:
                         <select value={this.state.newTask.status} onChange={(event) => this.handleChange(event, 'status')}>
                             <option value=''></option>
                             {this.props.store.admin.taskStatusReducer.map((status) => {
@@ -100,20 +104,45 @@ class AddNewTask extends Component {
                             })}
                         </select>
                     </label>
+
+                    {/* TRACKING NUMBER */}
+                    {/* render tracking number if "materials" task type is selected */}
                     {this.state.newTask.type === '1' &&
-                    <label> Tracking Number: &nbsp;
-                        <input value={this.state.newTask.tracking_number} onChange={(event) => this.handleChange(event, 'tracking_number')} placeholder="UPS or FEDEX"></input>
-                    </label>}
-                    <br/>
-                    <br/>
-                    <label> Notes: &nbsp;
-                            <textarea placeholder="...any specific details about the task go here" 
-                            className="notes" type="text" cols="100" rows="5"
+                        <label> Tracking Number:
+                        <input
+                                value={this.state.newTask.tracking_number}
+                                onChange={(event) => this.handleChange(event, 'tracking_number')}
+                                placeholder="UPS or FEDEX"
+                            ></input>
+                        </label>
+                    }
+
+                    {/* NOTES */}
+                    <label> Notes:
+                            <textarea placeholder="...any specific details about the task go here"
+                            className="notes" type="text" cols="60" rows="5"
                             value={this.state.newTask.notes}
-                            onChange={(event) => this.handleChange(event, 'notes')}/>
+                            onChange={(event) => this.handleChange(event, 'notes')} />
                     </label>
-                    <br/>
-                    <button onClick={ (event) => this.addTask(event)} type="submit">Add Task</button>
+
+                    {/* BUTTONS */}
+                    <div className="new-task-buttons">
+                        {/* SUBMIT */}
+                        <button
+                            className="btn"
+                            onClick={(event) => this.addTask(event)}
+                            type="submit"
+                        >
+                            Add Task
+                        </button>
+                        {/* CANCEL */}
+                        <button
+                            className="btn"
+                            onClick={this.props.showAddTask}
+                        >
+                            Cancel
+                        </button>
+                    </div>
                 </form>
             </div>
         );

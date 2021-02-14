@@ -1,0 +1,89 @@
+.project-item{
+    margin: 1rem auto;
+    border-radius: .5rem;
+    background-color: rgb(75, 76, 80);
+}
+
+.project-details{
+    margin: 1rem;
+}
+
+.on-time{
+    border: #00cdf1 solid .375rem;
+}
+
+.attention{
+    border: #9c7319 solid .375rem;
+}
+
+.late{
+    border: #b80b0b solid .375rem;
+}
+
+.complete{
+    border: #279219 solid .375rem;
+}
+
+.on-time .status-bar .active{
+    height: 2rem;
+    width: auto;
+    background-color: #00cdf1;
+    margin: 0;
+}
+
+.attention .status-bar .active{
+    height: 2rem;
+    width: auto;
+    background-color: #9c7319;
+    margin: 0;
+}
+
+.late .status-bar .active{
+    height: 2rem;
+    width: auto;
+    background-color: #b80b0b;
+    margin: 0;
+}
+
+.complete .status-bar .active{
+    height: 2rem;
+    /* width: 33%; */
+    background-color: #279219;
+    margin: 0;
+}
+
+.status-bar{
+    display: grid;
+    grid-template-columns:repeat(4, 1fr);
+}
+
+.status-bar button{
+    background-color: #5a544d;
+    color: #efefef;
+    border: inherit;
+    font-size: 1.125rem;
+}
+
+/* .status-bar button:active, */
+.status-bar button:hover,
+.status-bar button:focus{
+    /* background-color: #5a544d; */
+    color: #efefef;
+    border: none;
+    outline: inherit;
+    background-color: #3a2815a8;
+}
+
+.project-name{
+    /* width: max-content; */
+    /* background-color: #b3481d; */
+    background: linear-gradient(90deg, #813f23 0%, #813f23 75%, #3b3b3b00 100%);
+    border-bottom-left-radius: .4rem;
+    border-top-left-radius: .4rem;
+}
+
+.project-name h2{
+    margin-left: .75rem;
+    margin-right: 33%;
+    width: max-content;
+}
