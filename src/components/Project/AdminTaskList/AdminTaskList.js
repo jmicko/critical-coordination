@@ -6,11 +6,11 @@ import Popup from 'reactjs-popup';
 import './AdminTaskList.css'
 
 const getCookie = (cookieName) => {
-  // Get name followed by anything except a semicolon
   const cookieString = RegExp('' + cookieName + '[^;]+').exec(document.cookie);
-  // Return everything after the equal sign, or an empty string if the cookie name not found
   return decodeURIComponent(!!cookieString ? cookieString.toString().replace(/^[^=]+./, '') : '');
 }
+
+const update = 'this.state.updateRecord';
 
 class AdminTaskList extends Component {
 
@@ -23,8 +23,17 @@ class AdminTaskList extends Component {
       task_type: '',
       nlt_date: '',
       date_scheduled: '',
+      tracking_number: '',
+      notes: '',
+      updated_by: '',
     }
   };
+
+  componentDidMount(){
+    this.setState({
+      updateRecord: this.props.task
+    })
+  }
 
   handleChange = (event, name) => {
     this.setState({
@@ -38,7 +47,6 @@ class AdminTaskList extends Component {
   showEditTask = () => {
     this.setState({
       showEditTask: !this.state.showEditTask,
-      updateRecord: { task_id: this.props.task.id }
     });
   }
 
@@ -49,6 +57,9 @@ class AdminTaskList extends Component {
 
   delete = () => {
     this.props.dispatch({ type: 'DELETE_TASK', payload: this.state });
+    this.setState({
+      showEditTask: '',
+    })
   }
 
   dateConversion = fieldValue => {
@@ -60,24 +71,10 @@ class AdminTaskList extends Component {
     }
   }
 
-  fieldValidation = () => {
-    if (this.state.updateRecord.task_id &&
-      this.state.updateRecord.task_status &&
-      this.state.updateRecord.task_type &&
-      this.state.updateRecord.nlt_date &&
-      this.state.updateRecord.date_scheduled
-    ) {
-      { this.save() }
-    } else {
-      alert('Please fill out all the fields');
-    }
-  }
-
   confirmSend = (id) => {
     console.log('sending email for task', id);
-    this.props.dispatch({ type: 'EMAIL_TASK', payload: { id: id, project: getCookie('project') } })
-    const date = (new Date()).toLocaleString("en-US")
-    console.log(date);
+    this.props.dispatch({ type: 'EMAIL_TASK', payload: { id: id, project: getCookie('project')} })
+    alert('Email sent')
   }
 
   render() {
@@ -86,51 +83,83 @@ class AdminTaskList extends Component {
       <div className="container-task metal rounded" >
         {/* show who the task is assigned to */}
         <p> Assigned to: {this.props.task.company_name} </p>
-
+        <p> Task: {this.props.task.task_name}  </p>
         {/* check if in edit mode */}
         {this.state.showEditTask
           // If editing
           ? <div>
-
-            <label>Task Type: &nbsp;
-            <select value={this.state.type} onChange={(event) => this.handleChange(event, 'task_type')}>
-                <option value=''></option>
-                <option value="1">Materials</option>
-                <option value="2">Install</option>
-                <option value="3">Invoice</option>
-                <option value="4">Custom</option>
-              </select>
-            </label>
-
-            <p><label>Date Scheduled:<input type='date' onChange={(event => this.handleChange(event, 'date_scheduled'))} placeholder={this.props.task.scheduled_date}></input></label></p>
-
-            <p><label>Final Due Date:<input type='date' onChange={(event => this.handleChange(event, 'nlt_date'))} placeholder={this.props.task.nlt_date}></input></label></p>
-
-            <label>Status:
+            
+            {this.props.task.task_name === 'Schedule Installation' &&
+            <div> 
+              <p>
+                <label>Scheduled Install Date: {this.dateConversion(this.props.task.scheduled_date)}
+                  <input type='date' onChange={(event => this.handleChange(event, 'scheduled_date'))} value={update.date_scheduled} placeholder={this.props.task.scheduled_date} />
+                </label>
+              </p>
+              <p>
+              <label> Technician Info: <br/>
+                <textarea 
+                  placeholder="name and contact information of installation technician" 
+                  rows="2" 
+                  cols="50" 
+                  value={this.state.updateRecord.technician_info}
+                  onChange={(event => this.handleChange(event, 'technician_info'))} />
+              </label>
+              </p>
+            </div>}
+            {this.props.task.task_name === 'Order Materials' &&
+            <p>
+              <label>Date Scheduled: {this.dateConversion(this.props.task.scheduled_date)}
+                <input type='date' onChange={(event => this.handleChange(event, 'scheduled_date'))} value={update.date_scheduled} placeholder={this.props.task.scheduled_date}/>
+              </label> 
+            </p>
+            }
+            <p>
+              <label>Final Due Date: {this.dateConversion(this.props.task.nlt_date)}
+                <input type='date' onChange={(event => this.handleChange(event, 'nlt_date'))} placeholder={this.props.task.nlt_date}/>
+              </label> 
+            </p>
+            <label>Status: {this.state.updateRecord.status_type}
             <select onChange={(event) => this.handleChange(event, 'task_status')}>
                 <option value=''></option>
                 {this.props.store.admin.taskStatusReducer.map((status) => {
                   return <option key={status.id} value={status.id}>{status.status_type}</option>
                 })}
               </select>
-            </label>
+            </label> <br/>
+            {this.props.task.task_name === 'Order Materials' &&
+              <p>
+                <label> Tracking Number:
+                  <input type="text" onChange={(event => this.handleChange(event, 'tracking_id'))} placeholder={this.props.task.tracking_id}></input>
+                </label>
+              </p>}
+              <label> Notes:  <br/>
+                <textarea value={this.state.updateRecord.notes} onChange={(event => this.handleChange(event, 'notes'))}rows="10" cols="50"></textarea>
+              </label>
           </div>
 
           // If not editing
-          : <div className="">
-            <p> Task: {this.props.task.task_name}  </p>
-            <p> Date Scheduled: {this.dateConversion(this.props.task.scheduled_date)} </p>
+          : <div>
+            
+            {/* if a materials task, show delivery date */}
+            {this.props.task.task_name === 'Order Materials' &&
+            <p> Delivery Date: {this.dateConversion(this.props.task.scheduled_date)} </p> }
+            {/* if an installation task, show installation date */}
+            {this.props.task.task_name === 'Schedule Installation' &&
+            <p> Scheduled Install Date: {this.dateConversion(this.props.task.scheduled_date)} <br/>
+            Technician Info: {this.props.task.technician_info}</p>
+            }
             <p> Final Due Date: {this.dateConversion(this.props.task.nlt_date)} </p>
             <p>Status: {this.props.task.status_type}  </p>
+            {/* show shipping information if there is any */}
+            {this.props.task.task_name === 'Order Materials' &&
+              <TrackingApi tracking_number={this.props.task.tracking_id} />}
+            <p>Notes: {this.props.task.notes}</p>
+            <p>Last Updated By: {this.props.task.updated_by}</p>
           </div>
         }
 
-        {/* show shipping information if there is any */}
-        {this.props.task.task_name === 'Order Materials' &&
-          <TrackingApi tracking_number={this.props.task.tracking_id} />}
 
-        {/* show notes */}
-        <p>Notes: {this.props.task.notes}</p>
 
         {/* check edit mode and display correct buttons accordingly */}
         {this.state.showEditTask
@@ -138,7 +167,7 @@ class AdminTaskList extends Component {
           // buttons to show when not in edit mode
           <div className="task-buttons">
             {/* save button */}
-            <button className="btn" onClick={this.fieldValidation}>Save</button>
+            <button className="btn" onClick={this.save}>Save</button>
             {/* cancel button to toggle edit mode */}
             <button className="btn" onClick={this.showEditTask}>Cancel</button>
             {/* delete button */}
@@ -163,7 +192,7 @@ class AdminTaskList extends Component {
         }
          {/* show the last time a reminder was sent, if any */}
         {this.props.task.notified_date &&
-          <p>Last Notified Date: {this.props.task?.notified_date}</p>}
+          <p>Contractors Notified: {this.dateConversion(this.props.task?.notified_date)}</p>}
       </div>
     );
   }
