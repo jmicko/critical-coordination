@@ -99,23 +99,32 @@ ALTER TABLE "company_location" ADD CONSTRAINT "company_location_fk0" FOREIGN KEY
 --inserts of starter data
 insert into company ("company_name") 
 VALUES ('Unassigned'), ('Critical Coordination'), ('AT&T DataCenter'), ('Datalink'), ('The Electric Contracting Company'), ('The Materials Supply Company'), ('Verizon'); 
-insert into company_location ("address", "location_name", "company_fk") 
 -- company location data
-VALUES ('Unassigned', 'Unassigned', 1),('Bayport, MN', 'Bayport', 2), ('1431 Beam Avenue, Maplewood, MN 55115', 'Maplewood', 3), 
-('11330 Fountains Dr, Maple Grove, MN 55369', 'Maple Grove', 3), ('850 E Co Rd E East, Vadnais Heights, MN 55127', 'Vadnais Heights', 4), 
-('10240 Hudson Rd, Woodbury, MN 55129', 'Woodbury', 4), ('99 Electric Avenue, Shakopee, MN 55379', 'Shakopee', 5), ('1000 Electric Supply Avenue, Shakopee, MN 55379', 'Shakopee', 6);
+insert into company_location ("address", "location_name", "company_fk") 
+VALUES ('Unassigned', 'Unassigned', 1),
+('Bayport, MN', 'Bayport', 2),
+('1431 Beam Avenue, Maplewood, MN 55115', 'Maplewood', 3), 
+('11330 Fountains Dr, Maple Grove, MN 55369', 'Maple Grove', 3),
+('850 E Co Rd E East, Vadnais Heights, MN 55127', 'Vadnais Heights', 4), 
+('10240 Hudson Rd, Woodbury, MN 55129', 'Woodbury', 4), 
+('99 Electric Avenue, Shakopee, MN 55379', 'Shakopee', 5), 
+('1000 Electric Supply Avenue, Shakopee, MN 55379', 'Shakopee', 6);
 --user data
-INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") VALUES('admin@admin.com', 'Tom', 'Darrow', 2, '$2a$10$Web1/wZqAWT9p36Od3/b2.SAwVJr9NoygJrvWmu42LX1/3K.BXrL.', 'admin');
-INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") VALUES('client@att.com', 'John', 'Doe', 3, '$2a$10$Web1/wZqAWT9p36Od3/b2.SAwVJr9NoygJrvWmu42LX1/3K.BXrL.', 'client');
-INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") VALUES('client@datasite.com', 'John', 'Deer', 4, '$2a$10$Web1/wZqAWT9p36Od3/b2.SAwVJr9NoygJrvWmu42LX1/3K.BXrL.', 'client');
-INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") VALUES('dan@electric.com', 'Dan', 'Porter', 5, '$2a$10$Web1/wZqAWT9p36Od3/b2.SAwVJr9NoygJrvWmu42LX1/3K.BXrL.', 'contractor');
-INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") VALUES('tim@materials.com', 'Tim', 'Washman', 6, '$2a$10$Web1/wZqAWT9p36Od3/b2.SAwVJr9NoygJrvWmu42LX1/3K.BXrL.', 'contractor');
+INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") 
+VALUES('admin@admin.com', 'Tom', 'Darrow', 2, '$2a$10$Web1/wZqAWT9p36Od3/b2.SAwVJr9NoygJrvWmu42LX1/3K.BXrL.', 'admin'),
+('client@att.com', 'John', 'Doe', 3, '$2a$10$Web1/wZqAWT9p36Od3/b2.SAwVJr9NoygJrvWmu42LX1/3K.BXrL.', 'client'),
+('client@datasite.com', 'John', 'Deer', 4, '$2a$10$Web1/wZqAWT9p36Od3/b2.SAwVJr9NoygJrvWmu42LX1/3K.BXrL.', 'client'),
+('dan@electric.com', 'Dan', 'Porter', 5, '$2a$10$Web1/wZqAWT9p36Od3/b2.SAwVJr9NoygJrvWmu42LX1/3K.BXrL.', 'contractor'),
+('tim@materials.com', 'Tim', 'Washman', 6, '$2a$10$Web1/wZqAWT9p36Od3/b2.SAwVJr9NoygJrvWmu42LX1/3K.BXrL.', 'contractor');
 --data for projects and tasks FK tables
 INSERT INTO task_status ("status_type") VALUES ('Started'), ('Receipt Acknowledged'), ('Shipped'), ('Scheduled'), ('Complete'), ('Invoiced');
 INSERT INTO task_name ("task_name") VALUES('Order Materials'), ('Schedule Installation'), ('Invoice'), ('Custom');
 --sample data for projects
-INSERT INTO project ("project_name", "PO_Number", "due_date", "company_fk", "location_fk", "notes") VALUES('AT&T Install', '1000', '2021-03-01', 3, 2, 'Cable Install to be completed no later than 3-1-21'), ('AT&T Maplewood', '1001', '2021-02-28', 3, 3, 'Cable Install to be completed by 2-28-21'),
-('Datalink Maple Grove', '1002', '2021-03-01', 4, 4, 'new project due 3-1-21'), ('Datalink Woodbury', '1003', '2021-03-02', 4, 5, 'new project/install due 3-2-21');
+INSERT INTO project ("project_name", "PO_Number", "due_date", "company_fk", "location_fk", "notes") 
+VALUES('AT&T Install', '1000', '2021-03-01', 3, 2, 'Cable Install to be completed no later than 3-1-21'), 
+('AT&T Maplewood', '1001', '2021-02-28', 3, 3, 'Cable Install to be completed by 2-28-21'),
+('Datalink Maple Grove', '1002', '2021-03-01', 4, 4, 'new project due 3-1-21'), 
+('Datalink Woodbury', '1003', '2021-03-02', 4, 5, 'new project/install due 3-2-21');
 --sample data for tasks
 INSERT INTO task ("poc_fk", "company_fk", "scheduled_date", "nlt_date", "task_name_fk", "task_status_fk", "project_fk") 
 VALUES(5, 6, '2021-02-08', '2021-02-09', 1, 1, 1), (4, 5, '2021-02-10', '2021-02-11', 2, 1, 1), (5, 6, '2021-02-10', '2021-02-11', 1, 1, 2), 
