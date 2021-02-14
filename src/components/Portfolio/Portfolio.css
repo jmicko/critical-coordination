@@ -1,7 +1,12 @@
 .project-item{
     margin: 1rem auto;
     border-radius: .5rem;
-    background-color: rgb(75, 76, 80);
+    background-color: #3b3b3b;
+}
+
+.portfolio{
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 
 .project-details{
@@ -9,25 +14,27 @@
 }
 
 .on-time{
-    border: #00cdf1 solid .375rem;
+    border: #00cdf1 solid .125rem;
+    border-top-left-radius: .5rem;
 }
 
 .attention{
-    border: #9c7319 solid .375rem;
+    border: #9c7319 solid .125rem;
 }
 
 .late{
-    border: #b80b0b solid .375rem;
+    border: #b80b0b solid .125rem;
 }
 
 .complete{
-    border: #279219 solid .375rem;
+    border: #279219 solid .125rem;
 }
 
 .on-time .status-bar .active{
     height: 2rem;
     width: auto;
     background-color: #00cdf1;
+    color: #efefef;
     margin: 0;
 }
 
@@ -35,6 +42,7 @@
     height: 2rem;
     width: auto;
     background-color: #9c7319;
+    color: #efefef;
     margin: 0;
 }
 
@@ -42,6 +50,7 @@
     height: 2rem;
     width: auto;
     background-color: #b80b0b;
+    color: #efefef;
     margin: 0;
 }
 
@@ -49,6 +58,7 @@
     height: 2rem;
     /* width: 33%; */
     background-color: #279219;
+    color: #efefef;
     margin: 0;
 }
 
@@ -58,8 +68,8 @@
 }
 
 .status-bar button{
-    background-color: #5a544d;
-    color: #efefef;
+    background-color: #313131;
+    color: #868686;
     border: inherit;
     font-size: 1.125rem;
 }
@@ -71,7 +81,7 @@
     color: #efefef;
     border: none;
     outline: inherit;
-    background-color: #3a2815a8;
+    background-color: #575757;
 }
 
 .project-name{

@@ -77,7 +77,7 @@ class Portfolio extends Component {
   render() {
     // console.log(this.state);
     return (
-      <div className="container portfolio metal rounded">
+      <div className="container portfolio night rounded">
         {/* THIS WILL RENDER IF ADMIN */}
         {this.props.store.user.user_type === "admin"
           ?
@@ -122,33 +122,35 @@ class Portfolio extends Component {
                 <button
                   onClick={() => this.setState({ status: 'onTime' })}
                   className={`
+                                btn-status
                                 ${this.state.status === "onTime" &&
-                    "active"}
+                                "active"}
                                 `}
-                >
+                                >
                   <center>On Time</center>
                 </button>
                 <button
                   onClick={() => this.setState({ status: 'attention' })}
                   className={`
-                                ${this.state.status === "attention" &&
-                    "active"}
-                                `}
-                >
+                  ${this.state.status === "attention" &&
+                  "active"}
+                  `}
+                  >
                   <center>Needs Attention</center>
                 </button>
                 <button
                   onClick={() => this.setState({ status: 'late' })}
                   className={`
-                                ${this.state.status === "late" &&
-                    "active"}
-                                `}
-                >
+                  ${this.state.status === "late" &&
+                  "active"}
+                  `}
+                  >
                   <center>Late</center>
                 </button>
                 <button
                   onClick={() => this.setState({ status: 'complete' })}
                   className={`
+                  btn-status
                                 ${this.state.status === "complete" &&
                     "active"}
                                 `}
