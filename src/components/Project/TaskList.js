@@ -31,7 +31,7 @@ class TaskList extends Component {
 
   render() {
     return (
-      <div className="container paper">
+      <div className="container night rounded">
         {this.props.store.user.user_type === 'admin' &&
           <div>
             {!this.state.showAddTask &&
