@@ -1,5 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
+const home = process.env.CLIENT_URL
+
+const doStuff = (props) => {
+  props.dispatch({type: 'LOGOUT'});
+  window.location.href = `${home}/#/login`;
+}
+
+
+
 
 const LogOutButton = (props) => (
   <button
@@ -7,7 +16,7 @@ const LogOutButton = (props) => (
     // because it's styled differently depending on where it is used, the className
     // is passed to it from it's parents through React props
     className={props.className}
-    onClick={() => props.dispatch({ type: 'LOGOUT' })}
+    onClick={() => doStuff(props)}
   >
     Log Out
   </button>
