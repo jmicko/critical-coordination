@@ -72,7 +72,7 @@ class App extends Component {
               // - else shows LandingPage at "/home"
               exact
               path="/home"
-              component={LandingPage}
+              component={LoginPage}
               authRedirect="/portfolio"
             />
             <ProtectedRoute

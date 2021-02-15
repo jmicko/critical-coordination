@@ -55,9 +55,9 @@ class Project extends Component {
                         ${this.state.status === "complete" && "complete"}
                     `}
       >
-        <PortfolioStatus 
-        status = {this.state.status}
-        updateStatus = {this.updateStatus} />
+        <PortfolioStatus
+          status={this.state.status}
+          updateStatus={this.updateStatus} />
 
 
         <div className="project-details">
@@ -89,7 +89,9 @@ class Project extends Component {
             </Popup>
           }
           <button className="btn" onClick={() => this.navigate(`/projectdetails`, this.props.project)}>Details</button>
-          <button className="btn btn-delete">Close Project</button>
+          {this.props.store.user.user_type === "admin" &&
+            <button className="btn btn-delete">Close Project</button>
+          }
         </div>
       </div>
     );
