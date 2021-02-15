@@ -121,12 +121,12 @@ INSERT INTO task_status ("status_type") VALUES ('Started'), ('Receipt Acknowledg
 INSERT INTO task_name ("task_name") VALUES('Order Materials'), ('Schedule Installation'), ('Invoice'), ('Custom');
 --sample data for projects
 INSERT INTO project ("project_name", "PO_Number", "due_date", "company_fk", "location_fk", "notes") 
-VALUES('AT&T Install', '1000', '2021-03-01', 3, 2, 'Cable Install to be completed no later than 3-1-21'), 
-('AT&T Maplewood', '1001', '2021-02-28', 3, 3, 'Cable Install to be completed by 2-28-21'),
-('Datalink Maple Grove', '1002', '2021-03-01', 4, 4, 'new project due 3-1-21'), 
-('Datalink Woodbury', '1003', '2021-03-02', 4, 5, 'new project/install due 3-2-21');
+VALUES('AT&T Install 1000', '1000', '2021-03-01', 3, 2, 'Cable Install to be completed no later than 3-1-21'), 
+('AT&T Install 1001', '1001', '2021-02-28', 3, 3, 'Cable Install to be completed by 2-28-21'),
+('Datalink Install 1002', '1002', '2021-03-01', 4, 4, 'new project due 3-1-21'), 
+('Datalink Install 1003', '1003', '2021-03-02', 4, 5, 'new project/install due 3-2-21');
 --sample data for tasks
-INSERT INTO task ("poc_fk", "company_fk", "scheduled_date", "nlt_date", "task_name_fk", "task_status_fk", "project_fk") 
-VALUES(5, 6, '2021-02-08', '2021-02-09', 1, 1, 1), (4, 5, '2021-02-10', '2021-02-11', 2, 1, 1), (5, 6, '2021-02-10', '2021-02-11', 1, 1, 2), 
-(4, 5, '2021-02-10', '2021-02-11', 2, 1, 2), (5, 6, '2021-02-10', '2021-02-11', 1, 1, 3), (4, 5, '2021-02-10', '2021-02-11', 2, 1, 3), 
-(5, 6, '2021-02-10', '2021-02-11', 1, 1, 4), (4, 5, '2021-02-10', '2021-02-11', 2, 1, 4);
+INSERT INTO task ("company_fk", "scheduled_date", "nlt_date", "task_name_fk", "task_status_fk", "project_fk") 
+VALUES(6, '2021-02-28', '2021-02-28', 1, 1, 1), (5, '2021-02-25', '2021-02-26', 2, 1, 1), (6, '2021-02-26', '2021-02-27', 1, 1, 2), 
+(5, '2021-02-18', '2021-02-19', 2, 1, 2), (6, '2021-02-20', '2021-02-21', 1, 1, 3), (5, '2021-02-20', '2021-02-21', 2, 1, 3), 
+(6, '2021-02-20', '2021-02-21', 1, 1, 4), (5, '2021-02-21', '2021-02-22', 2, 1, 4);

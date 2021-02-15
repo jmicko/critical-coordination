@@ -103,7 +103,7 @@ class Project extends Component {
             <h2>{this.props.project.project_name}</h2>
           </div>
 
-          <p>{JSON.stringify(this.props.project)}</p>
+          <p></p>
 
           <p>Location: {this.props.project.location_name}</p>
 
