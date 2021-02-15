@@ -31,15 +31,16 @@
     border: #279219 solid .125rem;
 }
 
-.project-name{
+.highlighter{
     /* width: max-content; */
     /* background-color: #b3481d; */
     background: linear-gradient(90deg, #813f23 0%, #813f23 75%, #3b3b3b00 100%);
     border-bottom-left-radius: .4rem;
     border-top-left-radius: .4rem;
+    
 }
 
-.project-name h2{
+.highlighter h2{
     margin-left: .75rem;
     margin-right: 33%;
     width: max-content;

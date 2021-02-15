@@ -47,9 +47,10 @@ class TaskList extends Component {
         <h3>Task List</h3>
         {this.props.store.task.projectTaskReducer.map((task, index) => {
           return <div key={index}>
-            {this.props.store.user.user_type === 'admin' && <AdminTaskList task={task} />}
+            <AdminTaskList task={task} />
+            {/* {this.props.store.user.user_type === 'admin' && <AdminTaskList task={task} />}
             {this.props.store.user.user_type === 'contractor' && <ContractorTaskList task={task} />}
-            {this.props.store.user.user_type === 'client' && <ClientTaskList task={task} />}
+            {this.props.store.user.user_type === 'client' && <ClientTaskList task={task} />} */}
           </div>
 
         })}

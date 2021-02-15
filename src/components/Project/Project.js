@@ -61,7 +61,7 @@ class Project extends Component {
 
 
         <div className="project-details">
-          <div className="project-name">
+          <div className="highlighter">
             <h2>{this.props.project.project_name}</h2>
           </div>
 
