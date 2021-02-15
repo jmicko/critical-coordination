@@ -18,6 +18,8 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
   })
 });
 
+
+// TODO - THIS SHOULD GO IN PROJECT ROUTER
 router.get('/project/:id', rejectUnauthenticated, (req, res) => {
   const task = req.params.id;
   const sqlText = `SELECT task.id AS id, company_name, nlt_date, poc_fk, project_fk, scheduled_date, status_type, task_name, task_name_fk, task_status_fk, technician_info, token, tracking_id, updated_by, notes, company_fk, notified_date  
@@ -36,6 +38,7 @@ router.get('/project/:id', rejectUnauthenticated, (req, res) => {
   })
 })
 
+// TODO - THIS SHOULD GO INTO IT'S OWN MODULE
 dateConversion = fieldValue => {
   if (fieldValue != null) {
     let year = fieldValue.slice(0, 4);
@@ -45,6 +48,7 @@ dateConversion = fieldValue => {
   }
 }
 
+// Update a single task
 router.put('/update', rejectUnauthenticated, (req, res) => {
   const updatedBy = `${req.user.first_name} ${req.user.last_name}`
   const due_date = dateConversion(req.body.nlt_date);
@@ -60,6 +64,8 @@ router.put('/update', rejectUnauthenticated, (req, res) => {
   });
 });
 
+// this does not protect the contractor route because it does not check the user type
+// it only checks if they are logged in. A client could hit this route and "complete" a task
 router.put('/contractor', rejectUnauthenticated, (req, res) => {
   const queryText1 = `UPDATE task SET task_status_fk=$1, scheduled_date=$2 WHERE id=$3;`;
   pool.query(queryText1, [req.body.status, req.body.date_scheduled, req.body.task_id])
@@ -72,6 +78,9 @@ router.put('/contractor', rejectUnauthenticated, (req, res) => {
   });
 });
 
+
+// this does not protect the route because it does not check the user type
+// any logged in user can delete a task
 router.put('/delete', rejectUnauthenticated, (req, res) => {
   const queryText1 = `DELETE FROM task WHERE id=$1`
   pool.query(queryText1, [req.body.id])
@@ -79,8 +88,8 @@ router.put('/delete', rejectUnauthenticated, (req, res) => {
       res.sendStatus(201);
     })
     .catch((error) => {
-    console.log('Error completeing the DELETE in task.router.js', error);
-    res.sendStatus(500);  
+    console.log('Error completing the DELETE in task.router.js', error);
+    res.sendStatus(500);
   });
 });
 
