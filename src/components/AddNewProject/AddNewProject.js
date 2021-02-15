@@ -13,6 +13,7 @@ class AddNewProject extends Component {
       this.props.dispatch({ type: 'FETCH_ALLCOMPANY' });
       this.props.dispatch({ type: 'FETCH_ALLLOCATION' });
    }
+   
    state = {
       newProject: {
          project_name: '',

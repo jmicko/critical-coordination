@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
 import TaskList from '../TaskList';
-import './ProjectTitle.css'
+import './ProjectDetails.css'
 
 
 const getCookie = (cookieName) => {
@@ -12,7 +12,7 @@ const getCookie = (cookieName) => {
     return decodeURIComponent(!!cookieString ? cookieString.toString().replace(/^[^=]+./, '') : '');
   }
 
-class ProjectTitle extends Component {
+class ProjectDetails extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_PROJECT', payload: getCookie('project') })
   }
@@ -40,4 +40,4 @@ class ProjectTitle extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(ProjectTitle);
+export default connect(mapStoreToProps)(ProjectDetails);

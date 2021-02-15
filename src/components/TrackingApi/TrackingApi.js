@@ -6,14 +6,18 @@ class TrackingApi extends Component {
    state = {
    };
 
-   componentDidMount(){
-     this.getTracking();
+   componentDidMount() {
+      this.getTracking();
    }
 
    getTracking = () => {
-      if(this.props.tracking_number){
-         if(this.props.tracking_number.substring(0, 2) === '1z') {
-            const tracking_data = {
+      if (this.props.tracking_number) {
+         let tracking_data = {
+            carrier: ``,
+            tracking_number: '',
+         }
+         if (this.props.tracking_number.substring(0, 2) == '1Z') {
+            tracking_data = {
                carrier: 'ups',
                tracking_number: this.props.tracking_number
             }
@@ -23,7 +27,7 @@ class TrackingApi extends Component {
                tracking_number: this.props.tracking_number
             }
          }
-         this.props.dispatch( {type: 'GET_TRACKING_DATA', payload: tracking_data})
+         this.props.dispatch({ type: 'GET_TRACKING_DATA', payload: tracking_data })
       }
    }
 
@@ -31,16 +35,16 @@ class TrackingApi extends Component {
       return (
          <div>
             <h4>Tracking Status</h4>
-            {this.props.tracking_number ? 
-            <>
-            <p>Tracking Number: {this.props.tracking_number}</p>
-            <p>ETA: {this.props.store.trackingReducer.eta}</p>
-            <p>Status Details: {this.props.store.trackingReducer?.tracking_status?.status_details}</p>
-            <p>Status Date: {this.props.store.trackingReducer?.tracking_status?.status_date}</p>
-            <p></p>
-            <button onClick={this.getTracking}>Update Tracking Status</button>
-            </>
-            : <p>No Tracking Number assigned to this task yet.</p>
+            {this.props.tracking_number ?
+               <>
+                  <p>Tracking Number: {this.props.tracking_number}</p>
+                  <p>ETA: {this.props.store.trackingReducer.eta}</p>
+                  <p>Status Details: {this.props.store.trackingReducer?.tracking_status?.status_details}</p>
+                  <p>Status Date: {this.props.store.trackingReducer?.tracking_status?.status_date}</p>
+                  <p></p>
+                  <button onClick={this.getTracking}>Update Tracking Status</button>
+               </>
+               : <p>No Tracking Number assigned to this task yet.</p>
             }
          </div>
       );
