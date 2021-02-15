@@ -17,12 +17,12 @@ class AdminCompany extends Component {
     deletePopupFlag: false,
     newCompany: {
       company: '',
-      },
-    editRecord:{
-        id: 0,
-        company_name: '',
-        archived: false,
-      }
+    },
+    editRecord: {
+      id: 0,
+      company_name: '',
+      archived: false,
+    }
   };
 
   handleChangeNewCompany = (event, type) => {
@@ -35,17 +35,17 @@ class AdminCompany extends Component {
   }
 
   handleChange = name => event => {
-    this.setState({ 
+    this.setState({
       editRecord: {
         ...this.state.editRecord,
-        [name]: event.target.value 
+        [name]: event.target.value
       }
-    });    
+    });
   }
 
-  updateRecord = () => { 
-    console.log (`updated record payload:`, this.state.editRecord);
-    this.props.dispatch({ type: 'UPDATE_COMPANY_VIAADMIN', payload: this.state.editRecord});  
+  updateRecord = () => {
+    console.log(`updated record payload:`, this.state.editRecord);
+    this.props.dispatch({ type: 'UPDATE_COMPANY_VIAADMIN', payload: this.state.editRecord });
     this.setState({
       updatePopupFlag: false,
       deletePopupFlag: false,
@@ -62,7 +62,7 @@ class AdminCompany extends Component {
       updatePopupFlag: false,
       updateDeleteFlag: false,
     })
-    console.log (`payload on openUpdatePopup`, passedRecord);
+    console.log(`payload on openUpdatePopup`, passedRecord);
     this.setState({
       updatePopupFlag: !this.state.updatePopupFlag,
       editRecord: {
@@ -72,13 +72,13 @@ class AdminCompany extends Component {
       }
     })
   }
-  
+
   openDeletePopup = (passedRecord) => {
     this.setState({
       updatePopupFlag: false,
       updateDeleteFlag: false,
     })
-    console.log (`payload on openDeletePopup`, passedRecord);
+    console.log(`payload on openDeletePopup`, passedRecord);
     this.setState({
       deletePopupFlag: !this.state.deletePopupFlag,
       editRecord: {
@@ -88,9 +88,9 @@ class AdminCompany extends Component {
       }
     })
   }
-  
-  cancelUpdate = () => { 
-    console.log (`cancel and close`);
+
+  cancelUpdate = () => {
+    console.log(`cancel and close`);
     this.setState({
       updatePopupFlag: false,
       deletePopupFlag: false,
@@ -130,15 +130,29 @@ class AdminCompany extends Component {
   render() {
     return (
       <div>
-        <h3>Admin Company Page</h3>
+        <div className="highlighter">
+          <h2>Company Management</h2>
+        </div>
         {this.state.showAddCompany ?
-          <> <h4>Add New User</h4>
-            <form>
+          <div className="box">
+            <center>
+              <button className="btn" onClick={this.showAddCompany}>Close</button>
+            </center>
+            <form className="formPanel metal">
+            <div className="highlighter">
+              <h2>Add New Company</h2>
+            </div>
               <label>New Company Name: </label>
               <input required onChange={(event) => this.handleChangeNewCompany(event, 'company')} value={this.state.newCompany.company}></input>
-              <button className="button" type="submit" onClick={(event) => this.addCompany(event)}>Add Company</button>
-            </form><button onClick={this.showAddCompany}>Close</button></>
-          : <button onClick={this.showAddCompany}>Add Company</button>}
+              <button className="btn" type="submit" onClick={(event) => this.addCompany(event)}>Add Company</button>
+            </form>
+          </div>
+          :
+          <div className="box">
+            <button className="btn" onClick={this.showAddCompany}>Add Company</button>
+          </div>
+        }
+
         <table className="tableClass">
           <thead className="headerClass">
             <tr><th>Company Name</th><th>&nbsp;</th><th>&nbsp;</th></tr>
@@ -150,27 +164,27 @@ class AdminCompany extends Component {
                 <tr key={index}>
                   <td>{lineItem.company_name}</td>
                   <td>
-                      <button onClick={()=>this.openUpdatePopup(lineItem)}>Edit</button>
-                      <Popup position="center" open={this.state.updatePopupFlag} closeOnDocumentClick>
-                          <div className="editPanel" >
-                              <input placeholder={lineItem.company_name} value={this.state.editRecord.company_name} onChange={this.handleChange('company_name')}/> 
-                              <button onClick={this.updateRecord}>Save</button> 
-                              <button onClick={this.cancelUpdate}>Cancel</button> 
-                          </div>
-                      </Popup>
-                    </td>
-                    <td>
-                      <button onClick={()=>this.openDeletePopup(lineItem)}>Delete</button>
-                      <Popup position="center" open={this.state.deletePopupFlag}>
-                            <div className="editPanel" >
-                                <h3>Are you sure you would like to delete this record?</h3> 
-                                <p>Deleted companies will no longer be avialable to select for new records, </p> 
-                                <p>but existing records with this status will maintain as is.</p> 
-                                <button onClick={this.updateRecord}>Yes Delete</button> 
-                                <button onClick={this.cancelUpdate}>Cancel</button> 
-                            </div>
-                        </Popup>
-                    </td>
+                    <button onClick={() => this.openUpdatePopup(lineItem)}>Edit</button>
+                    <Popup position="center" open={this.state.updatePopupFlag} closeOnDocumentClick>
+                      <div className="editPanel" >
+                        <input placeholder={lineItem.company_name} value={this.state.editRecord.company_name} onChange={this.handleChange('company_name')} />
+                        <button onClick={this.updateRecord}>Save</button>
+                        <button onClick={this.cancelUpdate}>Cancel</button>
+                      </div>
+                    </Popup>
+                  </td>
+                  <td>
+                    <button onClick={() => this.openDeletePopup(lineItem)}>Delete</button>
+                    <Popup position="center" open={this.state.deletePopupFlag}>
+                      <div className="editPanel" >
+                        <h3>Are you sure you would like to delete this record?</h3>
+                        <p>Deleted companies will no longer be avialable to select for new records, </p>
+                        <p>but existing records with this status will maintain as is.</p>
+                        <button onClick={this.updateRecord}>Yes Delete</button>
+                        <button onClick={this.cancelUpdate}>Cancel</button>
+                      </div>
+                    </Popup>
+                  </td>
                 </tr>
               );
             })}

@@ -12,14 +12,14 @@ class AdminUser extends Component {
 
   async componentDidMount() {
     // Get's data to populate lists/tables
-    this.props.dispatch({type: 'FETCH_ALLUSERS'});
-    this.props.dispatch({type: 'FETCH_ALLCOMPANY'});
+    this.props.dispatch({ type: 'FETCH_ALLUSERS' });
+    this.props.dispatch({ type: 'FETCH_ALLCOMPANY' });
   }
 
   state = {
     stateBuffer: 0,
     showAddUser: false,
-    editRecord:{
+    editRecord: {
       id: 0,
       email: '',
       first_name: '',
@@ -31,17 +31,17 @@ class AdminUser extends Component {
   }
 
   handleChange = name => event => {
-    this.setState({ 
+    this.setState({
       editRecord: {
         ...this.state.editRecord,
-        [name]: event.target.value 
+        [name]: event.target.value
       }
-    });    
+    });
   }
 
-  updateRecord = () => { 
-    console.log (`updated record payload:`, this.state.editRecord);
-    this.props.dispatch({ type: 'UPDATE_USER_VIAADMIN', payload: this.state.editRecord});  
+  updateRecord = () => {
+    console.log(`updated record payload:`, this.state.editRecord);
+    this.props.dispatch({ type: 'UPDATE_USER_VIAADMIN', payload: this.state.editRecord });
     this.setState({
       updatePopupFlag: false,
       deletePopupFlag: false,
@@ -55,7 +55,7 @@ class AdminUser extends Component {
         archived: false,
       }
     })
-    
+
   }
 
   openUpdatePopup = (passedRecord) => {
@@ -63,7 +63,7 @@ class AdminUser extends Component {
       updatePopupFlag: false,
       updateDeleteFlag: false,
     })
-    console.log (`payload on openUpdatePopup`, passedRecord);
+    console.log(`payload on openUpdatePopup`, passedRecord);
     this.setState({
       updatePopupFlag: !this.state.updatePopupFlag,
       editRecord: {
@@ -77,13 +77,13 @@ class AdminUser extends Component {
       }
     })
   }
-  
+
   openDeletePopup = (passedRecord) => {
     this.setState({
       updatePopupFlag: false,
       updateDeleteFlag: false,
     })
-    console.log (`payload on openDeletePopup`, passedRecord);
+    console.log(`payload on openDeletePopup`, passedRecord);
     this.setState({
       deletePopupFlag: !this.state.deletePopupFlag,
       editRecord: {
@@ -97,9 +97,9 @@ class AdminUser extends Component {
       }
     })
   }
-  
-  cancelUpdate = () => { 
-    console.log (`cancel and close`);
+
+  cancelUpdate = () => {
+    console.log(`cancel and close`);
     this.setState({
       updatePopupFlag: false,
       deletePopupFlag: false,
@@ -121,101 +121,112 @@ class AdminUser extends Component {
   render() {
     return (
       <div>
-        <h3>Admin User Page</h3>
+        <div className="highlighter">
+          <h2>User Management</h2>
+        </div>
 
         {/* <h3>Category List</h3> */}
         {this.state.showAddUser ?
-          <> <AddUserForm /> <button onClick={this.addUser}>Close</button></>
-          : <button onClick={this.addUser}>Add User</button>}
-              
+          <div className="box">
+            <center>
+              <button className="btn" onClick={this.addUser}>Close</button>
+            </center>
+            <AddUserForm />
+          </div>
+          :
+          <div className="box">
+            <button className="btn" onClick={this.addUser}>Add User</button>
+          </div>
+        }
 
-              <table className="tableClass">
-                <thead className="headerClass">
-                  <tr><th>email</th><th>First</th><th>Last</th><th>User Type</th><th>Company</th><th>&nbsp;</th><th>&nbsp;</th></tr>
-                </thead>
-                <tbody className="bodyClass">
-                    {this.props.store.admin.allUsersReducer.map((lineItem, index) => {
-                        return (
-                          <tr key={index}>
-                              <td>{lineItem.email}</td>
-                              <td>{lineItem.first_name}</td>
-                              <td>{lineItem.last_name}</td>
-                              <td>{lineItem.user_type}</td>
-                              <td>{lineItem.company_name}</td>
+        <table className="tableClass">
+          <thead className="headerClass">
+            <tr><th>email</th><th>First</th><th>Last</th><th>User Type</th><th>Company</th><th>&nbsp;</th><th>&nbsp;</th></tr>
+          </thead>
+          <tbody className="bodyClass">
+            {this.props.store.admin.allUsersReducer.map((lineItem, index) => {
+              return (
+                <tr key={index}>
+                  <td>{lineItem.email}</td>
+                  <td>{lineItem.first_name}</td>
+                  <td>{lineItem.last_name}</td>
+                  <td>{lineItem.user_type}</td>
+                  <td>{lineItem.company_name}</td>
+                  <td>
+                    <button onClick={() => this.openUpdatePopup(lineItem)}>Edit</button>
+                    <Popup position="center" open={this.state.updatePopupFlag} closeOnDocumentClick>
+                      <div className="editPanel" >
+                        <table>
+                          <thead>
+                            <tr>
+                              <th>email</th>
+                              <th>First</th>
+                              <th>Last</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td><input placeholder={lineItem.email} value={this.state.editRecord.email} onChange={this.handleChange('email')} /> </td>
+                              <td><input placeholder={lineItem.first_name} value={this.state.editRecord.first_name} onChange={this.handleChange('first_name')} /> </td>
+                              <td><input placeholder={lineItem.last_name} value={this.state.editRecord.last_name} onChange={this.handleChange('last_name')} /> </td>
+                            </tr>
+                          </tbody>
+                          <thead>
+                            <tr>
+                              <th>User Type</th>
+                              <th>Company</th>
+                              <th>&nbsp;</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
                               <td>
-                              <button onClick={()=>this.openUpdatePopup(lineItem)}>Edit</button>
-                                <Popup position="center" open={this.state.updatePopupFlag} closeOnDocumentClick>
-                                    <div className="editPanel" >
-                                      <table>
-                                        <thead>
-                                          <tr>
-                                            <th>email</th>
-                                            <th>First</th>
-                                            <th>Last</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr>
-                                            <td><input placeholder={lineItem.email} value={this.state.editRecord.email} onChange={this.handleChange('email')}/> </td>
-                                            <td><input placeholder={lineItem.first_name} value={this.state.editRecord.first_name} onChange={this.handleChange('first_name')}/> </td>
-                                            <td><input placeholder={lineItem.last_name} value={this.state.editRecord.last_name} onChange={this.handleChange('last_name')}/> </td>
-                                          </tr>
-                                        </tbody>
-                                        <thead>
-                                          <tr>
-                                            <th>User Type</th>
-                                            <th>Company</th>
-                                            <th>&nbsp;</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr>
-                                            <td>
-                                              <select placeholder={lineItem.user_type} value={this.state.editRecord.user_type} onChange={this.handleChange('user_type')}>
-                                                <option value="admin">admin</option>
-                                                <option value="client">client</option>
-                                                <option value="contractor">contractor</option>
-                                              </select>
-                                            </td>
-                                            <td>
-                                              <select placeholder={lineItem.company_name} value={this.state.editRecord.company_fk} onChange={this.handleChange('company_fk')}>
-                                              {this.props.store.admin.allCompanyReducer.map( (company) => {
-                                                return (
-                                                    <option key={company.id} value={company.id}>{company.company_name}</option>)})}
-                                              </select>
-                                            </td>
-                                            <td>
-                                                <button onClick={this.updateRecord}>Save</button> 
-                                                <button onClick={this.cancelUpdate}>Cancel</button> 
-                                            </td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                      
-                                    </div>
-                                </Popup>
+                                <select placeholder={lineItem.user_type} value={this.state.editRecord.user_type} onChange={this.handleChange('user_type')}>
+                                  <option value="admin">admin</option>
+                                  <option value="client">client</option>
+                                  <option value="contractor">contractor</option>
+                                </select>
                               </td>
                               <td>
-                                <button onClick={()=>this.openDeletePopup(lineItem)}>Delete</button>
-                                <Popup position="center" open={this.state.deletePopupFlag}>
-                                      <div className="editPanel" >
-                                          <h3>Are you sure you would like to delete this record?</h3> 
-                                          <p>Deleted users will no longer be avialable to select for new records, </p> 
-                                          <p>but existing records with this status will maintain as is.</p> 
-                                          <button onClick={this.updateRecord}>Yes Delete</button> 
-                                          <button onClick={this.cancelUpdate}>Cancel</button> 
-                                      </div>
-                                 </Popup>
+                                <select placeholder={lineItem.company_name} value={this.state.editRecord.company_fk} onChange={this.handleChange('company_fk')}>
+                                  {this.props.store.admin.allCompanyReducer.map((company) => {
+                                    return (
+                                      <option key={company.id} value={company.id}>{company.company_name}</option>)
+                                  })}
+                                </select>
                               </td>
-                          </tr>
-                        );
-                    })} 
-                </tbody>
-              </table>
+                              <td>
+                                <button onClick={this.updateRecord}>Save</button>
+                                <button onClick={this.cancelUpdate}>Cancel</button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                      </div>
+                    </Popup>
+                  </td>
+                  <td>
+                    <button onClick={() => this.openDeletePopup(lineItem)}>Delete</button>
+                    <Popup position="center" open={this.state.deletePopupFlag}>
+                      <div className="editPanel" >
+                        <h3>Are you sure you would like to delete this record?</h3>
+                        <p>Deleted users will no longer be avialable to select for new records, </p>
+                        <p>but existing records with this status will maintain as is.</p>
+                        <button onClick={this.updateRecord}>Yes Delete</button>
+                        <button onClick={this.cancelUpdate}>Cancel</button>
+                      </div>
+                    </Popup>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     );
   }
 }
- 
+
 // this allows us to use <App /> in index.js
 export default connect(mapStoreToProps)(AdminUser);

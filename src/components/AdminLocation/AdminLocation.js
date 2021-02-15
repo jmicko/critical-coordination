@@ -7,9 +7,9 @@ import '../AdminLocation/AdminLocation.css'
 
 class AdminLocation extends Component {
 
-componentDidMount() {
-    this.props.dispatch({type: 'FETCH_ALLLOCATION'});
-}
+  componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_ALLLOCATION' });
+  }
 
   state = {
     updatePopupFlag: false,
@@ -37,7 +37,7 @@ componentDidMount() {
       }
     })
   }
- 
+
   addLocation = (event) => {
     event.preventDefault();
     let location = this.state.newLocation;
@@ -58,17 +58,17 @@ componentDidMount() {
   }
 
   handleChange = name => event => {
-    this.setState({ 
+    this.setState({
       editRecord: {
         ...this.state.editRecord,
-        [name]: event.target.value 
+        [name]: event.target.value
       }
-    });    
+    });
   }
 
-  updateRecord = () => { 
-    console.log (`updated record payload:`, this.state.editRecord);
-    this.props.dispatch({ type: 'UPDATE_LOCATION_VIAADMIN', payload: this.state.editRecord});  
+  updateRecord = () => {
+    console.log(`updated record payload:`, this.state.editRecord);
+    this.props.dispatch({ type: 'UPDATE_LOCATION_VIAADMIN', payload: this.state.editRecord });
     this.setState({
       updatePopupFlag: false,
       deletePopupFlag: false,
@@ -80,7 +80,7 @@ componentDidMount() {
         archived: false,
       }
     })
-    
+
   }
 
   openUpdatePopup = (passedRecord) => {
@@ -88,7 +88,7 @@ componentDidMount() {
       updatePopupFlag: false,
       updateDeleteFlag: false,
     })
-    console.log (`payload on openUpdatePopup`, passedRecord);
+    console.log(`payload on openUpdatePopup`, passedRecord);
     this.setState({
       updatePopupFlag: !this.state.updatePopupFlag,
       editRecord: {
@@ -100,13 +100,13 @@ componentDidMount() {
       }
     })
   }
-  
+
   openDeletePopup = (passedRecord) => {
     this.setState({
       updatePopupFlag: false,
       updateDeleteFlag: false,
     })
-    console.log (`payload on openDeletePopup`, passedRecord);
+    console.log(`payload on openDeletePopup`, passedRecord);
     this.setState({
       deletePopupFlag: !this.state.deletePopupFlag,
       editRecord: {
@@ -118,9 +118,9 @@ componentDidMount() {
       }
     })
   }
-  
-  cancelUpdate = () => { 
-    console.log (`cancel and close`);
+
+  cancelUpdate = () => {
+    console.log(`cancel and close`);
     this.setState({
       updatePopupFlag: false,
       deletePopupFlag: false,
@@ -146,95 +146,109 @@ componentDidMount() {
   render() {
     return (
       <div>
-        <h3>Admin Location Page</h3>
+        <div className="highlighter">
+          <h2>Company Management</h2>
+        </div>
         {this.state.showAddLocation ?
-          <> <h4>Add New Location</h4>
-            <form>
+          <div className="box">
+            <center>
+              <button className="btn" onClick={this.showAddLocation}>Close</button>
+            </center>
+            <form className="formPanel metal">
+              <div className="highlighter">
+                <h2>Add New Location</h2>
+              </div>
               <label>Select Company to add a location to: </label>
               <select onChange={(event) => this.handleChangeNewLocation(event, 'company')}>
                 {this.props.store.admin.allCompanyReducer.map((company) => <option key={company.id} value={company.id}>{company.company_name}</option>)}
               </select>
-              <br/>
+              <br />
               <label>New Location Address:</label>
               <input required onChange={(event) => this.handleChangeNewLocation(event, 'address')} value={this.state.newLocation.address}></input>
-              <br/>
+              <br />
               <label>New Location Nickname: </label>
               <input required onChange={(event) => this.handleChangeNewLocation(event, 'location_name')} value={this.state.newLocation.location_name}></input>
-              <button className="button" type="submit" onClick={(event) => this.addLocation(event)}>Add Location</button>
-            </form><button onClick={this.showAddLocation}>Close</button></>
-          : <button onClick={this.showAddLocation}>Add Location</button>}
-              
-              <table className="tableClass">
-                <thead className="headerClass">
-                  <tr><th>Company</th><th>Name</th><th>Address</th><th>&nbsp;</th><th>&nbsp;</th></tr>
-                </thead>
-                <tbody className="bodyClass">
-                    {this.props.store.admin.allLocationReducer.map((lineItem, index) => {
-                        return (
-                          <tr key={index}>
-                              <td>{lineItem.company_name}</td>
-                              <td>{lineItem.location_name}</td>
-                              <td>{lineItem.address}</td>
+              <button className="btn" type="submit" onClick={(event) => this.addLocation(event)}>Add Location</button>
+            </form>
+          </div>
+          :
+          <div className="box">
+            <button className="btn" onClick={this.showAddLocation}>Add Location</button>
+          </div>
+        }
+
+        <table className="tableClass">
+          <thead className="headerClass">
+            <tr><th>Company</th><th>Name</th><th>Address</th><th>&nbsp;</th><th>&nbsp;</th></tr>
+          </thead>
+          <tbody className="bodyClass">
+            {this.props.store.admin.allLocationReducer.map((lineItem, index) => {
+              return (
+                <tr key={index}>
+                  <td>{lineItem.company_name}</td>
+                  <td>{lineItem.location_name}</td>
+                  <td>{lineItem.address}</td>
+                  <td>
+                    <button onClick={() => this.openUpdatePopup(lineItem)}>Edit</button>
+                    <Popup position="center" open={this.state.updatePopupFlag} closeOnDocumentClick>
+                      <div className="editPanel" >
+                        <table>
+                          <thead>
+                            <tr>
+                              <th>Location Name</th>
+                              <th>Address</th>
+                              <th>Company</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td><input placeholder={lineItem.location_name} value={this.state.editRecord.location_name} onChange={this.handleChange('location_name')} /> </td>
+                              <td><input placeholder={lineItem.address} value={this.state.editRecord.address} onChange={this.handleChange('address')} /> </td>
                               <td>
-                                  <button onClick={()=>this.openUpdatePopup(lineItem)}>Edit</button>
-                                  <Popup position="center" open={this.state.updatePopupFlag} closeOnDocumentClick>
-                                      <div className="editPanel" >
-                                        <table>
-                                          <thead>
-                                            <tr>
-                                                <th>Location Name</th>
-                                                <th>Address</th>
-                                                <th>Company</th>
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            <tr>
-                                                <td><input placeholder={lineItem.location_name} value={this.state.editRecord.location_name} onChange={this.handleChange('location_name')}/> </td>
-                                                <td><input placeholder={lineItem.address} value={this.state.editRecord.address} onChange={this.handleChange('address')}/> </td>
-                                                <td>
-                                                    <select placeholder={lineItem.company_name} value={this.state.editRecord.company_fk} onChange={this.handleChange('company_fk')}>
-                                                    {this.props.store.admin.allCompanyReducer.map( (company) => {
-                                                      return (
-                                                          <option key={company.id} value={company.id}>{company.company_name}</option>)})}
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                          </tbody>
-                                          <thead>
-                                            <tr>
-                                              <th>&nbsp;</th>
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            <tr>
-                                              <td>
-                                                  <button onClick={this.updateRecord}>Save</button> 
-                                                  <button onClick={this.cancelUpdate}>Cancel</button> 
-                                              </td>
-                                            </tr>
-                                          </tbody>
-                                        </table>
-                                        
-                                      </div>
-                                  </Popup>
+                                <select placeholder={lineItem.company_name} value={this.state.editRecord.company_fk} onChange={this.handleChange('company_fk')}>
+                                  {this.props.store.admin.allCompanyReducer.map((company) => {
+                                    return (
+                                      <option key={company.id} value={company.id}>{company.company_name}</option>)
+                                  })}
+                                </select>
                               </td>
+                            </tr>
+                          </tbody>
+                          <thead>
+                            <tr>
+                              <th>&nbsp;</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
                               <td>
-                                <button onClick={()=>this.openDeletePopup(lineItem)}>Delete</button>
-                                <Popup position="center" open={this.state.deletePopupFlag}>
-                                      <div className="editPanel" >
-                                          <h3>Are you sure you would like to delete this record?</h3> 
-                                          <p>Deleted locations will no longer be avialable to select for new records, </p> 
-                                          <p>but existing records with this status will maintain as is.</p> 
-                                          <button onClick={this.updateRecord}>Yes Delete</button> 
-                                          <button onClick={this.cancelUpdate}>Cancel</button> 
-                                      </div>
-                                 </Popup>
+                                <button onClick={this.updateRecord}>Save</button>
+                                <button onClick={this.cancelUpdate}>Cancel</button>
                               </td>
-                          </tr>
-                        );
-                    })} 
-                </tbody>
-              </table>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                      </div>
+                    </Popup>
+                  </td>
+                  <td>
+                    <button onClick={() => this.openDeletePopup(lineItem)}>Delete</button>
+                    <Popup position="center" open={this.state.deletePopupFlag}>
+                      <div className="editPanel" >
+                        <h3>Are you sure you would like to delete this record?</h3>
+                        <p>Deleted locations will no longer be avialable to select for new records, </p>
+                        <p>but existing records with this status will maintain as is.</p>
+                        <button onClick={this.updateRecord}>Yes Delete</button>
+                        <button onClick={this.cancelUpdate}>Cancel</button>
+                      </div>
+                    </Popup>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     );
   }

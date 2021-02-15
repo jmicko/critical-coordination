@@ -13,31 +13,63 @@ class AdminPage extends Component {
   }
 
   state = {
-    active: "user"
+    active: "company"
   }
 
   render() {
     if (this.props.store.user.user_type === 'admin') {
       return (
-        <center>
-          <h1 className="menu-hz-header">Admin</h1>
-          {/* {JSON.stringify(this.props)} */}
-          <div className="menu-hz">
-            <button className="menu-hz-btn" onClick={() => this.setState({ active: "user" })}>Manage User</button>
-            <button className="menu-hz-btn" onClick={() => this.setState({ active: "company" })}>Manage Company</button>
-            <button className="menu-hz-btn" onClick={() => this.setState({ active: "task" })}>Manage Task Status</button>
+        <div>
+          {/* <center> */}
+          <div className="container portfolio night rounded">
+            <center>
+              <div className="metal notched box">
+                <h1 className="bigHeader"> Site Settings </h1>
+              </div>
+
+              {/* {JSON.stringify(this.props)} */}
+              <div className="menu-hz">
+                <button
+                  className={`btn menu-hz-btn
+                  ${this.state.active === "user" &&
+                  "menu-active"}`}
+                  onClick={() => this.setState({ active: "user" })}>
+                  Manage User
+                  </button>
+                <button
+                  className={`btn menu-hz-btn
+                  ${this.state.active === "company" &&
+                  "menu-active"}`}
+                  onClick={() => this.setState({ active: "company" })}>
+                  Manage Company
+                  </button>
+                <button
+                  className={`btn menu-hz-btn
+                  ${this.state.active === "task" &&
+                  "menu-active"}`}
+                  onClick={() => this.setState({ active: "task" })}>
+                  Manage Task Status
+                  </button>
+              </div>
+            </center>
+            {/* <br /><br /> */}
+            {/* <div className="container"> */}
+            <div className="box">
+
+              {this.state.active === "user" &&
+                <AdminUser />}
+              {this.state.active === "company" &&
+                <>
+                  <AdminCompany />
+                  <AdminLocation />
+                </>
+                }
+              {this.state.active === "task" &&
+                <AdminTaskStatus />}
+            </div >
           </div>
-          <br /><br />
-          {this.state.active === "user" &&
-            <AdminUser />}
-          {this.state.active === "company" &&
-            <>
-              <AdminCompany />
-              <AdminLocation />
-            </>}
-          {this.state.active === "task" &&
-            <AdminTaskStatus />}
-        </center>
+          {/* </center> */}
+        </div>
       );
     } else {
       return (

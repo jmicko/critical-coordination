@@ -74,8 +74,8 @@ class Portfolio extends Component {
     // console.log(this.state);
     return (
       <div className="container portfolio night rounded">
-        <center>
-          <h1> Project Portfolio </h1>
+        <center className="metal notched box">
+          <h1 className="bigHeader"> Project Portfolio </h1>
         </center>
         {/* THIS WILL RENDER IF ADMIN */}
         {this.props.store.user.user_type === "admin"

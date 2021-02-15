@@ -33,6 +33,11 @@ Container
   margin: auto;
 }
 
+.box{
+  width: max-content;
+  margin: auto;
+}
+
 /* --------------------------------------------------------------------------------
 Button
 -------------------------------------------------------------------------------- */
@@ -144,8 +149,10 @@ input {
 }
 
 table {
+  margin: auto;
   border:none;
   border-collapse: collapse;
+  /* background-color: #505050; */
 }
 
 table td {
@@ -173,11 +180,23 @@ Menus
 -------------------------------------------------------------------------------- */
 
 .menu-hz-btn{
-  height: 100%;
+  /* height: 100%; */
+  margin: .125rem;
+  display: inline;
+  /* float: left; */
 }
 
 .menu-hz{
-  height: 2rem;
+  margin: auto;
+  margin-top: 1rem;
+}
+
+.menu-active{
+  background-color: rgb(134, 134, 134);
+}
+
+.menu-active:hover{
+  background-color: rgb(104, 104, 104);
 }
 
 
@@ -257,3 +276,12 @@ General Theme
     padding: 1rem;
 }
 
+
+/* --------------------------------------------------------------------------------
+Headers
+-------------------------------------------------------------------------------- */
+
+.bigHeader{
+  font-size: 3.5rem;
+  margin: auto;
+}

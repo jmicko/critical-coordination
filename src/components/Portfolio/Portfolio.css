@@ -34,7 +34,8 @@
 .highlighter{
     /* width: max-content; */
     /* background-color: #b3481d; */
-    background: linear-gradient(90deg, #813f23 0%, #813f23 75%, #3b3b3b00 100%);
+    background: linear-gradient(90deg, #252525 0%, #2e2e2e 75%, #3b3b3b00 100%);
+    /* background: linear-gradient(90deg, #d67951 0%, #994d2c 75%, #3b3b3b00 100%); */
     border-bottom-left-radius: .4rem;
     border-top-left-radius: .4rem;
     
