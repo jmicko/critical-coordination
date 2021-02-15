@@ -35,7 +35,6 @@ class TrackingApi extends Component {
       return (
          <div>
             <h4>Tracking Status</h4>
-            {JSON.stringify(this.props.store.trackingReducer)}
             {this.props.tracking_number ? 
             <>
             <p>Tracking Number: {this.props.tracking_number}</p>
