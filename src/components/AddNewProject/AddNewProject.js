@@ -90,7 +90,7 @@ class AddNewProject extends Component {
                   <option value=''></option>
                   {this.props.store.admin.allLocationReducer.map((location) => {
                      return (
-                        this.state.newProject.company == location.company_fk &&
+                        this.state.newProject.company === location.company_fk &&
                         <option key={location.location_id} value={location.location_id}>{location.location_name} : {location.address}</option>
                      )
                   })}

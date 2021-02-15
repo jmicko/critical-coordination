@@ -58,8 +58,11 @@ function* updateTaskStatus(action) {
     console.log('In updateTaskStatus saga', action.payload);
     // Go to server, update redux store with data from server
     try {
+            // Why do we have the line below? We aren't getting we are putting
         // get data from db
-        const response = yield axios.put('/api/admin/taskstatus', action.payload);
+            // Why do we have the line below? We never use response in this function
+        // const response = 
+        yield axios.put('/api/admin/taskstatus', action.payload);
         yield put({ type: 'FETCH_TASKSTATUS' });
     } catch ( error ) {
         console.log('error with updateTaskStatus get request', error);
@@ -70,8 +73,11 @@ function* updateUserViaAdmin(action) {
     console.log('In updateUserViaAdmin saga', action.payload);
     // Go to server, update redux store with data from server
     try {
+            // who is writing these notes? what is this?
         // get data from db
-        const response = yield axios.put('/api/admin/usermodify', action.payload);
+            // Why do we have the line below? We never use response in this function
+        // const response = 
+        yield axios.put('/api/admin/usermodify', action.payload);
         yield put({ type: 'FETCH_ALLUSERS' });
         yield put({ type: 'FETCH_ALLCOMPANY' });
     } catch ( error ) {
@@ -84,7 +90,9 @@ function* updateCompanyViaAdmin(action) {
     // Go to server, update redux store with data from server
     try {
         // get data from db
-        const response = yield axios.put('/api/admin/companymodify', action.payload);
+            // another stray const response!
+        // const response = 
+        yield axios.put('/api/admin/companymodify', action.payload);
         yield put({ type: 'FETCH_ALLCOMPANY' });
         yield put({ type: 'FETCH_ALLLOCATION' });
     } catch ( error ) {
@@ -97,7 +105,9 @@ function* updateLocationViaAdmin(action) {
     // Go to server, update redux store with data from server
     try {
         // get data from db
-        const response = yield axios.put('/api/admin/locationmodify', action.payload);
+            // not even surprised anymore
+        // const response = 
+        yield axios.put('/api/admin/locationmodify', action.payload);
         yield put({ type: 'FETCH_ALLLOCATION' });
     } catch ( error ) {
         console.log('error with updateLocationViaAdmin get request', error);
