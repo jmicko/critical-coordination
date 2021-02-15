@@ -18,11 +18,11 @@ class ProjectDetails extends Component {
   }
     
    // returns the date in the day/month/year format
-   dateConversion = date => {
+   dateConversion = (date) => {
     let year = date[0] + date[1] + date[2] + date[3];
     let month = date[5] + date[6];
     let day = date[8] + date[9];
-    return (day + "/" + month + "/" + year);
+    return (month + "/" + day + "/" + year);
 }
   render() {
     return (
@@ -31,7 +31,7 @@ class ProjectDetails extends Component {
           <p>Customer: {this.props.store.projectReducer.projectReducer[0]?.company_name}</p>
           <p>Project Name: {this.props.store.projectReducer.projectReducer[0]?.project_name}</p>
           <p>PO Number: {this.props.store.projectReducer.projectReducer[0]?.PO_Number}</p>
-          <p>Scheduled Completion: {this.props.store.projectReducer.projectReducer[0]?.due_date}</p>
+          <p>Scheduled Completion: {this.props.store.projectReducer?.projectReducer[0]?.due_date.substring(0,10)}</p>
           <p>Address: {this.props.store.projectReducer.projectReducer[0]?.address}</p>
           <p>Notes: {this.props.store.projectReducer.projectReducer[0]?.notes}</p>
         <TaskList/>  
