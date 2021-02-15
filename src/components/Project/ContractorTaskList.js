@@ -57,7 +57,7 @@ class ContractorTaskList extends Component {
         this.state.updateRecord.task_status  &&
         this.state.updateRecord.date_scheduled  
         ){
-          {this.save()}
+          this.save()
         }else{
           alert('Please fill out all the fields')
         }

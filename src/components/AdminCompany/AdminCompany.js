@@ -8,7 +8,7 @@ class AdminCompany extends Component {
   // this component doesn't do much to start, just renders some user info to the DOM
 
   async componentDidMount() {
-    // Get's data to populate lists/tables
+    // Gets data to populate lists/tables
     this.props.dispatch({ type: 'FETCH_ALLCOMPANY' });
   }
 

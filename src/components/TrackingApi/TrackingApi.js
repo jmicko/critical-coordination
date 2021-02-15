@@ -12,7 +12,7 @@ class TrackingApi extends Component {
 
    getTracking = () => {
       if(this.props.tracking_number){
-         if(this.props.tracking_number.substring(0, 2) == '1z') {
+         if(this.props.tracking_number.substring(0, 2) === '1z') {
             const tracking_data = {
                carrier: 'ups',
                tracking_number: this.props.tracking_number
