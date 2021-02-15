@@ -18,12 +18,12 @@ class TrackingApi extends Component {
                tracking_number: this.props.tracking_number
             }
          } else {
-            const tracking_data = {
+            tracking_data = {
                carrier: 'fedex',
                tracking_number: this.props.tracking_number
             }
-            this.props.dispatch( {type: 'GET_TRACKING_DATA', payload: tracking_data})
          }
+         this.props.dispatch( {type: 'GET_TRACKING_DATA', payload: tracking_data})
       }
    }
 
