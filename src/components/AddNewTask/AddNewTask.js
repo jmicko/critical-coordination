@@ -151,4 +151,3 @@ class AddNewTask extends Component {
 
 
 export default connect(mapStoreToProps)(AddNewTask);
-

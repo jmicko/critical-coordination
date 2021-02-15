@@ -31,60 +31,6 @@
     border: #279219 solid .125rem;
 }
 
-.on-time .status-bar .active{
-    height: 2rem;
-    width: auto;
-    background-color: #00cdf1;
-    color: #efefef;
-    margin: 0;
-}
-
-.attention .status-bar .active{
-    height: 2rem;
-    width: auto;
-    background-color: #9c7319;
-    color: #efefef;
-    margin: 0;
-}
-
-.late .status-bar .active{
-    height: 2rem;
-    width: auto;
-    background-color: #b80b0b;
-    color: #efefef;
-    margin: 0;
-}
-
-.complete .status-bar .active{
-    height: 2rem;
-    /* width: 33%; */
-    background-color: #279219;
-    color: #efefef;
-    margin: 0;
-}
-
-.status-bar{
-    display: grid;
-    grid-template-columns:repeat(4, 1fr);
-}
-
-.status-bar button{
-    background-color: #313131;
-    color: #868686;
-    border: inherit;
-    font-size: 1.125rem;
-}
-
-/* .status-bar button:active, */
-.status-bar button:hover,
-.status-bar button:focus{
-    /* background-color: #5a544d; */
-    color: #efefef;
-    border: none;
-    outline: inherit;
-    background-color: #575757;
-}
-
 .project-name{
     /* width: max-content; */
     /* background-color: #b3481d; */

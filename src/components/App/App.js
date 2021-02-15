@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   HashRouter as Router,
+  Route,
   Redirect,
   Switch,
 } from 'react-router-dom';
@@ -16,7 +17,8 @@ import AdminPage from '../AdminPage/AdminPage';
 import ResetPage from '../ResetPage/ResetPage';
 import ResetLinkPage from '../resetLinkPage/ResetLinkPage';
 import Portfolio from '../Portfolio/Portfolio';
-import Project from '../Project/Project';
+import ProjectDetails from '../Project/ProjectDetails/ProjectDetails';
+// import Project from '../Project/Project';
 import Task from '../Task/Task';
 import './App.css';
 
@@ -93,8 +95,8 @@ class App extends Component {
               component={Task}
             />
             <ProtectedRoute
-              exact path="/project"
-              component={Project}
+              exact path="/projectdetails"
+              component={ProjectDetails}
             />
           </Switch>
           <Footer />
