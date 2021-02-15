@@ -189,7 +189,7 @@ class AdminTaskList extends Component {
               </button>
             }
             {/* notify button sends reminder email to party responsible for task */}
-            {this.props.task.notified_date && this.props.store.user.user_type === "admin" &&
+            {this.props.store.user.user_type === "admin" &&
               <button
                 className="btn"
                 onClick={(event) => this.confirmSend(this.props.task.id)}>
