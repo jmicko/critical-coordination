@@ -73,6 +73,7 @@ class App extends Component {
               exact
               path="/home"
               component={LandingPage}
+              authRedirect="/portfolio"
             />
             <ProtectedRoute
               exact
@@ -84,7 +85,7 @@ class App extends Component {
               exact path="/resetpassword"
               component={ResetLinkPage}
               authRedirect="/portfolio"
-            />
+              />
             <ProtectedRoute
               exact
               path="/portfolio"

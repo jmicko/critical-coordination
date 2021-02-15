@@ -19,6 +19,10 @@ img {
   max-width: 100%;
 }
 
+a {
+  color: aqua;
+}
+
 /* --------------------------------------------------------------------------------
 Container
 -------------------------------------------------------------------------------- */
@@ -139,9 +143,7 @@ table {
 }
 
 table td {
-
   padding-right: 15px;
-
 }
 
 table td:first-child {
@@ -150,6 +152,13 @@ table td:first-child {
 
 table td:last-child {
   border-right: none;
+}
+
+.data-label{
+  border-radius: .3rem;
+  background-color: rgb(0, 146, 146);
+  padding-left: .5rem;
+  padding-right: .5rem;
 }
 
 
@@ -241,3 +250,4 @@ General Theme
   /* 1rem of padding to more than account for the size of the notch */
     padding: 1rem;
 }
+
