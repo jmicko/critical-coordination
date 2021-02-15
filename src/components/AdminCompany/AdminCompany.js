@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Popup from 'reactjs-popup';
-
-import LogOutButton from '../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import '../AdminCompany/AdminCompany.css'
 
@@ -10,7 +8,7 @@ class AdminCompany extends Component {
   // this component doesn't do much to start, just renders some user info to the DOM
 
   async componentDidMount() {
-    // Get's data to populate lists/tables
+    // Gets data to populate lists/tables
     this.props.dispatch({ type: 'FETCH_ALLCOMPANY' });
   }
 

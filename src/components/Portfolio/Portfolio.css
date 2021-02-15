@@ -2,6 +2,7 @@
     margin: 1rem auto;
     border-radius: .5rem;
     background-color: #3b3b3b;
+    overflow: hidden;
 }
 
 .portfolio{
