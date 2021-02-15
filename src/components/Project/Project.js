@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 // import ProjectDetails from './ProjectDetails/ProjectDetails';
 import PortfolioStatus from '../PortfolioStatus/PortfolioStatus';
-// import Popup from 'reactjs-popup';
+import Popup from 'reactjs-popup';
 
 
 class Project extends Component {
@@ -55,66 +55,23 @@ class Project extends Component {
                         ${this.state.status === "complete" && "complete"}
                     `}
       >
-        <PortfolioStatus 
-        status = {this.state.status}
-        updateStatus = {this.updateStatus} />
-        
-        {/* div to hold status bar. clicking a button will 
-                        change the status and color will update */}
-        {/* <div className="status-bar">
-                <button
-                  onClick={() => this.setState({ status: 'onTime' })}
-                  className={`
-                    btn-status
-                    ${this.state.status === "onTime" && "active"}
-                  `}
-                >
-                  On Time
-                </button>
-                <button
-                  onClick={() => this.setState({ status: 'attention' })}
-                  className={`${this.state.status === "attention" && "active"}`}
-                >
-                  Needs Attention
-                </button>
-                <button
-                  onClick={() => this.setState({ status: 'late' })}
-                  className={`
-                  ${this.state.status === "late" &&
-                    "active"}
-                  `}
-                >
-                  Late
-                </button>
-                <button
-                  onClick={() => this.setState({ status: 'complete' })}
-                  className={`
-                    btn-status
-                    ${this.state.status === "complete" && "active"}
-                  `}
-                >
-                  Complete
-                </button>
-              </div> */}
+        <PortfolioStatus
+          status={this.state.status}
+          updateStatus={this.updateStatus} />
 
 
         <div className="project-details">
-          <div className="project-name">
+          <div className="highlighter">
             <h2>{this.props.project.project_name}</h2>
           </div>
 
-          <p>{JSON.stringify(this.props.project)}</p>
-
+          {/* <p>{JSON.stringify(this.props.project)}</p> */}
           <p>Location: {this.props.project.location_name}</p>
-
           <p>PO#: {this.props.project.PO_Number}</p>
-
           <p>Due Date: {this.props.dateConversion(this.props.project.due_date)}</p>
 
-          {/* <label>Status: <input placeholder='Logic needs to be done' /></label> */}
-
-          {/* {this.props.store.user.user_type === "admin" &&
-            <Popup trigger={open => (<button className="btn">Edit </button>)} position="left" >
+          {this.props.store.user.user_type === "admin" &&
+            <Popup trigger={open => (<button className="btn">Edit </button>)} position="right" >
               <div className="editPanel" onClick={() => this.updateId(this.props.project)}>
                 <h3>Edit Window:</h3>
                 <label>Project:</label>
@@ -130,9 +87,11 @@ class Project extends Component {
                 <button onClick={this.fieldValidation}>Save</button>
               </div>
             </Popup>
-          } */}
+          }
           <button className="btn" onClick={() => this.navigate(`/projectdetails`, this.props.project)}>Details</button>
-          <button className="btn">Close Project</button>
+          {this.props.store.user.user_type === "admin" &&
+            <button className="btn btn-delete">Close Project</button>
+          }
         </div>
       </div>
     );

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import AddNewTask from '../AddNewTask/AddNewTask';
-import AdminTaskList from './AdminTaskList/AdminTaskList'
-import ContractorTaskList from './ContractorTaskList'
-import ClientTaskList from './ClientTaskList'
+import AdminTaskList from '../AdminTaskList/AdminTaskList'
+import ContractorTaskList from '../Project/ContractorTaskList'
+import ClientTaskList from '../ClientTaskList/ClientTaskList'
 
 const getCookie = (cookieName) => {
   // Get name followed by anything except a semicolon
@@ -47,9 +47,10 @@ class TaskList extends Component {
         <h3>Task List</h3>
         {this.props.store.task.projectTaskReducer.map((task, index) => {
           return <div key={index}>
-            {this.props.store.user.user_type === 'admin' && <AdminTaskList task={task} />}
+            <AdminTaskList task={task} />
+            {/* {this.props.store.user.user_type === 'admin' && <AdminTaskList task={task} />}
             {this.props.store.user.user_type === 'contractor' && <ContractorTaskList task={task} />}
-            {this.props.store.user.user_type === 'client' && <ClientTaskList task={task} />}
+            {this.props.store.user.user_type === 'client' && <ClientTaskList task={task} />} */}
           </div>
 
         })}
