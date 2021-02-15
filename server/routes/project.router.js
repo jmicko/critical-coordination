@@ -6,7 +6,7 @@ const {
 } = require('../modules/authentication-middleware');
 
 
-//will need rejectunauthenticated text here 
+
 router.get('/:id', rejectUnauthenticated, (req, res) => {
    console.log('GETTING PROJECT FROM DB');
    const sqlText = `SELECT * FROM "project" 
