@@ -5,7 +5,6 @@ const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
-//will need rejectunauthenticated text here 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
   console.log(`SHOULD BE task id from task router line 7`, req.params);
   const sqlText = `SELECT * FROM "task" WHERE "id"=$1`
