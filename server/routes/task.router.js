@@ -19,10 +19,27 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 });
 
 
+// This seems to get all the tasks for a single project
 // TODO - THIS SHOULD GO IN PROJECT ROUTER
 // or wait, it's right? Wow wish I had notes
-router.get('/project/:id', rejectUnauthenticated, (req, res) => {
-  const task = req.params.id;
+router.get('/for_project/:id', rejectUnauthenticated, (req, res) => {
+  const project = req.params.id;
+  const company = req.user.company_fk;
+  // Not sure if we want to protect this route from clients or not, but here's the code if we do
+  // just drop the closing bracket down over the function
+  let inputs = [project];
+  if (req.user.user_type !== "client") {
+    console.log(req.user.user_type);
+  }
+  if (req.user.user_type === "contractor") {
+    console.log(req.user.user_type);
+    // for contractors, we need to limit them tasks they can see 
+    // to only those they are assigned, so add company
+    inputs = [project, company];
+  } 
+  // else {
+  //   inputs = [project];
+  // }
   const sqlText = `SELECT task.id AS id,
                           company_name,
                           nlt_date,
@@ -44,8 +61,14 @@ router.get('/project/:id', rejectUnauthenticated, (req, res) => {
     JOIN task_status ON task_status.id = task.task_status_fk
     JOIN company on company.id = task.company_fk
     where project_fk = $1 
+    ${
+      // this will limit contractors from seeing tasks not assigned to them
+      req.user.user_type === "contractor"
+      ? "AND company_fk = $2"
+      : ""
+    }
     ORDER BY nlt_date ASC;`;
-  pool.query(sqlText, [task])
+  pool.query(sqlText, inputs)
     .then((result) => {
       res.send(result.rows)
     })
