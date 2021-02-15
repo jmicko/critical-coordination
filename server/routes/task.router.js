@@ -92,13 +92,19 @@ router.put('/update', rejectUnauthenticated, (req, res) => {
   const updatedBy = `${req.user.first_name} ${req.user.last_name}`
   const due_date = dateConversion(req.body.nlt_date);
   const scheduled_date = dateConversion(req.body.scheduled_date);
+  const status = req.body.task_status_fk;
+  const taskName = req.body.task_name_fk;
+  const trackingId = req.body.tracking_id;
+  const notes = req.body.notes;
+  const techInfo = req.body.technician_info;
+  const id = req.body.id;
   const queryText1 = `UPDATE task SET task_status_fk=$1, task_name_fk=$2, nlt_date=$3, scheduled_date=$4, updated_by=$5, tracking_id=$6, notes=$7, technician_info=$8 WHERE id=$9;`;
-  pool.query(queryText1, [req.body.task_status_fk, req.body.task_name_fk, due_date, scheduled_date, updatedBy, req.body.tracking_id, req.body.notes, req.body.technician_info, req.body.id])
+  pool.query(queryText1, [status, taskName, due_date, scheduled_date, updatedBy, trackingId, notes, techInfo, id])
     .then(() => {
       res.sendStatus(201);
     })
     .catch((error) => {
-      console.log('Error completeing the TASK UPDATE in task.router.js', error);
+      console.log('Error completing the TASK UPDATE in task.router.js', error);
       res.sendStatus(500);
     });
 });
@@ -112,7 +118,7 @@ router.put('/contractor', rejectUnauthenticated, (req, res) => {
       res.sendStatus(201);
     })
     .catch((error) => {
-      console.log('Error completeing the CONTRACTOR TASK UPDATE in task.router.js', error);
+      console.log('Error completing the CONTRACTOR TASK UPDATE in task.router.js', error);
       res.sendStatus(500);
     });
 });
