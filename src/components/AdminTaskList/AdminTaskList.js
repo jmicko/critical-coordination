@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import mapStoreToProps from '../../../redux/mapStoreToProps';
-import TrackingApi from '../../TrackingApi/TrackingApi'
+import mapStoreToProps from '../../redux/mapStoreToProps';
+import TrackingApi from '../TrackingApi/TrackingApi'
 import './AdminTaskList.css'
 
 const getCookie = (cookieName) => {

@@ -17,7 +17,7 @@ import AdminPage from '../AdminPage/AdminPage';
 import ResetPage from '../ResetPage/ResetPage';
 import ResetLinkPage from '../resetLinkPage/ResetLinkPage';
 import Portfolio from '../Portfolio/Portfolio';
-import ProjectDetails from '../Project/ProjectDetails/ProjectDetails';
+import ProjectDetails from '../ProjectDetails/ProjectDetails';
 // import Project from '../Project/Project';
 import Task from '../Task/Task';
 import './App.css';
