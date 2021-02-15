@@ -16,7 +16,7 @@ function* fetchProjectTasks (action) {
     // console.log(action.payload);
     
     try {
-        const response = yield axios.get(`/api/task/project/${action.payload}`)
+        const response = yield axios.get(`/api/task/for_project/${action.payload}`)
         yield put( {type: 'SET_PROJECT_TASKS', payload: response.data})
     } catch(error) {
         console.log('error with the SET_PROJECT_TASKS request in the task.saga file', error);

@@ -17,7 +17,7 @@ import AdminPage from '../AdminPage/AdminPage';
 import ResetPage from '../ResetPage/ResetPage';
 import ResetLinkPage from '../resetLinkPage/ResetLinkPage';
 import Portfolio from '../Portfolio/Portfolio';
-import ProjectDetails from '../Project/ProjectDetails/ProjectDetails';
+import ProjectDetails from '../ProjectDetails/ProjectDetails';
 // import Project from '../Project/Project';
 import Task from '../Task/Task';
 import './App.css';
@@ -72,7 +72,8 @@ class App extends Component {
               // - else shows LandingPage at "/home"
               exact
               path="/home"
-              component={LandingPage}
+              component={LoginPage}
+              authRedirect="/portfolio"
             />
             <ProtectedRoute
               exact
@@ -84,7 +85,7 @@ class App extends Component {
               exact path="/resetpassword"
               component={ResetLinkPage}
               authRedirect="/portfolio"
-            />
+              />
             <ProtectedRoute
               exact
               path="/portfolio"

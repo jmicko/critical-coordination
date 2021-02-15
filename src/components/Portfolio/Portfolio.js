@@ -32,7 +32,7 @@ class Portfolio extends Component {
       this.state.PO_Number &&
       this.state.due_date &&
       this.state.location_fk
-    ) { 
+    ) {
       this.update();
     } else {
       alert('Please fill out all the fields');
@@ -74,11 +74,13 @@ class Portfolio extends Component {
     // console.log(this.state);
     return (
       <div className="container portfolio night rounded">
+        <center>
+          <h1> Project Portfolio </h1>
+        </center>
         {/* THIS WILL RENDER IF ADMIN */}
         {this.props.store.user.user_type === "admin"
           ?
           <div>
-            <h1> Executive Portfolio Page </h1>
             <button
               className="btn"
               onClick={this.showAdd}>
@@ -90,19 +92,20 @@ class Portfolio extends Component {
           // END ADMIN
 
           // RENDER CLIENT PAGE IF CLIENT
-          : this.props.store.user.user_type === "client"
-            ? <h1> Client Portfolio Page </h1>
-            // RENDER CONTRACTOR IF CONTRACTOR
-            : <h1> Contractor Portfolio Page </h1>
+          : <></>
+          // this.props.store.user.user_type === "client"
+          //   ? <h1> Client Portfolio Page </h1>
+          //   // RENDER CONTRACTOR IF CONTRACTOR
+          //   : <h1> Contractor Portfolio Page </h1>
         }
 
         {this.props.store.portfolio.map((project) => {
           return (
-            <Project 
-              key = {project.id}
-              project = {project}
-              dateConversion = {this.dateConversion}
-              history = {this.props.history}
+            <Project
+              key={project.id}
+              project={project}
+              dateConversion={this.dateConversion}
+              history={this.props.history}
             />
           )
         })}
