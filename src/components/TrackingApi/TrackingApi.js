@@ -12,18 +12,22 @@ class TrackingApi extends Component {
 
    getTracking = () => {
       if(this.props.tracking_number){
-         if(this.props.tracking_number.substring(0, 2) == '1z') {
-            const tracking_data = {
+         let tracking_data = {
+            carrier: ``,
+            tracking_number: '',
+         }
+         if(this.props.tracking_number.substring(0, 2) == '1Z') {
+            tracking_data = {
                carrier: 'ups',
                tracking_number: this.props.tracking_number
             }
          } else {
-            const tracking_data = {
+            tracking_data = {
                carrier: 'fedex',
                tracking_number: this.props.tracking_number
             }
-            this.props.dispatch( {type: 'GET_TRACKING_DATA', payload: tracking_data})
          }
+         this.props.dispatch( {type: 'GET_TRACKING_DATA', payload: tracking_data})
       }
    }
 
@@ -31,6 +35,7 @@ class TrackingApi extends Component {
       return (
          <div>
             <h4>Tracking Status</h4>
+            {JSON.stringify(this.props.store.trackingReducer)}
             {this.props.tracking_number ? 
             <>
             <p>Tracking Number: {this.props.tracking_number}</p>

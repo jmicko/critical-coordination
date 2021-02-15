@@ -175,7 +175,7 @@ class Portfolio extends Component {
                 {/* <label>Status: <input placeholder='Logic needs to be done' /></label> */}
 
                 {this.props.store.user.user_type === "admin" &&
-                  <Popup trigger={open => (<button className="btn">Edit </button>)} position="left" >
+                  <Popup trigger={open => (<button className="btn">Edit </button>)} position="right" >
                     <div className="editPanel" onClick={() => this.updateId(project)}>
                       <h3>Edit Window:</h3>
                       <label>Project:</label>
