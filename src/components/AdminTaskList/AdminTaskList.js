@@ -153,7 +153,9 @@ class AdminTaskList extends Component {
             <p>Status: {this.props.task.status_type}  </p>
             {/* show shipping information if there is any */}
             {this.props.task.task_name === 'Order Materials' &&
-              <div className="tracking formPanel slate"><TrackingApi tracking_number={this.props.task.tracking_id} /></div>}
+              <div className="tracking formPanel slate">
+                <TrackingApi tracking_number={this.props.task.tracking_id} />
+              </div>}
             {this.props.task.notes &&
               <p>Notes: {this.props.task.notes}</p>
             }
