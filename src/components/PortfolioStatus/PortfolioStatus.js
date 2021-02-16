@@ -10,7 +10,7 @@ import './PortfolioStatus.css'
 class PortfolioStatus extends Component {
 
     state = {
-        status: 'complete'
+        status: 'onTime'
     };
 
     componentDidUpdate(prevProps) {

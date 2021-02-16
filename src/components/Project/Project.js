@@ -17,7 +17,7 @@ class Project extends Component {
     due_date: '',
     showAddNewProject: false,
     location_fk: '',
-    status: 'complete'
+    status: 'onTime'
   }
 
   updateStatus = (newStatus) => {
