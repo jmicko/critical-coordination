@@ -98,7 +98,9 @@ Button
 
 .btn-delete{
   float: right;
-  background-color: #b80b0b;
+  /* background-color: #b80b0b; */
+  /* background-color: #5f1313; */
+  color: #f31d1d;
 }
 
 

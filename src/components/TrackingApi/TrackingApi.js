@@ -50,7 +50,7 @@ class TrackingApi extends Component {
                   {/* <p>ETA: {this.props.store.trackingReducer.eta}</p> */}
                   <p>Status Date: 02-14-2021 at 20:56 GMT</p>
                   <p></p>
-                  <button className="btn" onClick={this.getTracking}>Update Tracking Status</button>
+                  <button className="btn" onClick={this.getTracking}>Refresh Tracking Status</button>
                </>
 
                // old code is below
@@ -61,7 +61,7 @@ class TrackingApi extends Component {
                //    <p>Status Details: {this.props.store.trackingReducer?.tracking_status?.status_details}</p>
                //    <p>Status Date: {this.props.store.trackingReducer?.tracking_status?.status_date}</p>
                //    <p></p>
-               //    <button onClick={this.getTracking}>Update Tracking Status</button>
+               //    <button onClick={this.getTracking}>Refresh Tracking Status</button>
                // </>
                : <p>No Tracking Number assigned to this task yet.</p>
             }
