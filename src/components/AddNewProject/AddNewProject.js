@@ -62,7 +62,7 @@ class AddNewProject extends Component {
 
    render() {
       return (
-         <div className="slate formPanel">
+         <div className="metal formPanel">
 
             <h4>Add New Project</h4>
             <br />
