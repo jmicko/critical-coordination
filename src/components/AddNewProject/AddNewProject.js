@@ -13,7 +13,7 @@ class AddNewProject extends Component {
       this.props.dispatch({ type: 'FETCH_ALLCOMPANY' });
       this.props.dispatch({ type: 'FETCH_ALLLOCATION' });
    }
-   
+
    state = {
       newProject: {
          project_name: '',
@@ -46,15 +46,27 @@ class AddNewProject extends Component {
    }
 
    saveProject = () => {
-      if (this.state.newProject.company !== '' && 
-         this.state.newProject.location !== '' && 
-         this.state.newProject.PO !== '' && 
-         this.state.newProject.due_date !== '' && 
+      if (this.state.newProject.company !== '' &&
+         this.state.newProject.location !== '' &&
+         this.state.newProject.PO !== '' &&
+         this.state.newProject.due_date !== '' &&
          this.state.newProject.project_name !== '' &&
          this.state.newProject.ordered_by !== '') {
          // send new project info to db
          this.props.dispatch({ type: 'ADMIN_ADD_PROJECT', payload: this.state.newProject });
-         this.props.dispatch({ type: 'FETCH_PORTFOLIO' })
+         this.props.dispatch({ type: 'FETCH_PORTFOLIO' });
+         this.setState({
+            newProject: {
+               project_name: '',
+               company: '',
+               location: '',
+               PO: '',
+               due_date: '',
+               expedited: false,
+               ordered_by: '',
+               notes: '',
+            }
+         })
       } else {
          alert('Please fill out all fields before Saving a New Project')
       }
@@ -62,57 +74,73 @@ class AddNewProject extends Component {
 
    render() {
       return (
-         <div className="slate notched">
-
-            <h4>Add New Project</h4>
-            <br />
+         // ADD NEW PROJECT FORM
+         <div className="metal formPanel">
+            <div className="highlighter">
+               <h2>Add New Project</h2>
+            </div>
+            {/* PROJECT NAME INPUT */}
             <label> Project Name:
                <input type="text" onChange={(event) => this.handleChange(event, 'project_name')} value={this.state.newProject.project_name}></input>
             </label>
+            {/* PO NUMBER INPUT */}
             <label> PO Number:
                <input type="text" onChange={(event) => this.handleChange(event, 'PO')} value={this.state.newProject.PO}></input>
-            </label><br />
+            </label>
+            {/* PROJECT COMPANY ASSIGNMENT DROPDOWN */}
             <label> New Project Company:
                <select
                   required
                   onChange={(event) => this.handleChange(event, 'company')}
                   value={this.state.newProject.company}>
-                     <option value=''></option>
+                  <option value=''></option>
                   {this.props.store.admin.allCompanyReducer.map((company) => {
                      return (
                         <option key={company.id} value={company.id}> {company.company_name}</option>)
                   })}
                </select>
             </label>
-            <br/>
+
+            <br />
             {/* Project Location dropdown */}
             <label> New Project Location:
-               <select required onChange={(event) => this.handleChange(event, 'location')} value={this.state.newProject.location}>
-                  <option value=''></option>
+               <select 
+               required 
+               onChange={(event) => this.handleChange(event, 'location')} 
+               value={this.state.newProject.location}>
+                  <option value=''>none</option>
                   {this.props.store.admin.allLocationReducer.map((location) => {
                      return (
-                        this.state.newProject.company === location.company_fk &&
+                        Number(this.state.newProject.company) === location.company_fk &&
                         <option key={location.location_id} value={location.location_id}>{location.location_name} : {location.address}</option>
                      )
                   })}
                </select><br />
             </label>
+            {/* Which individual at the company was responsible for talking to Tom?  */}
             <label> Ordered By:
                <input type="text" onChange={(event) => this.handleChange(event, 'ordered_by')} value={this.state.newProject.ordered_by} />
             </label>
             <br />
+            {/* PROJECT DUE */}
             <label> Project Due Date:
                <input type="Date" onChange={(event) => this.handleChange(event, 'due_date')} value={this.state.newProject.due_date}></input>
             </label>
+            {/* WAS THE PROJECT EXPEDITED? This is relevant to the "Ordered By" input. If expedition increases expense, it is known who is responsible for it */}
             <label> Expedited?
-               <select onChange={(event) => this.handleChange(event, 'expedited')} value={this.state.newProject.expedited}>
+               <select
+                  onChange={(event) => this.handleChange(event, 'expedited')}
+                  value={this.state.newProject.expedited}>
                   <option value="false">No</option>
                   <option value="true">Yes</option>
                </select>
-            </label><br/>
-            <label> Notes: &nbsp;
-                            <textarea placeholder="...any specific details about the project..."
-                  className="notes" type="text" cols="100" rows="5"
+            </label><br />
+            {/* NOTES INPUT */}
+            <label>
+               <p>Notes:</p>
+               <textarea
+                  placeholder="...any specific details about the project..."
+                  className="notes" type="text" cols="50" rows="5"
                   value={this.state.newProject.notes}
                   onChange={(event) => this.handleChange(event, 'notes')} />
             </label>
