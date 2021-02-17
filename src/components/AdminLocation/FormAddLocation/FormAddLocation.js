@@ -32,7 +32,6 @@ class FormAddLocation extends Component {
         return (
             <form className="formPanel metal"
                 onSubmit={this.addLocation}>
-                {JSON.stringify(this.state)}
                 <div className="highlighter">
                     <h2>Add New Location</h2>
                 </div>
