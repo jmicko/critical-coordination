@@ -76,8 +76,6 @@ class AddNewProject extends Component {
       return (
          // ADD NEW PROJECT FORM
          <div className="metal formPanel">
-            <p>state: {JSON.stringify(this.state)}</p>
-            <p>location reducer: {JSON.stringify(this.props.store.admin.allLocationReducer)}</p>
             <div className="highlighter">
                <h2>Add New Project</h2>
             </div>
