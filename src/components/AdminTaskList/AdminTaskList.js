@@ -77,6 +77,8 @@ class AdminTaskList extends Component {
   }
 
   render() {
+    console.log(this.state);
+    console.log(this.props.task);
     return (
       // one task is held entirely within this div
       <div className="container-task metal rounded" >

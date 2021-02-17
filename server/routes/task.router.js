@@ -31,7 +31,7 @@ router.get('/for_project/:id', rejectUnauthenticated, (req, res) => {
   if (req.user.user_type !== "client") {
     console.log(req.user.user_type);
   }
-  if (req.user.user_type === "contractor") {
+  if (req.user.user_type === "contractor" || req.user.user_type === "contractor") {
     console.log(req.user.user_type);
     // for contractors, we need to limit them tasks they can see 
     // to only those they are assigned, so add company
@@ -92,7 +92,7 @@ router.put('/update', rejectUnauthenticated, (req, res) => {
   const updatedBy = `${req.user.first_name} ${req.user.last_name}`
   const due_date = dateConversion(req.body.nlt_date);
   const scheduled_date = dateConversion(req.body.scheduled_date);
-  const status = req.body.task_status_fk;
+  const status = req.body.task_status;
   const taskName = req.body.task_name_fk;
   const trackingId = req.body.tracking_id;
   const notes = req.body.notes;
