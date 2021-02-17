@@ -98,35 +98,15 @@ ALTER TABLE "company_location" ADD CONSTRAINT "company_location_fk0" FOREIGN KEY
 
 --inserts of starter data
 insert into company ("company_name") 
-VALUES ('Unassigned'), ('Critical Coordination'), ('AT&T DataCenter'), ('Datalink'), ('The Electric Contracting Company'), ('The Materials Supply Company'), ('Verizon'); 
+VALUES ('Unassigned'), ('Critical Coordination');
 -- company location data
 insert into company_location ("address", "location_name", "company_fk") 
-VALUES ('Unassigned', 'Unassigned', 1),
-('Bayport, MN', 'Bayport', 2),
-('1431 Beam Avenue, Maplewood, MN 55115', 'Maplewood', 3), 
-('11330 Fountains Dr, Maple Grove, MN 55369', 'Maple Grove', 3),
-('850 E Co Rd E East, Vadnais Heights, MN 55127', 'Vadnais Heights', 4), 
-('10240 Hudson Rd, Woodbury, MN 55129', 'Woodbury', 4), 
-('99 Electric Avenue, Shakopee, MN 55379', 'Shakopee', 5), 
-('1000 Electric Supply Avenue, Shakopee, MN 55379', 'Shakopee', 6);
+VALUES ('Unassigned', 'Unassigned', 1);
 --user data
 INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") 
-VALUES('admin@admin.com', 'Tom', 'Darrow', 2, '$2a$10$Web1/wZqAWT9p36Od3/b2.SAwVJr9NoygJrvWmu42LX1/3K.BXrL.', 'admin'),
-('client@att.com', 'John', 'Doe', 3, '$2a$10$Web1/wZqAWT9p36Od3/b2.SAwVJr9NoygJrvWmu42LX1/3K.BXrL.', 'client'),
-('client@datasite.com', 'John', 'Deer', 4, '$2a$10$Web1/wZqAWT9p36Od3/b2.SAwVJr9NoygJrvWmu42LX1/3K.BXrL.', 'client'),
-('dan@electric.com', 'Dan', 'Porter', 5, '$2a$10$Web1/wZqAWT9p36Od3/b2.SAwVJr9NoygJrvWmu42LX1/3K.BXrL.', 'contractor'),
-('tim@materials.com', 'Tim', 'Washman', 6, '$2a$10$Web1/wZqAWT9p36Od3/b2.SAwVJr9NoygJrvWmu42LX1/3K.BXrL.', 'contractor');
+VALUES('tim@criticalcoordination.com', 'Tom', 'Darrow', 2, '$2a$10$Web1/wZqAWT9p36Od3/b2.SAwVJr9NoygJrvWmu42LX1/3K.BXrL.', 'admin');
 --data for projects and tasks FK tables
 INSERT INTO task_status ("status_type") VALUES ('Started'), ('Receipt Acknowledged'), ('Shipped'), ('Scheduled'), ('Complete'), ('Invoiced');
-INSERT INTO task_name ("task_name") VALUES('Order Materials'), ('Schedule Installation'), ('Invoice'), ('Custom');
---sample data for projects
-INSERT INTO project ("project_name", "PO_Number", "due_date", "company_fk", "location_fk", "notes") 
-VALUES('AT&T Install 1000', '1000', '2021-03-01', 3, 2, 'Cable Install to be completed no later than 3-1-21'), 
-('AT&T Install 1001', '1001', '2021-02-28', 3, 3, 'Cable Install to be completed by 2-28-21'),
-('Datalink Install 1002', '1002', '2021-03-01', 4, 4, 'new project due 3-1-21'), 
-('Datalink Install 1003', '1003', '2021-03-02', 4, 5, 'new project/install due 3-2-21');
---sample data for tasks
-INSERT INTO task ("company_fk", "scheduled_date", "nlt_date", "task_name_fk", "task_status_fk", "project_fk") 
-VALUES(6, '2021-02-28', '2021-02-28', 1, 1, 1), (5, '2021-02-25', '2021-02-26', 2, 1, 1), (6, '2021-02-26', '2021-02-27', 1, 1, 2), 
-(5, '2021-02-18', '2021-02-19', 2, 1, 2), (6, '2021-02-20', '2021-02-21', 1, 1, 3), (5, '2021-02-20', '2021-02-21', 2, 1, 3), 
-(6, '2021-02-20', '2021-02-21', 1, 1, 4), (5, '2021-02-21', '2021-02-22', 2, 1, 4);
+INSERT INTO task_name ("task_name") VALUES('Materials'), ('Installation'), ('Invoice'), ('Custom');
+
+

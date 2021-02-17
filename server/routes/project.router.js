@@ -12,7 +12,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
    const sqlText = `SELECT * FROM "project" 
                      JOIN company ON company.id=project.company_fk
                      JOIN company_location ON company_location.id=project.location_fk
-                     WHERE project.id=$1;`
+                     WHERE project.id=$1 and project.archived = false`
    pool.query(sqlText, [req.params.id])
       .then((result) => {
          res.send(result.rows)

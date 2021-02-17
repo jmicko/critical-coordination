@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   HashRouter as Router,
-  Route,
+  //Route,
   Redirect,
   Switch,
 } from 'react-router-dom';
@@ -17,8 +17,6 @@ import ResetPage from '../ResetPage/ResetPage';
 import ResetLinkPage from '../resetLinkPage/ResetLinkPage';
 import Portfolio from '../Portfolio/Portfolio';
 import ProjectDetails from '../ProjectDetails/ProjectDetails';
-import History from '../History/History';
-// import Project from '../Project/Project';
 import Task from '../Task/Task';
 import './App.css';
 
@@ -53,11 +51,6 @@ class App extends Component {
               exact path="/login"
               component={LoginPage}
               authRedirect="/portfolio"
-            />
-            <ProtectedRoute
-              // with authRedirect: if logged in, redirects to "/user" else shows LoginPage at /login
-              exact path="/history"
-              component={History}
             />
             <ProtectedRoute
               // with authRedirect:
