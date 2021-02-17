@@ -65,7 +65,6 @@ class Project extends Component {
             <h2>{this.props.project.project_name}</h2>
           </div>
 
-          {/* <p>{JSON.stringify(this.props.project)}</p> */}
           <p>Location: {this.props.project.location_name}</p>
           <p>PO#: {this.props.project.PO_Number}</p>
           <p>Due Date: {this.props.dateConversion(this.props.project.due_date)}</p>
