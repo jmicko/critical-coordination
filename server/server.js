@@ -49,15 +49,15 @@ app.listen(PORT, () => {
 });
 
 
-const cron = require('node-cron');
-let count = 1;
-let hourCount = 1
-cron.schedule("0 52 10 * * *", function(){
-  console.log('running at 1052am daily: ', count);
-  count++
-})
+// const cron = require('node-cron');
+// let count = 1;
+// let hourCount = 1
+// cron.schedule("0 52 10 * * *", function(){
+//   console.log('running at 1052am daily: ', count);
+//   count++
+// })
 
-cron.schedule("0 0 * * * *", function(){
-  console.log('running top of every hour: ', hourCount);
-  hourCount++;
-})
+// cron.schedule("0 0 * * * *", function(){
+//   console.log('running top of every hour: ', hourCount);
+//   hourCount++;
+// })
