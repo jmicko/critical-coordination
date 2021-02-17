@@ -8,34 +8,64 @@ import mapStoreToProps from '../../../redux/mapStoreToProps';
 // component.
 class FormAddLocation extends Component {
     state = {
-        heading: 'Class Component',
+        company: '',
         address: '',
-        locationName: '',
+        location_name: '',
     };
 
     handleInputChangeFor = (propertyName) => (event) => {
         this.setState({
-          [propertyName]: event.target.value,
+            [propertyName]: event.target.value,
         });
-      };
+    };
+
+    addLocation = () => {
+        console.log('========= ADDLOCATION BUTTON CLICKED');
+        this.props.dispatch({ type: 'ADMIN_ADD_LOCATION', payload: this.state })
+    }
 
     render() {
         return (
-            <form className="formPanel metal">
+            <form className="formPanel metal"
+                onSubmit={this.addLocation}>
+                {JSON.stringify(this.state)}
                 <div className="highlighter">
                     <h2>Add New Location</h2>
                 </div>
-                <label>Select Company to add a location to: </label>
-                <select onChange={(event) => this.handleChangeNewLocation(event, 'company')}>
-                    {this.props.store.admin.allCompanyReducer.map((company) => <option key={company.id} value={company.id}>{company.company_name}</option>)}
+                {/* select input to choose company name for new location */}
+                <label htmlFor="company-for-location">Select Company to add a location to: </label>
+                <select
+                    id="company-for-location"
+                    onChange={this.handleInputChangeFor('company')}>
+                    <option>Select</option>
+                    {this.props.store.admin.allCompanyReducer.map((company) =>
+                        <option
+                            key={company.id}
+                            value={company.id}>
+                            {company.company_name}
+                        </option>)
+                    }
                 </select>
                 <br />
-                <label>New Location Address:</label>
-                <input required onChange={(event) => this.handleInputChangeFor(event, 'address')} value={this.state.address}></input>
+                {/* text input for new location  */}
+                <label htmlFor="new-address">New Location Address:</label>
+                <input
+                    type="text"
+                    id="new-address"
+                    required
+                    onChange={this.handleInputChangeFor('address')}
+                    value={this.state.address}>
+                </input>
                 <br />
                 <label>New Location Nickname: </label>
-                <input required onChange={(event) => this.handleInputChangeFor(event, 'locationName')} value={this.state.locationName}></input>
-                <button className="btn" type="submit" onClick={(event) => this.addLocation(event)}>Add Location</button>
+                <input
+                    required
+                    onChange={this.handleInputChangeFor('location_name')}
+                    value={this.state.location_name}>
+                </input>
+                <button className="btn" type="submit"
+                    // onClick={(event) => this.addLocation(event)}
+                >Add Location</button>
             </form>
         );
     }
