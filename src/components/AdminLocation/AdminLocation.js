@@ -30,34 +30,6 @@ class AdminLocation extends Component {
     showAddLocation: false
   };
 
-  handleChangeNewLocation = (event, type) => {
-    this.setState({
-      newLocation: {
-        ...this.state.newLocation,
-        [type]: event.target.value
-      }
-    })
-  }
-
-  addLocation = (event) => {
-    event.preventDefault();
-    let location = this.state.newLocation;
-    if (location.company !== '' && location.address !== '' && location.location_name !== '') {
-      console.log('in addLocation');
-      this.props.dispatch({ type: 'ADMIN_ADD_LOCATION', payload: location })
-    } else {
-      alert('Please ensure all fields are filled before submitting')
-    }
-    this.setState({
-      showAddLocation: false,
-      newLocation: {
-        company: '',
-        address: '',
-        location_name: '',
-      }
-    })
-  }
-
   handleChange = name => event => {
     this.setState({
       editRecord: {
@@ -156,7 +128,6 @@ class AdminLocation extends Component {
             <center>
               <button className="btn" onClick={this.showAddLocation}>Close</button>
             </center>
-
           <FormAddLocation />
           </div>
           :

@@ -20,8 +20,12 @@ class FormAddLocation extends Component {
     };
 
     addLocation = () => {
-        console.log('========= ADDLOCATION BUTTON CLICKED');
-        this.props.dispatch({ type: 'ADMIN_ADD_LOCATION', payload: this.state })
+        this.props.dispatch({ type: 'ADMIN_ADD_LOCATION', payload: this.state });
+        this.setState({
+            company: '',
+            address: '',
+            location_name: '',
+        })
     }
 
     render() {
@@ -64,7 +68,7 @@ class FormAddLocation extends Component {
                     value={this.state.location_name}>
                 </input>
                 <button className="btn" type="submit"
-                    // onClick={(event) => this.addLocation(event)}
+                // onClick={(event) => this.addLocation(event)}
                 >Add Location</button>
             </form>
         );
