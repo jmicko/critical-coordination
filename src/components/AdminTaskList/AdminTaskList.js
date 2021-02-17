@@ -116,8 +116,8 @@ class AdminTaskList extends Component {
               </p>
             }
             <p>
-              <label>Final Due Date: {this.dateConversion(this.props.task.nlt_date)}
-                <input type='date' onChange={(event => this.handleChange(event, 'nlt_date'))} placeholder={this.props.task.nlt_date} />
+              <label>Final Due Date: {this.dateConversion(this.props.task.nlt_date)}              
+                {this.props.store.user.user_type === 'admin' &&  <input type='date' onChange={(event => this.handleChange(event, 'nlt_date'))} placeholder={this.props.task.nlt_date} />}                              
               </label>
             </p>
             <label>Status: {this.state.updateRecord.status_type}
