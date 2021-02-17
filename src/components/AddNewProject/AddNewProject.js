@@ -54,7 +54,19 @@ class AddNewProject extends Component {
          this.state.newProject.ordered_by !== '') {
          // send new project info to db
          this.props.dispatch({ type: 'ADMIN_ADD_PROJECT', payload: this.state.newProject });
-         this.props.dispatch({ type: 'FETCH_PORTFOLIO' })
+         this.props.dispatch({ type: 'FETCH_PORTFOLIO' });
+         this.setState({
+            newProject: {
+               project_name: '',
+               company: '',
+               location: '',
+               PO: '',
+               due_date: '',
+               expedited: false,
+               ordered_by: '',
+               notes: '',
+            }
+         })
       } else {
          alert('Please fill out all fields before Saving a New Project')
       }
@@ -64,7 +76,8 @@ class AddNewProject extends Component {
       return (
          // ADD NEW PROJECT FORM
          <div className="metal formPanel">
-
+            <p>state: {JSON.stringify(this.state)}</p>
+            <p>location reducer: {JSON.stringify(this.props.store.admin.allLocationReducer)}</p>
             <div className="highlighter">
                <h2>Add New Project</h2>
             </div>
@@ -93,11 +106,14 @@ class AddNewProject extends Component {
             <br />
             {/* Project Location dropdown */}
             <label> New Project Location:
-               <select required onChange={(event) => this.handleChange(event, 'location')} value={this.state.newProject.location}>
-                  <option value=''></option>
+               <select 
+               required 
+               onChange={(event) => this.handleChange(event, 'location')} 
+               value={this.state.newProject.location}>
+                  <option value=''>none</option>
                   {this.props.store.admin.allLocationReducer.map((location) => {
                      return (
-                        this.state.newProject.company === location.company_fk &&
+                        Number(this.state.newProject.company) === location.company_fk &&
                         <option key={location.location_id} value={location.location_id}>{location.location_name} : {location.address}</option>
                      )
                   })}
@@ -112,7 +128,7 @@ class AddNewProject extends Component {
             <label> Project Due Date:
                <input type="Date" onChange={(event) => this.handleChange(event, 'due_date')} value={this.state.newProject.due_date}></input>
             </label>
-            {/* WAS THE PROJECT EXPIDITED? This is relevant to the "Ordered By" input. If expedition increases expense, it is known who is responsible for it */}
+            {/* WAS THE PROJECT EXPEDITED? This is relevant to the "Ordered By" input. If expedition increases expense, it is known who is responsible for it */}
             <label> Expedited?
                <select
                   onChange={(event) => this.handleChange(event, 'expedited')}
