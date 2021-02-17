@@ -62,7 +62,7 @@ class AddNewProject extends Component {
 
    render() {
       return (
-         <div className="slate notched">
+         <div className="slate formPanel">
 
             <h4>Add New Project</h4>
             <br />
