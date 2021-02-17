@@ -35,9 +35,6 @@ const Nav = (props) => {
               Admin
             </Link>
             : <></>}
-            <Link className="nav-link" to="/history">
-              History
-            </Link>
             <Link className="nav-link" to="/portfolio">
               Portfolio
             </Link>

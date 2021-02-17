@@ -152,7 +152,7 @@ class AdminTaskList extends Component {
             <p> Final Due Date: {this.dateConversion(this.props.task.nlt_date)} </p>
             <p>Status: {this.props.task.status_type}  </p>
             {/* show shipping information if there is any */}
-            {this.props.task.task_name === 'Order Materials' &&
+            {this.props.task.task_name === 'Order Materials' && this.props.task.tracking_id &&
               <div className="tracking formPanel slate">
                 <TrackingApi tracking_number={this.props.task.tracking_id} />
               </div>}
