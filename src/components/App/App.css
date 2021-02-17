@@ -275,7 +275,11 @@ General Theme
       0% calc(100% - var(--notchSize))
     );
   /* 1rem of padding to more than account for the size of the notch */
-    padding: 1rem;
+  padding: 1rem;
+}
+
+.divider{
+  border-bottom: #f56f34 1px solid;
 }
 
 

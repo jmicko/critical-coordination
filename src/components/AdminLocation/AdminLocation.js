@@ -4,6 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import Popup from 'reactjs-popup';
 
 import '../AdminLocation/AdminLocation.css'
+import FormAddLocation from './FormAddLocation/FormAddLocation';
 
 class AdminLocation extends Component {
 
@@ -147,36 +148,22 @@ class AdminLocation extends Component {
     return (
       <div>
         <div className="highlighter">
-          <h2>Company Management</h2>
+          <h2>Location Management</h2>
         </div>
         {this.state.showAddLocation ?
+
           <div className="box">
             <center>
               <button className="btn" onClick={this.showAddLocation}>Close</button>
             </center>
-            <form className="formPanel metal">
-              <div className="highlighter">
-                <h2>Add New Location</h2>
-              </div>
-              <label>Select Company to add a location to: </label>
-              <select onChange={(event) => this.handleChangeNewLocation(event, 'company')}>
-                {this.props.store.admin.allCompanyReducer.map((company) => <option key={company.id} value={company.id}>{company.company_name}</option>)}
-              </select>
-              <br />
-              <label>New Location Address:</label>
-              <input required onChange={(event) => this.handleChangeNewLocation(event, 'address')} value={this.state.newLocation.address}></input>
-              <br />
-              <label>New Location Nickname: </label>
-              <input required onChange={(event) => this.handleChangeNewLocation(event, 'location_name')} value={this.state.newLocation.location_name}></input>
-              <button className="btn" type="submit" onClick={(event) => this.addLocation(event)}>Add Location</button>
-            </form>
+
+          <FormAddLocation />
           </div>
           :
           <div className="box">
             <button className="btn" onClick={this.showAddLocation}>Add Location</button>
           </div>
         }
-
         <table className="tableClass">
           <thead className="headerClass">
             <tr><th>Company</th><th>Name</th><th>Address</th><th>&nbsp;</th><th>&nbsp;</th></tr>
