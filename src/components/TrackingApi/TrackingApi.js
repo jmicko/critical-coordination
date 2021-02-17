@@ -35,35 +35,22 @@ class TrackingApi extends Component {
       return (
          <div>
             <h4>Tracking Status</h4>
-            {this.props.tracking_number ?
-
-               // commenting out the old code for presentation mode since 
-               // it is currently breaking the demo computer. Add it back later
-               // this is the smoke and mirrors code
-
-
+            {this.props.tracking_number
+               ?
                <>
                   <div className="highlighter light">
-                     <p><strong>Status Details: Delivered</strong></p>
+                     <p><strong>Status Details: {this.props.store.trackingReducer?.tracking_status?.status_details}</strong></p>
                   </div>
-                  <p>Tracking Number: 1ZX799470293602849</p>
-                  {/* <p>ETA: {this.props.store.trackingReducer.eta}</p> */}
-                  <p>Status Date: 02-14-2021 at 20:56 GMT</p>
+                  <p>Tracking Number: {this.props.tracking_number}</p>
+                  {this.props.store.trackingReducer.eta &&
+                     <p>ETA: {this.props.store.trackingReducer.eta}</p>
+                  }
+                  <p>Status Date: {this.props.store.trackingReducer?.tracking_status?.status_date}</p>
                   <p></p>
                   <button className="btn" onClick={this.getTracking}>Refresh Tracking Status</button>
                </>
-
-               // old code is below
-
-               // <>
-               //    <p>Tracking Number: {this.props.tracking_number}</p>
-               //    <p>ETA: {this.props.store.trackingReducer.eta}</p>
-               //    <p>Status Details: {this.props.store.trackingReducer?.tracking_status?.status_details}</p>
-               //    <p>Status Date: {this.props.store.trackingReducer?.tracking_status?.status_date}</p>
-               //    <p></p>
-               //    <button onClick={this.getTracking}>Refresh Tracking Status</button>
-               // </>
-               : <p>No Tracking Number assigned to this task yet.</p>
+               :
+               <p>No Tracking Number assigned to this task yet.</p>
             }
          </div>
       );
