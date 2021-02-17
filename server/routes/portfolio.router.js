@@ -11,7 +11,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     if( req.user.user_type === 'admin' ) {
         const queryTextAdmin = `SELECT project_name, project.id, due_date, "PO_Number", address, location_name, location_fk  FROM project
                                 JOIN company_location ON company_location.id = project.location_fk
-                                JOIN company ON company.id = project.company_fk;`
+                                JOIN company ON company.id = project.company_fk
+                                WHERE project.archived=false;`;
         pool.query(queryTextAdmin)
             .then((result) => {
                 res.send(result.rows);
@@ -24,7 +25,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         const queryText1 =` SELECT project_name, project.id, due_date, "PO_Number", address, location_name, location_fk  FROM project
                             JOIN company_location ON company_location.id = project.location_fk
                             JOIN company ON company.id = project.company_fk
-                            WHERE project.company_fk = $1`;    
+                            WHERE project.company_fk = $1 and project.archived=false`;    
         pool.query(queryText1, [req.user.company_fk])
             .then((result) => {
                 res.send(result.rows);
@@ -37,7 +38,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         const queryText1 = `SELECT * FROM task
                             JOIN company on company.id = task.company_fk
                             JOIN project on project.id = task.project_fk
-                            WHERE task.company_fk = $1;`
+                            WHERE task.company_fk = $1 and task.archived=false;`
         pool.query(queryText1, [req.user.company_fk])
             .then((result) => {
                 res.send(result.rows);

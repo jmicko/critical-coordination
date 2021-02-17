@@ -50,7 +50,7 @@ class TrackingApi extends Component {
                   {this.props.store.trackingReducer.eta &&
                      <p>ETA: {this.props.store.trackingReducer.eta}</p>
                   }
-                  <p>Status Date: {this.props.store.trackingReducer?.tracking_status?.status_date}</p>
+                  <p>Status Date: {this.props.store.trackingReducer?.tracking_status?.status_date.substring(0,10)}</p>
                   <p></p>
                   <button className="btn" onClick={this.getTracking}>Refresh Tracking Status</button>
                </>

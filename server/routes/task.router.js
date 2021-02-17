@@ -60,7 +60,7 @@ router.get('/for_project/:id', rejectUnauthenticated, (req, res) => {
     JOIN task_name ON task_name.id = task.task_name_fk
     JOIN task_status ON task_status.id = task.task_status_fk
     JOIN company on company.id = task.company_fk
-    where project_fk = $1 
+    where project_fk = $1 and task.archived = false
     ${
       // this will limit contractors from seeing tasks not assigned to them
       req.user.user_type === "contractor"
