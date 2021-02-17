@@ -35,16 +35,22 @@ class TrackingApi extends Component {
       return (
          <div>
             <h4>Tracking Status</h4>
-            {this.props.tracking_number ?
+            {this.props.tracking_number
+               ?
                <>
+                  <div className="highlighter light">
+                     <p><strong>Status Details: {this.props.store.trackingReducer?.tracking_status?.status_details}</strong></p>
+                  </div>
                   <p>Tracking Number: {this.props.tracking_number}</p>
-                  <p>ETA: {this.props.store.trackingReducer.eta}</p>
-                  <p>Status Details: {this.props.store.trackingReducer?.tracking_status?.status_details}</p>
+                  {this.props.store.trackingReducer.eta &&
+                     <p>ETA: {this.props.store.trackingReducer.eta}</p>
+                  }
                   <p>Status Date: {this.props.store.trackingReducer?.tracking_status?.status_date}</p>
                   <p></p>
-                  <button onClick={this.getTracking}>Update Tracking Status</button>
+                  <button className="btn" onClick={this.getTracking}>Refresh Tracking Status</button>
                </>
-               : <p>No Tracking Number assigned to this task yet.</p>
+               :
+               <p>No Tracking Number assigned to this task yet.</p>
             }
          </div>
       );

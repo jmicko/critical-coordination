@@ -46,3 +46,15 @@
     margin-right: 33%;
     width: max-content;
 }
+
+.highlighter p{
+    margin-left: .75rem;
+    margin-right: 33%;
+    width: max-content;
+    
+}
+
+.light{
+    color: black;
+    background: linear-gradient(90deg, #999999 0%, #999999 75%, #3b3b3b00 100%);
+}

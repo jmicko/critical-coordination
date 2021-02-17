@@ -98,7 +98,9 @@ Button
 
 .btn-delete{
   float: right;
-  background-color: #b80b0b;
+  /* background-color: #b80b0b; */
+  /* background-color: #5f1313; */
+  color: #f31d1d;
 }
 
 
@@ -273,7 +275,11 @@ General Theme
       0% calc(100% - var(--notchSize))
     );
   /* 1rem of padding to more than account for the size of the notch */
-    padding: 1rem;
+  padding: 1rem;
+}
+
+.divider{
+  border-bottom: #f56f34 1px solid;
 }
 
 
