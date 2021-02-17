@@ -292,3 +292,31 @@ Headers
   font-size: 3.5rem;
   margin: auto;
 }
+
+.highlighter{
+  /* width: max-content; */
+  /* background-color: #b3481d; */
+  background: linear-gradient(90deg, #252525 0%, #2e2e2e 75%, #3b3b3b00 100%);
+  /* background: linear-gradient(90deg, #d67951 0%, #994d2c 75%, #3b3b3b00 100%); */
+  border-bottom-left-radius: .4rem;
+  border-top-left-radius: .4rem;
+  
+}
+
+.highlighter h2{
+  margin-left: .75rem;
+  margin-right: 33%;
+  width: max-content;
+}
+
+.highlighter p{
+  margin-left: .75rem;
+  margin-right: 33%;
+  width: max-content;
+  
+}
+
+.light{
+  color: black;
+  background: linear-gradient(90deg, #999999 0%, #999999 75%, #3b3b3b00 100%);
+}

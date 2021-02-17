@@ -64,8 +64,11 @@ class AddNewProject extends Component {
       return (
          <div className="metal formPanel">
 
-            <h4>Add New Project</h4>
-            <br />
+         <div className="highlighter">
+
+            <h2>Add New Project</h2>
+         </div>
+
             <label> Project Name:
                <input type="text" onChange={(event) => this.handleChange(event, 'project_name')} value={this.state.newProject.project_name}></input>
             </label>
