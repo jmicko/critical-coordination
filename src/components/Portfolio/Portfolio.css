@@ -16,7 +16,7 @@
 
 .on-time {
     border: #00cdf1 solid .125rem;
-    border-top-left-radius: .5rem;
+    /* border-top-left-radius: .5rem; */
 }
 
 .attention {

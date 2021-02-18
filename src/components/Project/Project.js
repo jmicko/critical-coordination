@@ -43,7 +43,7 @@ class Project extends Component {
   }
   
   archiveProject = (id) => {
-    console.log("++++++++++++ project do archive is:", id);
+    console.log("++++++++++++ project to archive is:", id);
     this.props.dispatch({ type: 'ARCHIVE_PROJECT', payload: id });
   }
 
@@ -69,6 +69,8 @@ class Project extends Component {
           <div className="highlighter">
             <h2>{this.props.project.project_name}</h2>
           </div>
+
+
 
           <p>Location: {this.props.project.location_name}</p>
           <p>PO#: {this.props.project.PO_Number}</p>
@@ -98,7 +100,10 @@ class Project extends Component {
             onClick={() => this.archiveProject(this.props.project.id)}
             className="btn btn-delete">
               {/* change this to "Archive Project" once history can be viewed */}
-              Close Project
+              {this.props.archiveMode
+              ? "Unarchive Project"
+              : "Archive Project"
+            }
             </button>
           }
         </div>

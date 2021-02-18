@@ -12,7 +12,7 @@ class Portfolio extends Component {
     this.props.dispatch({ type: 'FETCH_PORTFOLIO' });
     this.props.dispatch({ type: 'FETCH_ALLLOCATION' });
   }
-
+  
   state = {
     archiveMode: false,
     edit: '',
@@ -25,7 +25,7 @@ class Portfolio extends Component {
     location_fk: '',
     // status: 'complete'
   };
-
+  
   fieldValidation = () => {
     if (this.state.project_id &&
       this.state.project_name &&
@@ -33,18 +33,24 @@ class Portfolio extends Component {
       this.state.PO_Number &&
       this.state.due_date &&
       this.state.location_fk
-    ) {
-      this.update();
-    } else {
-      alert('Please fill out all the fields');
+      ) {
+        this.update();
+      } else {
+        alert('Please fill out all the fields');
+      }
     }
-  }
-
-  viewArchive = () => {
-    console.log("archive mode");
-    this.setState({
-      archiveMode: !this.state.archiveMode
-    })
+    
+    viewArchive = () => {
+      if (!this.state.archiveMode) {
+        console.log("archive mode", this.state.archiveMode);
+        this.props.dispatch({ type: 'FETCH_ARCHIVE' });
+      } else {
+        console.log("NOT archive mode", this.state.archiveMode);
+        this.props.dispatch({ type: 'FETCH_PORTFOLIO' });
+      }
+      this.setState({
+        archiveMode: !this.state.archiveMode
+      });
   }
 
   handleChange = name => event => {
@@ -96,7 +102,8 @@ class Portfolio extends Component {
               Add New Project
             </button>
             :
-            <div></div>
+
+            <div className="ghost"></div>
               }
             <button
             className="btn"
@@ -117,6 +124,7 @@ class Portfolio extends Component {
               project={project}
               dateConversion={this.dateConversion}
               history={this.props.history}
+              archiveMode={this.state.archiveMode}
             />
           )
         })}
