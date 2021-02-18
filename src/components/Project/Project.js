@@ -37,14 +37,19 @@ class Project extends Component {
     this.props.dispatch({ type: 'FETCH_PROJECT', payload: project.id });
     this.props.history.push(web_address);
   };
-  
+
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   }
-  
+
   archiveProject = (id) => {
     console.log("++++++++++++ project to archive is:", id);
     this.props.dispatch({ type: 'ARCHIVE_PROJECT', payload: id });
+  }
+
+  unarchiveProject = (id) => {
+    console.log("------------ project to unarchive is:", id);
+    this.props.dispatch({ type: 'UNARCHIVE_PROJECT', payload: id });
   }
 
   render() {
@@ -96,15 +101,21 @@ class Project extends Component {
           }
           <button className="btn" onClick={() => this.navigate(`/projectdetails`, this.props.project)}>Details</button>
           {this.props.store.user.user_type === "admin" &&
-            <button 
-            onClick={() => this.archiveProject(this.props.project.id)}
-            className="btn btn-delete">
-              {/* change this to "Archive Project" once history can be viewed */}
-              {this.props.archiveMode
-              ? "Unarchive Project"
-              : "Archive Project"
-            }
+            // {/* change button based on archive mode or not */}
+            this.props.archiveMode
+            ?
+            <button
+              onClick={() => this.unarchiveProject(this.props.project.id)}
+              className="btn btn-delete">
+              "Unarchive Project"
             </button>
+            :
+            <button
+              onClick={() => this.archiveProject(this.props.project.id)}
+              className="btn btn-delete">
+              "Archive Project"
+            </button>
+
           }
         </div>
       </div>

@@ -23,9 +23,22 @@ function* archiveProject(action) {
 
 }
 
+function* unarchiveProject(action) {
+   try {
+      const response = yield axios.put(`/api/project/${action.payload}`)
+      // yield put({ type: 'SET_PROJECT', payload: response.data })
+      yield put({ type: 'FETCH_ARCHIVE'})
+
+   } catch (error) {
+      console.log('error with the get request for the PROJECT', error);
+   }
+
+}
+
 function* projectSaga() {
    yield takeLatest('FETCH_PROJECT', fetchProject);
    yield takeLatest('ARCHIVE_PROJECT', archiveProject);
+   yield takeLatest('UNARCHIVE_PROJECT', unarchiveProject);
 }
 
 export default projectSaga;
