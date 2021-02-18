@@ -41,13 +41,18 @@ Before pushing to Heroku, run `npm run build` in terminal. This will create a bu
 ## Deployment
 
 1. Create a new Heroku project
-1. Link the Heroku project to the project GitHub Repo
-1. Create an Heroku Postgres database
-1. Connect to the Heroku Postgres database from Postico
-1. Create the necessary tables
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
-1. In the deploy section, select manual deploy
+  - $ heroku create <critical-coordination>
+2. Link the Heroku project to the project GitHub Repo
+  - $ git push heroku master
+3. Create an Heroku Postgres database
+  - $ heroku addons:create heroku-postgresql:hobby-dev
+4. Connect to the Heroku Postgres database from Postico
+  - $ heroku pg:push critical_coordination DATABASE_URL
+5. Add environment variables for the following: 
+  - SHIPPO_API_KEY=<your SHIPPO API Key>
+  - SERVER_SESSION_SECRET=<a random phrase or string to encrypt your sessions>
+  - REACT_APP_EMAIL_USER=<gmail address you want to send emails>
+  - REACT_APP_EMAIL_PASSWORD=<password for the gmail account>
+  - CLIENT_URL=<address where the app is hosted>
+  - RESET_PASSWORD_KEY=<another random key that will encrypt lost password tokens>
 
-## Update Documentation
-
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2

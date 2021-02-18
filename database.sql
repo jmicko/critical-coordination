@@ -104,7 +104,7 @@ insert into company_location ("address", "location_name", "company_fk")
 VALUES ('Unassigned', 'Unassigned', 1);
 --user data
 INSERT INTO "public"."user"("email", "first_name", "last_name", "company_fk", "password", "user_type") 
-VALUES('tim@criticalcoordination.com', 'Tom', 'Darrow', 2, '$2a$10$Web1/wZqAWT9p36Od3/b2.SAwVJr9NoygJrvWmu42LX1/3K.BXrL.', 'admin');
+VALUES('tom@criticalcoordination.com', 'Tom', 'Darrow', 2, '$2a$10$Web1/wZqAWT9p36Od3/b2.SAwVJr9NoygJrvWmu42LX1/3K.BXrL.', 'admin');
 --data for projects and tasks FK tables
 INSERT INTO task_status ("status_type") VALUES ('Started'), ('Receipt Acknowledged'), ('Shipped'), ('Scheduled'), ('Complete'), ('Invoiced');
 INSERT INTO task_name ("task_name") VALUES('Materials'), ('Installation'), ('Invoice'), ('Custom');
