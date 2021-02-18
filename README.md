@@ -7,6 +7,7 @@ If you are installing this to a local host/machine, you will need the following 
 - [Nodemon](https://nodemon.io/)
 - [Postico](https://https://eggerapps.at/postico/)
 
+
 - an IDE (editor) of your choosing such as [VS-Code](https://code.visualstudio.com/download)
 
 ## Development Setup Instructions
@@ -30,6 +31,7 @@ If you are installing this to a local host/machine, you will need the following 
   
 
 ## Production Build
+Create a database in POSTICO called critical_coordination.  Copy the database information over from the database.sql file included and run it to create your database.
 
 Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
 
@@ -40,15 +42,18 @@ Before pushing to Heroku, run `npm run build` in terminal. This will create a bu
 
 ## Deployment
 
+For this step you will need a Heroku account and install heroku CLI on your machine.
+
 1. Create a new Heroku project
-  - $ heroku create <critical-coordination>
+  - $ heroku create 
 2. Link the Heroku project to the project GitHub Repo
   - $ git push heroku master
 3. Create an Heroku Postgres database
   - $ heroku addons:create heroku-postgresql:hobby-dev
 4. Connect to the Heroku Postgres database from Postico
   - $ heroku pg:push critical_coordination DATABASE_URL
-5. Add environment variables for the following: 
+5. Navigate to heroku's website, log in as you and add environment variables for the following: 
+Settings -> Config Vars -> Reveal Vars -> add in the following key/value pairs:
   - SHIPPO_API_KEY=<your SHIPPO API Key>
   - SERVER_SESSION_SECRET=<a random phrase or string to encrypt your sessions>
   - REACT_APP_EMAIL_USER=<gmail address you want to send emails>
