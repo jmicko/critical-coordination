@@ -1,10 +1,11 @@
 ## Prerequisites
 
-Before you get started, make sure you have the following software installed on your computer:
+If you are installing this to a local host/machine, you will need the following software  installed on your computer:
 
 - [Node.js](https://nodejs.org/en/)
 - [PostrgeSQL](https://www.postgresql.org/)
 - [Nodemon](https://nodemon.io/)
+- [Postico](https://https://eggerapps.at/postico/)
 
 - an IDE (editor) of your choosing such as [VS-Code](https://code.visualstudio.com/download)
 
