@@ -288,6 +288,10 @@ General Theme
   border-bottom: #f56f34 1px solid;
 }
 
+.flex{
+  display: flex;
+}
+
 
 /* --------------------------------------------------------------------------------
 Headers
