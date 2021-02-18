@@ -32,7 +32,7 @@ router.put('/:id', (req, res) => {
          res.send(result.rows)
       })
       .catch((error) => {
-         console.log('error in TASK GET route, ', error);
+         console.log('error in TASK PUT route, ', error);
       })
 
 });
