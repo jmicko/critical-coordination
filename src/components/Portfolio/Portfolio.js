@@ -12,8 +12,9 @@ class Portfolio extends Component {
     this.props.dispatch({ type: 'FETCH_PORTFOLIO' });
     this.props.dispatch({ type: 'FETCH_ALLLOCATION' });
   }
-
+  
   state = {
+    archiveMode: false,
     edit: '',
     project_id: '',
     project_name: '',
@@ -24,7 +25,7 @@ class Portfolio extends Component {
     location_fk: '',
     // status: 'complete'
   };
-
+  
   fieldValidation = () => {
     if (this.state.project_id &&
       this.state.project_name &&
@@ -32,11 +33,24 @@ class Portfolio extends Component {
       this.state.PO_Number &&
       this.state.due_date &&
       this.state.location_fk
-    ) {
-      this.update();
-    } else {
-      alert('Please fill out all the fields');
+      ) {
+        this.update();
+      } else {
+        alert('Please fill out all the fields');
+      }
     }
+    
+    viewArchive = () => {
+      if (!this.state.archiveMode) {
+        console.log("archive mode", this.state.archiveMode);
+        this.props.dispatch({ type: 'FETCH_ARCHIVE' });
+      } else {
+        console.log("NOT archive mode", this.state.archiveMode);
+        this.props.dispatch({ type: 'FETCH_PORTFOLIO' });
+      }
+      this.setState({
+        archiveMode: !this.state.archiveMode
+      });
   }
 
   handleChange = name => event => {
@@ -78,26 +92,30 @@ class Portfolio extends Component {
           <h1 className="bigHeader"> Project Portfolio </h1>
         </center>
         {/* THIS WILL RENDER IF ADMIN */}
-        {this.props.store.user.user_type === "admin"
-          ?
-          <div>
+        {this.props.store.user.user_type === "admin" &&
+          <div className="flex archive">
+            {!this.state.archiveMode 
+            ?
             <button
-              className="btn"
-              onClick={this.showAdd}>
+            className="btn"
+            onClick={this.showAdd}>
               Add New Project
-                    </button>
+            </button>
+            :
 
-            {this.state.showAddNewProject && <AddNewProject />}
+            <div className="ghost"></div>
+              }
+            <button
+            className="btn"
+            onClick={this.viewArchive}>
+            {this.state.archiveMode 
+             ? "Back to Current Projects"
+             : "View Archive"
+            }
+            </button>
           </div>
-          // END ADMIN
-
-          // RENDER CLIENT PAGE IF CLIENT
-          : <></>
-          // this.props.store.user.user_type === "client"
-          //   ? <h1> Client Portfolio Page </h1>
-          //   // RENDER CONTRACTOR IF CONTRACTOR
-          //   : <h1> Contractor Portfolio Page </h1>
         }
+        {this.state.showAddNewProject && this.props.store.user.user_type === "admin" && <AddNewProject />}
 
         {this.props.store.portfolio.map((project) => {
           return (
@@ -106,6 +124,7 @@ class Portfolio extends Component {
               project={project}
               dateConversion={this.dateConversion}
               history={this.props.history}
+              archiveMode={this.state.archiveMode}
             />
           )
         })}

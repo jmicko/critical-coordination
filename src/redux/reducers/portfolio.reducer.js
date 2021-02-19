@@ -3,7 +3,7 @@ const portfolioReducer = (state = [], action) => {
     case 'SET_PORTFOLIO':
       return action.payload;
     case 'CLEAR_PORTFOLIO':
-      return {};
+      return [];
     default:
       return state;
   }

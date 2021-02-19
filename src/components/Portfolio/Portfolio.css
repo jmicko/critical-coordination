@@ -1,33 +1,36 @@
-.project-item{
+.project-item {
     margin: 1rem auto;
     border-radius: .5rem;
     background-color: #3b3b3b;
     overflow: hidden;
 }
 
-.portfolio{
+.portfolio {
     margin-left: 2rem;
     margin-right: 2rem;
 }
 
-.project-details{
+.project-details {
     margin: 1rem;
 }
 
-.on-time{
+.on-time {
     border: #00cdf1 solid .125rem;
-    border-top-left-radius: .5rem;
+    /* border-top-left-radius: .5rem; */
 }
 
-.attention{
+.attention {
     border: #9c7319 solid .125rem;
 }
 
-.late{
+.late {
     border: #b80b0b solid .125rem;
 }
 
-.complete{
+.complete {
     border: #279219 solid .125rem;
 }
 
+.archive {
+    justify-content: space-between;
+}
