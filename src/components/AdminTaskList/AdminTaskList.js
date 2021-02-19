@@ -90,7 +90,7 @@ class AdminTaskList extends Component {
           // If editing
           ? <div>
 
-            {this.props.task.task_name === 'Schedule Installation' &&
+            {this.props.task.task_name === 'Installation' &&
               <div>
                 <p>
                   <label>Scheduled Install Date: {this.dateConversion(this.props.task.scheduled_date)}
@@ -108,7 +108,7 @@ class AdminTaskList extends Component {
                   </label>
                 </p>
               </div>}
-            {this.props.task.task_name === 'Order Materials' &&
+            {this.props.task.task_name === 'Materials' &&
               <p>
                 <label>Date Scheduled: {this.dateConversion(this.props.task.scheduled_date)}
                   <input type='date' onChange={(event => this.handleChange(event, 'scheduled_date'))} value={update.date_scheduled} placeholder={this.props.task.scheduled_date} />
@@ -128,7 +128,7 @@ class AdminTaskList extends Component {
                 })}
               </select>
             </label> <br />
-            {this.props.task.task_name === 'Order Materials' &&
+            {this.props.task.task_name === 'Materials' &&
               <p>
                 <label> Tracking Number:
                   <input type="text" onChange={(event => this.handleChange(event, 'tracking_id'))} placeholder={this.props.task.tracking_id}></input>
@@ -143,16 +143,16 @@ class AdminTaskList extends Component {
           : <div>
 
             {/* if a materials task, show delivery date */}
-            {this.props.task.task_name === 'Order Materials' &&
+            {this.props.task.task_name === 'Materials' &&
               <p> Delivery Date: {this.dateConversion(this.props.task.scheduled_date)} </p>}
             {/* if an installation task, show installation date */}
-            {this.props.task.task_name === 'Schedule Installation' &&
+            {this.props.task.task_name === 'Installation' &&
               <p> Scheduled Install Date: {this.dateConversion(this.props.task.scheduled_date)} <br />
             Technician Info: {this.props.task.technician_info}</p>}
             <p> Final Due Date: {this.dateConversion(this.props.task.nlt_date)} </p>
             <p>Status: {this.props.task.status_type}  </p>
             {/* show shipping information if there is any */}
-            {this.props.task.task_name === 'Order Materials' && this.props.task.tracking_id &&
+            {this.props.task.task_name === 'Materials' &&
               <div className="tracking formPanel slate">
                 <TrackingApi tracking_number={this.props.task.tracking_id} />
               </div>}

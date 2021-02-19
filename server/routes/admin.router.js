@@ -267,7 +267,7 @@ router.post('/addproject', rejectUnauthenticated, (req, res) => {
 
 router.post('/addtask', rejectUnauthenticated, (req, res) => {
    if (req.user.user_type === 'admin') {
-      console.log(req.body);
+      const tracking = req.body.tracking_number;
       const company = req.body.company;
       const task_name = req.body.type;
       const nlt_date = req.body.due_date;
@@ -275,9 +275,11 @@ router.post('/addtask', rejectUnauthenticated, (req, res) => {
       const updated_by = req.body.updated_by;
       const project = req.body.project;
       const notes = req.body.notes;
-      const sqlText = `INSERT INTO task ("task_name_fk", "nlt_date", "task_status_fk", "updated_by", "project_fk", "notes", "company_fk")
-      VALUES($1, $2, $3, $4, $5, $6, $7)`;
-      pool.query(sqlText, [task_name, nlt_date, task_status, updated_by, project, notes, company])
+      console.log(tracking, 'is tracking number');
+      const sqlText = `INSERT INTO task 
+      ("task_name_fk", "nlt_date", "task_status_fk", "updated_by", "project_fk", "notes", "company_fk", "tracking_id")
+      VALUES($1, $2, $3, $4, $5, $6, $7, $8)`;
+      pool.query(sqlText, [task_name, nlt_date, task_status, updated_by, project, notes, company, tracking])
          .then( () => {
             res.sendStatus(201)
          }).catch((error) => {

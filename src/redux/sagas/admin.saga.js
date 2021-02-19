@@ -166,6 +166,7 @@ function* adminAddProject(action) {
 function* adminAddTask(action) {
     console.log('in AdminAddTaskSaga');
     try {
+        console.log(action.payload);
         yield axios.post('/api/admin/addtask', action.payload)
         yield put({ type: 'FETCH_PROJECT_TASKS', payload: action.payload.project })
     } catch (error) {
