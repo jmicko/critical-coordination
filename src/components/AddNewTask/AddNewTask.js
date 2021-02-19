@@ -88,12 +88,12 @@ class AddNewTask extends Component {
                                 return <option key={company.id} value={company.id}>{company.company_name}</option>
                             })}
                         </select>
-                    </label>
+                    </label><br/>
 
                     {/* DUE DATE */}
                     <label> Due Date:
                         <input value={this.state.newTask.due_date} onChange={(event) => this.handleChange(event, 'due_date')} type="date"></input>
-                    </label>
+                    </label><br/>
 
                     {/* STATUS */}
                     <label> Status:
@@ -103,7 +103,7 @@ class AddNewTask extends Component {
                                 return <option key={status.id} value={status.id}>{status.status_type}</option>
                             })}
                         </select>
-                    </label>
+                    </label><br/>
 
                     {/* TRACKING NUMBER */}
                     {/* render tracking number if "materials" task type is selected */}
@@ -113,7 +113,7 @@ class AddNewTask extends Component {
                                 value={this.state.newTask.tracking_number}
                                 onChange={(event) => this.handleChange(event, 'tracking_number')}
                                 placeholder="UPS or FEDEX"
-                            ></input>
+                            ></input> <br/>
                         </label>
                     }
 
